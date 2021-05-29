@@ -17,13 +17,6 @@ const INITIAL_STATE = {
   email: '',
   passwordOne: '',
   passwordTwo: '',
-  invalids: {
-    passwordsNoMatch: false,
-    emptyPassword: false,
-    emptyEmail: false,
-    emptyUsername: false,
-    notNUSEmail: false,
-  },
   error: null,
 };
 
@@ -74,6 +67,9 @@ class SignUpFormBase extends Component {
         .then(authUser => {
           this.setState({ ...INITIAL_STATE });
           this.props.history.push(ROUTES.HOME);
+        })
+        .then(() => {
+          this.props.firebase.doSendVerificationEmail();
         })
         .catch(error => {
           this.setState({ error });
