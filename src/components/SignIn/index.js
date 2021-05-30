@@ -20,10 +20,10 @@ const SignInPage = () => (
           <h2 class="col-xs-1 text-center">Focus on what matters.</h2>
         </ Col>
 
-        <Col classname="col-md-6 col-md-offset-3">
+        <Col className="authcontent col-md-6 col-md-offset-3">
           <SignInForm />
-          <PasswordForgetLink />
-          <SignUpLink />
+          <SignUpLink className="inter link" />
+          <PasswordForgetLink className="inter link" />
         </ Col>
       </ Row>
     </ Container>
@@ -71,19 +71,17 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <Form onSubmit={this.onSubmit}>
-        <Form.Group controlId="signInBasicEmail">
-          <Form.Label>NUS Email Address</Form.Label>
+      <Form className="formgroup" onSubmit={this.onSubmit}>
+        <Form.Group className="textbox" controlId="signInBasicEmail">
           <Form.Control
             name="email" 
             type="email"
-            placeholder="Enter email"
+            placeholder="NUSNET Email Address"
             value={email}
             onChange={this.onChange} />
         </Form.Group>
 
-        <Form.Group className="mt-2" controlId="signInBasicPassword">
-          <Form.Label>Password</Form.Label>
+        <Form.Group className="textbox mt-2" controlId="signInBasicPassword">
           <Form.Control 
             name="password"
             type="password"
@@ -93,7 +91,7 @@ class SignInFormBase extends Component {
         </Form.Group>
 
         <Button  
-          className="mt-2 mb-2"
+          className="mootbutton mt-2 mb-2"
           variant="primary"
           type="submit"
           disabled={isInvalid}>

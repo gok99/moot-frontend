@@ -18,7 +18,7 @@ const PasswordForgetPage = () => (
           <h2 class="col-xs-1 text-center">Focus on what matters.</h2>
         </ Col>
 
-        <Col classname="col-md-6 col-md-offset-3">
+        <Col classname="authcontent col-md-6 col-md-offset-3">
           <PasswordForgetForm />
           <SignInLink message={"Go back to "}/>
         </ Col>
@@ -65,18 +65,18 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === '';
  
     return (
-      <Form onSubmit={this.onSubmit}>
-        <Form.Group controlId="forgotBasicEmail">
+      <Form className="formgroup" onSubmit={this.onSubmit}>
+        <Form.Group className="textbox" controlId="forgotBasicEmail">
           <Form.Control
             name="email" 
             type="email"
             value={this.state.email}
-            placeholder="Email Address"
+            placeholder="NUSNET Email Address"
             onChange={this.onChange} />
         </Form.Group>
 
         <Button  
-          className="mt-2 mb-2"
+          className="mootbutton mt-2 mb-2"
           variant="primary"
           type="submit"
           disabled={isInvalid}>
@@ -90,8 +90,8 @@ class PasswordForgetFormBase extends Component {
 }
  
 const PasswordForgetLink = () => (
-  <p>
-    <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
+  <p className="startpagelink">
+    <Link className="link" to={ROUTES.PASSWORD_FORGET}>Forgot your password?</Link>
   </p>
 );
  
