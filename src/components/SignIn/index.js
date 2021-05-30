@@ -13,7 +13,7 @@ import logo from '../../assets/logo.png';
 
 const SignInPage = () => (
   <div>
-    <Container className= "centered">
+    <Container className="centered">
       <Row className="justify-content-md-center">
         <Col className="section">
           <img className="img-centered" src={logo} alt="Moot Logo" />
@@ -26,7 +26,6 @@ const SignInPage = () => (
           <SignUpLink />
         </ Col>
       </ Row>
-
     </ Container>
   </div>
 );
@@ -74,7 +73,7 @@ class SignInFormBase extends Component {
     return (
       <Form onSubmit={this.onSubmit}>
         <Form.Group controlId="signInBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label>NUS Email Address</Form.Label>
           <Form.Control
             name="email" 
             type="email"

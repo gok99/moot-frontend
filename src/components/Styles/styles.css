@@ -7,7 +7,7 @@
   -moz-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  
+
   font-size: 20px;
   padding: 5px;
   z-index: 100;
@@ -15,6 +15,35 @@
 
 .img-centered {
   display: block;
+  width: 480px;
+  height: 350px;
   margin-left: auto;
-  margin-right: auto 
+  margin-right: auto;
+}
+
+.col-xs-1.text-center {
+  font-family: InterBold;
+  font-size: 48px;
+  text-align: center;
+  color: #0e0f0f;
+}
+
+.mt-2.mb-2 {
+  padding: 16px 32px;
+  background: #6b4eff;
+  color: #ffffff;
+  border-radius: 48px;
+  font-family: InterMedium;
+  font-size: 20px;
+  width: 320px;
+}
+
+@font-face {
+  font-family: InterBold;
+  src: url(./Inter/static/Inter-Bold.ttf);
+}
+
+@font-face {
+  font-family: InterMedium;
+  src: url(./Inter/static/Inter-Medium.ttf);
 }
