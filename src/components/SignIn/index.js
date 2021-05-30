@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
  
 import { SignUpLink } from '../SignUp';
@@ -7,12 +8,26 @@ import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes'; 
 
+import '../Styles/styles.css';
+import logo from '../../assets/logo.png';
+
 const SignInPage = () => (
   <div>
-    <h1>SignIn</h1>
-    <SignInForm />
-    <PasswordForgetLink />
-    <SignUpLink />
+    <Container className= "centered">
+      <Row className="justify-content-md-center">
+        <Col className="section">
+          <img className="img-centered" src={logo} alt="Moot Logo" />
+          <h2 class="col-xs-1 text-center">Focus on what matters.</h2>
+        </ Col>
+
+        <Col classname="col-md-6 col-md-offset-3">
+          <SignInForm />
+          <PasswordForgetLink />
+          <SignUpLink />
+        </ Col>
+      </ Row>
+
+    </ Container>
   </div>
 );
  
@@ -46,6 +61,8 @@ class SignInFormBase extends Component {
   };
  
   onChange = event => {
+    console.log(event.target.name);
+    console.log(event.target.value)
     this.setState({ [event.target.name]: event.target.value });
   };
  
@@ -53,38 +70,57 @@ class SignInFormBase extends Component {
     const { email, password, error } = this.state;
  
     const isInvalid = password === '' || email === '';
- 
+
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
- 
-        {error && <p>{error.message}</p>}
-      </form>
+      <Form onSubmit={this.onSubmit}>
+        <Form.Group controlId="signInBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            name="email" 
+            type="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={this.onChange} />
+        </Form.Group>
+
+        <Form.Group className="mt-2" controlId="signInBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control 
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={this.onChange} />
+        </Form.Group>
+
+        <Button  
+          className="mt-2 mb-2"
+          variant="primary"
+          type="submit"
+          disabled={isInvalid}>
+          Log In
+        </Button>
+
+        { error && <h5> { error.message } </h5> }
+      </Form>     
     );
   }
 }
  
+class SignInLink extends Component {
+  render() {
+    return (
+      <p>
+        {this.props.message} <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+      </p>);
+  }
+
+}
+
 const SignInForm = compose(
   withRouter,
   withFirebase,
 )(SignInFormBase);
- 
+
 export default SignInPage;
- 
-export { SignInForm };
+export { SignInForm, SignInLink };

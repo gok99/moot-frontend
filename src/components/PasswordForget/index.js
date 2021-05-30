@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
  
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
- 
+
+import '../Styles/styles.css';
+import logo from '../../assets/logo.png';
+import { SignInLink } from '../SignIn';
+
 const PasswordForgetPage = () => (
   <div>
-    <h1>PasswordForget</h1>
-    <PasswordForgetForm />
+    <Container className= "centered">
+      <Row className="justify-content-md-center">
+        <Col className="section">
+          <img className="img-centered" src={logo} alt="Moot Logo" />
+          <h2 class="col-xs-1 text-center">Focus on what matters.</h2>
+        </ Col>
+
+        <Col classname="col-md-6 col-md-offset-3">
+          <PasswordForgetForm />
+          <SignInLink message={"Go back to "}/>
+        </ Col>
+      </ Row>
+    </ Container>
+
   </div>
 );
  
@@ -48,20 +65,26 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === '';
  
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={this.state.email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <button disabled={isInvalid} type="submit">
+      <Form onSubmit={this.onSubmit}>
+        <Form.Group controlId="forgotBasicEmail">
+          <Form.Control
+            name="email" 
+            type="email"
+            value={this.state.email}
+            placeholder="Email Address"
+            onChange={this.onChange} />
+        </Form.Group>
+
+        <Button  
+          className="mt-2 mb-2"
+          variant="primary"
+          type="submit"
+          disabled={isInvalid}>
           Reset My Password
-        </button>
+        </Button>
  
-        {error && <p>{error.message}</p>}
-      </form>
+        {error && <h5> {error.message} </h5>}
+      </ Form>
     );
   }
 }

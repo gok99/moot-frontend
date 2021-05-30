@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
  
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
- 
+import { SignInLink } from '../SignIn';
+
+import '../Styles/styles.css';
+import logo from '../../assets/logo.png';
+
+
 const SignUpPage = () => (
   <div>
-    <h1>SignUp</h1>
-    <SignUpForm />
+    <Container className= "centered">
+      <Row className="justify-content-md-center">
+        <Col className="section">
+          <img className="img-centered" src={logo} alt="Moot Logo" />
+          <h2 class="col-xs-1 text-center">Focus on what matters.</h2>
+        </ Col>
+
+        <Col classname="col-md-6 col-md-offset-3">
+          <SignUpForm />
+          <SignInLink message={"Already have an account? "}/>
+        </ Col>
+      </ Row>
+    </ Container>
   </div>
 );
  
@@ -94,41 +111,52 @@ class SignUpFormBase extends Component {
     } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Username"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button type="submit">
+      <Form onSubmit={this.onSubmit}>
+        <Form.Group controlId="signIpBasicUsername">
+          <Form.Control
+            name="username" 
+            type="username"
+            placeholder="Username"
+            value={username}
+            onChange={this.onChange} />
+        </Form.Group>
+
+        <Form.Group className="mt-2" controlId="signUpBasicEmail">
+          <Form.Control
+            name="email" 
+            type="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={this.onChange} />
+        </Form.Group>
+
+        <Form.Group className="mt-2" controlId="signUpBasicPasswordOne">
+          <Form.Control 
+            name="passwordOne"
+            type="password"
+            placeholder="Enter Password"
+            value={passwordOne}
+            onChange={this.onChange} />
+        </Form.Group>
+
+        <Form.Group className="mt-2" controlId="signUpBasicPasswordTwo">
+          <Form.Control 
+            name="passwordTwo"
+            type="password"
+            placeholder="Re-Enter Password"
+            value={passwordTwo}
+            onChange={this.onChange} />
+        </Form.Group>
+
+        <Button  
+          className="mt-2 mb-2"
+          variant="primary"
+          type="submit">
           Sign Up
-        </button>
+        </Button>
  
-        {error && <p>{error.message}</p>}
-      </form>
+        {error && <h5> {error.message} </h5>}
+      </ Form>
     );
   }
 }
