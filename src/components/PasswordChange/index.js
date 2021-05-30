@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
- 
+import { Form, Button } from 'react-bootstrap';
+
 import { withFirebase } from '../Firebase';
  
 const INITIAL_STATE = {
@@ -39,29 +40,53 @@ class PasswordChangeForm extends Component {
  
     const isInvalid =
       passwordOne !== passwordTwo || passwordOne === '';
- 
+      <Form onSubmit={this.onSubmit}>
+      <Form.Group controlId="forgotBasicEmail">
+        <Form.Control
+          name="email" 
+          type="email"
+          value={this.state.email}
+          placeholder="Email Address"
+          onChange={this.onChange} />
+      </Form.Group>
+
+      <Button  
+        className="mt-2 mb-2"
+        variant="primary"
+        type="submit"
+        disabled={isInvalid}>
+        Reset My Password
+      </Button>
+
+      {error && <h5> {error.message} </h5>}
+    </ Form>
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="New Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm New Password"
-        />
-        <button disabled={isInvalid} type="submit">
+      <Form onSubmit={this.onSubmit}>
+        <Form.Group className="mt-2" controlId="resetPwBasicPasswordOne">
+          <Form.Control 
+            name="passwordOne"
+            type="password"
+            placeholder="New Password"
+            value={passwordOne}
+            onChange={this.onChange} />
+        </Form.Group>
+
+        <Form.Group className="mt-2" controlId="resetPwBasicPasswordTwo">
+          <Form.Control 
+            name="passwordTwo"
+            type="password"
+            placeholder="Confirm New Password"
+            value={passwordTwo}
+            onChange={this.onChange} />
+        </Form.Group>
+        <Button  
+          className="mt-2 mb-2"
+          variant="primary"
+          type="submit"
+          disabled={isInvalid}>
           Reset My Password
-        </button>
- 
-        {error && <p>{error.message}</p>}
-      </form>
+        </Button>
+      </ Form>
     );
   }
 }
