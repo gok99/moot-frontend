@@ -89,6 +89,23 @@
   /* margin: auto; */
 }
 
+/* TODO Fix Nav bar */
+.navbar {
+  height: 10%;
+  width: 100%;
+  opacity: 0;
+  color: #000000;
+}
+
+.navicon {
+  height: 32px;
+  width: 32px;
+}
+
+.logoicon {
+  text-align: center;
+}
+
 .link {
   color: #6b4eff;
   font-weight: bold;
