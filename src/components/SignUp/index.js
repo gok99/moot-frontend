@@ -13,14 +13,14 @@ import logo from '../../assets/logo.png';
 
 const SignUpPage = () => (
   <div>
-    <Container className= "centered">
+    <Container className="centered">
       <Row className="justify-content-md-center">
         <Col className="section">
           <img className="img-centered" src={logo} alt="Moot Logo" />
           <h2 class="col-xs-1 text-center">Focus on what matters.</h2>
         </ Col>
 
-        <Col classname="col-md-6 col-md-offset-3">
+        <Col classname="authcontent col-md-6 col-md-offset-3">
           <SignUpForm />
           <SignInLink message={"Already have an account? "}/>
         </ Col>
@@ -111,8 +111,8 @@ class SignUpFormBase extends Component {
     } = this.state;
 
     return (
-      <Form onSubmit={this.onSubmit}>
-        <Form.Group controlId="signIpBasicUsername">
+      <Form className="formgroup" onSubmit={this.onSubmit}>
+        <Form.Group className="textbox" controlId="signIpBasicUsername">
           <Form.Control
             name="username" 
             type="username"
@@ -121,7 +121,7 @@ class SignUpFormBase extends Component {
             onChange={this.onChange} />
         </Form.Group>
 
-        <Form.Group className="mt-2" controlId="signUpBasicEmail">
+        <Form.Group className="textbox mt-2" controlId="signUpBasicEmail">
           <Form.Control
             name="email" 
             type="email"
@@ -130,7 +130,7 @@ class SignUpFormBase extends Component {
             onChange={this.onChange} />
         </Form.Group>
 
-        <Form.Group className="mt-2" controlId="signUpBasicPasswordOne">
+        <Form.Group className="textbox mt-2" controlId="signUpBasicPasswordOne">
           <Form.Control 
             name="passwordOne"
             type="password"
@@ -139,7 +139,7 @@ class SignUpFormBase extends Component {
             onChange={this.onChange} />
         </Form.Group>
 
-        <Form.Group className="mt-2" controlId="signUpBasicPasswordTwo">
+        <Form.Group className="textbox mt-2" controlId="signUpBasicPasswordTwo">
           <Form.Control 
             name="passwordTwo"
             type="password"
@@ -149,7 +149,7 @@ class SignUpFormBase extends Component {
         </Form.Group>
 
         <Button  
-          className="mt-2 mb-2"
+          className="mootbutton mt-2 mb-2"
           variant="primary"
           type="submit">
           Sign Up

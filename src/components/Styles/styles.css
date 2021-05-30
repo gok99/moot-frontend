@@ -54,6 +54,19 @@
   border: 2px solid #6b4eff;
 }
 
+.mootbutton:visited {
+  background: #6b4eff;
+  color: #ffffff;
+  border: 2px solid #6b4eff;
+}
+
+.mootbutton:focus {
+  background: #6b4eff;
+  color: #ffffff;
+  border: 2px solid #6b4eff;
+  box-shadow: none;
+}
+
 .startpagelink {
   text-align: center;
   width: 320px;

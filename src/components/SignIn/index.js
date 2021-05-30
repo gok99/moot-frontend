@@ -107,8 +107,8 @@ class SignInFormBase extends Component {
 class SignInLink extends Component {
   render() {
     return (
-      <p>
-        {this.props.message} <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+      <p className="startpagelink">
+        {this.props.message} <Link className="link" to={ROUTES.SIGN_IN}>Sign In</Link>
       </p>);
   }
 
