@@ -10,7 +10,7 @@ For most of us, almost an entire academic year has been spent not in the physica
 
 Moot aims to expedite the process of social interaction and forming new connections, in an increasingly isolated world. We want to do this by matching individuals on the basis of common interest in deeper ideas/questions/themes as opposed to generic topic tags. To prevent distractions from the need to engage in small talk and make good first impressions, moot conversations are anonymous by default until users are comfortable enough to reveal their identities.
 
-Link to Heroku deployment: https://moot-frontend.herokuapp.com/signin
+Link to Heroku deployment: https://moot-frontend.herokuapp.com/
 
 ## Set-up
 
