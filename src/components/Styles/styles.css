@@ -32,6 +32,7 @@
 }
 
 .mootbutton {
+  display: block;
   padding: 16px 32px;
   text-align: center;
   background: #6b4eff;
@@ -41,10 +42,13 @@
   font-family: InterBold, Roboto;
   font-size: 20px;
   width: 320px;
+  height: 64px;
   margin: auto;
 }
 
-.mootbutton:hover {
+.mootbutton:hover,
+#temp1:hover,
+#temp2:hover {
   background: #ffffff;
   color: #6b4eff;
   border: 2px solid #6b4eff;
@@ -62,7 +66,9 @@
   border: 2px solid #6b4eff;
 }
 
-.mootbutton:focus {
+.mootbutton:focus,
+#temp1:focus,
+#temp2:focus {
   background: #6b4eff;
   color: #ffffff;
   border: 2px solid #6b4eff;
@@ -81,6 +87,39 @@
 
 .formgroup {
   width: 320px;
+}
+
+/* Temporary background changes... */
+.temp {
+  height: 256px;
+}
+#root {
+  background: #eae8f5;
+}
+/* Temporary background changes... */
+
+.nobullet {
+  height: 72px;
+  list-style-type: none;
+  text-align: left;
+  margin: auto;
+}
+
+.homebutton {
+  margin-top: 18px;
+}
+
+.homebuttonlist {
+  left: 0px;
+  width: 320px;
+  height: 256px;
+}
+
+.listtobutton {
+  width: 320px;
+  position: relative;
+  top: 25%;
+  text-decoration: none;
 }
 
 .textbox {
@@ -122,13 +161,12 @@
   font-family: InterMedium, Roboto;
 }
 
-.temp {
-  background: #e1dcf8;
-  height: 100px;
+.lightheavyfont {
+  color: #414141;
 }
 
-.homebutton {
-  margin-top: 18px;
+.lightfont {
+  color: #4e4e4e;
 }
 
 @font-face {

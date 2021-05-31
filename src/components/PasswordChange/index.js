@@ -40,8 +40,8 @@ class PasswordChangeForm extends Component {
  
     const isInvalid =
       passwordOne !== passwordTwo || passwordOne === '';
-      <Form onSubmit={this.onSubmit}>
-      <Form.Group controlId="forgotBasicEmail">
+      <Form className="formgroup" onSubmit={this.onSubmit}>
+      <Form.Group className="textbox" controlId="forgotBasicEmail">
         <Form.Control
           name="email" 
           type="email"
@@ -51,7 +51,7 @@ class PasswordChangeForm extends Component {
       </Form.Group>
 
       <Button  
-        className="mt-2 mb-2"
+        className="mootbutton mt-2 mb-2"
         variant="primary"
         type="submit"
         disabled={isInvalid}>
@@ -61,8 +61,8 @@ class PasswordChangeForm extends Component {
       {error && <h5> {error.message} </h5>}
     </ Form>
     return (
-      <Form onSubmit={this.onSubmit}>
-        <Form.Group className="mt-2" controlId="resetPwBasicPasswordOne">
+      <Form className="formgroup" onSubmit={this.onSubmit}>
+        <Form.Group className="textbox" className="mt-2" controlId="resetPwBasicPasswordOne">
           <Form.Control 
             name="passwordOne"
             type="password"
@@ -71,7 +71,7 @@ class PasswordChangeForm extends Component {
             onChange={this.onChange} />
         </Form.Group>
 
-        <Form.Group className="mt-2" controlId="resetPwBasicPasswordTwo">
+        <Form.Group className="textbox" className="mt-2" controlId="resetPwBasicPasswordTwo">
           <Form.Control 
             name="passwordTwo"
             type="password"
@@ -80,7 +80,7 @@ class PasswordChangeForm extends Component {
             onChange={this.onChange} />
         </Form.Group>
         <Button  
-          className="mt-2 mb-2"
+          className="mootbutton mt-2 mb-2"
           variant="primary"
           type="submit"
           disabled={isInvalid}>

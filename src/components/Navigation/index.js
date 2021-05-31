@@ -23,16 +23,21 @@ const Navigation = ({ authUser }) => (
 );
 
 const NavigationAuth = () => (
-  <ul className="temp">
-    {/* <li>
+  <ul className="temp tempbgchange">
+    <div className="homebuttonlist">
+    {/* <li className="nobullet">
       <Link to={ROUTES.HOME}>Home</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.ACCOUNT}>Account</Link>
     </li> */}
-    {/* <li> */}
+    <li className="nobullet">
+      <a id="temp1" className="listtobutton mootbutton" target="_blank" href="https://t.me/mmvp1_bot">Chat</a>
+    </li>
+    <li className="nobullet">
+      <Link id="temp2" className="listtobutton mootbutton" to={ROUTES.ACCOUNT}>Account</Link>
+    </li>
+    <li className="nobullet">
       <SignOutButton/>
-    {/* </li> */}
+    </li>
+    </div>
   </ul>
 );
  
