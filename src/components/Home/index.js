@@ -12,13 +12,13 @@ import tags from '../../assets/tags.png';
 
 const Home = () => (
   <div>
-    <nav className="navbar">
+    {/* <nav className="navbar">
       <img className="img-centered navicon logoicon" src={logo} alt="Moot Logo" />
       <a href="/"><img className="img-centered navicon chaticon" src={socials} alt="Chats" /></a>
       <a href="/"><img className="img-centered navicon friendicon" src={colleagues} alt="Friends" /></a>
       <a href="/"><img className="img-centered navicon interesticon" src={tags} alt="Interests" /></a>
       <a href="/"><img className="img-centered navicon profileicon" src={account} alt="Profile" /></a>
-    </nav>
+    </nav> */}
   </div>
 );
 

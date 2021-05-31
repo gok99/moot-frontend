@@ -18,9 +18,11 @@ const PasswordForgetPage = () => (
           <h2 class="col-xs-1 text-center">Focus on what matters.</h2>
         </ Col>
 
-        <Col classname="authcontent col-md-6 col-md-offset-3">
-          <PasswordForgetForm />
-          <SignInLink message={"Go back to "}/>
+        <Col classname="col-md-6 col-md-offset-3">
+          <div className="authcontent">
+            <PasswordForgetForm />
+            <SignInLink message={"Go back to "}/>
+          </div>
         </ Col>
       </ Row>
     </ Container>

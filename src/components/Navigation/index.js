@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
  
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
+
+import '../Styles/styles.css';
+
 // import { AuthUserContext } from '../Session'; 
 
 // const Navigation = () => (
@@ -20,16 +23,16 @@ const Navigation = ({ authUser }) => (
 );
 
 const NavigationAuth = () => (
-  <ul>
-    <li>
+  <ul className="temp">
+    {/* <li>
       <Link to={ROUTES.HOME}>Home</Link>
     </li>
     <li>
       <Link to={ROUTES.ACCOUNT}>Account</Link>
-    </li>
-    <li>
-      <SignOutButton />
-    </li>
+    </li> */}
+    {/* <li> */}
+      <SignOutButton/>
+    {/* </li> */}
   </ul>
 );
  
