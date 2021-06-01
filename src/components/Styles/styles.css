@@ -24,11 +24,11 @@
   padding: 20px;
 }
 
-.col-xs-1.text-center {
+.logotext {
   font-family: InterBold, Roboto;
   font-size: 48px;
   text-align: center;
-  color: #222424;
+  color: #505050;
 }
 
 .mootbutton {
@@ -54,12 +54,7 @@
   border: 2px solid #6b4eff;
 }
 
-.mootbutton:disabled {
-  background: #6b4eff;
-  color: #ffffff;
-  border: 2px solid #6b4eff;
-}
-
+.mootbutton:disabled,
 .mootbutton:visited {
   background: #6b4eff;
   color: #ffffff;

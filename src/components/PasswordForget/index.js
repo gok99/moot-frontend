@@ -15,7 +15,7 @@ const PasswordForgetPage = () => (
       <Row className="justify-content-md-center">
         <Col className="section">
           <img className="img-centered" src={logo} alt="Moot Logo" />
-          <h2 class="col-xs-1 text-center">Focus on what matters.</h2>
+          <h2 class="col-xs-1 text-center logotext">Focus on what matters.</h2>
         </ Col>
 
         <Col classname="col-md-6 col-md-offset-3">
