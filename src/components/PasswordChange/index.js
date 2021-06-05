@@ -62,7 +62,7 @@ class PasswordChangeForm extends Component {
     </ Form>
     return (
       <Form className="formgroup" onSubmit={this.onSubmit}>
-        <Form.Group className="textbox" className="mt-2" controlId="resetPwBasicPasswordOne">
+        <Form.Group className="textbox mt-2" controlId="resetPwBasicPasswordOne">
           <Form.Control 
             name="passwordOne"
             type="password"
@@ -71,7 +71,7 @@ class PasswordChangeForm extends Component {
             onChange={this.onChange} />
         </Form.Group>
 
-        <Form.Group className="textbox" className="mt-2" controlId="resetPwBasicPasswordTwo">
+        <Form.Group className="textbox mt-2" controlId="resetPwBasicPasswordTwo">
           <Form.Control 
             name="passwordTwo"
             type="password"

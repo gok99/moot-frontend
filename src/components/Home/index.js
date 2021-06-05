@@ -4,11 +4,11 @@ import { withAuthorization } from '../Session';
 import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
-import account from '../../assets/account.png';
-import colleagues from '../../assets/colleagues.png';
-import logo from '../../assets/logo.png';
-import socials from '../../assets/socials.png';
-import tags from '../../assets/tags.png';
+// import account from '../../assets/account.png';
+// import colleagues from '../../assets/colleagues.png';
+// import logo from '../../assets/logo.png';
+// import socials from '../../assets/socials.png';
+// import tags from '../../assets/tags.png';
 
 const Home = () => (
   <div>

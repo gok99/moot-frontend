@@ -1,6 +1,5 @@
 import React from 'react';
  
-import { PasswordForgetForm } from '../PasswordForget';
 import { Container } from 'react-bootstrap';
 
 import PasswordChangeForm from '../PasswordChange';
