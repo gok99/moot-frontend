@@ -15,14 +15,14 @@ const SignUpPage = () => (
   <div>
     <Container className="centered">
       <Row className="justify-content-md-center">
-        <Col className="section">
-          <img className="img-centered" src={logo} alt="Moot Logo" />
-          <h2 class="col-xs-1 text-center logotext">Focus on what matters.</h2>
+        <Col className="justify-content-md-start">
+          <img className="logo" src={logo} alt="Moot Logo" />
         </ Col>
-
-        <Col classname="authcontent col-md-6 col-md-offset-3">
-          <SignUpForm />
-          <SignInLink message={"Already have an account? "}/>
+        <Col className="justify-content-md-end">
+          <div className="startform signup">
+            <SignUpForm />
+            <SignInLink message={"Already have an account? "}/>
+          </div>
         </ Col>
       </ Row>
     </ Container>
@@ -111,7 +111,7 @@ class SignUpFormBase extends Component {
     } = this.state;
 
     return (
-      <Form className="formgroup" onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit}>
         <Form.Group className="textbox" controlId="signIpBasicUsername">
           <Form.Control
             name="username" 
@@ -162,7 +162,7 @@ class SignUpFormBase extends Component {
 }
  
 const SignUpLink = () => (
-  <p className="startpagelink">
+  <p className="startlink">
     Don't have an account? <Link className="link" to={ROUTES.SIGN_UP}>Sign up</Link>
   </p>
 );

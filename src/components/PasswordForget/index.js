@@ -13,13 +13,11 @@ const PasswordForgetPage = () => (
   <div>
     <Container className= "centered">
       <Row className="justify-content-md-center">
-        <Col className="section">
-          <img className="img-centered" src={logo} alt="Moot Logo" />
-          <h2 class="col-xs-1 text-center logotext">Focus on what matters.</h2>
+        <Col className="justify-content-md-start">
+          <img className="logo" src={logo} alt="Moot Logo" />
         </ Col>
-
-        <Col classname="col-md-6 col-md-offset-3">
-          <div className="authcontent">
+        <Col className="justify-content-md-end">
+          <div className="startform pwforget">
             <PasswordForgetForm />
             <SignInLink message={"Go back to "}/>
           </div>
@@ -67,7 +65,7 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === '';
  
     return (
-      <Form className="formgroup" onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit}>
         <Form.Group className="textbox" controlId="forgotBasicEmail">
           <Form.Control
             name="email" 
@@ -92,7 +90,7 @@ class PasswordForgetFormBase extends Component {
 }
  
 const PasswordForgetLink = () => (
-  <p className="startpagelink">
+  <p className="startlink">
     <Link className="link" to={ROUTES.PASSWORD_FORGET}>Forgot your password?</Link>
   </p>
 );

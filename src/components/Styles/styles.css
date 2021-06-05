@@ -1,4 +1,6 @@
-/* TODO Organise CSS */
+/* CSS for the entire application */
+
+/* Containers */
 
 .centered {
   position: fixed;
@@ -15,21 +17,62 @@
   z-index: 100;
 }
 
-.img-centered {
+/* Logo */
+
+.logo {
   display: block;
   width: 480px;
   height: 320px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
+  margin: auto;
 }
 
-.logotext {
-  font-family: InterBold, Roboto;
-  font-size: 48px;
-  text-align: center;
-  color: #505050;
+/* Start Page Forms */
+
+.justify-content-md-start,
+.justify-content-md-end {
+  max-width: 480px;
 }
+
+.startform {
+  width: 320px;
+  margin: auto;
+}
+
+.startform.signin {
+  margin-top: 4%;
+}
+
+.startform.pwforget {
+  margin-top: 12%;
+}
+
+.startlink {
+  text-align: center;
+  width: 320px;
+  padding-top: 10px;
+}
+
+.textbox {
+  width: 320px;
+  background: #ffffff;
+  border: 1px solid #f2e8f8;
+  border-radius: 6px;
+}
+
+/* Link */
+
+a.link {
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  color: #6b4eff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #362491;
+}
+
+/* Button */
 
 .mootbutton {
   display: block;
@@ -39,7 +82,8 @@
   color: #ffffff;
   border: 2px solid #6b4eff;
   border-radius: 48px;
-  font-family: InterBold, Roboto;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
   font-size: 20px;
   width: 320px;
   height: 64px;
@@ -70,19 +114,7 @@
   box-shadow: none;
 }
 
-.startpagelink {
-  text-align: center;
-  width: 320px;
-}
-
-.authcontent {
-  margin: auto;
-  padding: auto;
-}
-
-.formgroup {
-  width: 320px;
-}
+/* BELOW IS THE NO MAN'S ZONE, AKA have not been organised yet */
 
 /* Temporary background changes... */
 .temp {
@@ -117,14 +149,6 @@
   text-decoration: none;
 }
 
-.textbox {
-  width: 320px;
-  background: #ffffff;
-  border: 1px solid #e3e5e6;
-  border-radius: 8px;
-  /* margin: auto; */
-}
-
 /* TODO Fix Nav bar */
 .navbar {
   height: 10%;
@@ -138,22 +162,8 @@
   width: 32px;
 }
 
-.logoicon {
-  text-align: center;
-}
-
-.link {
-  color: #6b4eff;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.link:hover {
-  color: #4832b3;
-}
-
 .inter {
-  font-family: InterMedium, Roboto;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
 }
 
 .lightheavyfont {
@@ -164,12 +174,9 @@
   color: #4e4e4e;
 }
 
-@font-face {
-  font-family: InterBold;
-  src: url(./Inter/static/Inter-Bold.ttf);
-}
+/* General Elements */
 
-@font-face {
-  font-family: InterMedium;
-  src: url(./Inter/static/Inter-Medium.ttf);
+p {
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  margin: auto;
 }

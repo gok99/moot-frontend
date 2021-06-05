@@ -15,15 +15,15 @@ const SignInPage = () => (
   <div>
     <Container className="centered">
       <Row className="justify-content-md-center">
-        <Col className="section">
-          <img className="img-centered" src={logo} alt="Moot Logo" />
-          <h2 class="col-xs-1 text-center logotext">Focus on what matters.</h2>
+        <Col className="justify-content-md-start">
+          <img className="logo" src={logo} alt="Moot Logo" />
         </ Col>
-
-        <Col className="authcontent col-md-6 col-md-offset-3">
-          <SignInForm />
-          <SignUpLink className="inter link" />
-          <PasswordForgetLink className="inter link" />
+        <Col className="justify-content-md-end">
+          <div className="startform signin">
+            <SignInForm />
+            <SignUpLink />
+            <PasswordForgetLink />
+          </div>
         </ Col>
       </ Row>
     </ Container>
@@ -71,7 +71,7 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <Form className="formgroup" onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit}>
         <Form.Group className="textbox" controlId="signInBasicEmail">
           <Form.Control
             name="email" 
@@ -107,7 +107,7 @@ class SignInFormBase extends Component {
 class SignInLink extends Component {
   render() {
     return (
-      <p className="startpagelink">
+      <p className="startlink">
         {this.props.message} <Link className="link" to={ROUTES.SIGN_IN}>Sign In</Link>
       </p>);
   }
