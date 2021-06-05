@@ -29,7 +29,7 @@ const NavigationAuth = () => (
       <Link to={ROUTES.HOME}>Home</Link>
     </li> */}
     <li className="nobullet">
-      <a id="temp1" className="listtobutton mootbutton" target="_blank" href="https://t.me/mmvp1_bot">Chat</a>
+      <a id="temp1" target="_blank" rel="noopener noreferrer" className="listtobutton mootbutton" href="https://t.me/mmvp1_bot">Chat</a>
     </li>
     <li className="nobullet">
       <Link id="temp2" className="listtobutton mootbutton" to={ROUTES.ACCOUNT}>Account</Link>

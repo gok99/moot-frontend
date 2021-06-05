@@ -44,13 +44,13 @@ class SignUpFormBase extends Component {
   }
 
   assert_valid = (username, email, passwordOne, passwordTwo) => {
+    const emailRegex = new RegExp('^(e|E)[0-9]{7}@u.nus.edu$', 'g');
     const invalids = {
       passwordsNoMatch: passwordOne !== passwordTwo,
       emptyPassword: passwordOne === '',
       emptyEmail: email === '',
       emptyUsername: username === '',
-      notNUSEmail: !email.includes('u.nus.edu'),
-      notStartingWithE: !(email.startsWith("e") || email.startsWith("e"))
+      notNUSEmail: !emailRegex.test(email),
     };
 
     if (invalids.passwordsNoMatch) {
@@ -66,10 +66,7 @@ class SignUpFormBase extends Component {
       this.setState({ 'error': new Error('The username field cannot be empty') }); 
       return false;
     } else if (invalids.notNUSEmail) {
-      this.setState({ 'error': new Error('You must use a u.nus.edu email address') }); 
-      return false;
-    } else if (invalids.notStartingWithE) {
-      this.setState({ 'error': new Error('Your email must start with an e') }); 
+      this.setState({ 'error': new Error('You must use a valid NUS email address (starting with \'e\')') }); 
       return false;
     }
     return true
