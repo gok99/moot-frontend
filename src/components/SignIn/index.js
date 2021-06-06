@@ -23,6 +23,7 @@ const SignInPage = () => (
             <SignInForm />
             <SignUpLink />
             <PasswordForgetLink />
+            <TempOnbLink />
           </div>
         </ Col>
       </ Row>
@@ -107,6 +108,15 @@ class SignInLink extends Component {
     return (
       <p className="startlink">
         {this.props.message} <Link className="link" to={ROUTES.SIGN_IN}>Sign In</Link>
+      </p>);
+  }
+}
+
+class TempOnbLink extends Component {
+  render() {
+    return (
+      <p className="startlink">
+        {this.props.message} <Link className="link" to={ROUTES.ONBOARDING}>Onboarding</Link>
       </p>);
   }
 }
