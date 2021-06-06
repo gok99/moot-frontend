@@ -109,7 +109,6 @@ class SignInLink extends Component {
         {this.props.message} <Link className="link" to={ROUTES.SIGN_IN}>Sign In</Link>
       </p>);
   }
-
 }
 
 const SignInForm = compose(

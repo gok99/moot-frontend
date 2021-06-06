@@ -1,8 +1,28 @@
 /* CSS for the entire application */
 
+*:focus:not(:focus-visible) {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
 /* Containers */
 
 .centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+
+  font-size: 20px;
+  padding: 5px;
+  z-index: 100;
+}
+
+.registerbox {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -59,7 +79,19 @@
   border-radius: 6px;
 }
 
-/* Link */
+/* Onboarding Page Forms */
+
+.onbheader {
+  color: #121212;
+  font-weight: bold;
+}
+
+.onbtext {
+  color: #4e4e4e;
+  font-weight: bold;
+}
+
+/* Links */
 
 a.link {
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
@@ -72,11 +104,10 @@ a.link {
   color: #362491;
 }
 
-/* Button */
+/* Buttons */
 
 .mootbutton {
   display: block;
-  padding: 16px 32px;
   text-align: center;
   background: #6b4eff;
   color: #ffffff;
@@ -88,30 +119,39 @@ a.link {
   width: 320px;
   height: 64px;
   margin: auto;
+  padding: 12px 32px;
+  text-decoration: none;
+}
+
+/* To be replaced by suitable icons instead of buttons later on */
+.mootbutton.smallbutton {
+  width: 160px;
+}
+
+.mootbutton:disabled,
+.mootbutton:visited,
+.mootbutton:default,
+.mootbutton:active,
+.tobutton:active {
+  background-color: #6b4eff;
+  color: #ffffff;
+  border: 2px solid #6b4eff;
+  box-shadow: none;
 }
 
 .mootbutton:hover,
-#temp1:hover,
-#temp2:hover {
-  background: #ffffff;
+.tobutton:hover {
+  background-color: #ffffff;
   color: #6b4eff;
   border: 2px solid #6b4eff;
 }
 
-.mootbutton:disabled,
-.mootbutton:visited {
-  background: #6b4eff;
+/* Forced override since CSS likes to be stupid */
+/* Look for any other solution? Problem not yet fixed... */
+.btn-primary:focus {
+  background-color: #6b4eff;
   color: #ffffff;
   border: 2px solid #6b4eff;
-}
-
-.mootbutton:focus,
-#temp1:focus,
-#temp2:focus {
-  background: #6b4eff;
-  color: #ffffff;
-  border: 2px solid #6b4eff;
-  box-shadow: none;
 }
 
 /* BELOW IS THE NO MAN'S ZONE, AKA have not been organised yet */
@@ -153,7 +193,7 @@ a.link {
 .navbar {
   height: 10%;
   width: 100%;
-  opacity: 0;
+  opacity: 1;
   color: #000000;
 }
 
