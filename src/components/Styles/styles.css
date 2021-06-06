@@ -140,7 +140,8 @@ a.link {
 }
 
 .mootbutton:hover,
-.tobutton:hover {
+.tobutton:hover,
+.mootbutton:focus:hover {
   background-color: #ffffff;
   color: #6b4eff;
   border: 2px solid #6b4eff;
