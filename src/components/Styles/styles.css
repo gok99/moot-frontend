@@ -147,6 +147,7 @@ a.link {
 }
 
 /* Forced override since CSS likes to be stupid */
+/* Look for any other solution? Problem not yet fixed... */
 .btn-primary:focus {
   background-color: #6b4eff;
   color: #ffffff;
