@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
@@ -14,9 +15,9 @@ class SignOutButtonBase extends Component {
   
   render() {
     return (
-      <button className="mootbutton homebutton" type="button" onClick={this.signout(this.props.firebase)}>
+      <Button className="mootbutton smallbutton" type="button" onClick={this.signout(this.props.firebase)}>
         Sign Out
-      </button>
+      </Button>
     );
   }
 }

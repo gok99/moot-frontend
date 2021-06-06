@@ -74,6 +74,18 @@
   border-radius: 6px;
 }
 
+/* Onboarding Page Forms */
+
+.onbheader {
+  color: #121212;
+  font-weight: bold;
+}
+
+.onbtext {
+  color: #4e4e4e;
+  font-weight: bold;
+}
+
 /* Link */
 
 a.link {
@@ -91,7 +103,6 @@ a.link {
 
 .mootbutton {
   display: block;
-  padding: 16px 32px;
   text-align: center;
   background: #6b4eff;
   color: #ffffff;
@@ -103,11 +114,17 @@ a.link {
   width: 320px;
   height: 64px;
   margin: auto;
+  padding: 12px 32px;
+  text-decoration: none;
+}
+
+/* TO be replaced by suitable icons */
+.mootbutton.smallbutton {
+  width: 160px;
 }
 
 .mootbutton:hover,
-#temp1:hover,
-#temp2:hover {
+.tobutton:hover {
   background: #ffffff;
   color: #6b4eff;
   border: 2px solid #6b4eff;
@@ -121,8 +138,7 @@ a.link {
 }
 
 .mootbutton:focus,
-#temp1:focus,
-#temp2:focus {
+.tobutton:focus {
   background: #6b4eff;
   color: #ffffff;
   border: 2px solid #6b4eff;
@@ -168,7 +184,7 @@ a.link {
 .navbar {
   height: 10%;
   width: 100%;
-  opacity: 0;
+  opacity: 1;
   color: #000000;
 }
 

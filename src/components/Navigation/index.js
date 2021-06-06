@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
  
 import SignOutButton from '../SignOut';
@@ -23,22 +24,41 @@ const Navigation = ({ authUser }) => (
 );
 
 const NavigationAuth = () => (
-  <ul className="temp tempbgchange">
-    <div className="homebuttonlist">
-    {/* <li className="nobullet">
-      <Link to={ROUTES.HOME}>Home</Link>
-    </li> */}
-    <li className="nobullet">
-      <a id="temp1" target="_blank" rel="noopener noreferrer" className="listtobutton mootbutton" href="https://t.me/mmvp1_bot">Chat</a>
-    </li>
-    <li className="nobullet">
-      <Link id="temp2" className="listtobutton mootbutton" to={ROUTES.ACCOUNT}>Account</Link>
-    </li>
-    <li className="nobullet">
-      <SignOutButton/>
-    </li>
-    </div>
-  </ul>
+  <div>
+    <Container className="navbar">
+      <Row className="justify-content-md-center">
+        <Col>
+          <Link className="link" to={ROUTES.HOME}>
+            <Button className="mootbutton smallbutton" type="button">Home</Button>
+          </Link>
+        </ Col>
+        <Col>
+          <Link className="link" to={ROUTES.CHAT}>
+            <Button className="mootbutton smallbutton" type="button">Chat</Button>
+          </Link>
+          {/* <a id="temp1" target="_blank" rel="noopener noreferrer" className="listtobutton tobutton mootbutton" href="https://t.me/mmvp1_bot">Chat</a> */}
+        </Col>
+        <Col>
+          <Link className="link" to={ROUTES.LIBRARY}>
+            <Button className="mootbutton smallbutton" type="button">Library</Button>
+          </Link>
+        </Col>
+        <Col>
+          <Link className="link" to={ROUTES.FRIENDS}>
+            <Button className="mootbutton smallbutton" type="button">Friends</Button>
+          </Link>
+        </Col>
+        <Col>
+          <Link className="link" to={ROUTES.ACCOUNT}>
+            <Button className="mootbutton smallbutton" type="button">Account</Button>
+          </Link>
+        </Col>
+        <Col>
+          <SignOutButton/>
+        </Col>
+      </ Row>
+    </ Container>
+  </div>
 );
  
 const NavigationNonAuth = () => (
