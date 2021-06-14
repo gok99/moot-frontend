@@ -38,6 +38,7 @@ const NavigationAuth = () => (
       <Col className="naviconcol">
         <Row>
           <Col></Col>
+          <Col></Col>
           <Col>
             <Link to={ROUTES.HOME}>
               <img className="navicon" src={icon} alt="Home" />
@@ -75,6 +76,7 @@ const NavigationAuth = () => (
 
             {/*  */}
           </Col>
+          <Col></Col>
           <Col></Col>
         </Row>
       </Col>
