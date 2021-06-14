@@ -13,9 +13,10 @@ const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div>
-        <Container className="tempbgchange">
-          <h2 className="inter lightheavyfont">Account: {authUser.email}</h2>
-          <h6 className="inter lightfont">If you wish to change your password, please type the new password below. </h6> 
+        <Container>
+          <br /><br /><br /><br />
+          <h2>Account: {authUser.email}</h2>
+          <h6>If you wish to change your password, please type the new password below. </h6> 
           {/* <PasswordForgetForm /> */}
           <hr />
           <PasswordChangeForm /> 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { withAuthorization } from '../Session';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
  
-import { SignUpLink } from '../SignUp';
-import { PasswordForgetLink } from '../PasswordForget';
+// import { SignUpLink } from '../SignUp';
+// import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes'; 
 
@@ -53,15 +53,15 @@ class OnboardingFormBase extends Component {
   }
  
   onBtnOneClick = event => {
-    this.state.current == 1 
+    this.state.current === 1 
       ? this.setState(ONBOARDING3_STATE)
       : this.props.history.push(ROUTES.HOME);
   };
 
   onBtnTwoClick = event => {
-    this.state.current == 1
+    this.state.current === 1
       ? this.setState(ONBOARDING2_STATE)
-      : this.state.current == 2
+      : this.state.current === 2
         ? this.setState(ONBOARDING3_STATE)
         : this.props.history.push(ROUTES.HOME);
   };

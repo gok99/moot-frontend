@@ -7,6 +7,18 @@
 
 /* Containers */
 
+#root {
+  width: 100%;
+  height: 100%;
+  background: #fcfcfc;
+}
+
+.container {
+  max-width: 100%;
+  max-height: 100%;
+  min-height: 0%;
+}
+
 .centered {
   position: fixed;
   top: 50%;
@@ -91,6 +103,49 @@
   font-weight: bold;
 }
 
+/* Navigation Bar */
+
+.navbar {
+  height: 64px;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0px 7px 15px 1px rgba(71, 29, 160, 0.2);
+  position: fixed;
+  z-index: 10;
+}
+
+.navlogocol {
+  margin: auto;
+  text-align: center;
+}
+
+.navlogo {
+  display: block;
+  height: auto;
+  width: 84px;
+  margin: auto;
+}
+
+.naviconcol {
+  text-align: center;
+}
+
+.navicon {
+  height: 32px;
+  width: 32px;
+}
+
+.navicon:hover {
+  border: 1px solid#000000;
+  border-radius: 100px;
+}
+
+.tempicon {
+  position: relative;
+  left: -12px;
+  top: -6px;
+}
+
 /* Links */
 
 a.link {
@@ -123,16 +178,10 @@ a.link {
   text-decoration: none;
 }
 
-/* To be replaced by suitable icons instead of buttons later on */
-.mootbutton.smallbutton {
-  width: 160px;
-}
-
 .mootbutton:disabled,
 .mootbutton:visited,
 .mootbutton:default,
-.mootbutton:active,
-.tobutton:active {
+.mootbutton:active {
   background-color: #6b4eff;
   color: #ffffff;
   border: 2px solid #6b4eff;
@@ -140,79 +189,56 @@ a.link {
 }
 
 .mootbutton:hover,
-.tobutton:hover,
 .mootbutton:focus:hover {
   background-color: #ffffff;
   color: #6b4eff;
   border: 2px solid #6b4eff;
 }
 
-/* Forced override since CSS likes to be stupid */
+/* TEMPORARY */
+.mootbutton.smallbutton {
+  width: 100px;
+  height: 32px;
+  font-size: 10px;
+  padding: 5px 0px;
+}
+
+.iconbutton {
+  display: block;
+  text-align: center;
+  background: none;
+  color: #ffffff;
+  border: none;
+  width: 32px;
+  height: 32px;
+  margin: auto;
+  padding: none;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* STILL HAS MINOR BUG: When accessing Account page from other pages via dropdown, green border still appears */
+.iconbutton:hover,
+.iconbutton:focus:hover,
+.iconbutton:disabled,
+.iconbutton:visited,
+.iconbutton:default,
+.iconbutton:active,
+.btn-check:active,
+.btn-check:active + .btn-success,
+.btn-check:checked + .btn-success,
+.btn-success.active,
+.btn-success:active,
+.show > .btn-success.dropdown-toggle {
+  background-color: #ffffff;
+}
+
+/* Forced override since CSS likes to be stupid
 /* Look for any other solution? Problem not yet fixed... */
 .btn-primary:focus {
   background-color: #6b4eff;
   color: #ffffff;
   border: 2px solid #6b4eff;
-}
-
-/* BELOW IS THE NO MAN'S ZONE, AKA have not been organised yet */
-
-/* Temporary background changes... */
-.temp {
-  height: 256px;
-}
-#root {
-  background: #eae8f5;
-}
-/* Temporary background changes... */
-
-.nobullet {
-  height: 72px;
-  list-style-type: none;
-  text-align: left;
-  margin: auto;
-}
-
-.homebutton {
-  margin-top: 18px;
-}
-
-.homebuttonlist {
-  left: 0px;
-  width: 320px;
-  height: 256px;
-}
-
-.listtobutton {
-  width: 320px;
-  position: relative;
-  top: 25%;
-  text-decoration: none;
-}
-
-/* TODO Fix Nav bar */
-.navbar {
-  height: 10%;
-  width: 100%;
-  opacity: 1;
-  color: #000000;
-}
-
-.navicon {
-  height: 32px;
-  width: 32px;
-}
-
-.inter {
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-}
-
-.lightheavyfont {
-  color: #414141;
-}
-
-.lightfont {
-  color: #4e4e4e;
 }
 
 /* General Elements */

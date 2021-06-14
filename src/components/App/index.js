@@ -65,9 +65,9 @@ class App extends Component {
       <Router>
         <div>
           { !!this.state.authUser ? 
-          <div>
-            <Navigation authUser={this.state.authUser} />
-            <hr /> </div>
+            <div>
+              <Navigation authUser={this.state.authUser} />
+            </div>
           : null
           }
           <Route exact path={ROUTES.LANDING} component={LandingPage} />

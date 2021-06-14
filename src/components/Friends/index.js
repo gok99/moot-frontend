@@ -2,7 +2,7 @@ import React from 'react';
 
 const Friends = () => (
   <div>
-    <h1>Friends</h1>
+    <h1><br /><br />Friends</h1>
   </div>
 );
 
