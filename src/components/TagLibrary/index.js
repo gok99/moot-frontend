@@ -8,7 +8,7 @@ import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
 
-const Home = () => (
+const Library = () => (
   <Container className="homepage">
     <Row className="divider"></Row>
     <Row>
@@ -23,7 +23,7 @@ const Home = () => (
             </div>
           </Col>
           <Col xs={8}>
-            <h1>Posts...</h1>
+            <h1>Library...</h1>
           </Col>
         </Row>
       </Col>
@@ -38,4 +38,4 @@ const dest = authUser => { return {
 };
 }
 
-export default withAuthorization(dest)(Home);
+export default withAuthorization(dest)(Library);

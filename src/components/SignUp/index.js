@@ -102,7 +102,7 @@ class SignUpFormBase extends Component {
         })
         .then(() => {
           this.setState({ ...INITIAL_STATE });
-          this.props.history.push(ROUTES.HOME);
+          this.props.history.push(ROUTES.ONBOARDING);
         })
         .then(() => {
           this.props.firebase.doSendVerificationEmail();
@@ -192,5 +192,4 @@ const SignUpForm = compose(
 )(SignUpFormBase);
 
 export default SignUpPage;
- 
 export { SignUpForm, SignUpLink };
