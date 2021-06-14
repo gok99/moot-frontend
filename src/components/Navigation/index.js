@@ -7,7 +7,11 @@ import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
 import logo from '../../assets/navlogo.png';
-import icon from '../../assets/logo_temp.png';
+import icon_h from '../../assets/icon_h.png';
+import icon_c from '../../assets/icon_c.png';
+import icon_l from '../../assets/icon_l.png';
+import icon_f from '../../assets/icon_f.png';
+import icon_a from '../../assets/icon_a.png';
 
 // import { AuthUserContext } from '../Session'; 
 
@@ -41,29 +45,29 @@ const NavigationAuth = () => (
           <Col></Col>
           <Col>
             <Link to={ROUTES.HOME}>
-              <img className="navicon" src={icon} alt="Home" />
+              <img className="navicon" src={icon_h} alt="Home" />
             </Link>
           </ Col>
           <Col>
             <Link to={ROUTES.CHAT}>
-              <img className="navicon" src={icon} alt="Chat" />
+              <img className="navicon" src={icon_c} alt="Chat" />
             </Link>
             {/* <a id="temp1" target="_blank" rel="noopener noreferrer" className="listtobutton tobutton mootbutton" href="https://t.me/mmvp1_bot">Chat</a> */}
           </Col>
           <Col>
             <Link to={ROUTES.LIBRARY}>
-              <img className="navicon" src={icon} alt="Library" />
+              <img className="navicon" src={icon_l} alt="Library" />
             </Link>
           </Col>
           <Col>
             <Link to={ROUTES.FRIENDS}>
-              <img className="navicon" src={icon} alt="Friends" />
+              <img className="navicon" src={icon_f} alt="Friends" />
             </Link>
           </Col>
           <Col>
             <Dropdown>
               <Dropdown.Toggle variant="success" className="iconbutton">
-                <img className="navicon tempicon" src={icon} alt="Account" />
+                <img className="navicon tempicon" src={icon_a} alt="Account" />
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item>

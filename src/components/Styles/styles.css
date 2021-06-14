@@ -142,11 +142,6 @@
   width: 32px;
 }
 
-.navicon:hover {
-  border: 1px solid#000000;
-  border-radius: 100px;
-}
-
 .tempicon {
   position: relative;
   left: -12px;
@@ -213,6 +208,12 @@ a.link {
 }
 
 /* TEMPORARY */
+.mootbutton.medbutton {
+  width: 200px;
+  height: 48px;
+  font-size: 15px;
+  padding: 10px 0px;
+}
 .mootbutton.smallbutton {
   width: 100px;
   height: 32px;

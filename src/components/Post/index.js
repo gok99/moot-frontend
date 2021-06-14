@@ -9,7 +9,7 @@ class PostCreation extends Component {
   render() {
     return (
       <div>
-        <Link className="mootbutton" /* to={ROUTES.POSTS} */ >Create a Post</Link>
+        <Link className="mootbutton medbutton" /* to={ROUTES.POSTS} */ >Create a Post</Link>
       </div>
     );
   }

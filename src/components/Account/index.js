@@ -54,7 +54,7 @@ class AccountPreview extends Component {
   render() {
     return (
       <div>
-        <Link className="mootbutton" to={ROUTES.ACCOUNT}>Account Preview</Link>
+        <Link className="mootbutton medbutton" to={ROUTES.ACCOUNT}>Account Preview</Link>
       </div>
     );
   }
