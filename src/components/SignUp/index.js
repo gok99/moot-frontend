@@ -88,7 +88,9 @@ class SignUpFormBase extends Component {
             .set({
               username,
               email,
-              id
+              id,
+              uid,
+              verified: false,
             });
         })
         .then(() => {
