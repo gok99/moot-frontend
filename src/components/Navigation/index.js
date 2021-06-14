@@ -26,7 +26,7 @@ const Navigation = ({ authUser }) => (
 );
 
 const NavigationAuth = () => (
-    <Container className="navbar">
+    <Container className="navbar fixed">
       <Col></Col>
       <Col className="navlogocol">
         <Col>

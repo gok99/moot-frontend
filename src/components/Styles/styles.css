@@ -49,6 +49,14 @@
   z-index: 100;
 }
 
+.fixed {
+  position: fixed;
+}
+
+.relative {
+  position: relative;
+}
+
 /* Logo */
 
 .logo {
@@ -110,7 +118,6 @@
   width: 100%;
   background: #ffffff;
   box-shadow: 0px 7px 15px 1px rgba(71, 29, 160, 0.2);
-  position: fixed;
   z-index: 10;
 }
 
@@ -144,6 +151,16 @@
   position: relative;
   left: -12px;
   top: -6px;
+}
+
+/* Home Page */
+
+.homepage {
+  height: 100vw;
+}
+
+.divider {
+  height: 6%;
 }
 
 /* Links */
