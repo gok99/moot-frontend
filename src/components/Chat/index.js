@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { AccountPreview } from '../Account';
+import { ProfilePreview } from '../Account';
 import { PostCreation } from '../Post';
 import { withAuthorization } from '../Session';
 
@@ -17,7 +17,7 @@ const Chat = () => (
         <Row>
           <Col xs={4}>
             <div className="fixed">
-              <AccountPreview />
+              <ProfilePreview />
               <br />
               <PostCreation />
             </div>

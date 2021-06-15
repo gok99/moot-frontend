@@ -158,6 +158,23 @@
   height: 10%;
 }
 
+/* Account Page */
+
+.profilepic {
+  height: 224px;
+  width: auto;
+  border: 5px double #ab9aff;
+  border-radius: 224px;
+}
+
+.ppp {
+  height: 64px;
+}
+
+.profilebio {
+  text-align: center;
+}
+
 /* Links */
 
 a.link {

@@ -7,11 +7,11 @@ import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
 import logo from '../../assets/navlogo.png';
-import icon_h from '../../assets/icon_h.png';
-import icon_c from '../../assets/icon_c.png';
-import icon_l from '../../assets/icon_l.png';
-import icon_f from '../../assets/icon_f.png';
-import icon_a from '../../assets/icon_a.png';
+import icon_h from '../../assets/icon_hh.png';
+import icon_c from '../../assets/icon_ch.png';
+import icon_l from '../../assets/icon_lh.png';
+import icon_f from '../../assets/icon_fh.png';
+import icon_a from '../../assets/icon_ah.png';
 
 // import { AuthUserContext } from '../Session'; 
 
@@ -33,11 +33,15 @@ const NavigationAuth = () => (
     <Container className="navbar fixed">
       <Col></Col>
       <Col className="navlogocol">
-        <Col>
+        <Row>
+          <Col></Col>
+          <Col>
           <Link to={ROUTES.HOME}>
             <img className="navlogo" src={logo} alt="moot" />
           </Link>
-        </ Col>
+          </Col>
+          <Col></Col>
+        </Row>
       </Col>
       <Col className="naviconcol">
         <Row>
