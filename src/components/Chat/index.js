@@ -23,7 +23,9 @@ const Chat = () => (
             </div>
           </Col>
           <Col xs={8}>
-            <h1>Chats...</h1>
+            <div className="contentbox d-flex justify-content-center">
+              <h5>--- CHATS ---</h5>
+            </div>
           </Col>
         </Row>
       </Col>

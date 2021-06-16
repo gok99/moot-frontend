@@ -15,8 +15,8 @@ class SignOutButtonBase extends Component {
   
   render() {
     return (
-      <Button className="mootbutton smallbutton" type="button" onClick={this.signout(this.props.firebase)}>
-        Sign Out
+      <Button className="dropdowntext buttontotext" type="button" onClick={this.signout(this.props.firebase)}>
+        Log Out
       </Button>
     );
   }

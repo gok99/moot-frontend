@@ -23,7 +23,9 @@ const Library = () => (
             </div>
           </Col>
           <Col xs={8}>
-            <h1>Library...</h1>
+            <div className="contentbox d-flex justify-content-center">
+              <h5>--- LIBRARY ---</h5>
+            </div>
           </Col>
         </Row>
       </Col>

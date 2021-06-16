@@ -23,7 +23,9 @@ const Home = () => (
             </div>
           </Col>
           <Col xs={8}>
-            <h1>Posts...</h1>
+            <div className="contentbox d-flex justify-content-center">
+              <h5>--- USER FEED ---</h5>
+            </div>
           </Col>
         </Row>
       </Col>

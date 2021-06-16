@@ -32,11 +32,15 @@ const AccountPage = () => (
                   </div>
                 </Col>
                 <Col xs={8}>
-                  <h2>Account: {authUser.email}</h2>
-                  <h6>If you wish to change your password, please type the new password below. </h6>
-                  {/* <PasswordForgetForm /> */}
-                  <hr />
-                  <PasswordChangeForm /> 
+                  <div className="contentbox">
+                    <h5>Contact: ---- ----</h5>
+                    <h5>Email: {authUser.email}</h5>
+                    <hr />
+                    <h6>If you wish to change your password, please type and confirm the new password below. </h6>
+                    <br />
+                    <PasswordChangeForm /> 
+                    <hr />
+                  </div>
                 </Col>
               </Row>
             </Col>
@@ -59,15 +63,24 @@ class ProfilePreview extends Component {
     return (
       <div>
         <Row>
-          <Col xs={5}>
-            <img className="profilepic ppp" src={logo_temp} alt="Profile Picture" />
+          <Col xs={5} className="d-flex justify-content-center">
+            <Link to={ROUTES.ACCOUNT}>
+              <img className="previewpic" src={logo_temp} alt="Profile Picture" />
+            </Link>
           </Col>
           <Col xs={7}>
-
+            <Row>
+              <p className="previewtext profilename">NAME</p>
+            </Row>
+            <Row>
+              <p className="previewtext profileuser">USERNAME</p>
+            </Row>
+            <Row>
+              <p className="previewtext profileuser">Interests: ...</p>
+            </Row>
           </Col>
         </Row>
-        <Link className="mootbutton medbutton" to={ROUTES.ACCOUNT}>Profile Preview</Link>
-        {/* To be modified: Clicking on Profile picture should send them to accounts page */}
+        <hr />
       </div>
     );
   }
@@ -78,7 +91,7 @@ class ProfilePictureDisplay extends Component {
     return (
       <div>
         <Row>
-          <Col>
+          <Col className="d-flex justify-content-center">
             <img className="profilepic" src={logo_temp} alt="Profile Picture" />
           </Col>
         </Row>
@@ -97,13 +110,13 @@ class ProfileDescription extends Component {
     return (
       <div className="profilebio">
         <Row>
-          <h4>NAME</h4>
+          <p className="profiletext profilename">NAME</p>
         </Row>
         <Row>
-          <h5>USERNAME</h5>
+          <p className="profiletext profileuser">USERNAME</p>
         </Row>
         <Row>
-          <h5>DESCRIPTION</h5>
+          <p className="profiletext profileuser">DESCRIPTION</p>
         </Row>
       </div>
     )
