@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import { compose } from 'recompose';
+ 
+import { withFirebase } from '../Firebase';
 import PasswordChangeForm from '../PasswordChange';
 import { PostCreation } from '../Post';
 
@@ -58,7 +60,28 @@ const dest = authUser => { return {
   };
 }
 
-class ProfilePreview extends Component {
+class ProfilePreviewBase extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: { username: "Loading..." } };
+  }
+
+  componentDidMount() {
+    const fb = this.props.firebase;
+    const uid = fb.auth.currentUser.uid;
+    console.log(uid);
+    const user = fb.user(uid).once('value').then((snapshot) => {
+          if (snapshot.exists()) {
+              return snapshot.val();
+          } else {
+              console.log("No data available");
+          }
+      }).catch((error) => {
+          console.error(error);
+      });
+    user.then((data) => this.setState({ data }));
+  }
+
   render() {
     return (
       <div>
@@ -73,7 +96,7 @@ class ProfilePreview extends Component {
               <p className="previewtext profilename">NAME</p>
             </Row>
             <Row>
-              <p className="previewtext profileuser">USERNAME</p>
+              <p className="previewtext profileuser">{ this.state.data.username }</p>
             </Row>
             <Row>
               <p className="previewtext profileuser">Interests: ...</p>
@@ -122,6 +145,10 @@ class ProfileDescription extends Component {
     )
   }
 }
+
+const ProfilePreview = compose(
+  withFirebase,
+)(ProfilePreviewBase);
 
 // export default AccountButton;
 export default withAuthorization(dest)(AccountPage);

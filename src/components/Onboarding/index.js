@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withAuthorization } from '../Session';
-import { Button, Container, Row } from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
  
@@ -13,7 +13,8 @@ import '../Styles/styles.css';
 
 const OnboardingPage = () => (
   <div>
-    <Container className="registerbox">
+    <Container className="homepage">
+      <Row className="divider"></Row>
       <OnboardingForm />
     </ Container>
   </div>
@@ -40,7 +41,7 @@ const ONBOARDING2_STATE = {
 const ONBOARDING3_STATE = {
   current: 3,
   header: "Would you like to link your account to your telegram account now?",
-  text1: "...",
+  text1: "",
   text2: "",
   buttontext1: "Skip this step",
   buttontext2: "Connect to Telegram!"
@@ -68,29 +69,34 @@ class OnboardingFormBase extends Component {
 
   render() {
     return (
-      <div>
-        <Row className="justify-content-md-center">
-          <p className="onbheader">
-            {this.state.header}<br /><br />
-          </p>
-          <p className="onbtext">
-            {this.state.text1}<br /><br />
-            {this.state.text2}<br /><br />
-          </p>
-        </ Row>
-        <Row className="justify-content-md-center">
-          <Row className="justify-content-md-start">
-            <Link className="link">
-              <Button className="mootbutton" type="button" onClick={this.onBtnOneClick}>{this.state.buttontext1}</Button>
-            </Link>
+      <Row>
+        <Col xs={3}></Col>
+        <Col xs={6} className="contentbox onbbox">
+          <Row className="justify-content-md-center">
+            <p className="onbheader">
+              {this.state.header}<br /><br />
+            </p>
+            <p className="onbtext">
+              {this.state.text1}<br /><br />
+              {this.state.text2}<br /><br />
+            </p>
           </ Row>
-          <Row className="justify-content-md-end">
-            <Link className="link">
-              <Button className="mootbutton" type="button" onClick={this.onBtnTwoClick}>{this.state.buttontext2}</Button>
-            </Link>
+          <br /><br />
+          <Row className="justify-content-md-center">
+            <Row className="justify-content-md-start">
+              <Link className="link">
+                <Button className="mootbutton" type="button" onClick={this.onBtnOneClick}>{this.state.buttontext1}</Button>
+              </Link>
+            </ Row>
+            <Row className="justify-content-md-end">
+              <Link className="link">
+                <Button className="mootbutton" type="button" onClick={this.onBtnTwoClick}>{this.state.buttontext2}</Button>
+              </Link>
+            </ Row>
           </ Row>
-        </ Row>
-      </div>
+        </Col>
+        <Col xs={3}></Col>
+      </Row>
     );
   }
 }

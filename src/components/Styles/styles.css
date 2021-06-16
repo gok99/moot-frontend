@@ -118,6 +118,10 @@
   font-weight: bold;
 }
 
+.onbbox {
+  height: 50vh;
+}
+
 /* Navigation Bar */
 
 .navbar {
