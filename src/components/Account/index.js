@@ -23,7 +23,7 @@ const AccountPage = () => (
             <Col>{/* Blank divider */}</Col>
             <Col xs={8}>
               <Row>
-                <Col xs={4}>
+                <Col xs={4} className="d-flex justify-content-center">
                   <div className="fixed">
                     <ProfilePictureDisplay />
                     <br />
@@ -88,7 +88,7 @@ class ProfilePreviewBase extends Component {
         <Row>
           <Col xs={5} className="d-flex justify-content-center">
             <Link to={ROUTES.ACCOUNT}>
-              <img className="previewpic" src={logo_temp} alt="Profile Picture" />
+              <img className="previewpic" src={logo_temp} alt="Profile" />
             </Link>
           </Col>
           <Col xs={7}>
@@ -115,7 +115,7 @@ class ProfilePictureDisplay extends Component {
       <div>
         <Row>
           <Col className="d-flex justify-content-center">
-            <img className="profilepic" src={logo_temp} alt="Profile Picture" />
+            <img className="profilepic" src={logo_temp} alt="Profile" />
           </Col>
         </Row>
       </div>

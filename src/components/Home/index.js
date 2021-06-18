@@ -15,7 +15,7 @@ const Home = () => (
       <Col>{/* Blank divider */}</Col>
       <Col xs={8}>
         <Row>
-          <Col xs={4}>
+          <Col xs={4} className="d-flex justify-content-center">
             <div className="fixed">
               <ProfilePreview />
               <br />

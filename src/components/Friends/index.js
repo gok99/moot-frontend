@@ -10,7 +10,7 @@ import { withAuthorization } from '../Session';
 import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 class FriendsBase extends Component {
   constructor(props) {
@@ -52,7 +52,7 @@ class FriendsBase extends Component {
             <Col>{/* Blank divider */}</Col>
             <Col xs={8}>
               <Row>
-                <Col xs={4}>
+                <Col xs={4} className="d-flex justify-content-center">
                   <div className="fixed">
                     <ProfilePreview />
                     <br />
