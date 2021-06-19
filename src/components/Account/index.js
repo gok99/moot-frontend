@@ -2,9 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import PasswordChangeForm from '../PasswordChange';
-import { PostCreation } from '../Post';
-import ProfilePicture from './ProfilePicture';
-import ProfileDescription from './ProfileDescription';
+import ProfileSidebar from './ProfileSidebar';
 
 import { AuthUserContext, withAuthorization } from '../Session';
 import * as ROUTES from '../../constants/routes';
@@ -21,16 +19,7 @@ const AccountPage = () => (
             <Col>{/* Blank divider */}</Col>
             <Col xs={8}>
               <Row>
-                <Col xs={4} className="d-flex justify-content-center">
-                  <div className="fixed">
-                    <ProfilePicture />
-                    <br />
-                    <ProfileDescription />
-                    { /* Name, Username, BioDesc */ }
-                    <br />
-                    <PostCreation />
-                  </div>
-                </Col>
+                <ProfileSidebar />
                 <Col xs={8}>
                   <div className="contentbox">
                     <h5>Contact: ---- ----</h5>

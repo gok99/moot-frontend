@@ -20,7 +20,7 @@ class PostCreation extends Component {
 class PostBar extends Component {
   render() {
     return (
-      <div className="contentbox postbox d-flex justify-content-center">
+      <div className="contentbox spacedbox d-flex justify-content-center">
         <p>BAR</p>
       </div>
     );
@@ -30,7 +30,7 @@ class PostBar extends Component {
 class PostBase extends Component {
   render() {
     return (
-      <div className="contentbox postbox d-flex justify-content-center">
+      <div className="contentbox spacedbox d-flex justify-content-center">
         <p>POST</p>
       </div>
     );

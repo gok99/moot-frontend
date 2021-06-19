@@ -3,9 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { compose } from 'recompose';
  
 import { withFirebase } from '../Firebase';
-import { ProfilePreview } from '../Account';
-import { PostCreation } from '../Post';
 import { withAuthorization } from '../Session';
+import ProfilePreview from '../Account/ProfilePreview';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -53,11 +52,7 @@ class FriendsBase extends Component {
             <Col xs={8}>
               <Row>
                 <Col xs={4} className="d-flex justify-content-center">
-                  <div className="fixed">
-                    <ProfilePreview />
-                    <br />
-                    <PostCreation />
-                  </div>
+                  <ProfilePreview />
                 </Col>
                 <Col xs={8}>
                   <div className="contentbox d-flex justify-content-center">

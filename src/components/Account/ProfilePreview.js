@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
 import ProfilePicturePreview from './ProfilePicturePreview';
+import { PostCreation } from '../Post';
 
 import '../Styles/styles.css';
 
@@ -49,6 +50,7 @@ class ProfilePreviewBase extends Component {
           </Col>
         </Row>
         <hr />
+        <PostCreation />
       </div>
     );
   }

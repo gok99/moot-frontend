@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ProfilePreview } from '../Account/profilePreview';
-import { PostCreation } from '../Post';
+import ProfilePreview from '../Account/ProfilePreview';
 import { withAuthorization } from '../Session';
 
 import * as ROUTES from '../../constants/routes';
+import ChatBoxCol from './ChatBoxCol';
 
 import '../Styles/styles.css';
 
@@ -16,16 +16,12 @@ const Chat = () => (
       <Col xs={8}>
         <Row>
           <Col xs={4} className="d-flex justify-content-center">
-            <div className="fixed">
-              <ProfilePreview />
-              <br />
-              <PostCreation />
-            </div>
+            <ProfilePreview />
           </Col>
           <Col xs={8}>
-            <div className="contentbox d-flex justify-content-center">
-              <h5>--- CHATS ---</h5>
-            </div>
+            <Row>
+              <ChatBoxCol />
+            </Row>
           </Col>
         </Row>
       </Col>
@@ -34,10 +30,11 @@ const Chat = () => (
   </ Container>
 );
 
-const dest = authUser => { return {
-  authorized: !!authUser,
-  destination: ROUTES.SIGN_IN,
-};
+const dest = authUser => { 
+  return {
+    authorized: !!authUser,
+    destination: ROUTES.SIGN_IN,
+  };
 }
 
 export default withAuthorization(dest)(Chat);

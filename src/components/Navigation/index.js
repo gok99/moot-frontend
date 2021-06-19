@@ -13,8 +13,12 @@ const Navigation = ({ authUser }) => (
 const NavigationAuth = () => (
     <Container className="navbar fixed">
       <Col></Col>
-      <NavigationBarLogo />
-      <NavigationBarIcon />
+      <Col className="navlogocol">
+        <NavigationBarLogo />
+      </Col>
+      <Col className="naviconcol">
+        <NavigationBarIcon />
+      </Col>
     </ Container>
 );
 

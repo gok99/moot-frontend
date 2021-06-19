@@ -7,15 +7,13 @@ import '../Styles/styles.css';
 
 const NavigationBarLogo = () => (
     <div>
-      <Col className="navlogocol">
-        <Row>
-          <Col></Col>
-          <Col>
-          <NavigationLogo />
-          </Col>
-          <Col></Col>
-        </Row>
-      </Col>
+      <Row>
+        <Col></Col>
+        <Col>
+        <NavigationLogo />
+        </Col>
+        <Col></Col>
+      </Row>
     </div>
 );
 

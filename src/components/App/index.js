@@ -15,7 +15,7 @@ import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import ChatPage from '../Chat';
-import LibraryPage from '../TagLibrary';
+import LibraryPage from '../Library';
 import FriendsPage from '../Friends';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
