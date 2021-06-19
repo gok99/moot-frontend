@@ -93,14 +93,14 @@ class ProfilePreviewBase extends Component {
           </Col>
           <Col xs={7}>
             <Row>
-              <p className="previewtext profilename">NAME</p>
+              <p className="previewtext profilename">{ this.state.data.username }</p>
             </Row>
             <Row>
-              <p className="previewtext profileuser">{ this.state.data.username }</p>
+              <p className="previewtext profileuser">{ this.state.data.email }</p>
             </Row>
-            <Row>
+            {/* <Row>
               <p className="previewtext profileuser">Interests: ...</p>
-            </Row>
+            </Row> */}
           </Col>
         </Row>
         <hr />

@@ -198,6 +198,10 @@
   height: 128px;
 }
 
+.postbox {
+  margin-bottom: 10px;
+}
+
 /* Account Page */
 
 .profilepic {

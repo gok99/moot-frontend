@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { ProfilePreview } from '../Account';
-import { PostCreation } from '../Post';
+import { PostCreation, PostBar, PostBase } from '../Post';
 import { withAuthorization } from '../Session';
 
 import * as ROUTES from '../../constants/routes';
@@ -23,9 +23,10 @@ const Home = () => (
             </div>
           </Col>
           <Col xs={8}>
-            <div className="contentbox d-flex justify-content-center">
-              <h5>--- USER FEED ---</h5>
-            </div>
+            <PostBar />
+            <PostBase />
+            <PostBase />
+            <PostBase />
           </Col>
         </Row>
       </Col>

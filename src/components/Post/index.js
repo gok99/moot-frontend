@@ -15,4 +15,26 @@ class PostCreation extends Component {
   }
 }
 
-export { PostCreation };
+// class SearchBar 
+
+class PostBar extends Component {
+  render() {
+    return (
+      <div className="contentbox postbox d-flex justify-content-center">
+        <p>BAR</p>
+      </div>
+    );
+  }
+}
+
+class PostBase extends Component {
+  render() {
+    return (
+      <div className="contentbox postbox d-flex justify-content-center">
+        <p>POST</p>
+      </div>
+    );
+  }
+}
+
+export { PostCreation, PostBar, PostBase };
