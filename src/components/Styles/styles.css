@@ -231,6 +231,14 @@
   color: #ee5858;
 }
 
+/* Friends Page */
+
+.friendboxtext {
+  font-weight: bold;
+  font-size: 16px;
+  color: #666666;
+}
+
 /* Account Page */
 
 .profilepic {
