@@ -51,7 +51,9 @@
 
 .contentbox {
   background: #ffffff;
-  border: 1px solid #c0badf;
+  border: 0.5px solid #c0badf;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
   padding: 32px 32px;
 }
@@ -198,8 +200,35 @@
   height: 128px;
 }
 
-.postbox {
+.spacedbox {
   margin-bottom: 10px;
+}
+
+/* Chat Page */
+
+.chatboxscroller {
+  height: 75vh;
+  overflow: auto;
+}
+
+.chatboxheader {
+  font-weight: bold;
+  font-size: 16px;
+  color: #666666;
+}
+
+.chatongoing {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: end;
+  color: #27b32e;
+}
+
+.chatempty {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: end;
+  color: #ee5858;
 }
 
 /* Account Page */
@@ -240,15 +269,36 @@
 
 /* Links */
 
+a,
+a:hover,
+a:focus,
+a:focus:hover,
+a:active,
+a:active:hover,
+a:visited,
+a:visited:hover,
+a:default,
+a:default:hover,
+a:disabled,
+a:disabled:hover {
+  text-decoration: none;
+  color: #000000;
+}
+
 a.link {
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
   color: #6b4eff;
   font-weight: bold;
-  text-decoration: none;
 }
 
 .link:hover {
   color: #362491;
+}
+
+.blocklink {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 /* Buttons */
@@ -321,6 +371,7 @@ a.link {
 
 /* STILL HAS MINOR BUG: When accessing Account page from other pages via dropdown, green border still appears */
 .iconbutton:hover,
+.iconbutton:focus,
 .iconbutton:focus:hover,
 .iconbutton:disabled,
 .iconbutton:visited,
