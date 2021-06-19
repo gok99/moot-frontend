@@ -41,7 +41,7 @@ class ProfilePreviewBase extends Component {
               <p className="previewtext profilename">{ this.state.data.username }</p>
             </Row>
             <Row>
-              <p className="previewtext profileuser">{ this.state.data.email }</p>
+              <p className="previewtext profileuser">@{ this.state.data.teleUser }</p>
             </Row>
             {/* <Row>
               <p className="previewtext profileuser">Interests: ...</p>

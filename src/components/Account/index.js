@@ -22,7 +22,6 @@ const AccountPage = () => (
                 <ProfileSidebar />
                 <Col xs={8}>
                   <div className="contentbox">
-                    <h5>Contact: ---- ----</h5>
                     <h5>Email: {authUser.email}</h5>
                     <hr />
                     <h6>If you wish to change your password, please type and confirm the new password below. </h6>

@@ -76,6 +76,11 @@ class SignUpFormBase extends Component {
     const { username, email, passwordOne, passwordTwo } = this.state;
     const id = Math.floor(100000000 + Math.random() * 900000000);
     var uid = '';
+    var newChat = {
+      active: false,
+      activematchUUID: '',
+      matchBOT: 0
+    };
 
     if (this.assert_valid(username, email, passwordOne, passwordTwo)) {
       this.props.firebase
@@ -91,6 +96,12 @@ class SignUpFormBase extends Component {
               id,
               uid,
               description: '',
+              teleUser: '',
+              chat1: newChat,
+              chat2: newChat,
+              chat3: newChat,
+              chat4: newChat,
+              chat5: newChat,
             });
         })
         .then(() => {
