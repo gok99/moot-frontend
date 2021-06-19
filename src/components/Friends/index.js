@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import { withAuthorization } from '../Session';
 import ProfilePreview from '../Account/ProfilePreview';
+import FriendBoxCol from './FriendBoxCol';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -55,9 +56,9 @@ class FriendsBase extends Component {
                   <ProfilePreview />
                 </Col>
                 <Col xs={8}>
-                  <div className="contentbox d-flex justify-content-center">
-                    <h5>You are currently matched with: { this.state.data.username }</h5>
-                  </div>
+                  <Row>
+                    <FriendBoxCol />
+                  </Row>
                 </Col>
               </Row>
             </Col>
