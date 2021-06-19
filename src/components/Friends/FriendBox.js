@@ -16,7 +16,7 @@ class FriendBox extends Component {
             <p className="friendboxtext">INSERT HYPOTHETICAL FRIEND NAME HERE</p>
           </Col>
           <Col xs={4} className="d-flex justify-content-center">
-            <a href="https://t.me/moot_chat1_bot" target="_blank" rel="noopener noreferrer" className="mootbutton medbutton">
+            <a href="https://t.me/moot_chat1_bot" target="_blank" rel="noopener noreferrer" className="mootbutton smallmedbutton">
               Chat -&#62;
             </a>
           </Col>

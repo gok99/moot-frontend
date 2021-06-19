@@ -17,7 +17,6 @@ class ProfilePreviewBase extends Component {
   componentDidMount() {
     const fb = this.props.firebase;
     const uid = fb.auth.currentUser.uid;
-    console.log(uid);
     const user = fb.user(uid).once('value').then((snapshot) => {
           if (snapshot.exists()) {
               return snapshot.val();

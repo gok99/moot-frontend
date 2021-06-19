@@ -90,7 +90,7 @@ class SignUpFormBase extends Component {
               email,
               id,
               uid,
-              verified: false,
+              description: '',
             });
         })
         .then(() => {
@@ -131,7 +131,7 @@ class SignUpFormBase extends Component {
 
     return (
       <Form onSubmit={this.onSubmit}>
-        <Form.Group className="textbox" controlId="signIpBasicUsername">
+        <Form.Group className="textbox" controlId="signUpBasicUsername">
           <Form.Control
             name="username" 
             type="username"
@@ -179,7 +179,7 @@ class SignUpFormBase extends Component {
     );
   }
 }
- 
+
 const SignUpLink = () => (
   <p className="startlink">
     Don't have an account? <Link className="link" to={ROUTES.SIGN_UP}>Sign up</Link>

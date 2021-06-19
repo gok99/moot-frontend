@@ -21,8 +21,6 @@ const Home = () => (
           <Col xs={8}>
             <PostBar />
             <PostBase />
-            <PostBase />
-            <PostBase />
           </Col>
         </Row>
       </Col>

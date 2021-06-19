@@ -121,7 +121,8 @@
 }
 
 .onbbox {
-  height: 50vh;
+  height: 60vh;
+  overflow: auto;
 }
 
 /* Navigation Bar */
@@ -294,9 +295,15 @@ a:disabled:hover {
 }
 
 a.link {
+  display: inline-block;
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
   color: #6b4eff;
   font-weight: bold;
+}
+
+a.link.centeredlink {
+  width: 200px;
+  margin: auto;
 }
 
 .link:hover {
@@ -333,6 +340,7 @@ a.link {
 }
 
 .mootbutton:disabled,
+.mootbutton:focus,
 .mootbutton:visited,
 .mootbutton:default,
 .mootbutton:active {
@@ -354,6 +362,13 @@ a.link {
   height: 48px;
   font-size: 15px;
   padding: 10px 0px;
+}
+
+.smallmedbutton {
+  width: 150px;
+  height: 40px;
+  font-size: 14px;
+  padding: 7px 0px;
 }
 
 .smallbutton {
