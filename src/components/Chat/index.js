@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ProfilePreview } from '../Account';
+import { ProfilePreview } from '../Account/profilePreview';
 import { PostCreation } from '../Post';
 import { withAuthorization } from '../Session';
 
