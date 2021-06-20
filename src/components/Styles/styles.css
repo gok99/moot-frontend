@@ -163,7 +163,7 @@
 }
 
 .dropdownmenu {
-  min-width: 6rem;
+  min-width: 5rem;
 }
 
 .dropdowntext,
@@ -242,6 +242,12 @@
 
 /* Account Page */
 
+.accountbox {
+  overflow: auto;
+  height: 75vh;
+  padding: 16px;
+}
+
 .profilepic {
   height: 160px;
   width: auto;
@@ -291,7 +297,7 @@ a:default:hover,
 a:disabled,
 a:disabled:hover {
   text-decoration: none;
-  color: #000000;
+  color: #6b4eff;
 }
 
 a.link {
@@ -307,7 +313,7 @@ a.link.centeredlink {
 }
 
 .link:hover {
-  color: #362491;
+  color: #6b4eff;
 }
 
 .blocklink {
@@ -360,7 +366,7 @@ a.link.centeredlink {
 .medbutton {
   width: 200px;
   height: 48px;
-  font-size: 15px;
+  font-size: 14px;
   padding: 10px 0px;
 }
 

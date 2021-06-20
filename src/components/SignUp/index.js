@@ -73,7 +73,8 @@ class SignUpFormBase extends Component {
   }
  
   onSubmit = event => {
-    const { username, email, passwordOne, passwordTwo } = this.state;
+    var { username, email, passwordOne, passwordTwo } = this.state;
+    email = email.toLowerCase();
     const id = Math.floor(100000000 + Math.random() * 900000000);
     var uid = '';
     var newChat = {

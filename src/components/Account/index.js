@@ -1,43 +1,30 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import PasswordChangeForm from '../PasswordChange';
+import AccountDetails from './AccountDetails';
 import ProfileSidebar from './ProfileSidebar';
 
-import { AuthUserContext, withAuthorization } from '../Session';
+import { withAuthorization } from '../Session';
 import * as ROUTES from '../../constants/routes';
  
 import '../Styles/styles.css';
 
 const AccountPage = () => (
-  <AuthUserContext.Consumer>
-    {authUser => (
-      <div>
-        <Container className="homepage">
-          <Row className="divider"></Row>
+  <div>
+    <Container className="homepage">
+      <Row className="divider"></Row>
+      <Row>
+        <Col>{/* Blank divider */}</Col>
+        <Col xs={8}>
           <Row>
-            <Col>{/* Blank divider */}</Col>
-            <Col xs={8}>
-              <Row>
-                <ProfileSidebar />
-                <Col xs={8}>
-                  <div className="contentbox">
-                    <h5>Email: {authUser.email}</h5>
-                    <hr />
-                    <h6>If you wish to change your password, please type and confirm the new password below. </h6>
-                    <br />
-                    <PasswordChangeForm /> 
-                    <hr />
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <Col>{/* Blank divider */}</Col>
+            <ProfileSidebar />
+            <AccountDetails />
           </Row>
-        </ Container>
-      </div>
-    )}
-  </AuthUserContext.Consumer>
+        </Col>
+        <Col>{/* Blank divider */}</Col>
+      </Row>
+    </ Container>
+  </div>
 );
  
 const dest = authUser => { return {
