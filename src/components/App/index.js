@@ -26,7 +26,7 @@ class App extends Component {
     super(props);
  
     this.state = {
-      authUser: null,
+      authUser: null
     };
   }
 
@@ -35,8 +35,9 @@ class App extends Component {
       authUser => {
         authUser
           ? this.setState({ authUser })
-          : this.setState({ authUser: null });
-      },
+          : this.setState({ authUser: null }
+        );
+      }
     );
   }
  
@@ -45,6 +46,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.onboarded);
     return (
       <Router>
         <div>

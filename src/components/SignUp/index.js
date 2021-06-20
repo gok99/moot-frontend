@@ -96,6 +96,7 @@ class SignUpFormBase extends Component {
               email,
               id,
               uid,
+              onboarded: false,
               description: '',
               teleUser: '',
               chat1: newChat,

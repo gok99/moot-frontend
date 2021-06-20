@@ -13,13 +13,32 @@ import '../Styles/styles.css';
 class OnboardingFormBase extends Component {
   constructor(props) {
     super(props);
-    this.state = { formid: 1, formstate: <OnboardingDescriptionForm /> };
+    this.state = { data: { onboarded: false }, formid: 1, formstate: <OnboardingDescriptionForm /> };
+  }
+
+  componentDidMount() {
+    const fb = this.props.firebase;
+    const uid = fb.auth.currentUser.uid;
+    fb.user(uid).once('value').then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No data available");
+      }
+    })
+    .then((data) => this.setState({ data }))
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   onSkip = event => {
+    const fb = this.props.firebase;
+    const uid = fb.auth.currentUser.uid;
     if (this.state.formid === 1) {
       this.setState({ formid: 2, formstate: <OnboardingTelegramForm /> });
     } else {
+      fb.user(uid).update({ onboarded: true });
       this.props.history.push(ROUTES.HOME);
     }
   };

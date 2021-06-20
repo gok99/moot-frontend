@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Row } from 'react-bootstrap';
 
 import DescriptionForm from './DescriptionForm';
 
