@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 // import { Link, withRouter } from 'react-router-dom';
 // import { compose } from 'recompose';
 
@@ -66,10 +66,15 @@ import '../Styles/styles.css';
 // )(OnboardingFormBase);
 
 class DescriptionForm extends Component {
+
+  na() {
+    alert("Not available... Please skip");
+  }
+
   render() {
     return (
       <div>
-        <Link className="mootbutton medbutton">Submit</Link>
+        <Button className="mootbutton medbutton" onClick={this.na}>Submit</Button>
       </div>
     )
   }

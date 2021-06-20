@@ -1,9 +1,32 @@
 import React, { Component } from 'react';
 import { Row, Button } from 'react-bootstrap';
+import { compose } from 'recompose';
+
+import { withFirebase } from '../Firebase';
 
 import '../Styles/styles.css';
 
-class TelegramForm extends Component {
+class TelegramFormBase extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: { email: '' }, confirmation: '' };
+  }
+
+  componentDidMount() {
+    const fb = this.props.firebase;
+    const uid = fb.auth.currentUser.uid;
+    const user = fb.user(uid).once('value').then((snapshot) => {
+          if (snapshot.exists()) {
+              return snapshot.val();
+          } else {
+              console.log("No data available");
+          }
+      }).catch((error) => {
+          console.error(error);
+      });
+    user.then((data) => this.setState({ data }));
+  }
+
   render() {
     return (
       <div>
@@ -16,5 +39,9 @@ class TelegramForm extends Component {
     )
   }
 }
+
+const TelegramForm = compose(
+  withFirebase,
+)(TelegramFormBase);
 
 export default TelegramForm;
