@@ -18,7 +18,6 @@ class PasswordChangeForm extends Component {
  
   onSubmit = event => {
     const { passwordOne } = this.state;
- 
     this.props.firebase
       .doPasswordUpdate(passwordOne)
       .then(() => {
@@ -38,28 +37,8 @@ class PasswordChangeForm extends Component {
   render() {
     const { passwordOne, passwordTwo, error } = this.state;
  
-    const isInvalid =
-      passwordOne !== passwordTwo || passwordOne === '';
-      <Form className="formgroup" onSubmit={this.onSubmit}>
-      <Form.Group className="textbox" controlId="forgotBasicEmail">
-        <Form.Control
-          name="email" 
-          type="email"
-          value={this.state.email}
-          placeholder="Email Address"
-          onChange={this.onChange} />
-      </Form.Group>
+    const isInvalid = passwordOne !== passwordTwo || passwordOne === '';
 
-      <Button  
-        className="mootbutton mt-2 mb-2"
-        variant="primary"
-        type="submit"
-        disabled={isInvalid}>
-        Reset My Password
-      </Button>
-
-      {error && <h5> {error.message} </h5>}
-    </ Form>
     return (
       <Form className="formgroup" onSubmit={this.onSubmit}>
         <Form.Group className="textbox mt-2" controlId="resetPwBasicPasswordOne">
@@ -88,6 +67,8 @@ class PasswordChangeForm extends Component {
           disabled={isInvalid}>
           Reset My Password
         </Button>
+        {error && <h5> {error.message} </h5>}
+
       </ Form>
     );
   }

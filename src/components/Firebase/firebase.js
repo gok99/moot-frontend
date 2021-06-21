@@ -38,7 +38,9 @@ class Firebase {
   doSignOut = () => this.auth.signOut();
 
   // *** User API ***
+  posts = () => this.db.ref('posts');
   user = uid => this.db.ref(`users/${uid}`);
+  userPosts = uid => this.db.ref(`users/${uid}/posts`);
   users = () => this.db.ref('users');
   idToUid = id => this.db.ref(`ids/${id}`);
 }

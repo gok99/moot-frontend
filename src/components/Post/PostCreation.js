@@ -14,27 +14,10 @@ class PostCreationBase extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      data: { postcount: 0 },
-      postid: 0,
       posttitle: '',
       postcontent: '',
       error: null
     };
-  }
-
-  componentDidMount() {
-    const fb = this.props.firebase;
-    const uid = fb.auth.currentUser.uid;
-    const user = fb.user(uid).once('value').then((snapshot) => {
-          if (snapshot.exists()) {
-              return snapshot.val();
-          } else {
-              console.log("No data available");
-          }
-      }).catch((error) => {
-          console.error(error);
-      });
-    user.then((data) => this.setState({ data }));
   }
 
   assert_valid = (posttitle, postcontent) => {
@@ -59,29 +42,15 @@ class PostCreationBase extends Component {
     const fb = this.props.firebase;
     var uid = fb.auth.currentUser.uid;
     if (this.assert_valid(posttitle, postcontent)) {
-      fb.user(uid)
-        .then(authUser => {
-          // Create a user in your Firebase realtime database
-          uid = authUser.user.uid;
-          return this.props.firebase
-            .user(uid)
-            .set({
-              newpost: {
-                title: this.state.posttitle,
-                content: this.state.postcontent,
-              }
-            });
-        })
-        .then(() => {
-          this.setState({ 
-            posttitle: '',
-            postcontent: '',
-            error: null
-          });
-        })
-        .catch(error => {
-          this.setState({ error });
-        });
+      var newPost = fb.posts().push();
+      newPost.set({
+        uid, 
+        posttitle,
+        postcontent
+      }).then((error) => console.log(error));;
+      fb.userPosts(uid).push({
+        postUid: newPost.key
+      }).then((error) => console.log(error));
     }
     event.preventDefault();
   }
@@ -100,7 +69,7 @@ class PostCreationBase extends Component {
 
     return (
       <div>
-        <Form className="temppostcreationrestriction">
+        <Form className="temppostcreationrestriction" onSubmit={this.onSubmit}>
           <Form.Group className="temppostcreationrestriction textbox mt-2" controlId="signUpBasicPasswordOne">
             <Form.Control 
               name="posttitle"
