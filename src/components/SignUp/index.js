@@ -99,6 +99,7 @@ class SignUpFormBase extends Component {
               onboarded: false,
               description: '',
               teleUser: '',
+              postcount: 0,
               chat1: newChat,
               chat2: newChat,
               chat3: newChat,

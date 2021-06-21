@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
 import ProfilePicturePreview from './ProfilePicturePreview';
-import { PostCreation } from '../Post';
+import PostCreation from '../Post/PostCreation';
 
 import '../Styles/styles.css';
 

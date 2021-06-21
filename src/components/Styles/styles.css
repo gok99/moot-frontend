@@ -5,6 +5,11 @@
   box-shadow: none !important;
 }
 
+/* TEMP - SHOULD DELETE */
+.temppostcreationrestriction {
+  max-width: 200px;
+}
+
 /* Containers */
 
 #root {

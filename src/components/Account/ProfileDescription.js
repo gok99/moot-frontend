@@ -3,7 +3,7 @@ import { Row } from 'react-bootstrap';
 import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
-import { PostCreation } from '../Post';
+import PostCreation from '../Post/PostCreation';
 
 import '../Styles/styles.css';
 
