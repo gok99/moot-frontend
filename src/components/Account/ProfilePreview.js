@@ -43,7 +43,7 @@ class ProfilePreviewBase extends Component {
             <Row>
               { this.state.data.teleUser === ''
                 ? <p className="previewtext profileuser">---</p>
-                : <p className="previewtext profileuser">{ this.state.data.teleUser }</p>
+                : <p className="previewtext profileuser">@{ this.state.data.teleUser }</p>
               }
             </Row>
             {/* <Row>
