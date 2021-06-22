@@ -14,9 +14,14 @@ const AccountDetails = () => (
       <Col xs={8}>
         <div className="accountbox">
           <div className="contentbox spacedbox">
-            <h5>Email: {authUser.email}</h5>
+            <h3>EMAIL</h3>
             <hr />
-            <p className="onbtext">If you wish to change your password, please type and confirm the new password below. </p><br />
+            <p className="accounttext">Your account is registered under: {authUser.email}</p>
+          </div>
+          <div className="contentbox spacedbox">
+            <h3>CHANGE PASSWORD</h3>
+            <hr />
+            <p className="accounttext">To change your password, please type and confirm the new password. </p><br />
             <PasswordChangeForm />
           </div>
           <SetupForm />

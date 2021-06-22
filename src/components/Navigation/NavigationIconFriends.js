@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
-import icon_f from '../../assets/icon_fh.png';
+import icon_f from '../../assets/icon_f.png';
 
 const NavigationIconFriends = () => (
   <div>

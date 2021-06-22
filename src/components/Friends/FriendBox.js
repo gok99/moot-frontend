@@ -13,10 +13,10 @@ class FriendBox extends Component {
             <img className="previewpic" src={logo_temp} alt="Profile" />
           </Col>
           <Col xs={6} className="d-flex justify-content-center">
-            <p className="friendboxtext">INSERT HYPOTHETICAL FRIEND NAME HERE</p>
+            <p className="friendboxtext">Friend</p>
           </Col>
           <Col xs={4} className="d-flex justify-content-center">
-            <a href="https://t.me/moot_chat1_bot" target="_blank" rel="noopener noreferrer" className="mootbutton smallmedbutton">
+            <a href="https://t.me/moot_chat1_bot" target="_blank" rel="noopener noreferrer" className="likebutton smallmedbutton">
               Chat -&#62;
             </a>
           </Col>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
-import icon_l from '../../assets/icon_lh.png';
+import icon_l from '../../assets/icon_l.png';
 
 const NavigationIconLibrary = () => (
   <div>

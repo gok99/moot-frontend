@@ -70,24 +70,25 @@ class PostCreationBase extends Component {
     return (
       <div>
         <Form className="temppostcreationrestriction" onSubmit={this.onSubmit}>
-          <Form.Group className="temppostcreationrestriction textbox mt-2" controlId="signUpBasicPasswordOne">
+          <Form.Group className="temppostcreationrestriction textbox mt-2" controlId="posttitle">
             <Form.Control 
               name="posttitle"
-              type="posttitle"
+              type="text"
               placeholder="Title"
               value={posttitle}
               onChange={this.onChange} />
           </Form.Group>
-          <Form.Group className="temppostcreationrestriction textbox postcreationbox mt-2" controlId="signUpBasicPasswordTwo">
+          <Form.Group className="temppostcreationrestriction textbox postcreationbox mt-2" controlId="postcontent">
             <Form.Control 
               name="postcontent"
-              type="postcontent"
+              type="text"
+              as="textarea"
               placeholder="What's on your mind?"
               value={postcontent}
               onChange={this.onChange} />
           </Form.Group>
           <Button  
-            className="mootbutton medbutton mt-2 mb-2"
+            className="likebutton medbutton mt-2 mb-2"
             variant="primary"
             type="submit">
             Create a Post

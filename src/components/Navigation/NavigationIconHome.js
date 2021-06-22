@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
-import icon_h from '../../assets/icon_hh.png';
+import icon_h from '../../assets/icon_h.png';
 
 const NavigationIconHome = () => (
   <div>

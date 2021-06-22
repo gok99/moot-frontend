@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
-import icon_c from '../../assets/icon_ch.png';
+import icon_c from '../../assets/icon_c.png';
 
 const NavigationIconChat = () => (
   <div>

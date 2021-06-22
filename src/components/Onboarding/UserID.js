@@ -29,8 +29,7 @@ class UserIDBase extends Component {
   render() {
     return (
       <div>
-        <h5>User ID: { this.state.data.id }</h5>
-        <hr />
+        <p className="accounttext">Your moot user ID is: { this.state.data.id }</p>
       </div>
     );
   }

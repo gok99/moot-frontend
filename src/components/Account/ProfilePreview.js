@@ -11,7 +11,7 @@ import '../Styles/styles.css';
 class ProfilePreviewBase extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: { username: "Loading..." } };
+    this.state = { data: { username: "Loading...", teleUser: '' } };
   }
 
   componentDidMount() {
@@ -41,7 +41,10 @@ class ProfilePreviewBase extends Component {
               <p className="previewtext profilename">{ this.state.data.username }</p>
             </Row>
             <Row>
-              <p className="previewtext profileuser">@{ this.state.data.teleUser }</p>
+              { this.state.data.teleUser === ''
+                ? <p className="previewtext profileuser">---</p>
+                : <p className="previewtext profileuser">{ this.state.data.teleUser }</p>
+              }
             </Row>
             {/* <Row>
               <p className="previewtext profileuser">Interests: ...</p>

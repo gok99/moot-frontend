@@ -6,7 +6,7 @@ import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
-import icon_a from '../../assets/icon_ah.png';
+import icon_a from '../../assets/icon_a.png';
 
 const NavigationIconAccount = () => (
   <div>

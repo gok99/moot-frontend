@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { compose } from 'recompose';
 
+import { withFirebase } from '../Firebase';
 import UserIDForm from './UserIDForm';
 import ResendEmailForm from './ResendEmailForm';
 import TelegramForm from './TelegramForm';
@@ -8,22 +10,63 @@ import { AuthUserContext } from '../Session';
  
 import '../Styles/styles.css';
 
-const SetupForm = () => (
-  <AuthUserContext.Consumer>
-    {authUser => (
-      <div className="contentbox">
-        <UserIDForm />
-        <p className="onbtext">To resend the verification email, please click the button below.</p><br />
-        <ResendEmailForm />
-        <br />
-        <hr />
-        <p className="onbtext">To connect to telegram, please click the button below to access the main telegram bot, and input the command "/r [User ID]".</p>
-        <p className="onbtext">(E.g. "/r 000000000")</p><br />
-        <p className="onbtext">The User ID is the 9-digit numerical code that should be visible above if you have already verified your email. If you don't see the code, please proceed to verify your email: you can have the verification email re-sent to your email via above.</p><br />
-        <TelegramForm />
-      </div>
-    )}
-  </AuthUserContext.Consumer>
-);
+class SetupFormBase extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: { teleUser: '' } };
+  }
+
+  componentDidMount() {
+    const fb = this.props.firebase;
+    const uid = fb.auth.currentUser.uid;
+    const user = fb.user(uid).once('value').then((snapshot) => {
+          if (snapshot.exists()) {
+              return snapshot.val();
+          } else {
+              console.log("No data available");
+          }
+      }).catch((error) => {
+          console.error(error);
+      });
+    user.then((data) => this.setState({ data }));
+  }
+
+  render() {
+    return (
+      <AuthUserContext.Consumer>
+        {authUser => (
+          <div>
+          <UserIDForm />
+          <div className="contentbox spacedbox">
+            <h3>ACCOUNT VERIFICATION</h3>
+            <hr />
+            <p className="accounttext">Clicking the button below will re-send the verification email to your NUSNET Email. Please use this if you need to re-verify your account.</p><br />
+            <ResendEmailForm />
+          </div>
+          <div className="contentbox spacedbox">
+            <h3>TELEGRAM CONNECTION</h3>
+            <hr />
+            { this.state.data.teleUser === ''
+              ? <div>
+                  <p className="accounttext">To connect to telegram, please click the button below to access the main telegram bot, and input the command "/r [User ID]".</p>
+                  <p className="accounttext">(E.g. "/r 000000000")</p><br />
+                  <p className="accounttext">The User ID is the 9-digit numerical code that should be visible above if you have already verified your email. If you don't see the code, please proceed to verify your email: you can have the verification email re-sent to your email via above.</p><br />
+                  <TelegramForm />
+                </div>
+              : <div>
+                  <p className="accounttext">Hello, @{ this.state.data.teleUser }! You are currently connected to telegram.</p>
+                </div>
+            }
+          </div>
+          </div>
+        )}
+      </AuthUserContext.Consumer>
+    )
+  }
+}
+
+const SetupForm = compose(
+  withFirebase,
+)(SetupFormBase);
 
 export default SetupForm;

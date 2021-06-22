@@ -17,7 +17,7 @@ class ChatBox extends Component {
           </Col>
         </Row>
         <hr />
-        <p>---Anon Chat Info / Post Info---</p>
+        <p className="chatboxtext">---Anon Chat Info / Post Info---</p>
       </div>
     )
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import AccountDetails from './AccountDetails';
-import ProfileSidebar from './ProfileSidebar';
+import AccountSidebar from './AccountSidebar';
 
 import { withAuthorization } from '../Session';
 import * as ROUTES from '../../constants/routes';
@@ -17,7 +17,7 @@ const AccountPage = () => (
         <Col>{/* Blank divider */}</Col>
         <Col xs={9}>
           <Row>
-            <ProfileSidebar />
+            <AccountSidebar />
             <AccountDetails />
           </Row>
         </Col>

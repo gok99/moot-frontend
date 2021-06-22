@@ -10,6 +10,19 @@
   max-width: 200px;
 }
 
+/* General Elements */
+
+h3 {
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-size: 21px;
+  color: #392155;
+}
+
+p {
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  margin: auto;
+}
+
 /* Containers */
 
 #root {
@@ -159,6 +172,11 @@
 .navicon {
   height: 32px;
   width: 32px;
+  opacity: 0.7;
+}
+
+.navicon:hover {
+  opacity: 0.4;
 }
 
 .tempicon {
@@ -196,6 +214,31 @@
   padding: initial;
 }
 
+/* Posts */
+
+.postbox {
+  height: 60vh;
+}
+
+p.postop {
+  margin: 0px;
+  text-align: left;
+}
+
+p.posttime {
+  color: #666666;
+}
+
+p.posttitle {
+  font-size: 20px;
+  color: #0e0f0f;
+}
+
+p.postcontent {
+  font-size: 15px;
+  color: #7a7e80;
+}
+
 /* Home Page */
 
 .homepage {
@@ -223,18 +266,23 @@
   color: #666666;
 }
 
+.chatboxtext {
+  font-size: 14px;
+  color: #815e91;
+}
+
 .chatongoing {
   font-weight: bold;
   font-size: 16px;
   text-align: end;
-  color: #27b32e;
+  color: #5dce62;
 }
 
 .chatempty {
   font-weight: bold;
   font-size: 16px;
   text-align: end;
-  color: #ee5858;
+  color: #f07171;
 }
 
 /* Friends Page */
@@ -253,17 +301,26 @@
   padding: 16px;
 }
 
+.accounttext {
+  font-size: 16px;
+  color: #5c4374;
+}
+
+.centeredform {
+  margin: auto;
+}
+
 .profilepic {
   height: 160px;
   width: auto;
-  border: 4px double #c0badf;
+  border: 4px double #bbbbbb;
   border-radius: 160px;
 }
 
 .previewpic {
   height: 64px;
   width: auto;
-  border: 4px double #c0badf;
+  border: 4px double #bbbbbb;
   border-radius: 64px;
 }
 
@@ -346,10 +403,6 @@ a.link.centeredlink {
   text-decoration: none;
 }
 
-.noncentered {
-  margin: initial;
-}
-
 .mootbutton:disabled,
 .mootbutton:focus,
 .mootbutton:visited,
@@ -366,6 +419,45 @@ a.link.centeredlink {
   background-color: #ffffff;
   color: #6b4eff;
   border: 2px solid #6b4eff;
+}
+
+.likebutton {
+  display: block;
+  text-align: center;
+  background: #F4EDFF;
+  color: #9c89fc;
+  border: 1px solid #BBBBBB;
+  border-radius: 12px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  width: 320px;
+  height: 64px;
+  margin: auto;
+  padding: 12px 32px;
+  text-decoration: none;
+}
+
+.likebutton:disabled,
+.likebutton:focus,
+.likebutton:visited,
+.likebutton:default,
+.likebutton:active {
+  background-color: #F4EDFF;
+  color: #9c89fc;
+  border: 0.5px solid #BBBBBB;
+  box-shadow: none;
+}
+
+.likebutton:hover,
+.likebutton:focus:hover {
+  background-color: #c7bcff;
+  color: #ffffff;
+  border: 0.5px solid #BBBBBB;
+}
+
+.noncentered {
+  margin: initial;
 }
 
 .medbutton {
@@ -418,11 +510,4 @@ a.link.centeredlink {
 .btn-success:active,
 .show > .btn-success.dropdown-toggle {
   background-color: #ffffff;
-}
-
-/* General Elements */
-
-p {
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  margin: auto;
 }

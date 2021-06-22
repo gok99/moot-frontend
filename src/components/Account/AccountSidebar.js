@@ -6,7 +6,7 @@ import ProfileDescription from './ProfileDescription';
  
 import '../Styles/styles.css';
 
-const ProfileSidebar = () => (
+const AccountSidebar = () => (
   <Col xs={4} className="d-flex justify-content-center">
     <div className="fixed">
       <ProfilePicture /><br />
@@ -15,4 +15,4 @@ const ProfileSidebar = () => (
   </Col>
 );
 
-export default ProfileSidebar;
+export default AccountSidebar;

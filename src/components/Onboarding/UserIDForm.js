@@ -21,7 +21,14 @@ class UserIDFormBase extends Component {
   render() {
     return (
       <div>
-        { this.state.visibleID ? <UserID /> : null }
+        { this.state.visibleID 
+          ? <div className="contentbox spacedbox">
+              <h3>USER ID</h3>
+              <hr />
+              <UserID />
+            </div>
+          : null
+        }
       </div>
     );
   }

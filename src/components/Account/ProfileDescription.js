@@ -10,7 +10,7 @@ import '../Styles/styles.css';
 class ProfileDescriptionBase extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: { username: "Loading..." } };
+    this.state = { data: { username: "Loading...", teleUser: '' } };
   }
 
   componentDidMount() {
@@ -35,7 +35,10 @@ class ProfileDescriptionBase extends Component {
           <p className="profiletext profilename">{ this.state.data.username }</p>
         </Row>
         <Row>
-          <p className="profiletext profileuser">@{ this.state.data.teleUser }</p>
+          { this.state.data.teleUser === ''
+            ? null
+            : <p className="profiletext profileuser">@{ this.state.data.teleUser }</p>
+          }
         </Row>
         <Row>
           {/* <p className="profiletext profileuser">{ this.state.data.description }</p> */}

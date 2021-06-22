@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import ProfilePreview from '../Account/ProfilePreview';
-import { PostBar, PostBase } from '../Post';
+import PostArea from '../Post/PostArea';
 import { withAuthorization } from '../Session';
 
 import * as ROUTES from '../../constants/routes';
@@ -19,8 +19,7 @@ const Home = () => (
             <ProfilePreview />
           </Col>
           <Col xs={8}>
-            <PostBar />
-            <PostBase />
+            <PostArea />
           </Col>
         </Row>
       </Col>

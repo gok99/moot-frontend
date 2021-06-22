@@ -59,9 +59,8 @@ class PasswordChangeForm extends Component {
             onChange={this.onChange} />
         </Form.Group>
 
-        <br />
         <Button  
-          className="mootbutton medbutton noncentered mt-2 mb-2"
+          className="mootbutton medbutton noncentered mt-4 mb-2"
           variant="primary"
           type="submit"
           disabled={isInvalid}>

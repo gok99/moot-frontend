@@ -41,8 +41,8 @@ class ChatBox2Base extends Component {
           </Col>
         </Row>
         <hr />
-        <p>You are currently matched with: {this.state.data.chat2.activematchUUID }</p>
-        <p>---Anon Chat Info / Post Info---</p>
+        <p className="chatboxtext">You are currently matched with: {this.state.data.chat2.activematchUUID }</p>
+        <p className="chatboxtext">---Anon Chat Info / Post Info---</p>
       </div>
     )
   }
