@@ -13,7 +13,7 @@ const Chat = () => (
     <Row className="divider"></Row>
     <Row>
       <Col>{/* Blank divider */}</Col>
-      <Col xs={8}>
+      <Col xs={9}>
         <Row>
           <Col xs={4} className="d-flex justify-content-center">
             <ProfilePreview />

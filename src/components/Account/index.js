@@ -15,7 +15,7 @@ const AccountPage = () => (
       <Row className="divider"></Row>
       <Row>
         <Col>{/* Blank divider */}</Col>
-        <Col xs={8}>
+        <Col xs={9}>
           <Row>
             <ProfileSidebar />
             <AccountDetails />
