@@ -38,17 +38,33 @@ class PostCreationBase extends Component {
     var { posttitle, postcontent } = this.state;
     const fb = this.props.firebase;
     var uid = fb.auth.currentUser.uid;
+
+    var date = new Date();
+    var hour = date.getHours() % 12 === 0 ? 12 : date.getHours() % 12;
+    var ampm = date.getHours() >= 12 ? "PM" : "AM";
+    var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes().toString() : date.getMinutes().toString();
+    var timestamp = 
+      date.getDate().toString() + " " + 
+      date.toLocaleString('default', { month: 'long' }) + ", " + 
+      hour.toString().toString() + ":" +
+      minutes + " " + ampm;
+
     if (this.assert_valid(posttitle, postcontent)) {
       var newPost = fb.posts().push();
       newPost.set({
         uid, 
         posttitle,
-        postcontent
+        postcontent,
+        timestamp,
       }).then((error) => console.log(error));;
       fb.userPosts(uid).push({
         postUid: newPost.key
       }).then((error) => console.log(error));
     }
+    
+    const currentState = this.state.active;
+    this.setState({ active: !currentState });
+
     event.preventDefault();
   }
  
