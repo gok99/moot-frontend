@@ -6,6 +6,7 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 
 import '../Styles/styles.css';
+import icon_x from '../../assets/icon_x.png';
 
 class PostCreationBase extends Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class PostCreationBase extends Component {
         postUid: newPost.key
       }).then((error) => console.log(error));
     }
-    
+
     const currentState = this.state.active;
     this.setState({ active: !currentState });
 
@@ -99,7 +100,9 @@ class PostCreationBase extends Component {
                 <Row className="pcodivider"></Row>
                 <div className="postcreationform">
                   <Row className="d-flex justify-content-end">
-                    <Button className="closebutton" type="button" onClick = {this.toggleClass}>X</Button>
+                    <Button className="closebutton" type="button" onClick = {this.toggleClass}>
+                      <img className="navicon" src={icon_x} alt="Close" />
+                    </Button>
                   </Row>
                   <Row>
                     <Form className="postcreationformint" onSubmit={this.onSubmit}>
