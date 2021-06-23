@@ -13,7 +13,7 @@ import '../Styles/styles.css';
 class OnboardingFormBase extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: { onboarded: false }, formid: 1, formstate: <OnboardingDescriptionForm /> };
+    this.state = { formid: 1, formstate: <OnboardingDescriptionForm /> };
   }
 
   componentDidMount() {
@@ -33,12 +33,9 @@ class OnboardingFormBase extends Component {
   }
 
   onSkip = event => {
-    const fb = this.props.firebase;
-    const uid = fb.auth.currentUser.uid;
     if (this.state.formid === 1) {
       this.setState({ formid: 2, formstate: <OnboardingTelegramForm /> });
     } else {
-      fb.user(uid).update({ onboarded: true });
       this.props.history.push(ROUTES.HOME);
     }
   };

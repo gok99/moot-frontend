@@ -96,7 +96,6 @@ class SignUpFormBase extends Component {
               email,
               id,
               uid,
-              onboarded: false,
               description: '',
               teleUser: '',
               postcount: 0,

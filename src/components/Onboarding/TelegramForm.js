@@ -9,7 +9,7 @@ import '../Styles/styles.css';
 class TelegramFormBase extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: { email: '' }, confirmation: '' };
+    this.state = { data: { email: '' } };
   }
 
   componentDidMount() {
