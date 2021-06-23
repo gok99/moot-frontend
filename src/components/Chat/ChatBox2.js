@@ -31,7 +31,7 @@ class ChatBox2Base extends Component {
       <div className="contentbox spacedbox">
         <Row>
           <Col xs={9}>
-            <p className="chatboxheader">Anonymous Chat Slot:</p>
+            <p className="chatboxheader">Anonymous Chat #2:</p>
           </Col>
           <Col xs={3}>
             { this.state.data.chat2.active 

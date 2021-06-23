@@ -11,7 +11,7 @@ import '../Styles/styles.css';
 class ProfilePreviewBase extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: { username: "Loading...", teleUser: '', description: '' } };
+    this.state = { data: { username: "Loading...", teleUser: " ", description: "Loading..." } };
   }
 
   componentDidMount() {
@@ -31,18 +31,18 @@ class ProfilePreviewBase extends Component {
 
   render() {
     return (
-      <div>
+      <div className="previewbox">
         <Row>
-          <Col xs={5} className="d-flex justify-content-center">
+          <Col xs={4} className="d-flex justify-content-center">
             <ProfilePicturePreview />
           </Col>
-          <Col xs={7}>
+          <Col xs={8}>
             <Row>
               <p className="previewtext profilename">{ this.state.data.username }</p>
             </Row>
             <Row>
               { this.state.data.teleUser === ''
-                ? <p className="previewtext profileuser">---</p>
+                ? <p className="previewtext profileuser"> </p>
                 : <p className="previewtext profileuser">@{ this.state.data.teleUser }</p>
               }
             </Row>

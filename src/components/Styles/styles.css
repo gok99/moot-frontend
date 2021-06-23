@@ -220,6 +220,41 @@ p {
   height: 60vh;
 }
 
+.postcreationoverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+.pcodivider {
+  height: 25vh;
+}
+
+.pcoactive {
+  display: block;
+}
+
+.pcoinactive {
+  display: none !important;
+}
+
+.postcreationform {
+  margin: auto;
+  background: #ffffff;
+  padding: 1vh 1vw;
+}
+
+.postcreationformint {
+  background: #ffffff;
+  padding: 5vh 5vw;
+}
+
 p.postop {
   margin: 0px;
   text-align: left;
@@ -268,7 +303,7 @@ p.postcontent {
 
 .chatboxtext {
   font-size: 14px;
-  color: #815e91;
+  color: #747474;
 }
 
 .chatongoing {
@@ -308,6 +343,10 @@ p.postcontent {
 
 .centeredform {
   margin: auto;
+}
+
+.previewbox {
+  min-width: 200px;
 }
 
 .profilepic {
@@ -454,6 +493,39 @@ a.link.centeredlink {
   background-color: #c7bcff;
   color: #ffffff;
   border: 0.5px solid #BBBBBB;
+}
+
+.closebutton {
+  display: block;
+  text-align: center;
+  background: #5e5e5e;
+  color: #ffffff;
+  border: 0.5px solid #707070;
+  border-radius: 12px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  width: 32px;
+  height: 32px;
+  text-decoration: none;
+}
+
+.closebutton:disabled,
+.closebutton:focus,
+.closebutton:visited,
+.closebutton:default,
+.closebutton:active {
+  background-color: #5e5e5e;
+  color: #ffffff;
+  border: 0.5px solid #707070;
+  box-shadow: none;
+}
+
+.closebutton:hover,
+.closebutton:focus:hover {
+  background-color: #ffffff;
+  color: #5e5e5e;
+  border: 0.5px solid #707070;
 }
 
 .noncentered {
