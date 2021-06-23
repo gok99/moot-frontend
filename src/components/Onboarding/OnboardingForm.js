@@ -56,7 +56,7 @@ class OnboardingFormBase extends Component {
             </Col>
             <Col xs={4} className="d-flex justify-content-end">
               <Link className="link">
-                <Button className="mootbutton smallbutton" type="button" onClick={this.onSkip}>Skip this step &#62;&#62;&#62;</Button>
+                <Button className="likebutton smallbutton" type="button" onClick={this.onSkip}>Skip this step &#62;&#62;&#62;</Button>
               </Link>
             </Col>
           </Row>

@@ -32,7 +32,7 @@ class TelegramFormBase extends Component {
       <div>
         <Row className="d-flex justify-content-center">
           <a href="https://t.me/mootapp_bot" target="_blank" rel="noopener noreferrer" className="d-flex justify-content-center link centeredlink">
-            <Button className="mootbutton medbutton" type="button" onClick={this.onSkip}>Connect to Telegram!</Button>
+            <Button className="likebutton medbutton" type="button" onClick={this.onSkip}>Connect to Telegram!</Button>
           </a>
         </Row>
       </div>

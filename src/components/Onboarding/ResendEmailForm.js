@@ -43,7 +43,7 @@ class ResendEmailFormBase extends Component {
     return (
       <div>
         <Row className="d-flex justify-content-center">
-          <Button className="mootbutton medbutton" type="button" onClick={this.onSubmit}>Resend Verification Email</Button>
+          <Button className="likebutton medbutton" type="button" onClick={this.onSubmit}>Resend Verification Email</Button>
         </Row>
       </div>
     );

@@ -336,6 +336,10 @@ p.postcontent {
   padding: 16px;
 }
 
+.accountsidebar {
+  max-width: 256px;
+}
+
 .accounttext {
   font-size: 16px;
   color: #5c4374;
@@ -343,6 +347,10 @@ p.postcontent {
 
 .centeredform {
   margin: auto;
+}
+
+.descriptionbox {
+  max-width: 256px;
 }
 
 .previewbox {

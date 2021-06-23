@@ -86,7 +86,7 @@ class OnboardingTelegramFormBase extends Component {
           { this.state.form }
         </Col>
         <Col className="d-flex mb-2 justify-content-center">
-          <Button className="mootbutton medbutton" type="button" onClick={this.onClick}>{ this.state.buttontext }</Button>
+          <Button className="likebutton medbutton" type="button" onClick={this.onClick}>{ this.state.buttontext }</Button>
         </Col>
       </ Row>
       </div>

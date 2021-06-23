@@ -8,7 +8,7 @@ import '../Styles/styles.css';
 
 const AccountSidebar = () => (
   <Col xs={4} className="d-flex justify-content-center">
-    <div className="fixed">
+    <div className="fixed accountsidebar">
       <ProfilePicture /><br />
       <ProfileDescription /><br />
     </div>
