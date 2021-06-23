@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
 import PostCreation from '../Post/PostCreation';
+import DescriptionForm from '../Onboarding/DescriptionForm';
 
 import '../Styles/styles.css';
 
@@ -43,6 +44,8 @@ class ProfileDescriptionBase extends Component {
         <Row>
           {/* <p className="profiletext profileuser">{ this.state.data.description }</p> */}
         </Row>
+        <hr />
+        <DescriptionForm />
         <hr />
         <PostCreation />
       </div>

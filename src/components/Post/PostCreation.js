@@ -68,34 +68,32 @@ class PostCreationBase extends Component {
     } = this.state;
 
     return (
-      <div>
-        <Form className="temppostcreationrestriction" onSubmit={this.onSubmit}>
-          <Form.Group className="temppostcreationrestriction textbox mt-2" controlId="posttitle">
-            <Form.Control 
-              name="posttitle"
-              type="text"
-              placeholder="Title"
-              value={posttitle}
-              onChange={this.onChange} />
-          </Form.Group>
-          <Form.Group className="temppostcreationrestriction textbox postcreationbox mt-2" controlId="postcontent">
-            <Form.Control 
-              name="postcontent"
-              type="text"
-              as="textarea"
-              placeholder="What's on your mind?"
-              value={postcontent}
-              onChange={this.onChange} />
-          </Form.Group>
-          <Button  
-            className="likebutton medbutton mt-2 mb-2"
-            variant="primary"
-            type="submit">
-            Create a Post
-          </Button>
-          {error && <h5> {error.message} </h5>}
-        </ Form>
-      </div>
+      <Form className="centeredform temppostcreationrestriction" onSubmit={this.onSubmit}>
+        <Form.Group className="temppostcreationrestriction textbox mt-2" controlId="posttitle">
+          <Form.Control 
+            name="posttitle"
+            type="text"
+            placeholder="Title"
+            value={posttitle}
+            onChange={this.onChange} />
+        </Form.Group>
+        <Form.Group className="temppostcreationrestriction textbox postcreationbox mt-2" controlId="postcontent">
+          <Form.Control 
+            name="postcontent"
+            type="text"
+            as="textarea"
+            placeholder="What's on your mind?"
+            value={postcontent}
+            onChange={this.onChange} />
+        </Form.Group>
+        <Button  
+          className="likebutton medbutton mt-2 mb-2"
+          variant="primary"
+          type="submit">
+          Create a Post
+        </Button>
+        {error && <h5> {error.message} </h5>}
+      </ Form>
     );
   }
 }
