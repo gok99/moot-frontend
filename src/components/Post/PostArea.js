@@ -27,67 +27,80 @@ class PostAreaBase extends Component {
 
   componentDidMount() {
     const fb = this.props.firebase;
-    fb.posts().once('value').then((snapshot) => {
+    fb.posts().limitToLast(20).once('value').then((snapshot) => {
       if (snapshot.exists()) {
-        console.log("Snapshotted!");
         return snapshot.val();
       } else {
         console.log("No data available");
       }
     })
-    .then((data) => this.setState({ posts: data }))
+    .then((data) => {
+      // this.setState({ posts: data })
+      const posts = Object.values(data);
+      posts.map((post) => {
+        var date = new Date(post.timestamp);
+        var hour = date.getHours() % 12 === 0 ? 12 : date.getHours() % 12;
+        var ampm = date.getHours() >= 12 ? "PM" : "AM";
+        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes().toString() : date.getMinutes().toString();
+        var new_timestamp = 
+          date.getDate().toString() + " " + 
+          date.toLocaleString('default', { month: 'long' }) + ", " + 
+          hour.toString().toString() + ":" +
+          minutes + " " + ampm;
+        post.timestamp = new_timestamp;
+        return post;
+      })
+      if (posts.length === 0) {
+        this.setState({ 
+          post: {
+            posttitle: "You have no more posts left to view!",
+            postcontent: '',
+            uid: '',
+            timestamp: '',
+          },
+          rightDisabled: true,
+        });
+      } else {
+        this.setState({
+          postarr: posts,
+          post: posts[0],
+          rightDisabled: posts.length === 1 ? true : false,
+        });
+      }
+    })  
     .catch((error) => {
       console.error(error);
     });
-
-    console.log(this.state.posts);
-    const posts = Object.values(this.state.posts);
-    if (posts.length === 0) {
-      this.setState({ 
-        post: {
-          posttitle: "You have no more posts left to view!",
-          postcontent: '',
-          uid: '',
-          timestamp: '',
-        },
-        rightDisabled: true,
-      });
-    } else {
-      this.setState({
-        postarr: posts,
-        post: posts[0],
-        rightDisabled: posts.length === 1 ? true : false,
-      });
-    }
   }
 
   onLeftClick = event => {
-    if (this.state.postNum <= 2) {
+    var num = this.state.postNum - 1;
+    var newpost = this.state.postarr[num];
+    this.setState({ 
+      postNum: num,
+      post: newpost,
+      rightDisabled: false,
+    });
+
+    if (num === 0) {
       this.setState({
         leftDisabled: true,
-      });
-    } else {
-      var num = this.state.postNum - 1;
-      var newpost = this.state.postarr[num];
-      this.setState({ 
-        postNum: num,
-        post: newpost,
       });
     }
   };
 
   onRightClick = event => {
-    if (this.state.postNum === this.state.postarr.length - 1) {
+    var num = this.state.postNum + 1;
+    var newpost = this.state.postarr[num];
+    this.setState({ 
+      postNum: num,
+      post: newpost,
+      leftDisabled: false,
+    });
+    
+    if (num === this.state.postarr.length - 1) {
       this.setState({
         rightDisabled: true,
-      });
-    } else {
-      var num = this.state.postNum + 1;
-      var newpost = this.state.postarr[num];
-      this.setState({ 
-        postNum: num,
-        post: newpost,
-        leftDisabled: false,
       });
     }
   };
@@ -104,7 +117,7 @@ class PostAreaBase extends Component {
               <img className="previewpic" src={logo_temp} alt="Profile" />
             </Col>
             <Col xs={6} className="d-flex align-items-center">
-              <p className="postop">Anonymous user: { this.state.post.uid }</p>
+              <p className="postop">Anonymous user: { /*this.state.post.uid*/ }</p>
             </Col>
             <Col xs={4} className="d-flex align-items-center">
               <p className="posttime">{ this.state.post.timestamp }</p>
