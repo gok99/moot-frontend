@@ -232,7 +232,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
 
@@ -269,6 +269,13 @@ p {
 
 Col.postchangearea {
   padding: 0px 0px !important;
+}
+
+.hearticon {
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  text-align: left;
 }
 
 p.postop {
@@ -487,9 +494,9 @@ a.link.centeredlink {
 .likebutton {
   display: block;
   text-align: center;
-  background: #F4EDFF;
+  background: #f4edff;
   color: #9c89fc;
-  border: 1px solid #BBBBBB;
+  border: 1px solid #bbbbbb;
   border-radius: 12px;
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
   font-weight: bold;
@@ -506,9 +513,9 @@ a.link.centeredlink {
 .likebutton:visited,
 .likebutton:default,
 .likebutton:active {
-  background-color: #F4EDFF;
+  background-color: #f4edff;
   color: #9c89fc;
-  border: 0.5px solid #BBBBBB;
+  border: 0.5px solid #bbbbbb;
   box-shadow: none;
 }
 
@@ -516,7 +523,7 @@ a.link.centeredlink {
 .likebutton:focus:hover {
   background-color: #c7bcff;
   color: #ffffff;
-  border: 0.5px solid #BBBBBB;
+  border: 0.5px solid #bbbbbb;
 }
 
 .closebutton,

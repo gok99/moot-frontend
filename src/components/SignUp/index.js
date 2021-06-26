@@ -99,11 +99,14 @@ class SignUpFormBase extends Component {
               description: '',
               teleUser: '',
               postcount: 0,
-              chat1: newChat,
-              chat2: newChat,
-              chat3: newChat,
-              chat4: newChat,
-              chat5: newChat,
+              chats: {
+                chat1: newChat,
+                chat2: newChat,
+                chat3: newChat,
+                chat4: newChat,
+                chat5: newChat,
+              }
+              
             });
         })
         .then(() => {

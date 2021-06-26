@@ -8,7 +8,7 @@ import '../Styles/styles.css';
 class ChatBox5Base extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: { chat5: { active: false, activematchUUID: 0 } } };
+    this.state = { data: { chats: { chat5: { active: false, activematchUUID: 0 } } } };
   }
 
   componentDidMount() {
@@ -34,14 +34,14 @@ class ChatBox5Base extends Component {
             <p className="chatboxheader">Anonymous Chat #5:</p>
           </Col>
           <Col xs={3}>
-            { this.state.data.chat5.active 
+            { this.state.data.chats.chat5.active 
               ? <p className="chatongoing">ONGOING</p>
               : <p className="chatempty">EMPTY</p>
             }
           </Col>
         </Row>
         <hr />
-        <p className="chatboxtext">You are currently matched with: {this.state.data.chat5.activematchUUID }</p>
+        <p className="chatboxtext">You are currently matched with: {this.state.data.chats.chat5.activematchUUID }</p>
         <p className="chatboxtext">---Anon Chat Info / Post Info---</p>
       </div>
     )

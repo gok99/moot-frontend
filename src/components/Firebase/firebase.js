@@ -39,8 +39,12 @@ class Firebase {
 
   // *** User API ***
   posts = () => this.db.ref('posts');
+  matchQueue = () => this.db.ref('matchQueue');
+  post = id => this.db.ref(`posts/${id}`);
+  postLikedUsers = postUid => this.db.ref(`posts/${postUid}/likedUsers`);
   user = uid => this.db.ref(`users/${uid}`);
   userPosts = uid => this.db.ref(`users/${uid}/posts`);
+  userLikedPosts = uid => this.db.ref(`users/${uid}/likedPosts`);
   users = () => this.db.ref('users');
   idToUid = id => this.db.ref(`ids/${id}`);
 }
