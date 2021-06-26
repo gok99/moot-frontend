@@ -4,7 +4,7 @@ import ProfilePreview from '../Account/ProfilePreview';
 import { withAuthorization } from '../Session';
 
 import * as ROUTES from '../../constants/routes';
-import ChatBoxCol from './ChatBoxCol';
+import ChatList from './ChatList';
 
 import '../Styles/styles.css';
 
@@ -20,7 +20,7 @@ const Chat = () => (
           </Col>
           <Col xs={8}>
             <Row>
-              <ChatBoxCol />
+              <ChatList />
             </Row>
           </Col>
         </Row>

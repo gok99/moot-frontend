@@ -11,21 +11,21 @@ import '../Styles/styles.css';
 class ProfilePreviewBase extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: { username: "Loading...", teleUser: " ", description: "Loading..." } };
+    this.state = { data: { Pid: 0, username: "Loading...", teleUser: " ", description: "Loading..." } };
   }
 
   componentDidMount() {
     const fb = this.props.firebase;
     const uid = fb.auth.currentUser.uid;
     const user = fb.user(uid).once('value').then((snapshot) => {
-          if (snapshot.exists()) {
-              return snapshot.val();
-          } else {
-              console.log("No data available");
-          }
-      }).catch((error) => {
-          console.error(error);
-      });
+      if (snapshot.exists()) {
+          return snapshot.val();
+      } else {
+          console.log("No data available");
+      }
+    }).catch((error) => {
+        console.error(error);
+    });
     user.then((data) => this.setState({ data }));
   }
 
@@ -34,7 +34,7 @@ class ProfilePreviewBase extends Component {
       <div className="previewbox">
         <Row>
           <Col xs={4} className="d-flex justify-content-center">
-            <ProfilePicturePreview />
+            <ProfilePicturePreview Pid={this.state.data.Pid}></ProfilePicturePreview>
           </Col>
           <Col xs={8}>
             <Row>

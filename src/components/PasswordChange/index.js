@@ -60,7 +60,7 @@ class PasswordChangeForm extends Component {
         </Form.Group>
 
         <Button  
-          className="likebutton medbutton noncentered mt-4 mb-2"
+          className="likebutton medbutton noncentered mt-4 mb-2 z_nonauto"
           variant="primary"
           type="submit"
           disabled={isInvalid}>

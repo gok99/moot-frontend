@@ -24,6 +24,7 @@ class PostAreaBase extends Component {
         uid: '',
         timestamp: '',
       },
+      myPost: false,
       postNum: 0,
       postLiked: false,
       likeDisabled: false,
@@ -79,6 +80,8 @@ class PostAreaBase extends Component {
           postarr: posts,
           post: posts[0],
           rightDisabled: posts.length === 1 ? true : false,
+          likeDisabled: fb.auth.currentUser.uid === posts[0].uid,
+          myPost: fb.auth.currentUser.uid === posts[0].uid,
         });
 
         // Set the like button state accordingly
@@ -89,13 +92,6 @@ class PostAreaBase extends Component {
             break;
           }
         }
-      }
-
-      // Disabling liking of own posts
-      if (fb.auth.currentUser.uid === posts[0].uid) {
-        this.setState({
-          likeDisabled: true,
-        });
       }
     })  
     .catch((error) => {
@@ -145,6 +141,7 @@ class PostAreaBase extends Component {
     if (fb.auth.currentUser.uid === newpost.uid) {
       this.setState({
         likeDisabled: true,
+        myPost: true,
       });
     }
   };
@@ -191,40 +188,39 @@ class PostAreaBase extends Component {
     if (fb.auth.currentUser.uid === newpost.uid) {
       this.setState({
         likeDisabled: true,
+        myPost: true,
       });
     }
   };
 
-  // // Function to ensure that repeat entries are not entered into matchQueue
-  // assert_notrepeated = (postUid, posterUid, likerUid) => {
-  //   const fb = this.props.firebase;
+  // Function to ensure that repeat entries are not entered into matchQueue
+  assert_notrepeated = (posterUid, likerUid) => {
+    const fb = this.props.firebase;
 
-  //   return fb.matchQueue().once('value').then((snapshot) => {
-  //     if (snapshot.exists()) {
-  //       return snapshot.val();
-  //     } else {
-  //       console.log("No data available");
-  //     }
-  //   })
-  //   .then((data) => {
-  //     const matchQueue = Object.values(data);
-  //     for (const match in matchQueue) {
-  //       if ((match.postUid === postUid && match.likerUid === likerUid) ||
-  //         (match.posterUid === posterUid && match.likerUid === likerUid) ||
-  //         (match.posterUid === likerUid && match.likerUid === posterUid)) {
-  //         console.log("FALSE!!!");
-  //         return false;
-  //       }
-  //     }
-  //     return true;
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //     return false;
-  //   });
-  // }
+    return fb.matchQueue().once('value').then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No data available");
+      }
+    })
+    .then((data) => {
+      const matchQueue = Object.values(data);
+      for (const match in matchQueue) {
+        if ((match.posterUid === posterUid && match.likerUid === likerUid) ||
+          (match.posterUid === likerUid && match.likerUid === posterUid)) {
+          return false;
+        }
+      }
+      return true;
+    })
+    .catch((error) => {
+      console.error(error);
+      return false;
+    });
+  }
 
-  onLike = event => {
+  onLike = async (event) => {
     if (!this.state.postLiked) {
 
       // Purely for image toggle: Unliked -> Liked
@@ -308,25 +304,23 @@ class PostAreaBase extends Component {
         return false;
       });
 
-      console.log(likerAvail);
-      console.log(posterAvail);
-
       // Add new match into the matchQueue
-      // const likerUid = fb.auth.currentUser.uid;
-      // const posterUid = this.state.post.uid;
-      // const postUid = this.state.post.postUid;
-      // const timeMatched = new Date().getTime();
-      // if (this.assert_notrepeated(postUid, posterUid, likerUid)) {
-      //   var newMatch = fb.matchQueue().push();
-      //   newMatch.set({
-      //     likerUid: likerUid,
-      //     posterUid: posterUid,
-      //     likerAvail: "placeholder_text", 
-      //     posterAvail: "placeholder_text",
-      //     postUid: postUid,
-      //     timeMatched: timeMatched,
-      //   }).then((error) => console.log(error));
-      // }
+      const likerUid = fb.auth.currentUser.uid;
+      const posterUid = this.state.post.uid;
+      const postUid = this.state.post.postUid;
+      const timeMatched = new Date().getTime();
+
+      if (this.assert_notrepeated(posterUid, likerUid)) {
+        var newMatch = fb.matchQueue().push();
+        newMatch.set({
+          likerUid: likerUid,
+          posterUid: posterUid,
+          likerAvail: await likerAvail, 
+          posterAvail: await posterAvail,
+          postUid: postUid,
+          timeMatched: timeMatched,
+        }).then((error) => console.log(error));
+      }
 
     } else {
 
@@ -419,7 +413,11 @@ class PostAreaBase extends Component {
               <img className="previewpic" src={logo_temp} alt="Profile" />
             </Col>
             <Col xs={6} className="d-flex align-items-center">
-              <p className="postop">Anonymous user: { /*this.state.post.uid*/ }</p>
+              { this.state.myPost
+                ? <p className="postop">Posted by: Me</p>
+                : <p className="postop">Posted by: Anonymous user</p>
+              }
+              
             </Col>
             <Col xs={4} className="d-flex align-items-center">
               <p className="posttime">{ this.state.post.timestamp }</p>

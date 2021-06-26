@@ -96,11 +96,14 @@ class PostCreationBase extends Component {
             >
               <div className="d-flex justify-content-md">
                 <Row className="pcodivider"></Row>
-                <div className="postcreationform">
+                <div className="postcreationform contentbox">
                   <Row className="d-flex justify-content-end">
                     <Button className="closebutton" type="button" onClick = {this.toggleClass}>
                       <img className="navicon" src={icon_x} alt="Close" />
                     </Button>
+                  </Row>
+                  <Row>
+                    <p className="pcotext mt-4">What's on your mind?</p>
                   </Row>
                   <Row>
                     <Form className="postcreationformint" onSubmit={this.onSubmit}>
@@ -117,7 +120,7 @@ class PostCreationBase extends Component {
                           name="postcontent"
                           type="text"
                           as="textarea"
-                          placeholder="What's on your mind?"
+                          placeholder="Give us more details!"
                           value={postcontent}
                           onChange={this.onChange} />
                       </Form.Group>

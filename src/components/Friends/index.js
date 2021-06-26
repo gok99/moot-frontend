@@ -4,7 +4,7 @@ import { compose } from 'recompose';
  
 import { withFirebase } from '../Firebase';
 import ProfilePreview from '../Account/ProfilePreview';
-import FriendBoxCol from './FriendBoxCol';
+import FriendList from './FriendList';
 import { withAuthorization } from '../Session';
 
 import * as ROUTES from '../../constants/routes';
@@ -24,7 +24,7 @@ const FriendsBase = () => (
             </Col>
             <Col xs={8}>
               <Row>
-                <FriendBoxCol />
+                <FriendList />
               </Row>
             </Col>
           </Row>

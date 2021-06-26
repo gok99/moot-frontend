@@ -99,6 +99,7 @@ class SignUpFormBase extends Component {
               id,
               uid,
               description: '',
+              pid: 0,
               teleUser: '',
               postcount: 0,
               chats: {
@@ -108,7 +109,6 @@ class SignUpFormBase extends Component {
                 chat4: newChat,
                 chat5: newChat,
               }
-              
             });
         })
         .then(() => {

@@ -24,7 +24,9 @@ class DescriptionFormBase extends Component {
       }).catch((error) => {
           console.error(error);
       });
-    user.then((data) => this.setState({ data }));
+    user.then((data) => {
+      this.setState({ currentDescription: data.description, data });
+    });
   }
 
   onSubmit = event => {
@@ -32,8 +34,8 @@ class DescriptionFormBase extends Component {
     const fb = this.props.firebase;
     var uid = fb.auth.currentUser.uid;
     fb.user(uid).update({
-        description: currentDescription,
-      }).then((error) => console.log(error));;
+      description: currentDescription,
+    }).catch((error) => console.log(error));;
     event.preventDefault();
   }
 
@@ -49,7 +51,7 @@ class DescriptionFormBase extends Component {
             name="currentDescription" 
             type="text"
             as="textarea"
-            placeholder="Description"
+            placeholder="Describe yourself!"
             defaultValue={ this.state.data.description }
             onChange={this.onChange} />
         </Form.Group>
