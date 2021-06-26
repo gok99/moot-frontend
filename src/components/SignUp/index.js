@@ -80,8 +80,10 @@ class SignUpFormBase extends Component {
     var newChat = {
       active: false,
       activematchUUID: '',
-      matchBOT: 0
+      matchBOT: 0,
+      status: "vacant",
     };
+    // status: vacant -> occupied -> end / friend -> vacant
 
     if (this.assert_valid(username, email, passwordOne, passwordTwo)) {
       this.props.firebase

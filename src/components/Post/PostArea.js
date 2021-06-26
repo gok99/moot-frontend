@@ -16,7 +16,6 @@ class PostAreaBase extends Component {
       data: {
         chats: {},
       },
-      posts: {},
       postarr: [],
       post: {
         postUid: '',
@@ -27,7 +26,7 @@ class PostAreaBase extends Component {
       },
       postNum: 0,
       postLiked: false,
-      likeDisabled: true,
+      likeDisabled: false,
       leftDisabled: true,
       rightDisabled: true,
     }
@@ -93,9 +92,9 @@ class PostAreaBase extends Component {
       }
 
       // Disabling liking of own posts
-      if (fb.auth.currentUser.uid !== this.state.post.uid) {
+      if (fb.auth.currentUser.uid === posts[0].uid) {
         this.setState({
-          likeDisabled: false,
+          likeDisabled: true,
         });
       }
     })  
@@ -308,6 +307,9 @@ class PostAreaBase extends Component {
         console.error(error);
         return false;
       });
+
+      console.log(likerAvail);
+      console.log(posterAvail);
 
       // Add new match into the matchQueue
       // const likerUid = fb.auth.currentUser.uid;
