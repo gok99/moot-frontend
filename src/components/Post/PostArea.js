@@ -27,7 +27,7 @@ class PostAreaBase extends Component {
       },
       postNum: 0,
       postLiked: false,
-      likeDisabled: false,
+      likeDisabled: true,
       leftDisabled: true,
       rightDisabled: true,
     }
@@ -93,9 +93,9 @@ class PostAreaBase extends Component {
       }
 
       // Disabling liking of own posts
-      if (fb.auth.currentUser.uid === this.state.post.uid) {
+      if (fb.auth.currentUser.uid !== this.state.post.uid) {
         this.setState({
-          likeDisabled: true,
+          likeDisabled: false,
         });
       }
     })  
