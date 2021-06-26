@@ -31,6 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    document.title = "moot";
     this.listener = this.props.firebase.auth.onAuthStateChanged(
       authUser => {
         authUser
