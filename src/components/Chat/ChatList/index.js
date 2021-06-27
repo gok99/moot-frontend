@@ -8,10 +8,8 @@ import '../../Styles/styles.css';
 import '../chat.css';
 
 const ChatListBase = (props) => {
-  const [auth, setAuth] = useState(true);
   const [chats, setChats] = useState([]);
   const fb = props.firebase;
-  // setAuth(fb.auth.currentUser.emailVerified);
 
   useEffect(() => {
     const uid = fb.auth.currentUser.uid;
@@ -29,7 +27,7 @@ const ChatListBase = (props) => {
   return (
     <div>
       { 
-        auth
+        fb.auth.currentUser.emailVerified
           ? <ChatBoxList chatList = {chats}></ChatBoxList>
           : <p className="friendboxtextbold nofriendtext">Please verify your email first if you wish to use this feature. Thank you!</p>
       }

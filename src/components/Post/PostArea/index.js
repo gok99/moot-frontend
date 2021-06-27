@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Form } from 'react-bootstrap';
 import { compose } from 'recompose';
  
 import { withFirebase } from '../../Firebase';
@@ -12,9 +12,9 @@ import icon_unlike from '../../../assets/icon_unlike.png';
 const PostAreaBase = (props) => {
   const fb = props.firebase;
   const uid = fb.auth.currentUser.uid;
-  const [chats, setChats] = useState([]);
+  // const [chats, setChats] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
   const [currentPost, setCurrentPost] = useState({
     uid: '',
     postTitle: '',
@@ -25,19 +25,21 @@ const PostAreaBase = (props) => {
     userComments: {}
   });
   const [postState, setPostState] = useState({
+    noPost: false,
     myPost: false,
     postCount: 0,
     postLiked: false
   });
   const [areaState, setAreaState] = useState({
     likeDisabled: false,
+    commentDisabled: false,
     leftDisabled: false,
     rightDisabled: false
   });
   const [currentComment, setCurrentComment] = useState({
     comment: ''
   });
-  const [matchFindState, setMatchFindState] = useState(false);
+  // const [matchFindState, setMatchFindState] = useState(false);
 
   /** 
    * Retrieves data from firebase
@@ -74,12 +76,14 @@ const PostAreaBase = (props) => {
             postUid: ''
           });
           setPostState({
+            noPost: true,
             myPost: false,
             postCount: 0,
             postLiked: false
           });
           setAreaState({
             likeDisabled: true,
+            commentDisabled: true,
             leftDisabled: true,
             rightDisabled: true
           });
@@ -96,18 +100,40 @@ const PostAreaBase = (props) => {
           }
           setCurrentPost(postsList[0]);
           setPostState({
+            noPost: false,
             myPost: userPostCheck,
             postCount: 0,
             postLiked: postLiked
           });
           setAreaState({
             likeDisabled: userPostCheck,
+            commentDisabled: userPostCheck,
             leftDisabled: true,
             rightDisabled: postsList.length === 1 ? true : false
           });
         }
       } else {
         console.log("No posts available");
+        // If there are no posts at all on moot
+        setCurrentPost({
+          uid: '',
+          postTitle: "You have no more posts left to view!",
+          postContent: '',
+          postTime: '',
+          postUid: ''
+        });
+        setPostState({
+          noPost: true,
+          myPost: false,
+          postCount: 0,
+          postLiked: false
+        });
+        setAreaState({
+          likeDisabled: true,
+          commentDisabled: true,
+          leftDisabled: true,
+          rightDisabled: true
+        });
       }
     });
 
@@ -142,12 +168,14 @@ const PostAreaBase = (props) => {
       }
     }
     setPostState({
+      noPost: false,
       myPost: userPostCheck,
       postCount: count,
       postLiked: postLiked
     });
     setAreaState({
       likeDisabled: userPostCheck,
+      userPostCheck: userPostCheck,
       leftDisabled: count === 0,
       rightDisabled: false
     });
@@ -170,12 +198,14 @@ const PostAreaBase = (props) => {
       }
     }
     setPostState({
+      noPost: false,
       myPost: userPostCheck,
       postCount: count,
       postLiked: postLiked
     });
     setAreaState({
       likeDisabled: userPostCheck,
+      commentDisabled: userPostCheck,
       leftDisabled: false,
       rightDisabled: count === posts.length - 1
     });
@@ -240,11 +270,11 @@ const PostAreaBase = (props) => {
   /** 
    * Behaviour on match
    */
-  const onMatch = (event) => {
-    // Toggle matchFind status (Placeholder until implementation)
-    setMatchFindState(true);
-    event.preventDefault();
-  }
+  // const onMatch = (event) => {
+  //   // Toggle matchFind status (Placeholder until implementation)
+  //   setMatchFindState(true);
+  //   event.preventDefault();
+  // }
 
   // // Function to ensure that repeat entries are not entered into matchQueue
   // assert_notrepeated = async (matchQueue, poster, liker) => {
@@ -478,9 +508,11 @@ const PostAreaBase = (props) => {
               <img className="previewpic" src={logo_temp} alt="Profile" />
             </Col>
             <Col xs={6} className="d-flex align-items-center">
-              { postState.myPost
-                ? <p className="postop">Posted by me</p>
-                : <p className="postop">Posted by an anonymous user</p>
+              { postState.noPost
+                ? <p className="postop">No more posts...</p>
+                : postState.myPost
+                  ? <p className="postop">Posted by me</p>
+                  : <p className="postop">Posted by an anonymous user</p>
               }
               
             </Col>
@@ -506,7 +538,27 @@ const PostAreaBase = (props) => {
                 }
               </Button>
             </Col>
-            <Col xs={10}></Col>
+            <Col xs={10}>
+              { areaState.commentDisabled
+                  ? null
+                  : <Form onSubmit={onCommentSubmit}>
+                      <Form.Group controlId="comment">
+                        <Form.Control
+                          name="currentComment" 
+                          type="text"
+                          as="textarea"
+                          placeholder="Reply to this post!"
+                          // defaultValue={ data.description }
+                          onChange={onChange} />
+                      </Form.Group>
+                      <Button  
+                        className="btn-onboarding mt-4 mb-2"
+                        type="submit">
+                        Reply
+                      </Button>
+                    </Form>
+              }
+            </Col>
           </Row>
         </Col>
         <Col xs={1} className="postchangearea">

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
-import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
  
 import { withFirebase } from '../../Firebase';
