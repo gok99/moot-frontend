@@ -6,7 +6,6 @@ import '../Styles/styles.css';
 function ChatBox(props) {
   const id = props.chatboxId;
   const activeStatus = props.activeStatus;
-  const activeMatchUUID = props.activeMatchUUID;
   return (
     <div className="contentbox spacedbox chatbox">
         <Row>
@@ -22,7 +21,7 @@ function ChatBox(props) {
         </Row>
         <hr />
         { activeStatus
-          ? <p className="chatboxtext">You are currently matched with a user. ({activeMatchUUID})</p>
+          ? <p className="chatboxtext">You are currently matched with a user.</p>
           : <p className="chatboxtext">You are currently not matched.</p>
         }
         {/* <p className="chatboxtext">---Anon Chat Info / Post Info---</p> */}
