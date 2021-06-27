@@ -194,21 +194,21 @@ class PostAreaBase extends Component {
   };
 
   // Function to ensure that repeat entries are not entered into matchQueue
-  assert_notrepeated = (posterUid, likerUid) => {
-    const fb = this.props.firebase;
-
-    return fb.matchQueue().once('value').then((snapshot) => {
-      if (snapshot.exists()) {
-        return snapshot.val();
-      } else {
-        console.log("No data available");
-      }
-    })
-    .then((data) => {
+  assert_notrepeated = async (matchQueue, poster, liker) => {
+    return await matchQueue
+    .then(async (data) => {
+      const posterP = await poster;
+      const likerP = await liker;
       const matchQueue = Object.values(data);
-      for (const match in matchQueue) {
-        if ((match.posterUid === posterUid && match.likerUid === likerUid) ||
-          (match.posterUid === likerUid && match.likerUid === posterUid)) {
+      const likerChats = Object.values(likerP.chats);
+      for (const match of matchQueue) {
+        if ((match.posterUid === posterP.uid && match.likerUid === likerP.uid) ||
+          (match.posterUid === likerP.uid && match.likerUid === posterP.uid)) {
+          return false;
+        }
+      }
+      for (const chat of likerChats) {
+        if (posterP.uid === chat.activematchUUID) {
           return false;
         }
       }
@@ -221,13 +221,24 @@ class PostAreaBase extends Component {
   }
 
   onLike = async (event) => {
+    const fb = this.props.firebase;
+    const matchQueue = fb.matchQueue().once('value').then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
     if (!this.state.postLiked) {
 
       // Purely for image toggle: Unliked -> Liked
       this.setState({ postLiked: true });
 
       // Inidcates post as liked under posts/post/likedUsers and user/likedPosts
-      const fb = this.props.firebase;
       const uid = fb.auth.currentUser.uid;
       fb.posts().limitToLast(20).once('value').then((snapshot) => {
         if (snapshot.exists()) {
@@ -261,14 +272,18 @@ class PostAreaBase extends Component {
       });
 
       // Gets the availability of the liker
-      const likerAvail = fb.user(uid).once('value').then((snapshot) => {
+      const liker = fb.user(uid).once('value').then((snapshot) => {
         if (snapshot.exists()) {
           return snapshot.val();
         } else {
           console.log("No data available");
         }
       })
-      .then((data) => {
+      .catch((error) => {
+        console.error(error);
+      });
+
+      const likerAvail = liker.then((data) => {
         const chats = Object.values(data.chats);
         for (let chat of chats) {
           if (!chat.active) {
@@ -283,14 +298,18 @@ class PostAreaBase extends Component {
       });
 
       // Gets the availability of the poster
-      const posterAvail = fb.user(this.state.post.uid).once('value').then((snapshot) => {
+      const poster = fb.user(this.state.post.uid).once('value').then((snapshot) => {
         if (snapshot.exists()) {
           return snapshot.val();
         } else {
           console.log("No data available");
         }
       })
-      .then((data) => {
+      .catch((error) => {
+        console.error(error);
+      });
+
+      const posterAvail = poster.then((data) => {
         const chats = Object.values(data.chats);
         for (let chat of chats) {
           if (!chat.active) {
@@ -310,7 +329,8 @@ class PostAreaBase extends Component {
       const postUid = this.state.post.postUid;
       const timeMatched = new Date().getTime();
 
-      if (this.assert_notrepeated(posterUid, likerUid)) {
+      const asserts = await this.assert_notrepeated(matchQueue, liker, poster);
+      if (asserts) {
         var newMatch = fb.matchQueue().push();
         newMatch.set({
           likerUid: likerUid,
@@ -375,29 +395,22 @@ class PostAreaBase extends Component {
         console.error(error);
       });
 
-      // // Removes match from match queue
-      // fb.matchQueue().once('value').then((snapshot) => {
-      //   if (snapshot.exists()) {
-      //     return snapshot.val();
-      //   } else {
-      //     console.log("No data available");
-      //   }
-      // })
-      // .then((data) => {
-      //   const likerUid = fb.auth.currentUser.uid;
-      //   const posterUid = this.state.post.uid;
-      //   const postUid = this.state.post.postUid;
-      //   const matchQueue = Object.values(data);        
-      //   for (const match in matchQueue) {
-      //     if ((match.postUid === postUid && match.posterUid === posterUid) && match.likerUid === likerUid) { 
-      //       // REMOVE POST
-      //     }
-      //   }
-      // })
-      // .catch((error) => {
-      //   console.error(error);
-      // });
-
+      // Removes match from match queue
+      fb.matchQueue().transaction((queue) => {
+        if (queue) {
+          const likerUid = fb.auth.currentUser.uid;
+          const posterUid = this.state.post.uid;
+          const postUid = this.state.post.postUid;
+          for (const matchKey of Object.keys(queue)) {
+            const match = queue[matchKey];
+            if (match.postUid === postUid && match.posterUid === posterUid && match.likerUid === likerUid) { 
+              delete queue[matchKey];
+              break;
+            }
+          }
+        }
+        return queue;
+      });
     }
   };
 
