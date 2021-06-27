@@ -99,7 +99,7 @@ class SignUpFormBase extends Component {
               id,
               uid,
               description: '',
-              pid: 0,
+              Pid: 0,
               teleUser: '',
               postcount: 0,
               chats: {
