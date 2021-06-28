@@ -303,10 +303,11 @@ Col.postchangearea {
 }
 
 .hearticon {
-  height: 24px;
-  width: 24px;
+  height: 20px;
+  width: 20px;
   display: inline-block;
   text-align: left;
+  margin: auto;
 }
 
 p.postop {
@@ -557,7 +558,7 @@ a.link.centeredlink {
   width: 320px;
   height: 64px;
   margin: auto;
-  padding: 12px 32px;
+  padding: auto;
   text-decoration: none;
 }
 

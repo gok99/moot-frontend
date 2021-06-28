@@ -447,12 +447,11 @@ class PostAreaBase extends Component {
           <hr />
           <Row>
             <Col xs={2}>
-              <Button className="likebutton smallbutton" type="button" disabled={ this.state.likeDisabled } onClick={this.onLike}>
+              <Button className="likebutton smallbutton d-flex justify-content-md-center" type="button" disabled={ this.state.likeDisabled } onClick={this.onLike}>
                 { this.state.postLiked 
                     ? <img className="hearticon" src={icon_like} alt="Like" />
                     : <img className="hearticon" src={icon_unlike} alt="Not Liked" />
                 }
-                Like
               </Button>
             </Col>
             <Col xs={10}></Col>
