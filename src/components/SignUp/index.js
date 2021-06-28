@@ -101,7 +101,6 @@ class SignUpFormBase extends Component {
               description: '',
               Pid: 0,
               teleUser: '',
-              postcount: 0,
               chats: {
                 chat1: newChat,
                 chat2: newChat,
