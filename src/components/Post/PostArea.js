@@ -110,6 +110,7 @@ class PostAreaBase extends Component {
       post: newpost,
       rightDisabled: false,
       likeDisabled: false,
+      myPost: false,
     });
 
     // Set the like button state accordingly
@@ -157,6 +158,7 @@ class PostAreaBase extends Component {
       post: newpost,
       leftDisabled: false,
       likeDisabled: false,
+      myPost: false,
     });
 
     // Set the like button state accordingly
