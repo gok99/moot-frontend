@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { withRouter, useHistory } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirebase } from '../../../Firebase';
@@ -65,8 +65,7 @@ const SignInFormBase = (props) => {
       </Form.Group>
 
       <Button
-        className="button-access mt-2 mb-2"
-        variant="primary"
+        className="btn-access mt-2 mb-2"
         type="submit"
         disabled={creds.password === '' || creds.email === ''}>
         Log In

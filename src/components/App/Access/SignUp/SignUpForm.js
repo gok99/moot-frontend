@@ -169,11 +169,11 @@ const SignUpFormBase = (props) => {
       </Form.Group>
 
       <Button  
-        className="button-access mt-2 mb-2"
-        variant="primary"
+        className="btn-access mt-2 mb-2"
         type="submit">
         Sign Up
       </Button>
+      
       {error && <h5> {error.message} </h5>}
     </ Form>
   );

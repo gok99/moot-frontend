@@ -6,7 +6,7 @@ import logo from '../../../../assets/logo.png';
 
 const Access = () => {
   return (
-    <Col className="d-flex justify-content-md-start">
+    <Col className="b-accessform d-flex justify-content-md-start">
       <img className="logo-access" src={logo} alt="Moot" />
     </Col>
   );

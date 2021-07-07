@@ -13,8 +13,8 @@ import '../access.css';
  */
 const SignUpPage = (props) => {
   return (
-    <Col className="d-flex justify-content-md-end">
-      <div className="b-accessform">
+    <Col className="b-accessform d-flex justify-content-md-end">
+      <div className="form-access">
         <SignUpForm firebase={props.firebase}></SignUpForm>
         <SignInLink message={"Already have an account?"}/>
       </div>

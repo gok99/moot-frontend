@@ -13,8 +13,8 @@ import '../access.css';
  */
 const PasswordForgetPage = (props) => {
   return (
-    <Col className="justify-content-md-end">
-      <div className="form-access p">
+    <Col className="b-accessform justify-content-md-end">
+      <div className="form-access pf">
         <PasswordForgetForm />
         <SignInLink message={"Go back to "}/>
       </div>

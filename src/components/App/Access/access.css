@@ -47,7 +47,7 @@
   background: #6b4eff;
   color: #ffffff;
   border: 2px solid #6b4eff;
-  border-radius: 48px;
+  border-radius: 16px;
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
   font-weight: bold;
   font-size: 20px;
@@ -58,54 +58,62 @@
   text-decoration: none;
 }
 
-.btn-access:disabled,
-.btn-access:focus,
 .btn-access:visited,
-.btn-access:default,
-.btn-access:active {
+.btn-access:default {
   background-color: #6b4eff;
   color: #ffffff;
   border: 2px solid #6b4eff;
   box-shadow: none;
 }
 
+.btn-access:disabled {
+  opacity: 0.7 !important;
+}
+
 .btn-access:hover,
 .btn-access:focus:hover {
+  background-color: #6247ec;
+  color: #ffffff;
+  border: 2px solid #6247ec;
+}
+
+.btn-access:focus:active,
+.btn-access:active {
   background-color: #ffffff;
   color: #6b4eff;
   border: 2px solid #6b4eff;
 }
 
-.justify-content-md-start,
-.justify-content-md-end {
+.b-accessform.justify-content-md-start,
+.b-accessform.justify-content-md-end {
   max-width: 480px;
 }
 
-/* Start Page Forms */
-
+/**
+ * Forms on the Access Pages
+ */
 .form-access {
   width: 320px;
   margin: auto;
 }
 
-.form-access.s {
+.form-access.si {
   margin-top: 4%;
 }
 
-.form-access.p {
+.form-access.pf {
   margin-top: 12%;
 }
 
+/**
+ * Texts on the Access Pages
+ */
 .text-access {
   text-align: center;
   width: 320px;
   padding-top: 10px;
 }
 
-.link-access:hover {
-  color: #6b4eff;
+.link-access {
+  font-weight: bold;
 }
-
-/**
- * 
- */

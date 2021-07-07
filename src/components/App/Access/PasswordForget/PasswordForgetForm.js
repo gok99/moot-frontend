@@ -49,11 +49,11 @@ const PasswordForgetFormBase = (props) => {
 
       <Button  
         className="btn-access mt-2 mb-2"
-        variant="primary"
         type="submit"
         disabled={creds.email === ''}>
         Reset My Password
       </Button>
+      
       {error && <h5> {error.message} </h5>}
     </ Form>
   );

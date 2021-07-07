@@ -14,8 +14,8 @@ import '../access.css';
  */
 const SignInPage = (props) => {
   return (
-    <Col className="d-flex justify-content-md-end">
-      <div className="b-accessform s">
+    <Col className="b-accessform d-flex justify-content-md-end">
+      <div className="form-access si">
         <SignInForm firebase={props.firebase}></SignInForm>
         <SignUpLink />
         <PasswordForgetLink />
