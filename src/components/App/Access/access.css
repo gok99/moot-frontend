@@ -1,0 +1,111 @@
+/* CSS Specific to Access Pages */
+
+/**
+ * Block containing all access components
+ */
+.b-access {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+
+  font-size: 20px;
+  padding: 5px;
+  z-index: 100;
+}
+
+/**
+ * Logo on the Access Pages
+ */
+.logo-access {
+  display: block;
+  width: 480px;
+  height: 320px;
+  margin: auto;
+}
+
+/**
+ * Input Forms on the Access Pages
+ */
+.input-access {
+  width: 320px;
+  background: #ffffff;
+  border: 1px solid #f2e8f8;
+  border-radius: 6px;
+}
+
+/**
+ * Buttons on the Access Pages
+ */
+.btn-access {
+  display: block;
+  text-align: center;
+  background: #6b4eff;
+  color: #ffffff;
+  border: 2px solid #6b4eff;
+  border-radius: 48px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  width: 320px;
+  height: 64px;
+  margin: auto;
+  padding: 12px 32px;
+  text-decoration: none;
+}
+
+.btn-access:disabled,
+.btn-access:focus,
+.btn-access:visited,
+.btn-access:default,
+.btn-access:active {
+  background-color: #6b4eff;
+  color: #ffffff;
+  border: 2px solid #6b4eff;
+  box-shadow: none;
+}
+
+.btn-access:hover,
+.btn-access:focus:hover {
+  background-color: #ffffff;
+  color: #6b4eff;
+  border: 2px solid #6b4eff;
+}
+
+.justify-content-md-start,
+.justify-content-md-end {
+  max-width: 480px;
+}
+
+/* Start Page Forms */
+
+.form-access {
+  width: 320px;
+  margin: auto;
+}
+
+.form-access.s {
+  margin-top: 4%;
+}
+
+.form-access.p {
+  margin-top: 12%;
+}
+
+.text-access {
+  text-align: center;
+  width: 320px;
+  padding-top: 10px;
+}
+
+.link-access:hover {
+  color: #6b4eff;
+}
+
+/**
+ * 
+ */

@@ -37,21 +37,6 @@ p {
   min-height: 0%;
 }
 
-.centered {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-
-  font-size: 20px;
-  padding: 5px;
-  z-index: 100;
-}
-
 .registerbox {
   position: fixed;
   top: 50%;
@@ -91,48 +76,6 @@ p {
 
 .centeredtext {
   text-align: center;
-}
-
-/* Logo */
-
-.logo {
-  display: block;
-  width: 480px;
-  height: 320px;
-  margin: auto;
-}
-
-/* Start Page Forms */
-
-.justify-content-md-start,
-.justify-content-md-end {
-  max-width: 480px;
-}
-
-.startform {
-  width: 320px;
-  margin: auto;
-}
-
-.startform.signin {
-  margin-top: 4%;
-}
-
-.startform.pwforget {
-  margin-top: 12%;
-}
-
-.startlink {
-  text-align: center;
-  width: 320px;
-  padding-top: 10px;
-}
-
-.textbox {
-  width: 320px;
-  background: #ffffff;
-  border: 1px solid #f2e8f8;
-  border-radius: 6px;
 }
 
 /* Onboarding Page Forms */
@@ -496,10 +439,6 @@ a.link {
 a.link.centeredlink {
   width: 200px;
   margin: auto;
-}
-
-.link:hover {
-  color: #6b4eff;
 }
 
 .blocklink {
