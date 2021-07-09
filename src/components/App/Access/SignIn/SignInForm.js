@@ -69,6 +69,7 @@ const SignInFormBase = (props) => {
     <Form onSubmit={onSubmit}>
       <Form.Group className="input-access" controlId="signInBasicEmail">
         <Form.Control
+          className="inputtxt-access"
           name="email" 
           type="email"
           placeholder="NUSNET Email Address"
@@ -78,6 +79,7 @@ const SignInFormBase = (props) => {
 
       <Form.Group className="input-access mt-2" controlId="signInBasicPassword">
         <Form.Control 
+          className="inputtxt-access"
           name="password"
           type="password"
           placeholder="Password"

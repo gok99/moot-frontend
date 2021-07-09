@@ -1,0 +1,158 @@
+/* CSS Specific to Navigation Bar */
+
+/**
+ * Navigation Bar Columns
+ */
+.navbar {
+  position: fixed;
+  display: inline-flex;
+  height: 56px;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0px 5px 15px 1px rgba(104, 76, 165, 0.2);
+  z-index: 10;
+}
+
+.navbar-alt {
+  position: fixed;
+  display: none;
+  height: 56px;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0px 5px 15px 1px rgba(104, 76, 165, 0.2);
+  z-index: 10;
+}
+
+.navcol-logo {
+  margin: auto;
+  text-align: center;
+}
+
+.navcol-icon {
+  text-align: center;
+}
+
+.navcol-menu {
+  margin: auto;
+  padding-left: 3vw;
+  text-align: left;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    display: none;
+  }
+  .navbar-alt {
+    display: inline-flex;
+  }
+}
+
+/**
+ * Navigation Bar Logo
+ */
+.navlogo {
+  display: block;
+  height: auto;
+  width: 64px;
+  margin: auto;
+}
+
+/**
+ * Navigation Bar Icons
+ */
+.navicon {
+  height: 28px;
+  width: 28px;
+  opacity: 0.8;
+}
+
+.navicon:hover {
+  opacity: 0.4;
+}
+
+.navicon.account {
+  position: relative;
+  left: -12px;
+  top: -6px;
+}
+
+.navicon-accountmenu {
+  display: block;
+  text-align: center;
+  background: none;
+  color: #ffffff;
+  border: none;
+  width: 32px;
+  height: 32px;
+  margin: auto;
+  padding: none;
+  text-align: center;
+  text-decoration: none;
+}
+
+.navicon-accountmenu:hover,
+.navicon-accountmenu:focus,
+.navicon-accountmenu:focus:hover,
+.navicon-accountmenu:disabled,
+.navicon-accountmenu:visited,
+.navicon-accountmenu:default,
+.navicon-accountmenu:active,
+.btn-check:active,
+.btn-check:active + .btn-success,
+.btn-check:checked + .btn-success,
+.btn-success.active,
+.btn-success:active,
+.show > .btn-success.dropdown-toggle {
+  background-color: #ffffff;
+}
+
+.navicon-tooltip > .tooltip-inner {
+  background: #7a70a8;
+  font-weight: 600;
+}
+
+/**
+ * Dropdown Menu (Account Icon)
+ */
+.b-accountmenu {
+  min-width: 8rem;
+  background: #ffffff;
+}
+
+.btn-accountmenu,
+.btn-accountmenu:focus,
+.btn-accountmenu:disabled,
+.btn-accountmenu:visited,
+.btn-accountmenu:default,
+.btn-accountmenu:active {
+  display: block;
+  width: 8rem;
+  border-radius: 0px;
+  background: #ffffff;
+  padding: auto;
+  border: none;
+}
+
+.btn-accountmenu:hover,
+.btn-accountmenu:focus:hover {
+  background: #eeeeee;
+}
+
+.text-accountmenu {
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  color: #5c4374;
+  font-weight: 600;
+  text-decoration: none;
+  background: none;
+}
+
+a.dropdown-item:hover,
+a.dropdown-item:focus:hover,
+a.dropdown-item:focus,
+a.dropdown-item:disabled,
+a.dropdown-item:visited,
+a.dropdown-item:default,
+a.dropdown-item:active {
+  background: none;
+  color: #5c4374;
+}

@@ -1,11 +1,12 @@
 html {
   height: 100%;
-  -webkit-background-size: cover;
+  /* -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-repeat: no-repeat;
-  background: -webkit-radial-gradient(
+  background-repeat: no-repeat; */
+  background: #ffffff;
+  /* background: -webkit-radial-gradient(
     50% 50% at 50% 50%,
     #ffffff 57.81%,
     #dcd6ff 100%
@@ -25,7 +26,7 @@ html {
     #ffffff 57.81%,
     #dcd6ff 100%
   );
-  background: radial-gradient(50% 50% at 50% 50%, #ffffff 57.81%, #dcd6ff 100%);
+  background: radial-gradient(50% 50% at 50% 50%, #ffffff 57.81%, #dcd6ff 100%); */
 }
 
 body {

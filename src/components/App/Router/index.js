@@ -3,9 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { withFirebase } from '../../Firebase';
 import * as ROUTES from '../../../constants/routes';
 
-import SignIn from '../Access/SignIn';
-import SignUp from '../Access/SignUp';
-import PasswordForget from '../Access/PasswordForget';
+import { SignIn, SignUp, PasswordForget } from '../Access';
 import Navigation from '../Navigation';
 import Onboarding from '../Onboarding';
 import Landing from '../Landing';
@@ -36,11 +34,13 @@ const AppRouter = (props) => {
         <Route path={ROUTES.SIGN_IN} component={SignIn} />
         <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
         <Route path={ROUTES.ONBOARDING} component={Onboarding} />
+        {/* <Route path={ROUTES.HOME} render={() => <Home componentProps={<ProfilePreview />}></Home>} /> */}
         <Route path={ROUTES.HOME} component={Home} />
         <Route path={ROUTES.CHAT} component={Chat} />
         <Route path={ROUTES.LIBRARY} component={Library} />
         <Route path={ROUTES.FRIENDS} component={Friends} />
         <Route path={ROUTES.ACCOUNT} component={Account} />
+        <Route path={ROUTES.POSTS} component={Home} />
         <Route path={ROUTES.ADMIN} component={Admin} />
       </div>
     </Router>
