@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState, useRef } from 'react';
+import { Form, Button, Spinner, Overlay, Tooltip } from 'react-bootstrap';
 import { withFirebase } from '../../../Firebase';
 
 import '../../../Styles/styles.css'
@@ -13,18 +13,35 @@ const PasswordForgetFormBase = (props) => {
   const [creds, setCreds] = useState({
     email: ''
   });
+  const [formState, setFormState] = useState({
+    submit: false,
+    error: false
+  });
   const [error, setError] = useState(null);
+  const target = useRef(null);
 
   const onSubmit = (event) => {
+    setFormState({
+      submit: true,
+      error: false
+    });
     props.firebase
       .doPasswordReset(creds.email)
       .then(() => {
         setCreds({
           email: ''
         });
+        setFormState({
+          submit: false,
+          error: false
+        });
       })
       .catch(error => {
         setError(error);
+        setFormState({
+          submit: false,
+          error: true
+        });
       });
     event.preventDefault();
   };
@@ -33,6 +50,10 @@ const PasswordForgetFormBase = (props) => {
     setCreds({
       ...creds,
       [event.target.name]: event.target.value
+    });
+    setFormState({
+      submit: false,
+      error: false
     });
   };
 
@@ -47,14 +68,33 @@ const PasswordForgetFormBase = (props) => {
           onChange={onChange} />
       </Form.Group>
 
-      <Button  
-        className="btn-access mt-2 mb-2"
-        type="submit"
-        disabled={creds.email === ''}>
-        Reset My Password
-      </Button>
-      
-      {error && <h5> {error.message} </h5>}
+      { formState.submit
+        ? <Button ref={target} className="btn-access loading mt-2 mb-2" disabled>
+            <Spinner
+              as="span"
+              animation="border"
+              role="status"
+              aria-hidden="true"
+            />
+            <span className="sr-only"></span>
+          </Button>
+        : <>
+            <Button
+              ref={target}
+              className="btn-access mt-2 mb-2"
+              type="submit"
+              disabled={creds.email === ''}>
+              Reset My Password
+            </Button>
+            <Overlay target={target} show={formState.error} placement="right">
+              {(props) => (
+                <Tooltip id="tooltip-access" {...props}>
+                  {error && <p> {error.message} </p>}
+                </Tooltip>
+              )}
+            </Overlay>
+          </>
+      }
     </ Form>
   );
 };

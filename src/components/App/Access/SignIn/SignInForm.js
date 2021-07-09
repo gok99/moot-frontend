@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import React, { useState, useRef } from 'react';
+import { Form, Button, Spinner, Overlay, Tooltip } from 'react-bootstrap';
 import { withRouter, useHistory } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirebase } from '../../../Firebase';
@@ -17,10 +17,19 @@ const SignInFormBase = (props) => {
     email: '',
     password: ''
   });
+  const [formState, setFormState] = useState({
+    submit: false,
+    error: false
+  });
   const [error, setError] = useState(null);
   const history = useHistory();
+  const target = useRef(null);
 
   const onSubmit = (event) => {
+    setFormState({
+      submit: true,
+      error: false
+    });
     props.firebase
       .doSignInWithEmailAndPassword(creds.email, creds.password)
       .then(() => {
@@ -30,9 +39,17 @@ const SignInFormBase = (props) => {
         });
         setError(null);
         history.push({ pathname: ROUTES.HOME });
+        setFormState({
+          submit: false,
+          error: false
+        });
       })
       .catch((error) => {
         setError(error);
+        setFormState({
+          submit: false,
+          error: true
+        });
       });
     event.preventDefault();
   };
@@ -41,6 +58,10 @@ const SignInFormBase = (props) => {
     setCreds({
       ...creds,
       [event.target.name]: event.target.value
+    });
+    setFormState({
+      submit: false,
+      error: false
     });
   };
 
@@ -64,14 +85,33 @@ const SignInFormBase = (props) => {
           onChange={onChange} />
       </Form.Group>
 
-      <Button
-        className="btn-access mt-2 mb-2"
-        type="submit"
-        disabled={creds.password === '' || creds.email === ''}>
-        Log In
-      </Button>
-
-      { error && <h5> { error.message } </h5> }
+      { formState.submit
+        ? <Button ref={target} className="btn-access loading mt-2 mb-2" disabled>
+            <Spinner
+              as="span"
+              animation="border"
+              role="status"
+              aria-hidden="true"
+            />
+            <span className="sr-only"></span>
+          </Button>
+        : <>
+            <Button
+              ref={target}
+              className="btn-access mt-2 mb-2"
+              type="submit"
+              disabled={creds.password === '' || creds.email === ''}>
+              Log In
+            </Button>
+            <Overlay target={target} show={formState.error} placement="right">
+              {(props) => (
+                <Tooltip id="tooltip-access" {...props}>
+                  {error && <p> {error.message} </p>}
+                </Tooltip>
+              )}
+            </Overlay>
+          </>
+      }
     </Form>   
   );
 };

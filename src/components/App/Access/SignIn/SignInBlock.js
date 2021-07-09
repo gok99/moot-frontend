@@ -12,9 +12,9 @@ import '../access.css';
  * Functional Presentational Component that composes its three sub-components.
  * The sub-components are Sign-in Form, Sign-up Link, and Password Forget Link.
  */
-const SignInPage = (props) => {
+const SignInBlock = (props) => {
   return (
-    <Col className="b-accessform d-flex justify-content-md-end">
+    <Col md="auto">
       <div className="form-access si">
         <SignInForm firebase={props.firebase}></SignInForm>
         <SignUpLink />
@@ -24,4 +24,4 @@ const SignInPage = (props) => {
   );
 };
 
-export default SignInPage;
+export default SignInBlock;

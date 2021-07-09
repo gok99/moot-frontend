@@ -11,15 +11,15 @@ import '../access.css';
  * Functional Presentational Component that composes its three sub-components.
  * The sub-components are Sign-in Form, Sign-up Link, and Password Forget Link.
  */
-const PasswordForgetPage = (props) => {
+const PasswordForgetBlock = (props) => {
   return (
-    <Col className="b-accessform justify-content-md-end">
+    <Col md="auto">
       <div className="form-access pf">
         <PasswordForgetForm />
         <SignInLink message={"Go back to "}/>
       </div>
-    </ Col>
+    </Col>
   );
 };
 
-export default PasswordForgetPage;
+export default PasswordForgetBlock;

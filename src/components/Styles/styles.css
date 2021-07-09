@@ -426,7 +426,6 @@ a:default:hover,
 a:disabled,
 a:disabled:hover {
   text-decoration: none;
-  color: #6b4eff;
 }
 
 a.link {

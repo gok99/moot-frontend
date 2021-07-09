@@ -1,9 +1,9 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 import { withFirebase } from '../../../Firebase';
 
 import AccessLogo from '../AccessLogo';
-import SignUpPage from './SignUpPage';
+import SignUpBlock from './SignUpBlock';
 
 import '../../../Styles/styles.css'
 import '../access.css';
@@ -15,9 +15,15 @@ const SignUp = (props) => {
   return (
     <div>
       <Container className="b-access">
-        <Row className="justify-content-md-center">
-          <AccessLogo />
-          <SignUpPage firebase={props.firebase}></SignUpPage>
+        <Row>
+          <Col md={1}>{/* Divider */}</Col>
+          <Col>
+            <Row md="auto" className="d-flex justify-content-md-center">
+              <AccessLogo />
+              <SignUpBlock firebase={props.firebase}></SignUpBlock>
+            </Row>
+          </Col>
+          <Col md={1}>{/* Divider */}</Col>
         </Row>
       </Container>
     </div>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState, useRef } from 'react';
+import { Form, Button, Spinner, Overlay, Tooltip } from 'react-bootstrap';
 import { withRouter, useHistory } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirebase } from '../../../Firebase';
@@ -19,39 +19,40 @@ const SignUpFormBase = (props) => {
     passwordOne: '',
     passwordTwo: ''
   });
+  const [formState, setFormState] = useState({
+    submit: false,
+    error: false
+  });
   const [error, setError] = useState(null);
   const history = useHistory();
+  const target = useRef(null);
 
   const assert_valid = (creds) => {
     const emailRegex = new RegExp('^(e|E)[0-9]{7}@u.nus.edu$', 'g');
     const invalids = {
       passwordsNoMatch: creds.passwordOne !== creds.passwordTwo,
-      emptyPassword: creds.passwordOne === '',
-      emptyEmail: creds.email === '',
-      emptyUsername: creds.username === '',
-      notNUSEmail: !emailRegex.test(creds.email)
+      notNUSEmail: !emailRegex.test(creds.email),
+      passwordLengthShort: creds.passwordOne.length < 8
     };
 
     if (invalids.passwordsNoMatch) {
-      setError(new Error('The two passwords don\'t match. Please try again.'));
-      return false;
-    } else if (invalids.emptyPassword) {
-      setError(new Error('The password field cannot be empty. Please try again.')); 
-      return false;
-    } else if (invalids.emptyEmail) {
-      setError(new Error('The email field cannot be empty. Please try again.')); 
-      return false;
-    } else if (invalids.emptyUsername) {
-      setError(new Error('The username field cannot be empty. Please try again.')); 
+      setError(new Error('The two passwords don\'t match. Please try again!'));
       return false;
     } else if (invalids.notNUSEmail) {
-      setError(new Error('You must use a valid NUS email address (starting with \"E\"). Please try again.')); 
+      setError(new Error('You must use a valid NUS email address (starting with \"E\" or \"e\"). Please try again!')); 
       return false;
-    }
+    } else if (invalids.passwordLengthShort) {
+      setError(new Error('Passwords should be at least 8 characters long. Please try again!')); 
+      return false;
+    } 
     return true;
   }
 
   const onSubmit = (event) => {
+    setFormState({
+      submit: true,
+      error: false
+    });
     setCreds({
       username: creds.username,
       email: creds.email.toLowerCase(),
@@ -112,13 +113,26 @@ const SignUpFormBase = (props) => {
           });
           setError(null);
           history.push({ pathname: ROUTES.ONBOARDING });
+          setFormState({
+            submit: false,
+            error: false
+          });
         })
         .then(() => {
           props.firebase.doSendVerificationEmail();
         })
         .catch(error => {
           setError(error);
+          setFormState({
+            submit: false,
+            error: true
+          });
         });
+    } else {
+      setFormState({
+        submit: false,
+        error: true
+      });
     }
     event.preventDefault();
   };
@@ -127,6 +141,10 @@ const SignUpFormBase = (props) => {
     setCreds({
       ...creds,
       [event.target.name]: event.target.value
+    });
+    setFormState({
+      submit: false,
+      error: false
     });
   };
 
@@ -168,13 +186,33 @@ const SignUpFormBase = (props) => {
           onChange={onChange} />
       </Form.Group>
 
-      <Button  
-        className="btn-access mt-2 mb-2"
-        type="submit">
-        Sign Up
-      </Button>
-      
-      {error && <h5> {error.message} </h5>}
+      { formState.submit
+        ? <Button ref={target} className="btn-access loading mt-2 mb-2" disabled>
+            <Spinner
+              as="span"
+              animation="border"
+              role="status"
+              aria-hidden="true"
+            />
+            <span className="sr-only"></span>
+          </Button>
+        : <>
+            <Button  
+              ref={target}
+              className="btn-access mt-2 mb-2"
+              type="submit"
+              disabled={creds.username === '' || creds.email === '' || creds.passwordOne === '' || creds.passwordTwo === ''}>
+              Sign Up
+            </Button>
+            <Overlay target={target} show={formState.error} placement="right">
+              {(props) => (
+                <Tooltip id="tooltip-access" {...props}>
+                  {error && <p> {error.message} </p>}
+                </Tooltip>
+              )}
+            </Overlay>
+          </>
+      }
     </ Form>
   );
 };
