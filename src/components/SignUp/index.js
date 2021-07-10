@@ -94,13 +94,15 @@ class SignUpFormBase extends Component {
           return this.props.firebase
             .user(uid)
             .set({
-              username,
-              email,
-              id,
-              uid,
-              description: '',
-              Pid: 0,
-              teleUser: '',
+              profile: {
+                username,
+                email,
+                id,
+                uid,
+                description: '',
+                Pid: 0,
+                teleUser: '',
+              },
               chats: {
                 chat1: newChat,
                 chat2: newChat,
