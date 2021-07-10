@@ -117,7 +117,8 @@ html {
 }
 
 .btn-access:visited,
-.btn-access:default {
+.btn-access:default,
+.btn-access:focus {
   background: #6b4eff;
   color: #ffffff;
   border: 2px solid #6b4eff;

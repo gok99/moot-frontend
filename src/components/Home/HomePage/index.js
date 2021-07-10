@@ -20,7 +20,7 @@ const HomePage = (props) => {
         <Col>{/* Blank divider */}</Col>
         <Col xs={9}>
           <Row>
-            <ProfilePreview overlayState="b-overlay-none"></ProfilePreview>
+            <ProfilePreview profile={props.profile} overlayState="b-overlay-none"></ProfilePreview>
             <Col xs={8}>{/* <PostArea /> */}<p>PostArea</p></Col>
           </Row>
         </Col>

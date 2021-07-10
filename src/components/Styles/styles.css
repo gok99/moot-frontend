@@ -31,6 +31,14 @@ p {
   background: #fcfcfc;
 }
 
+.b-home {
+  height: 100vh;
+}
+
+.b-divider {
+  height: 128px;
+}
+
 .container {
   max-width: 100%;
   max-height: 100%;
@@ -76,37 +84,6 @@ p {
 
 .centeredtext {
   text-align: center;
-}
-
-/* Onboarding Page Forms */
-
-.onbheader {
-  color: #121212;
-  font-weight: bold;
-}
-
-.onbtext {
-  color: #4e4e4e;
-  font-weight: bold;
-}
-
-.onbbox {
-  height: 60vh;
-  overflow: auto;
-}
-
-.onbicon {
-  height: 64px;
-  width: auto;
-  border: 5px double #bbbbbb;
-  border-radius: 64px;
-}
-
-.onbicon_active {
-  height: 64px;
-  width: auto;
-  border: 5px double #6b4eff;
-  border-radius: 64px;
 }
 
 /* Posts */
@@ -217,43 +194,6 @@ p.postcontent {
   margin-bottom: 10px;
 }
 
-/* Chat Page */
-
-.chatbox {
-  padding: 24px 32px;
-  background: #faf9ff;
-}
-
-.chatboxscroller {
-  height: 75vh;
-  overflow: auto;
-}
-
-.chatboxheader {
-  font-weight: bold;
-  font-size: 16px;
-  color: #666666;
-}
-
-.chatboxtext {
-  font-size: 14px;
-  color: #747474;
-}
-
-.chatongoing {
-  font-weight: bold;
-  font-size: 16px;
-  text-align: end;
-  color: #5dce62;
-}
-
-.chatempty {
-  font-weight: bold;
-  font-size: 16px;
-  text-align: end;
-  color: #f07171;
-}
-
 /* Friends Page */
 
 .friendbox {
@@ -275,69 +215,6 @@ p.postcontent {
 .nofriendtext {
   text-align: center;
   margin-top: 5vh;
-}
-
-/* Account Page */
-
-.accountbox {
-  overflow: auto;
-  height: 75vh;
-  padding: 16px;
-}
-
-.accountsidebar {
-  max-width: 256px;
-}
-
-.accounttext {
-  font-size: 16px;
-  color: #5c4374;
-}
-
-.centeredform {
-  margin: auto;
-}
-
-.descriptionbox {
-  max-width: 256px;
-}
-
-.previewbox {
-  min-width: 200px;
-}
-
-.profilepic {
-  height: 160px;
-  width: auto;
-  border: 4px double #bbbbbb;
-  border-radius: 160px;
-}
-
-.previewpic {
-  height: 64px;
-  width: auto;
-  border: 4px double #bbbbbb;
-  border-radius: 64px;
-}
-
-.profilebio {
-  text-align: center;
-}
-
-.previewtext {
-  font-size: 12px;
-}
-
-.profiletext {
-  font-size: 18px;
-}
-
-.profilename {
-  color: #232323;
-}
-
-.profileuser {
-  color: #666666;
 }
 
 /* Links */

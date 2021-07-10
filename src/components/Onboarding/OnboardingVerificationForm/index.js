@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Row, Col, Form, ProgressBar } from 'react-bootstrap';
-import { Link, withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
+import { Button, Row, Col, ProgressBar } from 'react-bootstrap';
 
 import { withFirebase } from '../../Firebase';
-import * as ROUTES from '../../../constants/routes'; 
-
-import AccessLogo from '../../Access/AccessLogo';
 
 import '../../Styles/styles.css';
 import '../onboarding.css';
 import logo from '../../../assets/navlogo.png';
 
+/**
+ * Functional Presentational Component that displays Onboarding Form 2.
+ */
 const OnboardingVerificationForm = (props) => {
   const onSubmit = props.onSubmit;
   const [btnDisabled, setBtnDisabled] = useState(true);
@@ -53,6 +51,7 @@ const OnboardingVerificationForm = (props) => {
       <Row>
         <p><br /><br /></p>
         <ProgressBar striped variant="info" animated now={16} />
+        <p><br /></p>
       </Row>
     </Col>
   );

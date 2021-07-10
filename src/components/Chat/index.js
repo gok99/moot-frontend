@@ -1,101 +1,48 @@
-// // import React from 'react';
-// // import { Container, Row, Col } from 'react-bootstrap';
-// // import ProfilePreview from '../Account/ProfilePreview';
-// // import { withAuthorization } from '../../Session';
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { compose } from 'recompose';
 
-// // import * as ROUTES from '../../../constants/routes';
-// // import ChatList from './ChatList';
+import { withFirebase } from '../Firebase';
+import * as ROUTES from '../../constants/routes';
 
-// // import '../../Styles/styles.css';
+import ProfilePreview from '../Account/ProfilePreview';
+import ChatList from './ChatList';
+import { withAuthorization } from '../Session';
 
-// // // const Chat = () => (
-// // //   <Container className="homepage">
-// // //     <Row className="divider"></Row>
-// // //     <Row>
-// // //       <Col>{/* Blank divider */}</Col>
-// // //       <Col xs={9}>
-// // //         <Row>
-// // //           <Col xs={4} className="d-flex justify-content-center">
-// // //             <ProfilePreview />
-// // //           </Col>
-// // //           <Col xs={8}>
-// // //             <Row>
-// // //               <ChatList />
-// // //             </Row>
-// // //           </Col>
-// // //         </Row>
-// // //       </Col>
-// // //       <Col>{/* Blank divider */}</Col>
-// // //     </Row>
-// // //   </ Container>
-// // // );
+import '../Styles/styles.css';
+import './chat.css';
 
-// // const Chat = () => {
-// //   return (
-// //     <div></div>
-// //   );
-// // };
+const ChatPage = (props) => {
+  return (
+    <Container className="b-home">
+      <Row className="b-divider"></Row>
+      <Row>
+        <Col>{/* Blank divider */}</Col>
+        <Col xs={9}>
+          <Row>
+            <Col md={4} className="d-flex justify-content-center">
+              <ProfilePreview profile={props.profile}></ProfilePreview>
+            </Col>
+            <Col md={8}>
+              <ChatList />
+            </Col>
+          </Row>
+        </Col>
+        <Col>{/* Blank divider */}</Col>
+      </Row>
+    </Container>
+  );
+};
 
-// // const dest = authUser => { 
-// //   return {
-// //     authorized: !!authUser,
-// //     destination: ROUTES.SIGN_IN,
-// //   };
-// // }
+const dest = authUser => { 
+  return {
+    authorized: !!authUser,
+    destination: ROUTES.SIGN_IN,
+  };
+}
 
-// // export default withAuthorization(dest)(Chat);
+const Chat = compose(
+  withFirebase,
+)(withAuthorization(dest)(ChatPage));
 
-// import React from 'react';
-// import { Container, Row, Col } from 'react-bootstrap';
-// import { compose } from 'recompose';
-
-// import { withFirebase } from '../../Firebase';
-// import * as ROUTES from '../../../constants/routes';
-
-// import ProfilePreview from '../Account/ProfilePreview';
-// import PostArea from '../Post/PostArea';
-// import { withAuthorization } from '../../Session';
-
-
-// import '../../Styles/styles.css';
-
-// // const ChatPage = (props) => {
-// //   return (
-// //     <Container className="homepage">
-// //       <Row className="divider"></Row>
-// //       <Row>
-// //         <Col>{/* Blank divider */}</Col>
-// //         <Col xs={9}>
-// //           <Row>
-// //             <Col xs={4} className="d-flex justify-content-center">
-// //               <ProfilePreview />
-// //             </Col>
-// //             <Col xs={8}>
-// //               {/* <PostArea /> */}<p>Test</p>
-// //             </Col>
-// //           </Row>
-// //         </Col>
-// //         <Col>{/* Blank divider */}</Col>
-// //       </Row>
-// //     </Container>
-// //   );
-// // };
-
-// const ChatPage = () => {
-//   return (
-//     <div></div>
-//   );
-// };
-
-// const dest = authUser => { 
-//   return {
-//     authorized: !!authUser,
-//     destination: ROUTES.SIGN_IN,
-//   };
-// }
-
-// const Chat = compose(
-//   withFirebase,
-// )(withAuthorization(dest)(ChatPage));
-
-// export default Chat;
+export default Chat;

@@ -22,7 +22,7 @@ const HomePageOnb = (props) => {
         <Col>{/* Blank divider */}</Col>
         <Col xs={9}>
           <Row>
-            <ProfilePreview overlayState="element-overlay"></ProfilePreview>
+            <ProfilePreview profile={props.profile} overlayState="element-overlay"></ProfilePreview>
             <Col xs={8}>{/* <PostArea /> */}<p>PostArea (onb)</p></Col>
           </Row>
         </Col>

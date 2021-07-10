@@ -2,14 +2,6 @@
 
 /* Home Page */
 
-.b-home {
-  height: 100vh;
-}
-
-.b-divider {
-  height: 128px;
-}
-
 .onbpagebox {
   position: absolute !important;
   width: 50% !important;

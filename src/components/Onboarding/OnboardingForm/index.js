@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Button, Row, Col } from 'react-bootstrap';
-import { Link, withRouter, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { withRouter, useHistory } from 'react-router-dom';
 import { compose } from 'recompose';
 
 import { withFirebase } from '../../Firebase';
@@ -9,18 +9,18 @@ import * as ROUTES from '../../../constants/routes';
 import OWForm from '../OnboardingWelcomeForm';
 import OVForm from '../OnboardingVerificationForm';
 import OTForm from '../OnboardingTelegramForm';
-import ODForm from '../OnboardingWelcomeForm';
-import OIForm from '../OnboardingWelcomeForm';
-import OIntForm from '../OnboardingWelcomeForm';
-// import ODForm from '../OnboardingDescriptionForm';
-// import OIForm from '../OnboardingIconForm';
-// import OIntForm from '../OnboardingInterestsForm';
+import ODForm from '../OnboardingDescriptionForm';
+import OIForm from '../OnboardingIconForm';
+import OIntForm from '../OnboardingInterestsForm';
+import OLForm from '../OnboardingLastForm';
 
 import '../../Styles/styles.css';
 import '../onboarding.css'
 
-const OnboardingFormBase = () => {
-  // formState: 0 = Welcome, 1 = Verif, 2 = Tele, 3 = Desc, 4 = Icon, 5 = Interests
+/**
+ * Functional Container Component that handles the transition between the Onboarding Forms.
+ */
+const OnboardingFormBase = (props) => {
   const [formState, setFormState] = useState({
     count: 0,
     progress: 0
@@ -49,7 +49,7 @@ const OnboardingFormBase = () => {
   });
 
   const changeFormState = (event) => {
-    if (formState.count === 5) {
+    if (formState.count === 6) {
       history.push({ pathname: ROUTES.HOME });
     } else {
       setFormState({
@@ -57,7 +57,6 @@ const OnboardingFormBase = () => {
         progress: formState.progress + 16
       });
     }
-    event.preventDefault();
   };
 
   return (
@@ -76,7 +75,9 @@ const OnboardingFormBase = () => {
                     ? <OIForm onSubmit={changeFormState}/>
                     : formState.count === 5
                       ? <OIntForm onSubmit={changeFormState}/>
-                      : null
+                      : formState.count === 6
+                        ? <OLForm onSubmit={changeFormState}/>
+                        : null
         }
       </Col>
       <Col md="auto" className="onbbox-alt">
@@ -93,7 +94,9 @@ const OnboardingFormBase = () => {
                     ? <OIForm onSubmit={changeFormState}/>
                     : formState.count === 5
                       ? <OIntForm onSubmit={changeFormState}/>
-                      : null
+                      : formState.count === 6
+                        ? <OLForm onSubmit={changeFormState}/>
+                        : null
         }
       </Col>
     </Row>

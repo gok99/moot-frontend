@@ -25,10 +25,10 @@ const ProfileDetailsPreview = (props) => {
         </Col>
         <Col xs={8}>
           <Row>
-            <p className="previewtext profilename">{username}</p>
+            <p className="text-preview username">{username}</p>
           </Row>
           <Row>
-            <p className="previewtext profileuser">
+            <p className="text-preview teleuser">
               { teleUser === '' ? teleUser : "@" + teleUser }
             </p>
           </Row>
@@ -40,8 +40,8 @@ const ProfileDetailsPreview = (props) => {
       <hr className={overlayState}></hr>
       <Row>
         <Col>
-          <p className="previewtext profilename">Bio:</p>
-          <p className="previewtext profilename">{description}</p>
+          <p className="text-preview descriptionheader">My Bio:</p>
+          <p className="text-preview description">{description}</p>
         </Col>
       </Row>
       <hr className={overlayState}></hr>

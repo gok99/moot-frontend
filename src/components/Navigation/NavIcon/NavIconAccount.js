@@ -53,6 +53,11 @@ const NavIconAccountBase = (props) => {
             My Posts
           </Dropdown.Item>
         </Button>
+        <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.POSTS, event)}>
+          <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
+            My Inbox
+          </Dropdown.Item>
+        </Button>
         <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.ACCOUNT, event)}>
           <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
             Settings
