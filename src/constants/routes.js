@@ -10,3 +10,5 @@ export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pwforget';
 export const ONBOARDING = '/home-onboarding';
 export const POSTS = '/posts';
+export const INBOX = '/inbox';
+export const SETTINGS = '/settings';

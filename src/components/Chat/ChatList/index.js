@@ -10,11 +10,11 @@ import '../chat.css';
 const ChatListBase = (props) => {
   const [auth, setAuth] = useState(false);
   const [chats, setChats] = useState([]);
+  const fb = props.firebase;
+  setAuth(fb.auth.currentUser.emailVerified);
 
   useEffect(() => {
-    const fb = props.firebase;
     const uid = fb.auth.currentUser.uid;
-    setAuth(fb.auth.currentUser.emailVerified);
     const listener = fb.userChats(uid).on('value', (snapshot) => {
       if (snapshot.exists()) {
         const userChats = Object.values(snapshot.val());
@@ -23,7 +23,7 @@ const ChatListBase = (props) => {
         console.log("No data available");
       }
     });
-    return () => fb.userProfile(uid).off('value', listener);
+    return () => fb.userChats(uid).off('value', listener);
   });
 
   return (

@@ -8,12 +8,12 @@ import * as ROUTES from '../../../constants/routes';
 
 import '../../Styles/styles.css';
 import '../navigation.css';
-import ica from '../../../assets/icon_a.png';
+import icl from '../../../assets/icon_l.png';
 
 /**
  * Functional Container Component that renders the Account Dropdown Menu.
  */
-const NavIconAccountBase = (props) => {
+const NavIconMenuBase = (props) => {
   const history = useHistory();
 
   const onClick = (dest, event) => {
@@ -35,14 +35,34 @@ const NavIconAccountBase = (props) => {
           placement="bottom"
           overlay={
             <Tooltip className="navicon-tooltip" id={`tooltip-bottom`}>
-              Settings
+              Menu
             </Tooltip>
           }
         >
-          <img className="navicon account" src={ica} alt="Account" />
+          <img className="navicon account" src={icl} alt="Menu" />
         </OverlayTrigger>
       </Dropdown.Toggle>
       <Dropdown.Menu className="b-accountmenu">
+        <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.HOME, event)}>
+          <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
+            Home
+          </Dropdown.Item>
+        </Button>
+        <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.CHAT, event)}>
+          <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
+            Chat
+          </Dropdown.Item>
+        </Button>
+        <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.FRIENDS, event)}>
+          <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
+            Friends
+          </Dropdown.Item>
+        </Button>
+        <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.LIBRARY, event)}>
+          <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
+            Library
+          </Dropdown.Item>
+        </Button>
         <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.ACCOUNT, event)}>
           <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
             My Account
@@ -73,9 +93,9 @@ const NavIconAccountBase = (props) => {
   );
 };
 
-const NavIconAccount = compose(
+const NavIconMenu = compose(
   withRouter,
   withFirebase,
-)(NavIconAccountBase);
+)(NavIconMenuBase);
 
-export default NavIconAccount;
+export default NavIconMenu;

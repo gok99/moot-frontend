@@ -39,7 +39,7 @@ const SignUpFormBase = (props) => {
       setError(new Error('The two passwords don\'t match. Please try again!'));
       return false;
     } else if (invalids.notNUSEmail) {
-      setError(new Error('You must use a valid NUS email address (starting with \"E\" or \"e\"). Please try again!')); 
+      setError(new Error('You must use a valid NUS email address (starting with E or e). Please try again!')); 
       return false;
     } else if (invalids.passwordLengthShort) {
       setError(new Error('Passwords should be at least 8 characters long. Please try again!')); 

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import ProfilePreview from '../Account/ProfilePreview';
-import { withAuthorization } from '../Session';
+import ProfilePreview from '../ProfilePreview';
+import { withAuthorization } from '../../Session';
 
-import * as ROUTES from '../../constants/routes';
+import * as ROUTES from '../../../constants/routes';
 
-import '../Styles/styles.css';
+import '../../Styles/styles.css';
 
-const Library = (props) => {
+const Settings = (props) => {
   return (
     <Container className="b-home">
       <Row className="b-divider"></Row>
@@ -36,4 +36,4 @@ const dest = authUser => {
   };
 }
 
-export default withAuthorization(dest)(Library);
+export default withAuthorization(dest)(Settings);

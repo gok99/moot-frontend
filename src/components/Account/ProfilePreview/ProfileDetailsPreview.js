@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import ProfilePicturePreview from './ProfilePicturePreview';
-import PostCreation from '../../Post/PostCreation';
+// import PostCreation from '../../Post/PostCreation';
 
 import '../../Styles/styles.css';
 import '../account.css';
@@ -18,7 +18,7 @@ const ProfileDetailsPreview = (props) => {
   const overlayState = props.overlayState;
 
   return (
-    <div className="previewbox">
+    <div className="display-profilepreview">
       <Row>
         <Col xs={4} className="d-flex justify-content-center">
           <ProfilePicturePreview pid={pid} overlayState={overlayState}></ProfilePicturePreview>

@@ -1,13 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { compose } from 'recompose';
-
-import { withFirebase } from '../../Firebase';
-import * as ROUTES from '../../../constants/routes';
 
 import ProfilePreview from '../../Account/ProfilePreview';
-import PostArea from '../../Post/PostArea';
-import { withAuthorization } from '../../Session';
+// import PostArea from '../../Post/PostArea';
 
 import '../../Styles/styles.css';
 import '../home.css';

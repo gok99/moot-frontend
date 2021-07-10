@@ -32,8 +32,8 @@ const ChatBoxList = (props) => {
                   </Button>
                 </OverlayTrigger>
               </Col>
-              <Col md={3}>
-                <Button className="btn-chatlink" href={"https://t.me/moot_chat"+(index+1)+"_bot"} target="_blank" rel="noopener noreferrer">Chat</Button>
+              <Col md={3} className="d-flex justify-content-md-center">
+                <Button className="d-flex justify-content-center btn-chatlink text-chatboxheader" href={"https://t.me/moot_chat"+(index+1)+"_bot"} target="_blank" rel="noopener noreferrer">Chat #{index+1} &gt;&gt;&gt;</Button>
               </Col>
             </Row>
   });

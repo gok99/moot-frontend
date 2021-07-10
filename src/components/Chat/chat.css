@@ -53,15 +53,18 @@
   height: 10vh;
   margin: auto;
   padding: auto;
+  padding-top: 3.2vh;
   border: none;
   text-decoration: none;
   border-radius: 0px;
+  color: #4f4974;
 }
 
 .btn-chatlink:hover,
 .btn-chatlink:focus:hover,
 .btn-chatlink:visited:hover {
   background: #eeeaff;
+  color: #4f4974;
 }
 
 .btn-chatlink:visited,
@@ -70,21 +73,24 @@
   background: #fcfcfc;
   border: none;
   box-shadow: none;
+  color: #4f4974;
 }
 
 .btn-chatlink:focus:active,
 .btn-chatlink:active {
   background: #cfc5ff;
   border: none;
+  color: #4f4974;
 }
 
 .btn-chatlink:disabled {
   opacity: 0.7 !important;
+  color: #4f4974;
 }
 
 .text-chatboxheader {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   color: #4f4974;
   text-align: left;
 }
@@ -102,11 +108,6 @@
 .empty {
   text-align: end;
   color: #777777;
-}
-
-.chatboxtext {
-  font-size: 14px;
-  color: #747474;
 }
 
 .popover.popover-chat {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Row, Col, ProgressBar } from 'react-bootstrap';
 
 import { withFirebase } from '../../Firebase';
@@ -12,11 +12,7 @@ import logo from '../../../assets/navlogo.png';
  */
 const OnboardingVerificationForm = (props) => {
   const onSubmit = props.onSubmit;
-  const [btnDisabled, setBtnDisabled] = useState(true);
-
-  useEffect(() => {
-    setBtnDisabled(!props.firebase.auth.currentUser.emailVerified);
-  });
+  const [btnDisabled, setBtnDisabled] = useState(!props.firebase.auth.currentUser.emailVerified);
 
   const onVerify = (event) => {
     setBtnDisabled(false);

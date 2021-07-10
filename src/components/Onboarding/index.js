@@ -1,6 +1,6 @@
 import React from 'react';
 import { withAuthorization } from '../Session';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import * as ROUTES from '../../constants/routes'; 
 import OnboardingForm from './OnboardingForm';

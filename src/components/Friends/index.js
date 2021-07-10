@@ -25,7 +25,7 @@ const FriendsBase = (props) => {
               </Col>
               <Col xs={8}>
                 <Row>
-                  {/* <FriendList /> */}
+                  <FriendList />
                 </Row>
               </Col>
             </Row>

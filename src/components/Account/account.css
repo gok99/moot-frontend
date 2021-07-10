@@ -1,5 +1,16 @@
 /* Containers */
 
+.display-profilepreview {
+  display: block;
+  min-width: 200px;
+}
+
+@media only screen and (max-width: 768px) {
+  .display-profilepreview {
+    display: none;
+  }
+}
+
 #root {
   width: 100%;
   height: 100%;
@@ -114,10 +125,6 @@
 
 .descriptionbox {
   max-width: 256px;
-}
-
-.previewbox {
-  min-width: 200px;
 }
 
 .profilepic {
