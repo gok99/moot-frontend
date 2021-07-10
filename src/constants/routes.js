@@ -8,5 +8,5 @@ export const FRIENDS = '/friends';
 export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pwforget';
-export const ONBOARDING = '/onboarding';
+export const ONBOARDING = '/home-onboarding';
 export const POSTS = '/posts';
