@@ -8,10 +8,10 @@ import '../../Styles/styles.css';
 import '../chat.css';
 
 const ChatListBase = (props) => {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(true);
   const [chats, setChats] = useState([]);
   const fb = props.firebase;
-  setAuth(fb.auth.currentUser.emailVerified);
+  // setAuth(fb.auth.currentUser.emailVerified);
 
   useEffect(() => {
     const uid = fb.auth.currentUser.uid;
