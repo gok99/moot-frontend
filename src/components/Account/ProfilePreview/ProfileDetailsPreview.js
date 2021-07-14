@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import ProfilePicturePreview from './ProfilePicturePreview';
-// import PostCreation from '../../Post/PostCreation';
+import { PostCreation } from '../../Post';
 
 import '../../Styles/styles.css';
 import '../account.css';
@@ -45,7 +45,7 @@ const ProfileDetailsPreview = (props) => {
         </Col>
       </Row>
       <hr className={overlayState}></hr>
-      {/* <PostCreation></PostCreation> */}
+      <PostCreation></PostCreation>
     </div>
   );
 };

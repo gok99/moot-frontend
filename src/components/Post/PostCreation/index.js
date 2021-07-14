@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
@@ -8,88 +8,85 @@ import { withFirebase } from '../../Firebase';
 import '../../Styles/styles.css';
 import icon_x from '../../../assets/icon_x.png';
 
-class PostCreationBase extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-      active: false,
-      posttitle: '',
-      postcontent: '',
-      error: null
-    };
-  }
+/**
+ * Functional Presentational Component that, depending on the current state, displays the Post Creation accordingly.
+ */
+const PostCreationBase = (props) => {
+  const [active, setActive] = useState(false);
+  const [postState, setPostState] = useState({
+    postTitle: '',
+    postContent: ''
+  });
+  const [error, setError] = useState(null);
 
-  assert_valid = (posttitle, postcontent) => {
+  const assert_valid = (postTitle, postContent) => {
     const invalids = {
-      emptyTitle: posttitle === '',
-      emptyPost: postcontent === '',
+      emptyTitle: postTitle === '',
+      emptyPost: postContent === '',
     };
-
     if (invalids.emptyTitle) {
-      this.setState({ 'error': new Error('The title cannot be empty...') });
+      setError(new Error('The title cannot be empty...'));
       return false;
     } else if (invalids.emptyPost) {
-      this.setState({ 'error': new Error('The post cannot be empty...') }); 
+      setError(new Error('The post cannot be empty...'));
       return false;
     }
-    return true
+    return true;
   }
- 
-  onSubmit = event => {
-    var { posttitle, postcontent } = this.state;
-    const fb = this.props.firebase;
-    var uid = fb.auth.currentUser.uid;
-    var timestamp = new Date().getTime();
 
-    if (this.assert_valid(posttitle, postcontent)) {
+  const onSubmit = (event) => {
+    const fb = props.firebase;
+    var uid = fb.auth.currentUser.uid;
+    var postTime = new Date().getTime();
+
+    if (assert_valid(postState.postTitle, postState.postContent)) {
+      // Create post under firebase
       var newPost = fb.posts().push();
       newPost.set({
         uid, 
-        posttitle,
-        postcontent,
-        timestamp,
+        postTitle: postState.postTitle,
+        postContent: postState.postContent,
+        postTime,
         postUid: newPost.key,
       }).then(() => {
-        this.setState({ 
-          posttitle: '',
-          postcontent: '',
-          error: null
+        setPostState({
+          postTitle: '',
+          postContent: ''
         });
-      }).then((error) => console.log(error));;
+        setError(null);
+      }).then((error) => {
+        console.log(error);
+      });
+
+      // Create post under user
       fb.userPosts(uid).push({
         postUid: newPost.key
-      }).then((error) => console.log(error));
+      }).then((error) => {
+        console.log(error);
+      });
     }
 
-    const currentState = this.state.active;
-    this.setState({ active: !currentState });
-
+    setActive(!active);
     event.preventDefault();
+  };
+
+  const onChange = (event) => {
+    setPostState({
+      ...postState,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  const toggleClass = (event) => {
+    setActive(!active);
   }
- 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value }); 
-  };
 
-  toggleClass = event => {
-    const currentState = this.state.active;
-    this.setState({ active: !currentState });
-  };
- 
-  render() {
-
-    const {
-      posttitle,
-      postcontent,
-      error,
-    } = this.state;
-
-    return (
-      this.state.active
+  return (
+    active
         ? <div>
-            <Button className="likebutton medbutton mt-2 mb-2" variant="primary" type="button" onClick = {this.toggleClass}>Create a Post</Button>
+            <Button className="likebutton medbutton mt-2 mb-2" variant="primary" type="button" onClick = {toggleClass}>Create a Post</Button>
             <div
-              className={ this.state.active 
+              className={ active 
                 ? "postcreationoverlay pcoactive d-flex justify-content-md-center"
                 : "postcreationoverlay pcoinactive d-flex justify-content-md-center"
                 }
@@ -98,7 +95,7 @@ class PostCreationBase extends Component {
                 <Row className="pcodivider"></Row>
                 <div className="postcreationform contentbox">
                   <Row className="d-flex justify-content-end">
-                    <Button className="closebutton" type="button" onClick = {this.toggleClass}>
+                    <Button className="closebutton" type="button" onClick = {toggleClass}>
                       <img className="navicon" src={icon_x} alt="Close" />
                     </Button>
                   </Row>
@@ -106,23 +103,23 @@ class PostCreationBase extends Component {
                     <p className="pcotext mt-4">What's on your mind?</p>
                   </Row>
                   <Row>
-                    <Form className="postcreationformint" onSubmit={this.onSubmit}>
-                      <Form.Group className="textbox mt-2" controlId="posttitle">
+                    <Form className="postcreationformint" onSubmit={onSubmit}>
+                      <Form.Group className="textbox mt-2" controlId="postTitle">
                         <Form.Control 
-                          name="posttitle"
+                          name="postTitle"
                           type="text"
                           placeholder="Title"
-                          value={posttitle}
-                          onChange={this.onChange} />
+                          value={postState.postTitle}
+                          onChange={onChange} />
                       </Form.Group>
-                      <Form.Group className="textbox postcreationbox mt-2" controlId="postcontent">
+                      <Form.Group className="textbox postcreationbox mt-2" controlId="postContent">
                         <Form.Control 
-                          name="postcontent"
+                          name="postContent"
                           type="text"
                           as="textarea"
                           placeholder="Give us more details!"
-                          value={postcontent}
-                          onChange={this.onChange} />
+                          value={postState.postContent}
+                          onChange={onChange} />
                       </Form.Group>
                       <Button  
                         className="likebutton medbutton mt-2 mb-2"
@@ -138,22 +135,12 @@ class PostCreationBase extends Component {
             </div>
           </div>
         : <div>
-            <Button className="likebutton medbutton mt-2 mb-2" variant="primary" type="button" onClick = {this.toggleClass}>Create a Post</Button>
+            <Button className="likebutton medbutton mt-2 mb-2" variant="primary" type="button" onClick = {toggleClass}>Create a Post</Button>
           </div>
-      
-      
-    );
-  }
-}
-
-// const PostCreationBase = () => {
-//   return (
-//     <Button variant="primary" type="button">Create a Post</Button>
-//   );
-// };
+  );
+};
 
 const PostCreation = compose(
-  withRouter,
   withFirebase,
 )(PostCreationBase);
 

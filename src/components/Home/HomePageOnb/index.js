@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import Onboarding from '../../Onboarding';
 import ProfilePreview from '../../Account/ProfilePreview';
-// import PostArea from '../../Post/PostArea';
+import PostArea from '../../Post/PostArea';
 
 import '../../Styles/styles.css';
 import '../home.css';
@@ -18,7 +18,9 @@ const HomePageOnb = (props) => {
         <Col xs={9}>
           <Row>
             <ProfilePreview profile={props.profile} overlayState="element-overlay"></ProfilePreview>
-            <Col xs={8}>{/* <PostArea /> */}<p>PostArea (onb)</p></Col>
+            <Col xs={8}>
+              <PostArea />
+            </Col>
           </Row>
         </Col>
         <Col>{/* Blank divider */}</Col>
