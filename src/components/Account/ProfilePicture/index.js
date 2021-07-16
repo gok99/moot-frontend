@@ -1,18 +1,18 @@
 import React from 'react';
  
 import '../../Styles/styles.css';
-import icz1 from '../../../assets/icon_z/icon_z1.png';
-import icz2 from '../../../assets/icon_z/icon_z2.png';
-import icz3 from '../../../assets/icon_z/icon_z3.png';
-import icz4 from '../../../assets/icon_z/icon_z4.png';
-import icz5 from '../../../assets/icon_z/icon_z5.png';
-import icz6 from '../../../assets/icon_z/icon_z6.png';
-import icz7 from '../../../assets/icon_z/icon_z7.png';
-import icz8 from '../../../assets/icon_z/icon_z8.png';
-import icz9 from '../../../assets/icon_z/icon_z9.png';
-import icz10 from '../../../assets/icon_z/icon_z10.png';
-import icz11 from '../../../assets/icon_z/icon_z11.png';
-import icz12 from '../../../assets/icon_z/icon_z12.png';
+import icz1 from '../../../assets/icon_z/icon_z0.png';
+import icz2 from '../../../assets/icon_z/icon_z0.png';
+import icz3 from '../../../assets/icon_z/icon_z0.png';
+import icz4 from '../../../assets/icon_z/icon_z0.png';
+import icz5 from '../../../assets/icon_z/icon_z0.png';
+import icz6 from '../../../assets/icon_z/icon_z0.png';
+import icz7 from '../../../assets/icon_z/icon_z0.png';
+import icz8 from '../../../assets/icon_z/icon_z0.png';
+import icz9 from '../../../assets/icon_z/icon_z0.png';
+import icz10 from '../../../assets/icon_z/icon_z0.png';
+import icz11 from '../../../assets/icon_z/icon_z0.png';
+import icz12 from '../../../assets/icon_z/icon_z0.png';
 
 /**
  * Functional Container Component that retrieves and returns the correct profile picture based on user pid.

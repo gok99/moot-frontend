@@ -102,9 +102,9 @@ html {
 .btn-access {
   display: block;
   text-align: center;
-  background: #6b4eff;
+  background: #8235ff;
   color: #ffffff;
-  border: 2px solid #6b4eff;
+  border: 2px solid #8235ff;
   border-radius: 20px;
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
   font-weight: bold;
@@ -119,9 +119,9 @@ html {
 .btn-access:visited,
 .btn-access:default,
 .btn-access:focus {
-  background: #6b4eff;
+  background: #8235ff;
   color: #ffffff;
-  border: 2px solid #6b4eff;
+  border: 2px solid #8235ff;
   box-shadow: none;
 }
 
@@ -132,8 +132,8 @@ html {
 .btn-access.loading:disabled {
   opacity: 1 !important;
   background: #ffffff;
-  color: #6b4eff;
-  border: 2px solid #6b4eff;
+  color: #8235ff;
+  border: 2px solid #8235ff;
   box-shadow: none;
   padding: 12px 32px 16px;
   text-align: center;
@@ -141,16 +141,16 @@ html {
 
 .btn-access:hover,
 .btn-access:focus:hover {
-  background: #6247ec;
+  background: #6322cc;
   color: #ffffff;
-  border: 2px solid #6247ec;
+  border: 2px solid #6322cc;
 }
 
 .btn-access:focus:active,
 .btn-access:active {
   background: #ffffff;
-  color: #6b4eff;
-  border: 2px solid #6b4eff;
+  color: #8235ff;
+  border: 2px solid #8235ff;
 }
 
 @media only screen and (max-width: 600px) {
@@ -202,12 +202,12 @@ html {
 }
 
 .link-access {
-  color: #6b4eff;
+  color: #8235ff;
   font-weight: bold;
 }
 
 a.link-access:hover {
-  color: #472ad8;
+  color: #6322cc;
 }
 
 @media only screen and (max-width: 600px) {

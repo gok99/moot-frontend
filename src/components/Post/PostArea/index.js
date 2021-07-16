@@ -222,9 +222,11 @@ const PostAreaBase = (props) => {
     });
 
     // Write like to post in database
+    var likedTime = new Date().getTime();
     var newLike = fb.postUserLikes(currentPost.postUid).push();
     newLike.set({
       uid: uid,
+      likedTime: likedTime,
       key: newLike.key
     }).catch((error) => console.log(error));
 
@@ -232,6 +234,7 @@ const PostAreaBase = (props) => {
     var newLikedPost = fb.userLikedPosts(uid).push();
     newLikedPost.set({
       postUid: currentPost.postUid,
+      likedTime: likedTime,
       key: newLikedPost.key
     }).catch((error) => console.log(error));
 
@@ -242,19 +245,22 @@ const PostAreaBase = (props) => {
    * Behaviour on comment
    */
   const onCommentSubmit = (event) => {
-    // Write like to post in database
+    // Write comment to post in database
+    var commentTime = new Date().getTime();
     var newComment = fb.postUserComments(currentPost.postUid).push();
     newComment.set({
       uid: uid,
-      comment: currentComment,
+      comment: currentComment.comment,
+      commentTime: commentTime,
       key: newComment.key
     }).catch((error) => console.log(error));
 
-    // Write liked post to user in database
+    // Write commented post to user in database
     var newCommentedPost = fb.userCommentedPosts(uid).push();
     newCommentedPost.set({
       postUid: currentPost.postUid,
-      comment: currentComment,
+      comment: currentComment.comment,
+      commentTime: commentTime,
       key: newCommentedPost.key
     }).catch((error) => console.log(error));
 
@@ -531,7 +537,7 @@ const PostAreaBase = (props) => {
           <hr />
           <Row>
             <Col xs={2}>
-              <Button className="likebutton smallbutton d-flex justify-content-md-center" type="button" disabled={ areaState.likeDisabled } onClick={onLike}>
+              <Button className="likebutton smallbutton d-flex justify-content-md-center mb-3" type="button" disabled={ areaState.likeDisabled } onClick={onLike}>
                 { postState.postLiked 
                     ? <img className="hearticon" src={icon_like} alt="Like" />
                     : <img className="hearticon" src={icon_unlike} alt="Not Liked" />
@@ -539,26 +545,28 @@ const PostAreaBase = (props) => {
               </Button>
             </Col>
             <Col xs={10}>
-              { areaState.commentDisabled
-                  ? null
-                  : <Form onSubmit={onCommentSubmit}>
-                      <Form.Group controlId="comment">
-                        <Form.Control
-                          name="currentComment" 
-                          type="text"
-                          as="textarea"
-                          placeholder="Reply to this post!"
-                          // defaultValue={ data.description }
-                          onChange={onChange} />
-                      </Form.Group>
-                      <Button  
-                        className="btn-onboarding mt-4 mb-2"
-                        type="submit">
-                        Reply
-                      </Button>
-                    </Form>
-              }
             </Col>
+          </Row>
+          <Row>
+            { areaState.commentDisabled
+                ? null
+                : <Form onSubmit={onCommentSubmit}>
+                    <Form.Group controlId="comment">
+                      <Form.Control
+                        name="currentComment" 
+                        type="text"
+                        as="textarea"
+                        placeholder="Reply to this post!"
+                        // defaultValue={ data.description }
+                        onChange={onChange} />
+                    </Form.Group>
+                    <Button  
+                      className="btn-onboarding mt-4 mb-2"
+                      type="submit">
+                      Reply
+                    </Button>
+                  </Form>
+            }
           </Row>
         </Col>
         <Col xs={1} className="postchangearea">
