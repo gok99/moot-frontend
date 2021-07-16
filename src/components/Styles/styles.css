@@ -43,7 +43,6 @@ html {
   box-shadow: none !important;
 }
 
-
 hr {
   opacity: 1;
   color: #bbbbbb;
@@ -67,6 +66,13 @@ a:default:hover,
 a:disabled,
 a:disabled:hover {
   text-decoration: none;
+}
+
+/* Friendbox and Chatbox headers */
+.text-general-header {
+  font-size: 24px;
+  font-weight: bold;
+  color: #421d61;
 }
 
 /* Main Containers */

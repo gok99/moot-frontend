@@ -8,10 +8,14 @@ import '../friends.css';
 const FriendBoxList = (props) => {
   const friends = props.friends;
   const friendsList = friends.map((friend) => {
-    return <Row><FriendBox fUsername={friend.username} fTeleUser={friend.teleUser} ></FriendBox></Row>
+    return <><Row><FriendBox fUsername={friend.username} fTeleUser={friend.teleUser} ></FriendBox></Row><hr /></>
   });
   return (
-    <div>{friendsList}</div>
+    <>
+      <p className="text-general-header">Friends</p>
+      <hr />
+      {friendsList}
+    </>
   );
 };
 

@@ -19,7 +19,10 @@ const Inbox = (props) => {
               <ProfilePreview />
             </Col>
             <Col xs={8}>
-              <p className="friendboxtextbold nofriendtext">This feature is yet to be implemented :(</p>
+              <p className="text-general-header">My Inbox</p>
+              <hr />
+              <p className="text-placeholder">This feature is yet to be implemented :(</p>
+              <p className="text-placeholder">This page should show the incoming comments to your posts!</p>
             </Col>
           </Row>
         </Col>

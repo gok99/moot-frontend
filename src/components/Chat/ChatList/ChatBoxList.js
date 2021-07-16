@@ -10,7 +10,7 @@ const ChatBoxList = (props) => {
   const ref = useRef(null);
   const chatsList = chats.map((chat, index) => {
     
-    return <Row>
+    return <Row className="mb-2">
               <Col md={9}>
                 <OverlayTrigger
                   trigger="click"
@@ -38,7 +38,11 @@ const ChatBoxList = (props) => {
             </Row>
   });
   return (
-    <Col>{chatsList}</Col>
+    <Col>
+      <p className="text-general-header">Chats</p>
+      <hr />
+      {chatsList}
+    </Col>
   );
 };
 

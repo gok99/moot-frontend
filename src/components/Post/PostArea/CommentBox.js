@@ -41,12 +41,16 @@ const CommentBox = (props) => {
           <p className="text-post meta">Comment by {myComment ? "me" : "anonymous user"} on {new_commentTime}:</p>
         </Col>
         <Col md={4} className="d-flex justify-content-end">
-        {/* <Button className="btn-postexpand" type="button" onClick={editComment}>
-          Edit
-        </Button> */}
-        <Button className="btn-postexpand" type="button" onClick={deleteComment}>
-          Delete
-        </Button>
+        {
+          myComment
+            ? /*<Button className="btn-postexpand" type="button" onClick={editComment}>
+                Edit
+              </Button>*/
+              <Button className="btn-postexpand" type="button" onClick={deleteComment}>
+                Delete
+              </Button>
+            : null
+        }
         </Col>
       </Row>
       <Row className="mb-3">

@@ -15,7 +15,7 @@ const HomePageOnb = (props) => {
       <Onboarding />
       <Row>
         <Col>{/* Blank divider */}</Col>
-        <Col xs={9}>
+        <Col xs={10}>
           <Row>
             <Side />
             <Col xs={8}>

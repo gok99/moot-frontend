@@ -13,7 +13,7 @@ const HomePage = (props) => {
       <Row className="b-divider"></Row>
       <Row>
         <Col>{/* Blank divider */}</Col>
-        <Col xs={9}>
+        <Col xs={10}>
           <Row>
             <Side />
             <Col xs={8}>

@@ -19,11 +19,9 @@ const ChatPage = (props) => {
       <Row className="b-divider"></Row>
       <Row>
         <Col>{/* Blank divider */}</Col>
-        <Col xs={9}>
+        <Col xs={10}>
           <Row>
-            <Col md={4} className="d-flex justify-content-center">
-              <Side />
-            </Col>
+            <Side />
             <Col md={8}>
               <ChatList />
             </Col>

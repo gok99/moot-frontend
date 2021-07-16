@@ -19,16 +19,13 @@ const PostContent = (props) => {
   return (
     <>
       <Row>
-        <Col className="d-flex justify-content-start">
-          <p className="text-post meta">
-            { noPost
-              ? "No more posts..."
-              : myPost
-                ? "Posted by me on " + postTime
-                : "Posted by an anonymous user on " + postTime
-            }
-            <br /><br />
-          </p>              
+        <Col className="d-flex justify-content-start">     
+          { noPost
+            ? <p className="text-post meta">No more posts...<br /><br /></p>
+            : myPost
+              ? <p className="text-post meta">Posted by me on {postTime}<br /><br /></p>
+              : <p className="text-post meta">Posted by an anonymous user on {postTime}<br /><br /></p>
+          }
         </Col>
       </Row>
       <Row>

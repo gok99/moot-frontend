@@ -19,7 +19,10 @@ const Settings = (props) => {
               <ProfilePreview />
             </Col>
             <Col xs={8}>
-              <p className="friendboxtextbold nofriendtext">This feature is yet to be implemented :(</p>
+              <p className="text-general-header">Settings</p>
+              <hr />
+              <p className="text-placeholder">This feature is yet to be implemented :(</p>
+              <p className="text-placeholder">This page should let you change the basic settings for your moot experience, like view mode and other preferences!</p>
             </Col>
           </Row>
         </Col>

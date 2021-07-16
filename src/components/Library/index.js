@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import ProfilePreview from '../Account/ProfilePreview';
+
+import LibraryArea from './LibraryArea';
 import { withAuthorization } from '../Session';
 
 import * as ROUTES from '../../constants/routes';
@@ -14,13 +15,11 @@ const Library = (props) => {
       <Row className="b-divider"></Row>
       <Row>
         <Col>{/* Blank divider */}</Col>
-        <Col xs={9}>
+        <Col xs={10}>
           <Row>
-            <Col xs={4} className="d-flex justify-content-center">
             <Side />
-            </Col>
             <Col xs={8}>
-              <p className="text-placeholder">This feature is yet to be implemented :(</p>
+              <LibraryArea />
             </Col>
           </Row>
         </Col>
