@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import ProfilePicturePreview from './ProfilePicturePreview';
@@ -10,13 +10,7 @@ import '../account.css';
 /**
  * Functional Presentational Component that renders all the profile information passed to it.
  */
-const ProfileDetailsPreview = (props) => {
-  const username = props.username;
-  const teleUser = props.teleUser;
-  const description = props.description;
-  const pid = props.pid;
-  const overlayState = props.overlayState;
-
+const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlayState }) => {
   return (
     <div className="display-profilepreview">
       <Row>
@@ -40,7 +34,7 @@ const ProfileDetailsPreview = (props) => {
       <hr className={overlayState}></hr>
       <Row>
         <Col>
-          <p className="text-preview descriptionheader">My Bio:</p>
+          <p className="text-preview descriptionheader">Bio:</p>
           <p className="text-preview description">{description}</p>
         </Col>
       </Row>
@@ -50,4 +44,4 @@ const ProfileDetailsPreview = (props) => {
   );
 };
 
-export default ProfileDetailsPreview;
+export default React.memo(ProfileDetailsPreview);

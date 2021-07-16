@@ -154,7 +154,7 @@ const SignUpFormBase = (props) => {
     <Form onSubmit={onSubmit}>
       <Form.Group className="input-access" controlId="signUpBasicUsername">
         <Form.Control
-          className="inputtxt-access"
+          className="text-input-access"
           name="username" 
           type="username"
           placeholder="Username"
@@ -164,7 +164,7 @@ const SignUpFormBase = (props) => {
 
       <Form.Group className="input-access mt-2" controlId="signUpBasicEmail">
         <Form.Control
-          className="inputtxt-access"
+          className="text-input-access"
           name="email" 
           type="email"
           placeholder="Enter email"
@@ -174,7 +174,7 @@ const SignUpFormBase = (props) => {
 
       <Form.Group className="input-access mt-2" controlId="signUpBasicPasswordOne">
         <Form.Control 
-          className="inputtxt-access"
+          className="text-input-access"
           name="passwordOne"
           type="password"
           placeholder="Enter Password"
@@ -184,7 +184,7 @@ const SignUpFormBase = (props) => {
 
       <Form.Group className="input-access mt-2" controlId="signUpBasicPasswordTwo">
         <Form.Control 
-          className="inputtxt-access"
+          className="text-input-access"
           name="passwordTwo"
           type="password"
           placeholder="Re-Enter Password"

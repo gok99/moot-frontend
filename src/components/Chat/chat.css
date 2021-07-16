@@ -1,7 +1,8 @@
-/* CSS for the entire application */
+/* CSS Specific to Chat Page */
 
-/* Chat Page */
-
+/**
+ * Styling for Chatboxes
+ */
 .b-chatbox {
   border: none;
   box-sizing: border-box;
@@ -88,6 +89,9 @@
   color: #4f4974;
 }
 
+/**
+ * Text for Chatboxes
+ */
 .text-chatboxheader {
   font-weight: bold;
   font-size: 14px;
@@ -110,7 +114,17 @@
   color: #777777;
 }
 
+/**
+ * Text for Chatbox Popovers
+ */
+
 .popover.popover-chat {
   max-width: 35vw;
   border-radius: 0px;
+}
+
+h3 {
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-size: 21px;
+  color: #392155;
 }

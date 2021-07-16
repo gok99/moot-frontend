@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
@@ -6,6 +6,7 @@ import * as ROUTES from '../../constants/routes';
 import { SignIn, SignUp, PasswordForget } from '../Access';
 import { Account, Posts, Inbox, Settings } from '../Account';
 import Navigation from '../Navigation';
+import ProfilePreview from '../Account/ProfilePreview';
 import Landing from '../Landing';
 import Home from '../Home';
 import Chat from '../Chat';
@@ -17,7 +18,6 @@ import Admin from '../Admin';
  * Functional Component that sets up the Router for the App.
  */
 const AppRouter = (props) => {
-  const authUser = props.authUser;
   // const [profile, setProfile] = useState({
   //   username: '',
   //   id: 0,
@@ -52,12 +52,20 @@ const AppRouter = (props) => {
   //   }
   // });
 
+  const authUser = props.authUser;
+  const [navState, setNavState] = useState(true);
+  const toggleNavBar = () => {
+    setNavState(!navState);
+  }
+
+  const profilePreview = () => { return <ProfilePreview overlayState=""></ProfilePreview> };
+
   return (
     <Router>
       <div>
-        { !!authUser 
+        { !!authUser
           ? <div>
-              <Navigation authUser={authUser} />
+              <Navigation authUser={authUser} navState={navState}/>
             </div>
           : null
         }
@@ -67,11 +75,11 @@ const AppRouter = (props) => {
         <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
         {/* <Route path={ROUTES.ONBOARDING} component={Onboarding} /> */}
         {/* <Route path={ROUTES.HOME} component={Home} /> */}
-        <Route path={ROUTES.ONBOARDING} render={() => <Home onbState={true}></Home>} />
-        <Route path={ROUTES.HOME} render={() => <Home onbState={false}></Home>} />
-        <Route path={ROUTES.CHAT} render={() => <Chat></Chat>} />
-        <Route path={ROUTES.LIBRARY} render={() => <Library></Library>} />
-        <Route path={ROUTES.FRIENDS} render={() => <Friends></Friends>} />
+        <Route path={ROUTES.ONBOARDING} render={() => <Home onbState={true} side={<ProfilePreview overlayState="element-overlay"></ProfilePreview>}></Home>} />
+        <Route path={ROUTES.HOME} render={() => <Home onbState={false} side={profilePreview}></Home>} />
+        <Route path={ROUTES.CHAT} render={() => <Chat side={profilePreview}></Chat>} />
+        <Route path={ROUTES.LIBRARY} render={() => <Library side={profilePreview}></Library>} />
+        <Route path={ROUTES.FRIENDS} render={() => <Friends side={profilePreview}></Friends>} />
         <Route path={ROUTES.ACCOUNT} component={Account} />
         <Route path={ROUTES.POSTS} component={Posts} />
         <Route path={ROUTES.INBOX} component={Inbox} />

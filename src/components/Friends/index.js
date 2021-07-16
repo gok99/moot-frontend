@@ -12,16 +12,17 @@ import * as ROUTES from '../../constants/routes';
 import '../Styles/styles.css';
 
 const FriendsBase = (props) => {
+  const Side = props.side;
   return (
     <div>
-      <Container className="b-home">
+      <Container className="b-main">
         <Row className="b-divider"></Row>
         <Row>
           <Col>{/* Blank divider */}</Col>
           <Col xs={9}>
             <Row>
               <Col xs={4} className="d-flex justify-content-center">
-                <ProfilePreview profile={props.profile}></ProfilePreview>
+                <Side />
               </Col>
               <Col xs={8}>
                 <Row>

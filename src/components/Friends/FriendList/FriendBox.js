@@ -2,23 +2,24 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import '../../Styles/styles.css';
+import '../friends.css';
 
 const FriendBox = (props) => {
   const fTeleUser = props.fTeleUser;
   const fUsername = props.fUsername;
   return (
-    <div className="contentbox spacedbox friendbox">
+    <div className="b-friendbox">
       <Row>
         <Col xs={6} className="mt-1">
           <Row>
-            <p className="friendboxtextbold">{fUsername}</p><br /><br />
+            <p className="text-friendbox heavy">{fUsername}</p><br /><br />
           </Row>
           <Row>
-            <p className="friendboxtextlight">@{fTeleUser}</p>
+            <p className="text-friendbox light">@{fTeleUser}</p>
           </Row>
         </Col>
         <Col xs={4} className="d-flex justify-content-center">
-          <a href={"https://t.me/"+fTeleUser} target="_blank" rel="noopener noreferrer" className="likebutton smallmedbutton">
+          <a href={"https://t.me/"+fTeleUser} target="_blank" rel="noopener noreferrer">
             Chat &#62;&#62;&#62;
           </a>
         </Col>

@@ -29,7 +29,7 @@ const ChatListBase = (props) => {
       { 
         fb.auth.currentUser.emailVerified
           ? <ChatBoxList chatList = {chats}></ChatBoxList>
-          : <p className="friendboxtextbold nofriendtext">Please verify your email first if you wish to use this feature. Thank you!</p>
+          : <p className="text-placeholder">Please verify your email first if you wish to use this feature. Thank you!</p>
       }
     </div>
   );

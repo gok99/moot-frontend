@@ -13,11 +13,13 @@ import './navigation.css';
  */
 const Navigation = (props) => {
   const authUser = props.authUser;
+  const navState = props.navState;
   return (
     !authUser
       ? null
-      : <>
-          <Container className="navbar">
+      : navState
+        ? <>
+            <Container className="navbar">
               <Col md={4}>{/* Divider */}</Col>
               <Col md={4} className="navcol-logo">
                 <NavLogo />
@@ -36,6 +38,26 @@ const Navigation = (props) => {
               <Col xs={4}>{/* Divider */}</Col>
             </Container>
           </>
+        : <div className="b-overlay-navigation">
+            <Container className="navbar">
+              <Col md={4}>{/* Divider */}</Col>
+              <Col md={4} className="navcol-logo">
+                <NavLogo />
+              </Col>
+              <Col md={4} className="navcol-icon">
+                <NavIcon />
+              </Col>
+            </Container>
+            <Container className="navbar-alt">
+              <Col xs={4} className="navcol-menu">
+                <NavMenu />
+              </Col>
+              <Col xs={4} className="navcol-logo">
+                <NavLogo />
+              </Col>
+              <Col xs={4}>{/* Divider */}</Col>
+            </Container>
+          </div>
   );
 };
 

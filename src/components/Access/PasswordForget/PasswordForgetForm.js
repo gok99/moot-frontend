@@ -62,7 +62,7 @@ const PasswordForgetFormBase = (props) => {
     <Form onSubmit={onSubmit}>
       <Form.Group className="input-access" controlId="forgotBasicEmail">
         <Form.Control
-          className="inputtxt-access"
+          className="text-input-access"
           name="email" 
           type="email"
           value={creds.email}

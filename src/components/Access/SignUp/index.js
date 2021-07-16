@@ -13,7 +13,7 @@ import '../access.css';
  */
 const SignUp = (props) => {
   return (
-    <div>
+    <Container className="b-accesspage">
       <Container className="b-access">
         <Row>
           <Col md={1}>{/* Divider */}</Col>
@@ -26,7 +26,7 @@ const SignUp = (props) => {
           <Col md={1}>{/* Divider */}</Col>
         </Row>
       </Container>
-    </div>
+    </Container>
   );
 };
 

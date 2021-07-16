@@ -5,17 +5,17 @@ import ProfilePreview from '../../Account/ProfilePreview';
 import PostArea from '../../Post/PostArea';
 
 import '../../Styles/styles.css';
-import '../home.css';
 
 const HomePage = (props) => {
+  const Side = props.side;
   return (
-    <Container className="b-home">
+    <Container className="b-main">
       <Row className="b-divider"></Row>
       <Row>
         <Col>{/* Blank divider */}</Col>
         <Col xs={9}>
           <Row>
-            <ProfilePreview profile={props.profile} overlayState="b-overlay-none"></ProfilePreview>
+            <Side />
             <Col xs={8}>
               <PostArea />
             </Col>

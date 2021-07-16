@@ -6,6 +6,7 @@ import { withFirebase } from '../../Firebase';
 import FriendBoxList from './FriendBoxList';
 
 import '../../Styles/styles.css';
+import '../friends.css';
 
 const FriendListBase = (props) => {
   const [friends, setFriends] = useState([]);
@@ -28,7 +29,7 @@ const FriendListBase = (props) => {
     <div>
       {
         friends.length === 0
-          ? <p className="friendboxtextbold nofriendtext">You have no friends yet :(</p>
+          ? <p className="text-placeholder">You have no friends yet :(</p>
           : <FriendBoxList friends={friends}></FriendBoxList>
       }
     </div>

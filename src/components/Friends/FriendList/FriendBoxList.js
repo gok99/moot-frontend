@@ -3,6 +3,7 @@ import { Row } from 'react-bootstrap';
 import FriendBox from './FriendBox';
 
 import '../../Styles/styles.css';
+import '../friends.css';
 
 const FriendBoxList = (props) => {
   const friends = props.friends;

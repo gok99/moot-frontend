@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, onKeyLeft, onKeyRight } from 'react';
 import { Row, Col, Button, Form } from 'react-bootstrap';
 import { compose } from 'recompose';
  
 import { withFirebase } from '../../Firebase';
+import PostContent from './PostContent';
+import PostComments from './PostComments';
 
 import '../../Styles/styles.css';
+import '../post.css';
+
 import logo_temp from '../../../assets/logo_temp.png';
 import icon_like from '../../../assets/icon_like.png';
 import icon_unlike from '../../../assets/icon_unlike.png';
@@ -12,9 +16,10 @@ import icon_unlike from '../../../assets/icon_unlike.png';
 const PostAreaBase = (props) => {
   const fb = props.firebase;
   const uid = fb.auth.currentUser.uid;
-  // const [chats, setChats] = useState([]);
   const [posts, setPosts] = useState([]);
-  // const [comments, setComments] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
+  const [commentedPosts, setCommentedPosts] = useState([]);
+  const [commentedPostKey, setCommentedPostKey] = useState('');
   const [currentPost, setCurrentPost] = useState({
     uid: '',
     postTitle: '',
@@ -28,7 +33,9 @@ const PostAreaBase = (props) => {
     noPost: false,
     myPost: false,
     postCount: 0,
-    postLiked: false
+    postLiked: false,
+    likeCount: 0,
+    commentCount: 0
   });
   const [areaState, setAreaState] = useState({
     likeDisabled: false,
@@ -79,7 +86,9 @@ const PostAreaBase = (props) => {
             noPost: true,
             myPost: false,
             postCount: 0,
-            postLiked: false
+            postLiked: false,
+            likeCount: 0,
+            commentCount: 0
           });
           setAreaState({
             likeDisabled: true,
@@ -90,7 +99,9 @@ const PostAreaBase = (props) => {
         } else {
           // Set the current post to the first (newest) post
           const userPostCheck = (postsList[0].uid === uid);
+          setCurrentPost(postsList[0]);
           const userLikes = !!postsList[0].userLikes ? Object.values(postsList[0].userLikes) : [];
+          const userComments = !!postsList[0].userComments ? Object.values(postsList[0].userComments) : [];
           let postLiked = false;
           for (let user of userLikes) {
             if (user.uid === uid) {
@@ -98,12 +109,13 @@ const PostAreaBase = (props) => {
               break;
             }
           }
-          setCurrentPost(postsList[0]);
           setPostState({
             noPost: false,
             myPost: userPostCheck,
             postCount: 0,
-            postLiked: postLiked
+            postLiked: postLiked,
+            likeCount: userLikes.length,
+            commentCount: userComments.length
           });
           setAreaState({
             likeDisabled: userPostCheck,
@@ -126,7 +138,9 @@ const PostAreaBase = (props) => {
           noPost: true,
           myPost: false,
           postCount: 0,
-          postLiked: false
+          postLiked: false,
+          likeCount: 0,
+          commentCount: 0
         });
         setAreaState({
           likeDisabled: true,
@@ -137,18 +151,34 @@ const PostAreaBase = (props) => {
       }
     });
 
-    // Listener for comments
-    // const commentListener = fb.postUserComments(currentPost.postUid).on('value', (snapshot) => {
-    //   if (snapshot.exists()) {
-    //     setComments(Object.values(snapshot.val()).reverse());
-    //   } else {
-    //     console.log("No data available");
-    //   }
-    // });
+    // Listener for user likes
+    const likedPostListener = fb.userLikedPosts(uid).on('value', (snapshot) => {
+      if (snapshot.exists()) {
+        setLikedPosts(Object.values(snapshot.val()));
+      } else {
+        console.log("No data available");
+      }
+    });
+
+    // Listener for user comments
+    const commentedPostListener = fb.userCommentedPosts(uid).on('value', (snapshot) => {
+      if (snapshot.exists()) {
+        const commentedPostsList = Object.values(snapshot.val());
+        setCommentedPosts(commentedPostsList);
+        for (let post of commentedPostsList) {
+          if (post.postUid === currentPost.postUid) {
+            setCommentedPostKey(post.key);
+          }
+        }
+      } else {
+        console.log("No data available");
+      }
+    });
 
     return () => {
       fb.posts().off('value', postListener);
-      // fb.postUserComments(currentPost.postUid).off('value', commentListener);
+      fb.userLikedPosts(uid).off('value', likedPostListener);
+      fb.userCommentedPosts(uid).off('value', commentedPostListener);
     };
   }, []);
 
@@ -158,8 +188,9 @@ const PostAreaBase = (props) => {
   const onLeftClick = (event) => {
     const count = postState.postCount - 1;
     setCurrentPost(posts[count]);
-    const userPostCheck = (currentPost.uid === uid);
-    const userLikes = !!posts[0].userLikes ? Object.values(posts[count].userLikes) : [];
+    const userPostCheck = (posts[count].uid === uid);
+    const userLikes = !!posts[count].userLikes ? Object.values(posts[count].userLikes) : [];
+    const userComments = !!posts[count].userComments ? Object.values(posts[count].userComments) : [];
     let postLiked = false;
     for (let user of userLikes) {
       if (user.uid === uid) {
@@ -167,15 +198,22 @@ const PostAreaBase = (props) => {
         break;
       }
     }
+    for (let post of commentedPosts) {
+      if (post.postUid === posts[count].postUid) {
+        setCommentedPostKey(post.key);
+      }
+    }
     setPostState({
       noPost: false,
       myPost: userPostCheck,
       postCount: count,
-      postLiked: postLiked
+      postLiked: postLiked,
+      likeCount: userLikes.length,
+      commentCount: userComments.length
     });
     setAreaState({
       likeDisabled: userPostCheck,
-      userPostCheck: userPostCheck,
+      commentDisabled: userPostCheck,
       leftDisabled: count === 0,
       rightDisabled: false
     });
@@ -188,8 +226,9 @@ const PostAreaBase = (props) => {
   const onRightClick = (event) => {
     const count = postState.postCount + 1;
     setCurrentPost(posts[count]);
-    const userPostCheck = (currentPost.uid === uid);
-    const userLikes = !!posts[0].userLikes ? Object.values(posts[count].userLikes) : [];
+    const userPostCheck = (posts[count].uid === uid);
+    const userLikes = !!posts[count].userLikes ? Object.values(posts[count].userLikes) : [];
+    const userComments = !!posts[count].userComments ? Object.values(posts[count].userComments) : [];
     let postLiked = false;
     for (let user of userLikes) {
       if (user.uid === uid) {
@@ -197,11 +236,18 @@ const PostAreaBase = (props) => {
         break;
       }
     }
+    for (let post of commentedPosts) {
+      if (post.postUid === posts[count].postUid) {
+        setCommentedPostKey(post.key);
+      }
+    }
     setPostState({
       noPost: false,
       myPost: userPostCheck,
       postCount: count,
-      postLiked: postLiked
+      postLiked: postLiked,
+      likeCount: userLikes.length,
+      commentCount: userComments.length
     });
     setAreaState({
       likeDisabled: userPostCheck,
@@ -216,30 +262,58 @@ const PostAreaBase = (props) => {
    * Behaviour on like
    */
   const onLike = (event) => {
-    // Toggle liked status
-    setPostState({
-      postLiked: !postState.postLiked
-    });
+    if (postState.postLiked) {
+      // If post is liked, delete like from database
+      // Toggle liked status
+      setPostState({
+        postLiked: !postState.postLiked
+      });
 
-    // Write like to post in database
-    var likedTime = new Date().getTime();
-    var newLike = fb.postUserLikes(currentPost.postUid).push();
-    newLike.set({
-      uid: uid,
-      likedTime: likedTime,
-      key: newLike.key
-    }).catch((error) => console.log(error));
+      // Delete like from post in database
+      const userLikesList = Object.values(currentPost.userLikes);
+      for (let like of userLikesList) {
+        if (like.uid === uid) {
+          console.log(currentPost.postUid);
+          fb.deletePostUserLikes(currentPost.postUid, like.key);
+        }
+      }
 
-    // Write liked post to user in database
-    var newLikedPost = fb.userLikedPosts(uid).push();
-    newLikedPost.set({
-      postUid: currentPost.postUid,
-      likedTime: likedTime,
-      key: newLikedPost.key
-    }).catch((error) => console.log(error));
+      // Delete liked post from user in database
+      for (let post of likedPosts) {
+        if (post.postUid === currentPost.postUid) {
+          fb.deleteUserLikedPosts(uid, post.key);
+        }
+      }
 
-    event.preventDefault();
-  }
+      event.preventDefault();
+
+    } else {
+      // If post is not liked, add like to database
+      // Toggle liked status
+      setPostState({
+        postLiked: !postState.postLiked
+      });
+
+      // Write like to post in database
+      var likedTime = new Date().getTime();
+      var newLike = fb.postUserLikes(currentPost.postUid).push();
+      newLike.set({
+        uid: uid,
+        likedTime: likedTime,
+        key: newLike.key
+      }).catch((error) => console.log(error));
+
+      // Write liked post to user in database
+      var newLikedPost = fb.userLikedPosts(uid).push();
+      newLikedPost.set({
+        postUid: currentPost.postUid,
+        likedTime: likedTime,
+        key: newLikedPost.key
+      }).catch((error) => console.log(error));
+
+      event.preventDefault();
+    }
+  };
 
   /** 
    * Behaviour on comment
@@ -257,15 +331,18 @@ const PostAreaBase = (props) => {
 
     // Write commented post to user in database
     var newCommentedPost = fb.userCommentedPosts(uid).push();
+    const newCommentKey = newCommentedPost.key;
     newCommentedPost.set({
       postUid: currentPost.postUid,
       comment: currentComment.comment,
       commentTime: commentTime,
-      key: newCommentedPost.key
+      key: newCommentKey
     }).catch((error) => console.log(error));
 
+    setCommentedPostKey(newCommentKey);
+    
     event.preventDefault();
-  }
+  };
 
   const onChange = (event) => {
     setCurrentComment({
@@ -504,75 +581,68 @@ const PostAreaBase = (props) => {
   // };
 
   return (
-    <Row className="contentbox spacedbox postbox d-flex">
-        <Col xs={1} className="postchangearea">
-          <Button className="postchangebutton left" type="button" disabled={ areaState.leftDisabled } onClick={onLeftClick}>&#60;</Button>
-        </Col>
-        <Col xs={10} className="postcontentarea">
-          <Row>
-            <Col xs={2}>
-              <img className="previewpic" src={logo_temp} alt="Profile" />
-            </Col>
-            <Col xs={6} className="d-flex align-items-center">
-              { postState.noPost
-                ? <p className="postop">No more posts...</p>
-                : postState.myPost
-                  ? <p className="postop">Posted by me</p>
-                  : <p className="postop">Posted by an anonymous user</p>
-              }
-              
-            </Col>
-            <Col xs={4} className="d-flex align-items-center">
-              <p className="posttime">{ currentPost.postTime }</p>
-            </Col>
-          </Row>
-          <hr />
-          <Row>
-            <p className="posttitle">{ currentPost.postTitle }</p>
-          </Row>
-          <br />
-          <Row>
-            <p className="postcontent">{ currentPost.postContent }</p>
-          </Row>
-          <hr />
-          <Row>
-            <Col xs={2}>
-              <Button className="likebutton smallbutton d-flex justify-content-md-center mb-3" type="button" disabled={ areaState.likeDisabled } onClick={onLike}>
-                { postState.postLiked 
-                    ? <img className="hearticon" src={icon_like} alt="Like" />
-                    : <img className="hearticon" src={icon_unlike} alt="Not Liked" />
-                }
-              </Button>
-            </Col>
-            <Col xs={10}>
-            </Col>
-          </Row>
-          <Row>
-            { areaState.commentDisabled
-                ? null
-                : <Form onSubmit={onCommentSubmit}>
-                    <Form.Group controlId="comment">
-                      <Form.Control
-                        name="currentComment" 
-                        type="text"
-                        as="textarea"
-                        placeholder="Reply to this post!"
-                        // defaultValue={ data.description }
-                        onChange={onChange} />
-                    </Form.Group>
-                    <Button  
-                      className="btn-onboarding mt-4 mb-2"
-                      type="submit">
-                      Reply
-                    </Button>
-                  </Form>
-            }
-          </Row>
-        </Col>
-        <Col xs={1} className="postchangearea">
-          <Button className="postchangebutton right" type="button" disabled={ areaState.rightDisabled } onClick={onRightClick}>&#62;</Button>
-        </Col>
-      </Row>
+    <Row className="b-post flex-container">
+      <Col className="b-postcontent">
+        <Row className="mb-4">
+          <Col>
+            <Button className="btn-postchange left" type="button" disabled={ areaState.leftDisabled } onClick={onLeftClick}>&lt;- Previous Post</Button>
+          </Col>
+          <Col>
+            <Button className="btn-postchange right" type="button" disabled={ areaState.rightDisabled } onClick={onRightClick}>Next Post -&gt;</Button>
+          </Col>
+        </Row>
+        <hr />
+        <PostContent noPost={postState.noPost} myPost={postState.myPost} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent}></PostContent>
+        <hr />
+        <Row className="mb-2">
+          <Col md="auto">
+            <Button className="btn-like d-flex justify-content-md-center" type="button" disabled={ areaState.likeDisabled } onClick={onLike}>
+              <img className="icon-like" src={postState.postLiked ? icon_like : icon_unlike} alt={postState.postLiked ? "Liked" : "Not Liked"} />
+            </Button>
+          </Col>
+          <Col md="auto">
+            <Button className="btn-postcreation btn-match d-flex justify-content-md-center" type="button" disabled={ areaState.likeDisabled } onClick={onLike}>
+              Match me!
+            </Button>
+          </Col>
+          <Col>
+            {/* Divider */}
+          </Col>
+          <Col md={3}>
+            <Row className="d-flex justify-content-end">
+              <p className="text-post content">{postState.likeCount} Likes</p>
+            </Row>
+            <Row className="d-flex justify-content-end">
+              <p className="text-post content">{postState.commentCount} Comments</p>
+            </Row>
+          </Col>
+        </Row>
+        <Row>
+          { areaState.commentDisabled
+              ? null
+              : <Form className="mt-2" onSubmit={onCommentSubmit}>
+                  <Form.Group controlId="comment">
+                    <Form.Control
+                      name="currentComment" 
+                      type="text"
+                      as="textarea"
+                      placeholder="Reply to this post!"
+                      // defaultValue={ data.description }
+                      onChange={onChange} />
+                  </Form.Group>
+                  <Button  
+                    className="btn-postcreation btn-comment mt-4 mb-2"
+                    type="submit"
+                    disabled={currentComment.comment === ''}>
+                    Reply
+                  </Button>
+                </Form>
+          }
+        </Row>
+        <hr />
+        <PostComments fb={fb} uid={uid} postUid={currentPost.postUid} commentedPostKey={commentedPostKey} comments={!!currentPost.userComments ? Object.values(currentPost.userComments) : []}></PostComments>
+      </Col>
+    </Row>
   );
 };
 

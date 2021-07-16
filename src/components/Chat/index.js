@@ -13,15 +13,16 @@ import '../Styles/styles.css';
 import './chat.css';
 
 const ChatPage = (props) => {
+  const Side = props.side;
   return (
-    <Container className="b-home">
+    <Container className="b-main">
       <Row className="b-divider"></Row>
       <Row>
         <Col>{/* Blank divider */}</Col>
         <Col xs={9}>
           <Row>
             <Col md={4} className="d-flex justify-content-center">
-              <ProfilePreview profile={props.profile}></ProfilePreview>
+              <Side />
             </Col>
             <Col md={8}>
               <ChatList />

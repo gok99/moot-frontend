@@ -61,7 +61,7 @@ const OnboardingFormBase = (props) => {
 
   return (
     <Row className="d-flex justify-content-md-center">
-      <Col md="auto" className="onbbox">
+      <Col md="auto" className="b-onboarding">
         {
           formState.count === 0
             ? <OWForm onSubmit={changeFormState} username={profile.username}/>
@@ -80,7 +80,7 @@ const OnboardingFormBase = (props) => {
                         : null
         }
       </Col>
-      <Col md="auto" className="onbbox-alt">
+      <Col md="auto" className="b-onboarding-alt">
         {
           formState.count === 0
             ? <OWForm onSubmit={changeFormState} username={profile.username}/>

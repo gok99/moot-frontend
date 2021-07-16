@@ -1,4 +1,4 @@
-/* Containers */
+/* CSS Specific to Account Pages */
 
 .display-profilepreview {
   display: block;
@@ -10,69 +10,6 @@
     display: none;
   }
 }
-
-.container {
-  max-width: 100%;
-  max-height: 100%;
-  min-height: 0%;
-}
-
-.registerbox {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-
-  font-size: 20px;
-  padding: 5px;
-  z-index: 100;
-}
-
-.contentbox {
-  background: #faf9ff;
-  border: 0.5px solid #c0badf;
-  box-sizing: border-box;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
-  border-radius: 16px;
-  padding: 32px 32px;
-  z-index: 5;
-}
-
-.contentbox.postbox {
-  padding: 0px 0px;
-}
-
-.fixed {
-  position: fixed;
-}
-
-.relative {
-  position: relative;
-}
-
-.centeredtext {
-  text-align: center;
-}
-
-/* Home Page */
-
-.homepage {
-  height: 100vh;
-}
-
-.divider {
-  height: 128px;
-}
-
-.spacedbox {
-  margin-bottom: 10px;
-}
-
-/* Account Page */
 
 .text-preview {
   font-size: 12px;
@@ -162,39 +99,4 @@ hr.element-overlay {
 
 .profileuser {
   color: #666666;
-}
-
-/* Links */
-
-a,
-a:hover,
-a:focus,
-a:focus:hover,
-a:active,
-a:active:hover,
-a:visited,
-a:visited:hover,
-a:default,
-a:default:hover,
-a:disabled,
-a:disabled:hover {
-  text-decoration: none;
-}
-
-a.link {
-  display: inline-block;
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  color: #6b4eff;
-  font-weight: bold;
-}
-
-a.link.centeredlink {
-  width: 200px;
-  margin: auto;
-}
-
-.blocklink {
-  display: block;
-  height: 100%;
-  width: 100%;
 }

@@ -6,18 +6,18 @@ import ProfilePreview from '../../Account/ProfilePreview';
 import PostArea from '../../Post/PostArea';
 
 import '../../Styles/styles.css';
-import '../home.css';
 
 const HomePageOnb = (props) => {
+  const Side = props.side;
   return (
-    <Container className="b-home">
+    <Container className="b-main">
       <Row className="b-divider"></Row>
       <Onboarding />
       <Row>
         <Col>{/* Blank divider */}</Col>
         <Col xs={9}>
           <Row>
-            <ProfilePreview profile={props.profile} overlayState="element-overlay"></ProfilePreview>
+            <Side />
             <Col xs={8}>
               <PostArea />
             </Col>
@@ -28,7 +28,5 @@ const HomePageOnb = (props) => {
     </Container>
   );
 };
-
-//<Container className="b-overlay">
 
 export default HomePageOnb;

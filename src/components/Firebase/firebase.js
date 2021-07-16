@@ -42,7 +42,9 @@ class Firebase {
   matchQueue = () => this.db.ref('matchQueue');
   post = id => this.db.ref(`posts/${id}`);
   postUserLikes = postUid => this.db.ref(`posts/${postUid}/userLikes`);
-  postUserComments = postUid => this.db.ref(`posts/${postUid}/userComments`);
+  deletePostUserLikes = (postUid, key) => this.db.ref(`posts/${postUid}/userLikes/${key}`).remove();
+  postUserComments = postUid => this.db.ref(`posts/${postUid}/userComments/`);
+  deletePostUserComments = (postUid, key) => this.db.ref(`posts/${postUid}/userComments/${key}`).remove();
 
   // *** User API ***
   user = (uid) => this.db.ref(`users/${uid}`);
@@ -51,7 +53,9 @@ class Firebase {
   userFriends = (uid) => this.db.ref(`users/${uid}/friends`);
   userPosts = (uid) => this.db.ref(`users/${uid}/posts`);
   userLikedPosts = (uid) => this.db.ref(`users/${uid}/likedPosts`);
+  deleteUserLikedPosts = (uid, key) => this.db.ref(`users/${uid}/likedPosts/${key}`).remove();
   userCommentedPosts = (uid) => this.db.ref(`users/${uid}/commentedPosts`);
+  deleteUserCommentedPosts = (uid, key) => this.db.ref(`users/${uid}/commentedPosts/${key}`).remove();
   users = () => this.db.ref('users');
   idToUid = id => this.db.ref(`ids/${id}`);
 }

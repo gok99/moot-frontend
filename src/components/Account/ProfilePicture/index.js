@@ -22,7 +22,7 @@ const ProfilePicture = (props) => {
   const style = props.picStyle;
   const iczArray = [icz1, icz2, icz3, icz4, icz5, icz6, icz7, icz8, icz9, icz10, icz11, icz12];
   return (
-    <img className={"img-profile " + style} src={iczArray[pid-1]} alt="Profile" />
+    <img className={"img-profile " + style} src={iczArray[pid-1]} alt=" " />
   );
 };
 

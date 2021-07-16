@@ -1,0 +1,29 @@
+/* CSS Specific to Friends Page */
+
+/**
+ * Styling for Friendboxes
+ */
+.b-friendbox {
+  border: none;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 16px;
+  background: #faf9ff;
+}
+
+/**
+ * Text for Friendboxes
+ */
+.text-friendbox {
+  font-size: 16px; 
+}
+
+.heavy {
+  font-weight: 600;
+  color: #666666;
+}
+
+.light {
+  font-weight: 500;
+  color: #888888;
+}

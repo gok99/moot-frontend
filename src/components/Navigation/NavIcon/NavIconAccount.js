@@ -39,7 +39,7 @@ const NavIconAccountBase = (props) => {
             </Tooltip>
           }
         >
-          <img className="navicon account" src={ica} alt="Account" />
+          <img className="navicon navicon-account" src={ica} alt="Account" />
         </OverlayTrigger>
       </Dropdown.Toggle>
       <Dropdown.Menu className="b-accountmenu">

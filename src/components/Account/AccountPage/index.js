@@ -11,8 +11,8 @@ import '../../Styles/styles.css';
 
 const AccountPage = () => (
   <div>
-    <Container className="homepage">
-      <Row className="divider"></Row>
+    <Container className="b-main">
+      <Row className="b-divider"></Row>
       <Row>
         <Col>{/* Blank divider */}</Col>
         <Col xs={9}>

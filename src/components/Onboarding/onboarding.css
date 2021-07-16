@@ -1,5 +1,8 @@
-/* CSS for the entire application */
+/* CSS Specific to Onboarding Pages */
 
+/**
+ * Blocks for Onboarding Pages
+ */
 .b-overlay-onboarding {
   display: block;
   position: fixed;
@@ -17,8 +20,41 @@
   height: 56px;
 }
 
-/* Onboarding Page Forms */
+.b-onboarding {
+  background: #f5edff;
+  box-sizing: border-box;
+  padding: 32px 32px;
+  z-index: 5;
+  display: inline-flex;
+  height: 75vh;
+  width: 50vw;
+  overflow: auto;
+}
 
+.b-onboarding-alt {
+  background: #f5edff;
+  box-sizing: border-box;
+  padding: 32px 32px;
+  z-index: 5;
+  display: none;
+  height: 75vh;
+  width: 90vw;
+  overflow: auto;
+  margin-left: 7vw;
+}
+
+@media only screen and (max-width: 768px) {
+  .b-onboarding {
+    display: none;
+  }
+  .b-onboarding-alt {
+    display: inline-flex;
+  }
+}
+
+/**
+ * Logo for Onboarding Pages
+ */
 .logo-onboarding {
   display: block;
   width: 36vw;
@@ -35,7 +71,10 @@
   margin: auto;
 }
 
-.header-onboarding {
+/**
+ * Texts and Buttons for Onboarding Pages
+ */
+ .header-onboarding {
   font-size: 2.5vw;
   color: #2e1042;
   text-align: center;
@@ -144,49 +183,6 @@
 @media only screen and (max-width: 1366px) {
   .btn-onboarding.btn-link {
     padding-top: 2vh;
-  }
-}
-
-.onbheader {
-  color: #121212;
-  font-weight: bold;
-  text-align: center;
-}
-
-.onbtext {
-  color: #4e4e4e;
-  font-weight: bold;
-}
-
-.onbbox {
-  background: #f5edff;
-  box-sizing: border-box;
-  padding: 32px 32px;
-  z-index: 5;
-  display: inline-flex;
-  height: 75vh;
-  width: 50vw;
-  overflow: auto;
-}
-
-.onbbox-alt {
-  background: #f5edff;
-  box-sizing: border-box;
-  padding: 32px 32px;
-  z-index: 5;
-  display: none;
-  height: 75vh;
-  width: 90vw;
-  overflow: auto;
-  margin-left: 7vw;
-}
-
-@media only screen and (max-width: 768px) {
-  .onbbox {
-    display: none;
-  }
-  .onbbox-alt {
-    display: inline-flex;
   }
 }
 

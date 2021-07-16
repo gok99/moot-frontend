@@ -9,11 +9,10 @@ import HomePageOnb from './HomePageOnb';
 import { withAuthorization } from '../Session';
 
 import '../Styles/styles.css';
-import './home.css';
 
 const HomeBase = (props) => {
   const onbState = props.onbState;
-  return onbState ? <HomePageOnb /> : <HomePage />;
+  return onbState ? <HomePageOnb side={props.side}></HomePageOnb> : <HomePage side={props.side}></HomePage>;
 };
 
 const dest = authUser => { 
