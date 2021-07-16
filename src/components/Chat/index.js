@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-import ProfilePreview from '../Account/ProfilePreview';
+// import ProfilePreview from '../Account/ProfilePreview';
 import ChatList from './ChatList';
 import { withAuthorization } from '../Session';
 

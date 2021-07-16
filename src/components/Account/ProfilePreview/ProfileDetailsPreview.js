@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import ProfilePicturePreview from './ProfilePicturePreview';
+import ProfilePicture from '../ProfilePicture';
 import { PostCreation } from '../../Post';
 
 import '../../Styles/styles.css';
@@ -15,7 +15,7 @@ const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlaySt
     <div className="display-profilepreview">
       <Row>
         <Col xs={4} className="d-flex justify-content-center">
-          <ProfilePicturePreview pid={pid} overlayState={overlayState}></ProfilePicturePreview>
+          <ProfilePicture pid={pid} picStyle={"preview " + overlayState}></ProfilePicture>
         </Col>
         <Col xs={8}>
           <Row>

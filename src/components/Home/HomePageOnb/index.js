@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import Onboarding from '../../Onboarding';
-import ProfilePreview from '../../Account/ProfilePreview';
+// import ProfilePreview from '../../Account/ProfilePreview';
 import PostArea from '../../Post/PostArea';
 
 import '../../Styles/styles.css';

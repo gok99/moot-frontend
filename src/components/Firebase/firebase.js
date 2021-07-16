@@ -48,6 +48,7 @@ class Firebase {
 
   // *** User API ***
   user = (uid) => this.db.ref(`users/${uid}`);
+  userDescription = (uid) => this.db.ref(`users/${uid}/profile/description`);
   userProfile = (uid) => this.db.ref(`users/${uid}/profile`);
   userChats = (uid) => this.db.ref(`users/${uid}/chats`);
   userFriends = (uid) => this.db.ref(`users/${uid}/friends`);

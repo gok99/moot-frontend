@@ -1,18 +1,21 @@
-// import React from 'react';
-// import { Col } from 'react-bootstrap';
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 
-// import ProfilePicture from './ProfilePictureAccount';
-// import ProfileDescription from './ProfileDescription';
+import ProfilePicture from '../ProfilePicture';
+import ProfileDescription from './ProfileDescription';
  
-// import '../../Styles/styles.css';
+import '../../Styles/styles.css';
+import '../account.css'
 
-// const AccountSidebar = () => (
-//   <Col xs={4} className="d-flex justify-content-center">
-//     <div className="fixed accountsidebar">
-//       <ProfilePicture /><br />
-//       <ProfileDescription /><br />
-//     </div>
-//   </Col>
-// );
+const AccountSidebar = (props) => {
+  return (
+    <Col xs={4} className="b-accountsidebar">
+      <Row className="d-flex justify-content-center">
+        <ProfilePicture pid={props.pid} picStyle={"profile " + props.overlayState}></ProfilePicture>
+      </Row>
+      <ProfileDescription username={props.username} teleUser={props.teleUser} description={props.description}></ProfileDescription>
+    </Col>
+  );
+};
 
-// export default AccountSidebar;
+export default AccountSidebar;

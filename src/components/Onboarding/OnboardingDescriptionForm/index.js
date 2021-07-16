@@ -59,7 +59,7 @@ const OnboardingDescriptionForm = (props) => {
               type="text"
               as="textarea"
               placeholder="Describe yourself!"
-              // defaultValue={ data.description }
+              // defaultValue={ desc.description }
               onChange={onChange} />
           </Form.Group>
           <Button  

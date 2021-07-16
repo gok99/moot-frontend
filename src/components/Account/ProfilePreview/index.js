@@ -39,7 +39,7 @@ const ProfilePreviewBase = (props) => {
   });
 
   return (
-    <Col xs={3} className="d-flex justify-content-center b-profilepreview">
+    <Col xs={3} className="b-profilepreview d-flex justify-content-center">
       <ProfileDetailsPreview 
         username={profile.username} 
         teleUser={profile.teleUser}

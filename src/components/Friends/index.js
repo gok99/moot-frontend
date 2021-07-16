@@ -3,11 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { compose } from 'recompose';
  
 import { withFirebase } from '../Firebase';
-import ProfilePreview from '../Account/ProfilePreview';
+import * as ROUTES from '../../constants/routes';
+
+// import ProfilePreview from '../Account/ProfilePreview';
 import FriendList from './FriendList';
 import { withAuthorization } from '../Session';
-
-import * as ROUTES from '../../constants/routes';
 
 import '../Styles/styles.css';
 

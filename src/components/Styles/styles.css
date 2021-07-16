@@ -48,6 +48,11 @@ hr {
   color: #bbbbbb;
 }
 
+hr.element-overlay {
+  opacity: 0.3;
+  color: #000000;
+}
+
 p {
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
   margin: auto;

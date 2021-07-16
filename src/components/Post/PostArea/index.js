@@ -1,4 +1,4 @@
-import React, { useEffect, useState, onKeyLeft, onKeyRight } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Button, Form } from 'react-bootstrap';
 import { compose } from 'recompose';
  
@@ -9,7 +9,6 @@ import PostComments from './PostComments';
 import '../../Styles/styles.css';
 import '../post.css';
 
-import logo_temp from '../../../assets/logo_temp.png';
 import icon_like from '../../../assets/icon_like.png';
 import icon_unlike from '../../../assets/icon_unlike.png';
 

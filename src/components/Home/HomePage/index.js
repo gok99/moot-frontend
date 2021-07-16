@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import ProfilePreview from '../../Account/ProfilePreview';
+// import ProfilePreview from '../../Account/ProfilePreview';
 import PostArea from '../../Post/PostArea';
 
 import '../../Styles/styles.css';

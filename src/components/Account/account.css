@@ -5,16 +5,30 @@
   min-width: 200px;
 }
 
+.b-accountsidebar {
+  display: block;
+  max-width: 288px;
+  min-width: 240px;
+  text-align: center;
+}
+
 @media only screen and (max-width: 768px) {
   .display-profilepreview {
     display: none;
   }
+  .b-accountsidebar {
+    display: none;
+  }
 }
 
-.b-profilepreview {
-  margin-right: 2vw;
+.b-account-description {
+  text-align: center;
+  width: 100%;
 }
 
+/**
+ * Texts 
+ */
 .text-preview {
   font-size: 12px;
 }
@@ -39,68 +53,104 @@
   font-weight: 600;
 }
 
+.text-profile {
+  text-align: center;
+  font-size: 18px;
+}
+
+.text-profile.username {
+  color: #371652;
+  font-weight: bold;
+}
+
+.text-profile.teleuser {
+  color: #806992;
+  font-weight: bold;
+}
+
+/**
+ * Images
+ */
+.img-profile {
+  border: 3px solid #bbbbbb;
+}
+
+.preview {
+  height: 64px;
+  width: auto;
+  border-radius: 64px;
+}
+
+.preview.element-overlay {
+  border: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+.profile {
+  height: 160px;
+  width: auto;
+  border-radius: 160px;
+  padding: 0;
+}
+
+/**
+ * Buttons
+ */
+.btn-description,
+.btn-description:visited,
+.btn-description:default,
+.btn-description:focus {
+  display: block;
+  text-align: center;
+  background: #921fd5;
+  color: #fcfcfc;
+  border: 2px solid #921fd5;
+  border-radius: 8px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  width: 200px;
+  height: 48px;
+  margin: auto;
+  padding: 10px 0px;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn-description:disabled {
+  background: #921fd5;
+  color: #fcfcfc;
+  border: 2px solid #921fd5;
+  opacity: 0.4 !important;
+}
+
+.btn-description:hover,
+.btn-description:focus:hover {
+  background: #7213a9;
+  color: #fcfcfc;
+  border: 2px solid #7213a9;
+}
+
+.btn-description:focus:active,
+.btn-description:active {
+  background-color: #fcfcfc;
+  color: #921fd5;
+  border: 2px solid #921fd5;
+}
+
+
+
+
+
+
+
+/* 
 .accountbox {
   overflow: auto;
   height: 75vh;
   padding: 16px;
 }
 
-.accountsidebar {
-  max-width: 256px;
-}
-
 .accounttext {
   font-size: 16px;
   color: #5c4374;
-}
-
-.centeredform {
-  margin: auto;
-}
-
-.descriptionbox {
-  max-width: 256px;
-}
-
-.profilepic {
-  height: 160px;
-  width: auto;
-  border: 3px solid #bbbbbb;
-  border-radius: 160px;
-}
-
-.previewpic {
-  height: 64px;
-  width: auto;
-  border: 3px solid #bbbbbb;
-  border-radius: 64px;
-}
-
-hr.element-overlay {
-  opacity: 0.3;
-  color: #000000;
-}
-
-.previewpic.element-overlay {
-  border: 3px solid rgba(0, 0, 0, 0.3);
-}
-
-.profilebio {
-  text-align: center;
-}
-
-.previewtext {
-  font-size: 12px;
-}
-
-.profiletext {
-  font-size: 18px;
-}
-
-.profilename {
-  color: #232323;
-}
-
-.profileuser {
-  color: #666666;
-}
+} */

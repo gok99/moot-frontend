@@ -19,7 +19,7 @@ const PostCreationBase = (props) => {
     postContent: ''
   });
   const [formState, setFormState] = useState(false);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const target = useRef(null);
 
   const onSubmit = (event) => {
@@ -41,7 +41,7 @@ const PostCreationBase = (props) => {
         postTitle: '',
         postContent: ''
       });
-      setError(null);
+      // setError(null);
     }).then(() => {
       setFormState(false);
       setActive(false);
