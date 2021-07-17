@@ -16,7 +16,7 @@ const Inbox = (props) => {
         <Col xs={9}>
           <Row>
             <Col xs={4} className="d-flex justify-content-center">
-              <ProfilePreview />
+              <ProfilePreview overlayState=""></ProfilePreview>
             </Col>
             <Col xs={8}>
               <h2>My Inbox</h2>

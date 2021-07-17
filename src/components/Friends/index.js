@@ -5,14 +5,13 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-// import ProfilePreview from '../Account/ProfilePreview';
+import ProfilePreview from '../Account/ProfilePreview';
 import FriendList from './FriendList';
 import { withAuthorization } from '../Session';
 
 import '../Styles/styles.css';
 
 const FriendsBase = (props) => {
-  const Side = props.side;
   return (
     <div>
       <Container className="b-main">
@@ -21,7 +20,7 @@ const FriendsBase = (props) => {
           <Col>{/* Blank divider */}</Col>
           <Col xs={10}>
             <Row>
-              <Side />
+              <ProfilePreview overlayState=""></ProfilePreview>
               <Col xs={8}>
                 <Row>
                   <FriendList />

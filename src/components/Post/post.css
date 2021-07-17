@@ -24,7 +24,7 @@
 }
 
 .divider-postcreation {
-  height: 25vh;  
+  height: 25vh;
 }
 
 .b-postcreation {
@@ -214,11 +214,19 @@
   border: 2px solid #921fd5;
 }
 
-.btn-match {
+.btn-match,
+.btn-match:hover,
+.btn-match:focus:hover,
+.btn-match:active,
+.btn-match:focus:active {
   width: 140px;
 }
 
-.btn-comment {
+.btn-comment,
+.btn-comment:hover,
+.btn-comment:focus:hover,
+.btn-comment:active,
+.btn-comment:focus:active {
   width: 200px;
 }
 

@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-// import ProfilePreview from '../Account/ProfilePreview';
+import ProfilePreview from '../Account/ProfilePreview';
 import ChatList from './ChatList';
 import { withAuthorization } from '../Session';
 
@@ -13,7 +13,6 @@ import '../Styles/styles.css';
 import './chat.css';
 
 const ChatPage = (props) => {
-  const Side = props.side;
   return (
     <Container className="b-main">
       <Row className="b-divider"></Row>
@@ -21,7 +20,7 @@ const ChatPage = (props) => {
         <Col>{/* Blank divider */}</Col>
         <Col xs={10}>
           <Row>
-            <Side />
+            <ProfilePreview overlayState=""></ProfilePreview>
             <Col md={8}>
               <ChatList />
             </Col>

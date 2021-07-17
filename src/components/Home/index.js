@@ -12,7 +12,11 @@ import '../Styles/styles.css';
 
 const HomeBase = (props) => {
   const onbState = props.onbState;
-  return onbState ? <HomePageOnb side={props.side}></HomePageOnb> : <HomePage side={props.side}></HomePage>;
+  return (
+    onbState 
+      ? <HomePageOnb />
+      : <HomePage />
+  );
 };
 
 const dest = authUser => { 

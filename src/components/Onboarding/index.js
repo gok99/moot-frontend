@@ -11,7 +11,7 @@ import './onboarding.css';
 /**
  * Functional Presentational Component that displays the Overlay + Onboarding Form onto the Home Page.
  */
-const Onboarding = () => {
+const Onboarding = (ProfilePreviewBase) => {
   return (
     <div className="b-overlay-onboarding d-flex justify-content-md-center">
       <Col>

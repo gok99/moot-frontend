@@ -4,7 +4,8 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
 import { SignIn, SignUp, PasswordForget } from '../Access';
-import { Account, Posts, Inbox, Settings } from '../Account';
+import Account from '../Account';
+import { Posts, Inbox, Settings } from '../Account';
 import Navigation from '../Navigation';
 import ProfilePreview from '../Account/ProfilePreview';
 import Landing from '../Landing';
@@ -58,8 +59,6 @@ const AppRouter = (props) => {
     setNavState(!navState);
   }
 
-  const profilePreview = () => { return <ProfilePreview overlayState=""></ProfilePreview> };
-
   return (
     <Router>
       <div>
@@ -75,11 +74,11 @@ const AppRouter = (props) => {
         <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
         {/* <Route path={ROUTES.ONBOARDING} component={Onboarding} /> */}
         {/* <Route path={ROUTES.HOME} component={Home} /> */}
-        <Route path={ROUTES.ONBOARDING} render={() => <Home onbState={true} side={<ProfilePreview overlayState="element-overlay"></ProfilePreview>}></Home>} />
-        <Route path={ROUTES.HOME} render={() => <Home onbState={false} side={profilePreview}></Home>} />
-        <Route path={ROUTES.CHAT} render={() => <Chat side={profilePreview}></Chat>} />
-        <Route path={ROUTES.LIBRARY} render={() => <Library side={profilePreview}></Library>} />
-        <Route path={ROUTES.FRIENDS} render={() => <Friends side={profilePreview}></Friends>} />
+        <Route path={ROUTES.ONBOARDING} render={() => <Home onbState={true}></Home>} />
+        <Route path={ROUTES.HOME} render={() => <Home onbState={false}></Home>} />
+        <Route path={ROUTES.CHAT} render={() => <Chat></Chat>} />
+        <Route path={ROUTES.LIBRARY} render={() => <Library></Library>} />
+        <Route path={ROUTES.FRIENDS} render={() => <Friends></Friends>} />
         <Route path={ROUTES.ACCOUNT} component={Account} />
         <Route path={ROUTES.POSTS} component={Posts} />
         <Route path={ROUTES.INBOX} component={Inbox} />

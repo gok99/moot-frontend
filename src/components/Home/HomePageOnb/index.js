@@ -2,13 +2,12 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import Onboarding from '../../Onboarding';
-// import ProfilePreview from '../../Account/ProfilePreview';
+import ProfilePreview from '../../Account/ProfilePreview';
 import PostArea from '../../Post/PostArea';
 
 import '../../Styles/styles.css';
 
 const HomePageOnb = (props) => {
-  const Side = props.side;
   return (
     <Container className="b-main">
       <Row className="b-divider"></Row>
@@ -17,7 +16,7 @@ const HomePageOnb = (props) => {
         <Col>{/* Blank divider */}</Col>
         <Col xs={10}>
           <Row>
-            <Side />
+            <ProfilePreview overlayState="element-overlay"></ProfilePreview>
             <Col xs={8}>
               <PostArea />
             </Col>
