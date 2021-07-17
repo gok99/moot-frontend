@@ -16,6 +16,7 @@ const PostAreaBase = (props) => {
   const fb = props.firebase;
   const uid = fb.auth.currentUser.uid;
   const [posts, setPosts] = useState([]);
+  const [postKeys, setPostKeys] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const [commentedPosts, setCommentedPosts] = useState([]);
   const [commentedPostKey, setCommentedPostKey] = useState('');
@@ -28,7 +29,7 @@ const PostAreaBase = (props) => {
     userLikes: {},
     userComments: {}
   });
-  const [postCount, setPostCount] = useState(0);
+  const [currentPostUid, setCurrentPostUid] = useState('');
   const [postState, setPostState] = useState({
     noPost: false,
     myPost: false,
@@ -45,6 +46,8 @@ const PostAreaBase = (props) => {
   const [currentComment, setCurrentComment] = useState({
     comment: ''
   });
+  const getIndex = (keys, key, fn = n => n) => fn(keys.indexOf(key));
+  const getValue = (values, keys, key, fn = n => n) => values[getIndex(keys, key, fn)];
   // const [matchFindState, setMatchFindState] = useState(false);
 
   /** 
@@ -55,7 +58,9 @@ const PostAreaBase = (props) => {
     const postListener = fb.posts().limitToLast(50).on('value', (snapshot) => {
       if (snapshot.exists()) {
         // Set the postsList array (Latest 50 posts, sorted from latest to earliest)
+        const postUids = Object.keys(snapshot.val()).reverse();
         const postsList = Object.values(snapshot.val()).reverse();
+        const currPostUid = currentPostUid === '' ? postUids[0] : currentPostUid;
         postsList.map((post) => {        
           var date = new Date(post.postTime);
           var hour = date.getHours() % 12 === 0 ? 12 : date.getHours() % 12;
@@ -70,12 +75,15 @@ const PostAreaBase = (props) => {
           return post;
         });
         setPosts(postsList);
+        setPostKeys(postUids);
+        setCurrentPostUid(currPostUid);
         
         // Set the current post to the first (newest) post
-        const userPostCheck = (postsList[postCount].uid === uid);
-        setCurrentPost(postsList[postCount]);
-        const userLikes = !!postsList[postCount].userLikes ? Object.values(postsList[postCount].userLikes) : [];
-        const userComments = !!postsList[postCount].userComments ? Object.values(postsList[postCount].userComments) : [];
+        const currPost = getValue(postsList, postUids, currPostUid);
+        const userPostCheck = (currPost.uid === uid);
+        setCurrentPost(currPost);
+        const userLikes = !!currPost.userLikes ? Object.values(currPost.userLikes) : [];
+        const userComments = !!currPost.userComments ? Object.values(currPost.userComments) : [];
         let postLiked = false;
         for (let user of userLikes) {
           if (user.uid === uid) {
@@ -145,17 +153,15 @@ const PostAreaBase = (props) => {
       fb.userLikedPosts(uid).off('value', likedPostListener);
       fb.userCommentedPosts(uid).off('value', commentedPostListener);
     };
-  }, [currentPost.postUid, fb, postCount, uid]);
+  }, [fb, currentPostUid, uid]);
 
-  /** 
-   * Behaviour on left click
-   */
-  const onLeftClick = (event) => {
-    const count = postCount - 1;
-    setCurrentPost(posts[count]);
-    const userPostCheck = (posts[count].uid === uid);
-    const userLikes = !!posts[count].userLikes ? Object.values(posts[count].userLikes) : [];
-    const userComments = !!posts[count].userComments ? Object.values(posts[count].userComments) : [];
+  const onButtonClick = (event, fn) => {
+    const currPostUid = getValue(postKeys, postKeys, currentPostUid, fn);
+    const currPost = getValue(posts, postKeys, currentPostUid, fn);
+    setCurrentPost(currPost);
+    const userPostCheck = (currPost.uid === uid);
+    const userLikes = !!currPost.userLikes ? Object.values(currPost.userLikes) : [];
+    const userComments = !!currPost.userComments ? Object.values(currPost.userComments) : [];
     let postLiked = false;
     for (let user of userLikes) {
       if (user.uid === uid) {
@@ -164,11 +170,11 @@ const PostAreaBase = (props) => {
       }
     }
     for (let post of commentedPosts) {
-      if (post.postUid === posts[count].postUid) {
+      if (post.postUid === currPost.postUid) {
         setCommentedPostKey(post.key);
       }
     }
-    setPostCount(count);
+    setCurrentPostUid(currPostUid);
     setPostState({
       noPost: false,
       myPost: userPostCheck,
@@ -179,48 +185,24 @@ const PostAreaBase = (props) => {
     setAreaState({
       likeDisabled: userPostCheck,
       commentDisabled: userPostCheck,
-      leftDisabled: count === 0,
-      rightDisabled: false
+      leftDisabled: getIndex(postKeys, currPostUid) === 0,
+      rightDisabled: getIndex(postKeys, currPostUid) === posts.length - 1
     });
     event.preventDefault();
+  };
+
+  /** 
+   * Behaviour on left click
+   */
+  const onLeftClick = (event) => {
+    onButtonClick(event, n => n-1);
   };
 
   /** 
    * Behaviour on right click
    */
   const onRightClick = (event) => {
-    const count = postCount + 1;
-    setCurrentPost(posts[count]);
-    const userPostCheck = (posts[count].uid === uid);
-    const userLikes = !!posts[count].userLikes ? Object.values(posts[count].userLikes) : [];
-    const userComments = !!posts[count].userComments ? Object.values(posts[count].userComments) : [];
-    let postLiked = false;
-    for (let user of userLikes) {
-      if (user.uid === uid) {
-        postLiked = true;
-        break;
-      }
-    }
-    for (let post of commentedPosts) {
-      if (post.postUid === posts[count].postUid) {
-        setCommentedPostKey(post.key);
-      }
-    }
-    setPostCount(count);
-    setPostState({
-      noPost: false,
-      myPost: userPostCheck,
-      postLiked: postLiked,
-      likeCount: userLikes.length,
-      commentCount: userComments.length
-    });
-    setAreaState({
-      likeDisabled: userPostCheck,
-      commentDisabled: userPostCheck,
-      leftDisabled: false,
-      rightDisabled: count === posts.length - 1
-    });
-    event.preventDefault();
+    onButtonClick(event, n => n + 1);
   };
   
   /** 
