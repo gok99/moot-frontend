@@ -28,10 +28,10 @@ const PostAreaBase = (props) => {
     userLikes: {},
     userComments: {}
   });
+  const [postCount, setPostCount] = useState(0);
   const [postState, setPostState] = useState({
     noPost: false,
     myPost: false,
-    postCount: 0,
     postLiked: false,
     likeCount: 0,
     commentCount: 0
@@ -39,7 +39,7 @@ const PostAreaBase = (props) => {
   const [areaState, setAreaState] = useState({
     likeDisabled: false,
     commentDisabled: false,
-    leftDisabled: false,
+    leftDisabled: true,
     rightDisabled: false
   });
   const [currentComment, setCurrentComment] = useState({
@@ -70,59 +70,26 @@ const PostAreaBase = (props) => {
           return post;
         });
         setPosts(postsList);
-
-        // Set the current post and other state variables
-        if (postsList.length === 0) {
-          // If there are no posts at all on moot
-          setCurrentPost({
-            uid: '',
-            postTitle: "You have no more posts left to view!",
-            postContent: '',
-            postTime: '',
-            postUid: ''
-          });
-          setPostState({
-            noPost: true,
-            myPost: false,
-            postCount: 0,
-            postLiked: false,
-            likeCount: 0,
-            commentCount: 0
-          });
-          setAreaState({
-            likeDisabled: true,
-            commentDisabled: true,
-            leftDisabled: true,
-            rightDisabled: true
-          });
-        } else {
-          // Set the current post to the first (newest) post
-          const userPostCheck = (postsList[0].uid === uid);
-          setCurrentPost(postsList[0]);
-          const userLikes = !!postsList[0].userLikes ? Object.values(postsList[0].userLikes) : [];
-          const userComments = !!postsList[0].userComments ? Object.values(postsList[0].userComments) : [];
-          let postLiked = false;
-          for (let user of userLikes) {
-            if (user.uid === uid) {
-              postLiked = true;
-              break;
-            }
+        
+        // Set the current post to the first (newest) post
+        const userPostCheck = (postsList[postCount].uid === uid);
+        setCurrentPost(postsList[postCount]);
+        const userLikes = !!postsList[postCount].userLikes ? Object.values(postsList[postCount].userLikes) : [];
+        const userComments = !!postsList[postCount].userComments ? Object.values(postsList[postCount].userComments) : [];
+        let postLiked = false;
+        for (let user of userLikes) {
+          if (user.uid === uid) {
+            postLiked = true;
+            break;
           }
-          setPostState({
-            noPost: false,
-            myPost: userPostCheck,
-            postCount: 0,
-            postLiked: postLiked,
-            likeCount: userLikes.length,
-            commentCount: userComments.length
-          });
-          setAreaState({
-            likeDisabled: userPostCheck,
-            commentDisabled: userPostCheck,
-            leftDisabled: true,
-            rightDisabled: postsList.length === 1 ? true : false
-          });
         }
+        setPostState({
+          noPost: false,
+          myPost: userPostCheck,
+          postLiked: postLiked,
+          likeCount: userLikes.length,
+          commentCount: userComments.length
+        });
       } else {
         console.log("No posts available");
         // If there are no posts at all on moot
@@ -136,7 +103,6 @@ const PostAreaBase = (props) => {
         setPostState({
           noPost: true,
           myPost: false,
-          postCount: 0,
           postLiked: false,
           likeCount: 0,
           commentCount: 0
@@ -155,7 +121,7 @@ const PostAreaBase = (props) => {
       if (snapshot.exists()) {
         setLikedPosts(Object.values(snapshot.val()));
       } else {
-        console.log("No data available");
+        console.log("No likes available");
       }
     });
 
@@ -170,7 +136,7 @@ const PostAreaBase = (props) => {
           }
         }
       } else {
-        console.log("No data available");
+        console.log("No comments available");
       }
     });
 
@@ -179,13 +145,13 @@ const PostAreaBase = (props) => {
       fb.userLikedPosts(uid).off('value', likedPostListener);
       fb.userCommentedPosts(uid).off('value', commentedPostListener);
     };
-  }, []);
+  }, [postCount]);
 
   /** 
    * Behaviour on left click
    */
   const onLeftClick = (event) => {
-    const count = postState.postCount - 1;
+    const count = postCount - 1;
     setCurrentPost(posts[count]);
     const userPostCheck = (posts[count].uid === uid);
     const userLikes = !!posts[count].userLikes ? Object.values(posts[count].userLikes) : [];
@@ -202,10 +168,10 @@ const PostAreaBase = (props) => {
         setCommentedPostKey(post.key);
       }
     }
+    setPostCount(count);
     setPostState({
       noPost: false,
       myPost: userPostCheck,
-      postCount: count,
       postLiked: postLiked,
       likeCount: userLikes.length,
       commentCount: userComments.length
@@ -223,7 +189,7 @@ const PostAreaBase = (props) => {
    * Behaviour on right click
    */
   const onRightClick = (event) => {
-    const count = postState.postCount + 1;
+    const count = postCount + 1;
     setCurrentPost(posts[count]);
     const userPostCheck = (posts[count].uid === uid);
     const userLikes = !!posts[count].userLikes ? Object.values(posts[count].userLikes) : [];
@@ -240,10 +206,10 @@ const PostAreaBase = (props) => {
         setCommentedPostKey(post.key);
       }
     }
+    setPostCount(count);
     setPostState({
       noPost: false,
       myPost: userPostCheck,
-      postCount: count,
       postLiked: postLiked,
       likeCount: userLikes.length,
       commentCount: userComments.length
@@ -272,7 +238,6 @@ const PostAreaBase = (props) => {
       const userLikesList = Object.values(currentPost.userLikes);
       for (let like of userLikesList) {
         if (like.uid === uid) {
-          console.log(currentPost.postUid);
           fb.deletePostUserLikes(currentPost.postUid, like.key);
         }
       }
@@ -339,7 +304,9 @@ const PostAreaBase = (props) => {
     }).catch((error) => console.log(error));
 
     setCommentedPostKey(newCommentKey);
-    
+    setCurrentComment({
+      comment: ''
+    });
     event.preventDefault();
   };
 
@@ -626,6 +593,7 @@ const PostAreaBase = (props) => {
                       type="text"
                       as="textarea"
                       placeholder="Reply to this post!"
+                      value={currentComment.comment}
                       // defaultValue={ data.description }
                       onChange={onChange} />
                   </Form.Group>
