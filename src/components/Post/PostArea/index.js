@@ -145,7 +145,7 @@ const PostAreaBase = (props) => {
       fb.userLikedPosts(uid).off('value', likedPostListener);
       fb.userCommentedPosts(uid).off('value', commentedPostListener);
     };
-  }, [postCount]);
+  }, [currentPost.postUid, fb, postCount, uid]);
 
   /** 
    * Behaviour on left click
