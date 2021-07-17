@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Row, Form, Button } from 'react-bootstrap';
 import { compose } from 'recompose';
 
-import { withFirebase } from '../../Firebase';
-import PostCreation from '../../Post/PostCreation';
+import { withFirebase } from '../../../Firebase';
+import PostCreation from '../../../Post/PostCreation';
 
-import '../../Styles/styles.css';
-import '../account.css'
+import '../../../Styles/styles.css';
+import '../../account.css';
 
 const ProfileDescriptionBase = (props) => {
   const username = props.username;

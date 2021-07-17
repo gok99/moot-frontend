@@ -46,7 +46,7 @@ const AccountPage = (props) => {
             <Row>
               <AccountSidebar pid={user.pid} username={user.username} teleUser={user.teleUser} description={user.description} overlayState=""></AccountSidebar>
               <Col xs={8}>
-                <AccountDetails email={user.email} id={user.id}></AccountDetails>
+                <AccountDetails username={user.username} teleUser={user.teleUser} email={user.email} id={user.id}></AccountDetails>
               </Col>
             </Row>
           </Col>

@@ -39,7 +39,7 @@ const ChatBoxList = (props) => {
   });
   return (
     <Col>
-      <p className="text-general-header">Chats</p>
+      <h2>Chats</h2>
       <hr />
       {chatsList}
     </Col>

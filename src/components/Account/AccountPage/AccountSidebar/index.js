@@ -1,11 +1,11 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import ProfilePicture from '../ProfilePicture';
+import ProfilePicture from '../../ProfilePicture';
 import ProfileDescription from './ProfileDescription';
  
-import '../../Styles/styles.css';
-import '../account.css'
+import '../../../Styles/styles.css';
+import '../../account.css';
 
 const AccountSidebar = (props) => {
   return (

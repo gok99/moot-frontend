@@ -6,7 +6,7 @@ import '../../Styles/styles.css';
 const LibraryArea = (props) => {
   return (
     <>
-      <p className="text-general-header">Library</p>
+      <h2>Library</h2>
       <hr />
       <p className="text-placeholder">This feature is yet to be implemented :(</p>
       <p className="text-placeholder">This page should let you move your interest tags around!</p>

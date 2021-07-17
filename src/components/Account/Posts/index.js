@@ -19,7 +19,7 @@ const MyPosts = (props) => {
               <ProfilePreview />
             </Col>
             <Col xs={8}>
-            <p className="text-general-header">My Posts</p>
+              <h2>My Posts</h2>
               <hr />
               <p className="text-placeholder">This feature is yet to be implemented :(</p>
               <p className="text-placeholder">This page should show all posts you've created, liked, or commented on!</p>

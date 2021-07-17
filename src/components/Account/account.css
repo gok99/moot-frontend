@@ -26,6 +26,10 @@
   width: 100%;
 }
 
+.b-accountdetails {
+  margin-left: 3vw;
+}
+
 /**
  * Texts 
  */
@@ -66,6 +70,33 @@
 .text-profile.teleuser {
   color: #806992;
   font-weight: bold;
+}
+
+.text-account {
+  color: #2e1649;
+  font-weight: 600;
+}
+
+.text-account-sub {
+  color: #765c94;
+  font-weight: 600;
+}
+
+/**
+ * Inputs
+ */
+.input-account {
+  opacity: 1;
+}
+
+.input-account-disabled {
+  opacity: 0.6;
+}
+
+.input-text-account,
+.input-text-account:disabled {
+  color: #333333;
+  background: #fcfcfc;
 }
 
 /**
@@ -137,20 +168,94 @@
   border: 2px solid #921fd5;
 }
 
-
-
-
-
-
-
-/* 
-.accountbox {
-  overflow: auto;
-  height: 75vh;
-  padding: 16px;
+.btn-username,
+.btn-username:visited,
+.btn-username:default,
+.btn-username:focus,
+.btn-username:disabled,
+.btn-username:active,
+.btn-username:active:hover {
+  background: transparent;
+  border: none;
+  color: #6b4eff;
+  font-size: 15px;
+  width: 96px;
+  padding: 0px;
 }
 
-.accounttext {
-  font-size: 16px;
-  color: #5c4374;
-} */
+.btn-username:hover,
+.btn-username:focus:hover {
+  background: transparent;
+  border: none;
+  color: #3b289d;
+}
+
+.btn-passwordchoice,
+.btn-passwordchoice:visited,
+.btn-passwordchoice:default,
+.btn-passwordchoice:focus {
+  display: block;
+  text-align: center;
+  background: #921fd5;
+  color: #fcfcfc;
+  border: 2px solid #921fd5;
+  border-radius: 0px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  padding: auto;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn-passwordchoice:hover,
+.btn-passwordchoice:focus:hover {
+  background: #7213a9;
+  color: #fcfcfc;
+  border: 2px solid #7213a9;
+}
+
+.btn-passwordchoice:focus:active,
+.btn-passwordchoice:active {
+  background-color: #580c85;
+  color: #fcfcfc;
+  border: 2px solid #580c85;
+}
+
+.btn-accountform,
+.btn-accountform:visited,
+.btn-accountform:default,
+.btn-accountform:focus {
+  display: block;
+  text-align: center;
+  background: #921fd5;
+  color: #fcfcfc;
+  border: 2px solid #921fd5;
+  border-radius: 8px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  height: auto;
+  width: 200px;
+  margin: auto;
+  padding: auto;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn-accountform:hover,
+.btn-accountform:focus:hover {
+  background: #7213a9;
+  color: #fcfcfc;
+  border: 2px solid #7213a9;
+}
+
+.btn-accountform:focus:active,
+.btn-accountform:active {
+  background-color: #580c85;
+  color: #fcfcfc;
+  border: 2px solid #580c85;
+}
