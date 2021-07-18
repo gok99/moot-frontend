@@ -112,6 +112,7 @@ const PostAreaBase = (props) => {
         setAreaState({
           likeDisabled: userPostCheck,
           commentDisabled: userPostCheck,
+          matchDisabled: userPostCheck || postMatched,
           leftDisabled: getIndex(postKeys, currPostUid) === 0,
           rightDisabled: getIndex(postKeys, currPostUid) === posts.length - 1
         });
