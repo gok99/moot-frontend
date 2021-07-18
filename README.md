@@ -14,6 +14,6 @@ Link to Heroku deployment: https://moot-nus.herokuapp.com/
 
 ## Set-up
 
-1. Clone this repository!
+1. Clone this repository
 2. Add an `.env.local` file to the root directory
 3. run `yarn install`, then `yarn start`
