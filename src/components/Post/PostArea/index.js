@@ -40,11 +40,11 @@ const PostAreaBase = (props) => {
     commentCount: 0
   });
   const [areaState, setAreaState] = useState({
-    likeDisabled: false,
-    commentDisabled: false,
-    matchDisabled: false,
+    likeDisabled: true,
+    commentDisabled: true,
+    matchDisabled: true,
     leftDisabled: true,
-    rightDisabled: false
+    rightDisabled: true
   });
   const [currentComment, setCurrentComment] = useState({
     comment: ''
@@ -109,7 +109,7 @@ const PostAreaBase = (props) => {
 
     setAreaState({
       likeDisabled: userPostCheck,
-      commentDisabled: userPostCheck,
+      commentDisabled: false,
       matchDisabled: userPostCheck || postMatched,
       leftDisabled: getIndex(postKeys, currPost.postUid) === 0,
       rightDisabled: getIndex(postKeys, currPost.postUid) === posts.length - 1
