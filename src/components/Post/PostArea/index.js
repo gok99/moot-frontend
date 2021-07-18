@@ -75,7 +75,7 @@ const PostAreaBase = (props) => {
    * Gets the availability of the user
    */
   const userAvail = (user) => {
-    user.then((data) => {
+    return user.then((data) => {
       const chats = Object.values(data.chats);
       return chats.some((chat) => !chat.active);
     })
@@ -200,7 +200,6 @@ const PostAreaBase = (props) => {
    * Behaviour on left/right button click
    */
   const onButtonClick = (event, fn) => {
-    const currPostUid = getValue(postKeys, postKeys, currentPostUid, fn);
     const currPost = getValue(posts, postKeys, currentPostUid, fn);
     setPostAreaState(currPost);
 
@@ -346,16 +345,6 @@ const PostAreaBase = (props) => {
    */
   const onMatch = async (event) => {
     if (window.confirm("Are you sure you want to queue a match?")) {
-      const matchQueue = fb.matchQueue().once('value').then((snapshot) => {
-        if (snapshot.exists()) {
-          return snapshot.val();
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
 
       // Add new match into the matchQueue
       const liker = userData(uid);
@@ -370,8 +359,8 @@ const PostAreaBase = (props) => {
       if (await matchAsserts(liker, poster)) {
         var newMatch = fb.matchQueue().push();
         newMatch.set({
-          likerUid: likerUid,
-          posterUid: posterUid,
+          likerUid,
+          posterUid,
           likerAvail: await likerAvail, 
           posterAvail: await posterAvail,
           postUid: postUid,
