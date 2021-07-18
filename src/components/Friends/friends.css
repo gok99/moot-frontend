@@ -1,0 +1,79 @@
+/* CSS Specific to Friends Page */
+
+/**
+ * Styling for Friendboxes
+ */
+.b-friendbox {
+  border: none;
+  box-sizing: border-box;
+  width: 100%;
+  padding: auto;
+  background: #f4efff;
+}
+
+/**
+ * Text for Friendboxes
+ */
+.text-friendbox-header {
+  font-size: 24px;
+  font-weight: bold;
+  color: #421d61;
+}
+.text-friendbox {
+  font-size: 16px; 
+}
+
+.heavy {
+  font-weight: 600;
+  color: #666666;
+}
+
+.light {
+  font-weight: 500;
+  color: #888888;
+}
+
+/**
+ * Button for Friendboxes
+ */
+.btn-friendchat,
+.btn-friendchat:visited,
+.btn-friendchat:default,
+.btn-friendchat:focus {
+  display: block;
+  text-align: center;
+  background: #f4efff;
+  color: #773b97;
+  border: none;
+  border-radius: 0px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  width: 200px;
+  height: 48px;
+  margin: auto;
+  padding: 12px 0px;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn-friendchat:disabled {
+  background: #f4efff;
+  color: #773b97;
+  border: none;
+  opacity: 0.4 !important;
+}
+
+.btn-friendchat:hover,
+.btn-friendchat:focus:hover {
+  background: #e4d5ee;
+  color: #773b97;
+  border: none;
+}
+
+.btn-friendchat:focus:active,
+.btn-friendchat:active {
+  background-color: #d2b7e4;
+  color: #773b97;
+  border: none;
+}

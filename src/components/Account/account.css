@@ -1,0 +1,261 @@
+/* CSS Specific to Account Pages */
+
+.display-profilepreview {
+  display: block;
+  min-width: 200px;
+}
+
+.b-accountsidebar {
+  display: block;
+  max-width: 288px;
+  min-width: 240px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .display-profilepreview {
+    display: none;
+  }
+  .b-accountsidebar {
+    display: none;
+  }
+}
+
+.b-account-description {
+  text-align: center;
+  width: 100%;
+}
+
+.b-accountdetails {
+  margin-left: 3vw;
+}
+
+/**
+ * Texts 
+ */
+.text-preview {
+  font-size: 12px;
+}
+
+.text-preview.username {
+  color: #1e1547;
+  font-weight: 600;
+}
+
+.text-preview.teleuser {
+  color: #685f8f;
+  font-weight: 600;
+}
+
+.text-preview.descriptionheader {
+  color: #1e1547;
+  font-weight: 600;
+}
+
+.text-preview.description {
+  color: #636363;
+  font-weight: 600;
+}
+
+.text-profile {
+  text-align: center;
+  font-size: 18px;
+}
+
+.text-profile.username {
+  color: #371652;
+  font-weight: bold;
+}
+
+.text-profile.teleuser {
+  color: #806992;
+  font-weight: bold;
+}
+
+.text-account {
+  color: #2e1649;
+  font-weight: 600;
+}
+
+.text-account-sub {
+  color: #765c94;
+  font-weight: 600;
+}
+
+/**
+ * Inputs
+ */
+.input-account {
+  opacity: 1;
+}
+
+.input-account-disabled {
+  opacity: 0.6;
+}
+
+.input-text-account,
+.input-text-account:disabled {
+  color: #333333;
+  background: #fcfcfc;
+}
+
+/**
+ * Images
+ */
+.img-profile {
+  border: 3px solid #bbbbbb;
+}
+
+.preview {
+  height: 64px;
+  width: auto;
+  border-radius: 64px;
+}
+
+.preview.element-overlay {
+  border: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+.profile {
+  height: 160px;
+  width: auto;
+  border-radius: 160px;
+  padding: 0;
+}
+
+/**
+ * Buttons
+ */
+.btn-description,
+.btn-description:visited,
+.btn-description:default,
+.btn-description:focus {
+  display: block;
+  text-align: center;
+  background: #921fd5;
+  color: #fcfcfc;
+  border: 2px solid #921fd5;
+  border-radius: 8px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  width: 200px;
+  height: 48px;
+  margin: auto;
+  padding: 10px 0px;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn-description:disabled {
+  background: #921fd5;
+  color: #fcfcfc;
+  border: 2px solid #921fd5;
+  opacity: 0.4 !important;
+}
+
+.btn-description:hover,
+.btn-description:focus:hover {
+  background: #7213a9;
+  color: #fcfcfc;
+  border: 2px solid #7213a9;
+}
+
+.btn-description:focus:active,
+.btn-description:active {
+  background-color: #fcfcfc;
+  color: #921fd5;
+  border: 2px solid #921fd5;
+}
+
+.btn-username,
+.btn-username:visited,
+.btn-username:default,
+.btn-username:focus,
+.btn-username:disabled,
+.btn-username:active,
+.btn-username:active:hover {
+  background: transparent;
+  border: none;
+  color: #6b4eff;
+  font-size: 15px;
+  width: 96px;
+  padding: 0px;
+}
+
+.btn-username:hover,
+.btn-username:focus:hover {
+  background: transparent;
+  border: none;
+  color: #3b289d;
+}
+
+.btn-passwordchoice,
+.btn-passwordchoice:visited,
+.btn-passwordchoice:default,
+.btn-passwordchoice:focus {
+  display: block;
+  text-align: center;
+  background: #921fd5;
+  color: #fcfcfc;
+  border: 2px solid #921fd5;
+  border-radius: 0px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  padding: auto;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn-passwordchoice:hover,
+.btn-passwordchoice:focus:hover {
+  background: #7213a9;
+  color: #fcfcfc;
+  border: 2px solid #7213a9;
+}
+
+.btn-passwordchoice:focus:active,
+.btn-passwordchoice:active {
+  background-color: #580c85;
+  color: #fcfcfc;
+  border: 2px solid #580c85;
+}
+
+.btn-accountform,
+.btn-accountform:visited,
+.btn-accountform:default,
+.btn-accountform:focus {
+  display: block;
+  text-align: center;
+  background: #921fd5;
+  color: #fcfcfc;
+  border: 2px solid #921fd5;
+  border-radius: 8px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  height: auto;
+  width: 200px;
+  margin: auto;
+  padding: auto;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn-accountform:hover,
+.btn-accountform:focus:hover {
+  background: #7213a9;
+  color: #fcfcfc;
+  border: 2px solid #7213a9;
+}
+
+.btn-accountform:focus:active,
+.btn-accountform:active {
+  background-color: #580c85;
+  color: #fcfcfc;
+  border: 2px solid #580c85;
+}

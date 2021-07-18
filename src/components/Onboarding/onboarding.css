@@ -1,0 +1,217 @@
+/* CSS Specific to Onboarding Pages */
+
+/**
+ * Blocks for Onboarding Pages
+ */
+.b-overlay-onboarding {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.b-divider-onboarding {
+  height: 56px;
+}
+
+.b-onboarding {
+  background: #f5edff;
+  box-sizing: border-box;
+  padding: 32px 32px;
+  z-index: 5;
+  display: inline-flex;
+  height: 75vh;
+  width: 50vw;
+  overflow: auto;
+}
+
+.b-onboarding-alt {
+  background: #f5edff;
+  box-sizing: border-box;
+  padding: 32px 32px;
+  z-index: 5;
+  display: none;
+  height: 75vh;
+  width: 90vw;
+  overflow: auto;
+  margin-left: 7vw;
+}
+
+@media only screen and (max-width: 768px) {
+  .b-onboarding {
+    display: none;
+  }
+  .b-onboarding-alt {
+    display: inline-flex;
+  }
+}
+
+/**
+ * Logo for Onboarding Pages
+ */
+.logo-onboarding {
+  display: block;
+  width: 36vw;
+  max-width: 320px;
+  min-width: 240px;
+  height: auto;
+  margin: auto;
+}
+
+.logo-onboarding-mini {
+  display: block;
+  width: 120px;
+  height: auto;
+  margin: auto;
+}
+
+/**
+ * Texts and Buttons for Onboarding Pages
+ */
+ .header-onboarding {
+  font-size: 2.5vw;
+  color: #2e1042;
+  text-align: center;
+}
+
+.subheader-onboarding {
+  font-size: 1.5vw;
+  color: #412852;
+  text-align: center;
+}
+
+.btn-onboarding {
+  display: block;
+  text-align: center;
+  background: #6d47aa;
+  color: #dadada;
+  border: 2px solid #6d47aa;
+  border-radius: 12px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 1.3vw;
+  width: 20vw;
+  height: 64px;
+  margin: auto;
+  padding: auto;
+  text-decoration: none;
+}
+
+.btn-onboarding:visited,
+.btn-onboarding:default,
+.btn-onboarding:focus {
+  background: #6d47aa;
+  color: #dadada;
+  border: 2px solid #6d47aa;
+  box-shadow: none;
+}
+
+.btn-onboarding:disabled {
+  background: #6d47aa;
+  border: 2px solid #6d47aa;
+  opacity: 0.7 !important;
+}
+
+.btn-onboarding.loading:disabled {
+  opacity: 1 !important;
+  background: #dadada;
+  color: #6d47aa;
+  border: 2px solid #6d47aa;
+  box-shadow: none;
+  padding: 12px 32px 16px;
+  text-align: center;
+}
+
+.btn-onboarding:hover,
+.btn-onboarding:focus:hover {
+  background: #4b2883;
+  color: #dadada;
+  border: 2px solid #4b2883;
+}
+
+.btn-onboarding:focus:active,
+.btn-onboarding:active {
+  background: #e6e6e6;
+  color: #6d47aa;
+  border: 2px solid #6d47aa;
+}
+
+.btn-onboarding.btn-link {
+  padding-top: 1.8vh;
+}
+
+@media only screen and (min-width: 1366px) {
+  .header-onboarding {
+    font-size: 34px;
+    color: #2e1042;
+    text-align: center;
+  }
+  .subheader-onboarding {
+    font-size: 20px;
+    color: #412852;
+    text-align: center;
+  }
+  .btn-onboarding {
+    font-size: 18px;
+    width: 270px;
+  }
+}
+
+@media only screen and (max-width: 864px) {
+  .header-onboarding {
+    font-size: 20px;
+    color: #2e1042;
+    text-align: center;
+  }
+  .subheader-onboarding {
+    font-size: 12px;
+    color: #412852;
+    text-align: center;
+  }
+  .btn-onboarding {
+    font-size: 12px;
+    width: 150px;
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .btn-onboarding.btn-link {
+    padding-top: 2vh;
+  }
+}
+
+.icon-onboarding {
+  height: 64px;
+  width: auto;
+  border: 3px solid #bbbbbb;
+  border-radius: 64px;
+}
+
+.icon-onboarding-active {
+  height: 64px;
+  width: auto;
+  border: 3px solid #2b1c79;
+  border-radius: 64px;
+}
+
+.btn-icon-onboarding,
+.btn-icon-onboarding:hover,
+.btn-icon-onboarding:disabled,
+.btn-icon-onboarding:visited,
+.btn-icon-onboarding:default,
+.btn-icon-onboarding:active,
+.btn-icon-onboarding:focus {
+  display: block;
+  background: #ffffff;
+  width: 64px;
+  height: 64px;
+  background: none;
+  border: none;
+  padding: initial;
+}

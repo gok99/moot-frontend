@@ -1,474 +1,62 @@
-/* CSS for the entire application */
+/* General Elements */
+
+html {
+  background: #f4efff;
+  /* height: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background: -webkit-radial-gradient(
+    50% 50% at 50% 50%,
+    #ffffff 57.81%,
+    #dcd6ff 100%
+  );
+  background: -moz-radial-gradient(
+    50% 50% at 50% 50%,
+    #ffffff 57.81%,
+    #dcd6ff 100%
+  );
+  background: -ms-radial-gradient(
+    50% 50% at 50% 50%,
+    #ffffff 57.81%,
+    #dcd6ff 100%
+  );
+  background: -o-radial-gradient(
+    50% 50% at 50% 50%,
+    #ffffff 57.81%,
+    #dcd6ff 100%
+  );
+  background: radial-gradient(50% 50% at 50% 50%, #ffffff 57.81%, #dcd6ff 100%); */
+}
+
+#root {
+  width: 100%;
+  min-height: 100%;
+  max-height: 1000vh;
+  background: #f4efff;
+}
 
 *:focus:not(:focus-visible) {
   outline: 0 !important;
   box-shadow: none !important;
 }
 
-/* General Elements */
-
 hr {
   opacity: 1;
   color: #bbbbbb;
 }
 
-h3 {
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  font-size: 21px;
-  color: #392155;
+hr.element-overlay {
+  opacity: 0.3;
+  color: #000000;
 }
 
 p {
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
   margin: auto;
 }
-
-/* Containers */
-
-#root {
-  width: 100%;
-  height: 100%;
-  background: #fcfcfc;
-}
-
-.container {
-  max-width: 100%;
-  max-height: 100%;
-  min-height: 0%;
-}
-
-.centered {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-
-  font-size: 20px;
-  padding: 5px;
-  z-index: 100;
-}
-
-.registerbox {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-
-  font-size: 20px;
-  padding: 5px;
-  z-index: 100;
-}
-
-.contentbox {
-  background: #faf9ff;
-  border: 0.5px solid #c0badf;
-  box-sizing: border-box;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
-  border-radius: 16px;
-  padding: 32px 32px;
-  z-index: 5;
-}
-
-.contentbox.postbox {
-  padding: 0px 0px;
-}
-
-.fixed {
-  position: fixed;
-}
-
-.relative {
-  position: relative;
-}
-
-.centeredtext {
-  text-align: center;
-}
-
-/* Logo */
-
-.logo {
-  display: block;
-  width: 480px;
-  height: 320px;
-  margin: auto;
-}
-
-/* Start Page Forms */
-
-.justify-content-md-start,
-.justify-content-md-end {
-  max-width: 480px;
-}
-
-.startform {
-  width: 320px;
-  margin: auto;
-}
-
-.startform.signin {
-  margin-top: 4%;
-}
-
-.startform.pwforget {
-  margin-top: 12%;
-}
-
-.startlink {
-  text-align: center;
-  width: 320px;
-  padding-top: 10px;
-}
-
-.textbox {
-  width: 320px;
-  background: #ffffff;
-  border: 1px solid #f2e8f8;
-  border-radius: 6px;
-}
-
-/* Onboarding Page Forms */
-
-.onbheader {
-  color: #121212;
-  font-weight: bold;
-}
-
-.onbtext {
-  color: #4e4e4e;
-  font-weight: bold;
-}
-
-.onbbox {
-  height: 60vh;
-  overflow: auto;
-}
-
-.onbicon {
-  height: 64px;
-  width: auto;
-  border: 5px double #bbbbbb;
-  border-radius: 64px;
-}
-
-.onbicon_active {
-  height: 64px;
-  width: auto;
-  border: 5px double #6b4eff;
-  border-radius: 64px;
-}
-
-/* Navigation Bar */
-
-.navbar {
-  height: 64px;
-  width: 100%;
-  background: #ffffff;
-  box-shadow: 0px 5px 15px 1px rgba(104, 76, 165, 0.2);
-  z-index: 10;
-}
-
-.navlogocol {
-  margin: auto;
-  text-align: center;
-}
-
-.navlogo {
-  display: block;
-  height: auto;
-  width: 84px;
-  margin: auto;
-}
-
-.naviconcol {
-  text-align: center;
-}
-
-.navicon {
-  height: 32px;
-  width: 32px;
-  opacity: 0.7;
-}
-
-.navicon:hover {
-  opacity: 0.4;
-}
-
-.tempicon {
-  position: relative;
-  left: -12px;
-  top: -6px;
-}
-
-.dropdownmenu {
-  min-width: 5rem;
-}
-
-.dropdowntext,
-.dropdowntext:hover,
-.dropdowntext:disabled,
-.dropdowntext:visited,
-.dropdowntext:default,
-.dropdowntext:active,
-.dropdowntext:focus {
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  color: #666666;
-  text-decoration: none;
-  background: none;
-}
-
-.buttontotext,
-.buttontotext:hover,
-.buttontotext:disabled,
-.buttontotext:visited,
-.buttontotext:default,
-.buttontotext:active,
-.buttontotext:focus {
-  background: none;
-  border: none;
-  padding: initial;
-}
-
-/* Posts */
-
-.postbox {
-  height: 60vh;
-  background: #faf9ff;
-}
-
-.postcreationoverlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-}
-
-.overlay {
-  z-index: 10 !important;
-}
-
-.pcotext {
-  font-weight: bold;
-  font-size: 24px;
-  color: #666666;
-  text-align: center;
-}
-
-.pcodivider {
-  height: 25vh;
-}
-
-.pcoactive {
-  display: block;
-}
-
-.pcoinactive {
-  display: none !important;
-}
-
-.postcreationform {
-  margin: auto;
-  background: #ffffff;
-  padding: 1vh 1vw;
-}
-
-.postcreationformint {
-  background: #ffffff;
-  padding: 5vh 5vw;
-}
-
-.col-1.postchangearea {
-  --bs-gutter-x: 0;
-}
-
-.postcontentarea {
-  padding: 32px 16px;
-}
-
-Col.postchangearea {
-  padding: 0px 0px !important;
-}
-
-.hearticon {
-  height: 20px;
-  width: 20px;
-  display: inline-block;
-  text-align: left;
-  margin: auto;
-}
-
-p.postop {
-  margin: 0px;
-  text-align: left;
-}
-
-p.posttime {
-  color: #666666;
-}
-
-p.posttitle {
-  font-size: 20px;
-  color: #343434;
-  font-weight: bold;
-}
-
-p.postcontent {
-  font-size: 15px;
-  color: #808080;
-  font-weight: bold;
-}
-
-/* Home Page */
-
-.homepage {
-  height: 100vh;
-}
-
-.divider {
-  height: 128px;
-}
-
-.spacedbox {
-  margin-bottom: 10px;
-}
-
-/* Chat Page */
-
-.chatbox {
-  padding: 24px 32px;
-  background: #faf9ff;
-}
-
-.chatboxscroller {
-  height: 75vh;
-  overflow: auto;
-}
-
-.chatboxheader {
-  font-weight: bold;
-  font-size: 16px;
-  color: #666666;
-}
-
-.chatboxtext {
-  font-size: 14px;
-  color: #747474;
-}
-
-.chatongoing {
-  font-weight: bold;
-  font-size: 16px;
-  text-align: end;
-  color: #5dce62;
-}
-
-.chatempty {
-  font-weight: bold;
-  font-size: 16px;
-  text-align: end;
-  color: #f07171;
-}
-
-/* Friends Page */
-
-.friendbox {
-  padding: 12px 16px;
-  background: #faf9ff;
-}
-
-.friendboxtextbold {
-  font-weight: 600;
-  font-size: 16px;
-  color: #666666;
-}
-
-.friendboxtextlight {
-  font-size: 16px;
-  color: #888888;
-}
-
-.nofriendtext {
-  text-align: center;
-  margin-top: 5vh;
-}
-
-/* Account Page */
-
-.accountbox {
-  overflow: auto;
-  height: 75vh;
-  padding: 16px;
-}
-
-.accountsidebar {
-  max-width: 256px;
-}
-
-.accounttext {
-  font-size: 16px;
-  color: #5c4374;
-}
-
-.centeredform {
-  margin: auto;
-}
-
-.descriptionbox {
-  max-width: 256px;
-}
-
-.previewbox {
-  min-width: 200px;
-}
-
-.profilepic {
-  height: 160px;
-  width: auto;
-  border: 4px double #bbbbbb;
-  border-radius: 160px;
-}
-
-.previewpic {
-  height: 64px;
-  width: auto;
-  border: 4px double #bbbbbb;
-  border-radius: 64px;
-}
-
-.profilebio {
-  text-align: center;
-}
-
-.previewtext {
-  font-size: 12px;
-}
-
-.profiletext {
-  font-size: 18px;
-}
-
-.profilename {
-  color: #232323;
-}
-
-.profileuser {
-  color: #666666;
-}
-
-/* Links */
 
 a,
 a:hover,
@@ -483,268 +71,36 @@ a:default:hover,
 a:disabled,
 a:disabled:hover {
   text-decoration: none;
-  color: #6b4eff;
 }
 
-a.link {
-  display: inline-block;
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  color: #6b4eff;
+/* Header */
+h2 {
+  font-size: 24px;
   font-weight: bold;
+  color: #421d61;
 }
 
-a.link.centeredlink {
-  width: 200px;
-  margin: auto;
+/* Main Containers */
+
+.container {
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 0%;
+  min-height: 0%;
 }
 
-.link:hover {
-  color: #6b4eff;
+.b-main {
+  height: 100vh;
 }
 
-.blocklink {
-  display: block;
-  height: 100%;
-  width: 100%;
+.b-divider {
+  height: 128px;
 }
 
-/* Buttons */
-
-.mootbutton {
-  display: block;
+.text-placeholder {
+  font-weight: 600;
+  font-size: 16px;
+  color: #666666;
   text-align: center;
-  background: #6b4eff;
-  color: #ffffff;
-  border: 2px solid #6b4eff;
-  border-radius: 48px;
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  width: 320px;
-  height: 64px;
-  margin: auto;
-  padding: 12px 32px;
-  text-decoration: none;
-}
-
-.mootbutton:disabled,
-.mootbutton:focus,
-.mootbutton:visited,
-.mootbutton:default,
-.mootbutton:active {
-  background-color: #6b4eff;
-  color: #ffffff;
-  border: 2px solid #6b4eff;
-  box-shadow: none;
-}
-
-.mootbutton:hover,
-.mootbutton:focus:hover {
-  background-color: #ffffff;
-  color: #6b4eff;
-  border: 2px solid #6b4eff;
-}
-
-.likebutton {
-  display: block;
-  text-align: center;
-  background: #f4edff;
-  color: #9c89fc;
-  border: 1px solid #bbbbbb;
-  border-radius: 12px;
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  width: 320px;
-  height: 64px;
-  margin: auto;
-  padding: auto;
-  text-decoration: none;
-}
-
-.likebutton:disabled,
-.likebutton:focus,
-.likebutton:visited,
-.likebutton:default,
-.likebutton:active {
-  background-color: #f4edff;
-  color: #9c89fc;
-  border: 0.5px solid #bbbbbb;
-  box-shadow: none;
-}
-
-.likebutton:disabled {
-  background-color: #f7f2ff;
-  color: #cbc1ff;
-  border: 0.5px solid #bbbbbb;
-  box-shadow: none;
-}
-
-.likebutton:hover,
-.likebutton:focus:hover {
-  background-color: #c7bcff;
-  color: #ffffff;
-  border: 0.5px solid #bbbbbb;
-}
-
-.closebutton,
-.closebutton:hover,
-.closebutton:disabled,
-.closebutton:visited,
-.closebutton:default,
-.closebutton:active,
-.closebutton:focus {
-  display: block;
-  background: #ffffff;
-  width: 32px;
-  height: 32px;
-  background: none;
-  border: none;
-  padding: initial;
-}
-
-.profilebutton,
-.profilebutton:hover,
-.profilebutton:disabled,
-.profilebutton:visited,
-.profilebutton:default,
-.profilebutton:active,
-.profilebutton:focus {
-  display: block;
-  background: #ffffff;
-  background: none;
-  border: none;
-  padding: initial;
-  text-decoration: none;
-}
-
-/* .closebutton {
-  display: block;
-  text-align: center;
-  background: #5e5e5e;
-  color: #ffffff;
-  border: 0.5px solid #707070;
-  border-radius: 12px;
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  font-weight: bold;
-  font-size: 12px;
-  width: 32px;
-  height: 32px;
-  text-decoration: none;
-}
-
-.closebutton:disabled,
-.closebutton:focus,
-.closebutton:visited,
-.closebutton:default,
-.closebutton:active {
-  background-color: #5e5e5e;
-  color: #ffffff;
-  border: 0.5px solid #707070;
-  box-shadow: none;
-}
-
-.closebutton:hover,
-.closebutton:focus:hover {
-  background-color: #ffffff;
-  color: #5e5e5e;
-  border: 0.5px solid #707070;
-} */
-
-.postchangebutton {
-  background: #faf9ff;
-  color: #aaaaaa;
-  border: 0px;
-  height: 100%;
-  width: 100%;
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  font-weight: bold;
-  font-size: 40px;
-  text-align: center;
-}
-
-.postchangebutton.left {
-  border-radius: 15px 0px 0px 15px;
-  margin-right: 100px;
-}
-
-.postchangebutton.right {
-  border-radius: 0px 15px 15px 0px;
-}
-
-.postchangebutton:disabled,
-.postchangebutton:focus,
-.postchangebutton:visited,
-.postchangebutton:default,
-.postchangebutton:active {
-  background: #faf9ff;
-  color: #cccccc;
-  box-shadow: none;
-}
-
-.postchangebutton:hover,
-.postchangebutton:focus:hover {
-  background-color: #f3f1ff;
-  color: #bbbbbb;
-}
-
-.noncentered {
-  margin: initial;
-}
-
-.medbutton {
-  width: 200px;
-  height: 48px;
-  font-size: 14px;
-  padding: 10px 0px;
-}
-
-.smallmedbutton {
-  width: 150px;
-  height: 40px;
-  font-size: 14px;
-  padding: 7px 0px;
-}
-
-.smallbutton {
-  width: 100px;
-  height: 32px;
-  font-size: 10px;
-  padding: 5px 0px;
-}
-
-.iconbutton {
-  display: block;
-  text-align: center;
-  background: none;
-  color: #ffffff;
-  border: none;
-  width: 32px;
-  height: 32px;
-  margin: auto;
-  padding: none;
-  text-align: center;
-  text-decoration: none;
-}
-
-/* Minor bug with account page, profile picture selection overlay */
-.btn:disabled {
-  opacity: 1;
-}
-
-/* STILL HAS MINOR BUG: When accessing Account page from other pages via dropdown, green border still appears */
-.iconbutton:hover,
-.iconbutton:focus,
-.iconbutton:focus:hover,
-.iconbutton:disabled,
-.iconbutton:visited,
-.iconbutton:default,
-.iconbutton:active,
-.btn-check:active,
-.btn-check:active + .btn-success,
-.btn-check:checked + .btn-success,
-.btn-success.active,
-.btn-success:active,
-.show > .btn-success.dropdown-toggle {
-  background-color: #ffffff;
+  margin-top: 5vh;
 }
