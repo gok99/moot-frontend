@@ -101,6 +101,8 @@ const PostAreaBase = (props) => {
         setAreaState({
           likeDisabled: userPostCheck,
           commentDisabled: userPostCheck,
+          leftDisabled: getIndex(postKeys, currPostUid) === 0,
+          rightDisabled: getIndex(postKeys, currPostUid) === posts.length - 1
         });
       } else {
         console.log("No posts available");
