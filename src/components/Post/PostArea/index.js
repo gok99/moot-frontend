@@ -98,6 +98,10 @@ const PostAreaBase = (props) => {
           likeCount: userLikes.length,
           commentCount: userComments.length
         });
+        setAreaState({
+          likeDisabled: userPostCheck,
+          commentDisabled: userPostCheck,
+        });
       } else {
         console.log("No posts available");
         // If there are no posts at all on moot
@@ -195,7 +199,7 @@ const PostAreaBase = (props) => {
    * Behaviour on left click
    */
   const onLeftClick = (event) => {
-    onButtonClick(event, n => n-1);
+    onButtonClick(event, n => n - 1);
   };
 
   /** 
