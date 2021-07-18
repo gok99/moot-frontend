@@ -7,7 +7,7 @@ import { SignIn, SignUp, PasswordForget } from '../Access';
 import Account from '../Account';
 import { Posts, Inbox, Settings } from '../Account';
 import Navigation from '../Navigation';
-import ProfilePreview from '../Account/ProfilePreview';
+// import ProfilePreview from '../Account/ProfilePreview';
 import Landing from '../Landing';
 import Home from '../Home';
 import Chat from '../Chat';

@@ -10,7 +10,15 @@ const PostContent = (props) => {
   const postTime = props.postTime;
   const postTitle = props.postTitle;
   const postContent = props.postContent;
+  const posterUid = props.posterUid;
+  const friends = props.friends;
   const [postContentState, setPostContentState] = useState(false);
+  var posterState = "an anonymous user";
+  for (let friend of friends) {
+    if (friend.friendUid === posterUid) {
+      posterState = friend.username;
+    }
+  }
 
   const toggleExpand = () => {
     setPostContentState(!postContentState);
@@ -24,7 +32,7 @@ const PostContent = (props) => {
             ? <p className="text-post meta">No more posts...<br /><br /></p>
             : myPost
               ? <p className="text-post meta">Posted by me on {postTime}<br /><br /></p>
-              : <p className="text-post meta">Posted by an anonymous user on {postTime}<br /><br /></p>
+              : <p className="text-post meta">Posted by {posterState} on {postTime}<br /><br /></p>
           }
         </Col>
       </Row>
