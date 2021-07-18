@@ -109,6 +109,10 @@ const PostAreaBase = (props) => {
           likeCount: userLikes.length,
           commentCount: userComments.length
         });
+        setAreaState({
+          likeDisabled: userPostCheck,
+          commentDisabled: userPostCheck,
+        });
       } else {
         console.log("No posts available");
         // If there are no posts at all on moot
