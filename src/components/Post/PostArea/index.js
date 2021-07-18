@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { withFirebase } from '../../Firebase';
 import PostContent from './PostContent';
 import PostComments from './PostComments';
+import { convertTime } from '../../utils.js';
 
 import '../../Styles/styles.css';
 import '../post.css';
@@ -50,7 +51,70 @@ const PostAreaBase = (props) => {
   });
   const getIndex = (keys, key, fn = n => n) => fn(keys.indexOf(key));
   const getValue = (values, keys, key, fn = n => n) => values[getIndex(keys, key, fn)];
-  // const [matchFindState, setMatchFindState] = useState(false);
+  const userCheck = (data) => data.some((user) => user.uid === uid);
+
+  /** 
+   * Retrieves the user data
+   */
+  const userData = (uid) => {
+    return fb.user(uid).once('value')
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      return {};
+    });
+  };
+
+  /** 
+   * Gets the availability of the user
+   */
+  const userAvail = (user) => {
+    user.then((data) => {
+      const chats = Object.values(data.chats);
+      return chats.some((chat) => !chat.active);
+    })
+    .catch((error) => {
+      console.error(error);
+      return false;
+    });
+  };
+
+  /** 
+   * Sets Post state and Area state
+   */
+  const setPostAreaState = (currPost) => {
+    setCurrentPost(currPost);
+    setCurrentPostUid(currPost.postUid);
+    const userPostCheck = (currPost.uid === uid);
+    const userLikes = !!currPost.userLikes ? Object.values(currPost.userLikes) : [];
+    const userComments = !!currPost.userComments ? Object.values(currPost.userComments) : [];
+    const userMatches = !!currPost.userMatches ? Object.values(currPost.userMatches) : [];
+    const postLiked = userCheck(userLikes);
+    const postMatched = userCheck(userMatches);
+
+    setPostState({
+      noPost: false,
+      myPost: userPostCheck,
+      postLiked,
+      postMatched,
+      likeCount: userLikes.length,
+      commentCount: userComments.length
+    });
+
+    setAreaState({
+      likeDisabled: userPostCheck,
+      commentDisabled: userPostCheck,
+      matchDisabled: userPostCheck || postMatched,
+      leftDisabled: getIndex(postKeys, currPost.postUid) === 0,
+      rightDisabled: getIndex(postKeys, currPost.postUid) === posts.length - 1
+    });
+  }
 
   /** 
    * Retrieves data from firebase
@@ -63,59 +127,17 @@ const PostAreaBase = (props) => {
         const postUids = Object.keys(snapshot.val()).reverse();
         const postsList = Object.values(snapshot.val()).reverse();
         const currPostUid = currentPostUid === '' ? postUids[0] : currentPostUid;
-        postsList.map((post) => {        
-          var date = new Date(post.postTime);
-          var hour = date.getHours() % 12 === 0 ? 12 : date.getHours() % 12;
-          var ampm = date.getHours() >= 12 ? "PM" : "AM";
-          var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes().toString() : date.getMinutes().toString();
-          var new_postTime = 
-            date.getDate().toString() + " " + 
-            date.toLocaleString('default', { month: 'long' }) + ", " + 
-            hour.toString().toString() + ":" +
-            minutes + " " + ampm;
-          post.postTime = new_postTime;
+        postsList.map((post) => {
+          post.postTime = convertTime(post.postTime);
           return post;
         });
         setPosts(postsList);
         setPostKeys(postUids);
-        setCurrentPostUid(currPostUid);
         
         // Set the current post to the first (newest) post
         const currPost = getValue(postsList, postUids, currPostUid);
-        const userPostCheck = (currPost.uid === uid);
-        setCurrentPost(currPost);
-        const userLikes = !!currPost.userLikes ? Object.values(currPost.userLikes) : [];
-        const userComments = !!currPost.userComments ? Object.values(currPost.userComments) : [];
-        const userMatches = !!currPost.userMatches ? Object.values(currPost.userMatches) : [];
-        let postLiked = false;
-        let postMatched = false;
-        for (let user of userLikes) {
-          if (user.uid === uid) {
-            postLiked = true;
-            break;
-          }
-        }
-        for (let user of userMatches) {
-          if (user.uid === uid) {
-            postMatched = true;
-            break;
-          }
-        }
-        setPostState({
-          noPost: false,
-          myPost: userPostCheck,
-          postLiked,
-          postMatched,
-          likeCount: userLikes.length,
-          commentCount: userComments.length
-        });
-        setAreaState({
-          likeDisabled: userPostCheck,
-          commentDisabled: userPostCheck,
-          matchDisabled: userPostCheck || postMatched,
-          leftDisabled: getIndex(postKeys, currPostUid) === 0,
-          rightDisabled: getIndex(postKeys, currPostUid) === posts.length - 1
-        });
+        setPostAreaState(currPost);
+ 
       } else {
         console.log("No posts available");
         // If there are no posts at all on moot
@@ -174,49 +196,19 @@ const PostAreaBase = (props) => {
     };
   }, [fb, currentPostUid, uid]);
 
+  /** 
+   * Behaviour on left/right button click
+   */
   const onButtonClick = (event, fn) => {
     const currPostUid = getValue(postKeys, postKeys, currentPostUid, fn);
     const currPost = getValue(posts, postKeys, currentPostUid, fn);
-    setCurrentPost(currPost);
-    const userPostCheck = (currPost.uid === uid);
-    const userLikes = !!currPost.userLikes ? Object.values(currPost.userLikes) : [];
-    const userComments = !!currPost.userComments ? Object.values(currPost.userComments) : [];
-    const userMatches = !!currPost.userMatches ? Object.values(currPost.userMatches) : [];
-    let postLiked = false;
-    let postMatched = false;
-    for (let user of userLikes) {
-      if (user.uid === uid) {
-        postLiked = true;
-        break;
-      }
-    }
-    for (let user of userMatches) {
-      if (user.uid === uid) {
-        postMatched = true;
-        break;
-      }
-    }
+    setPostAreaState(currPost);
+
     for (let post of commentedPosts) {
       if (post.postUid === currPost.postUid) {
         setCommentedPostKey(post.key);
       }
     }
-    setCurrentPostUid(currPostUid);
-    setPostState({
-      noPost: false,
-      myPost: userPostCheck,
-      postLiked,
-      postMatched,
-      likeCount: userLikes.length,
-      commentCount: userComments.length
-    });
-    setAreaState({
-      likeDisabled: userPostCheck,
-      commentDisabled: userPostCheck,
-      matchDisabled: userPostCheck || postMatched,
-      leftDisabled: getIndex(postKeys, currPostUid) === 0,
-      rightDisabled: getIndex(postKeys, currPostUid) === posts.length - 1
-    });
     event.preventDefault();
   };
 
@@ -324,48 +316,34 @@ const PostAreaBase = (props) => {
     });
   };
 
+  // Function to ensure that repeat entries are not entered into matchQueue
+  // (likerchat, likerfriends, posteruid)
+  const matchAsserts = async (poster, liker) => {
+    const posterP = await poster;
+    const likerP = await liker;
+    const likerChats = Object.values(likerP.chats);
+    const likerFriends = likerP.friends ? Object.values(likerP.friends) : [];
+
+    //if poster currently in activeChat
+    for (const chat of likerChats) {
+      if (posterP.profile.uid === chat.activematchUUID) {
+        return false;
+      }
+    }
+
+    // if poster/liker are friends
+    for (const friend of likerFriends) {
+      if (posterP.profile.uid === friend.activematchUUID) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   /** 
    * Behaviour on match
    */
-
-  // Function to ensure that repeat entries are not entered into matchQueue
-  const matchAsserts = async (matchQueue, poster, liker) => {
-    return await matchQueue
-    .then(async (data) => {
-      const posterP = await poster;
-      const likerP = await liker;
-      //const matchQueue = Object.values(data);
-      const likerChats = Object.values(likerP.chats);
-      const likerFriends = likerP.friends ? Object.values(likerP.friends) : [];
-
-      // // if poster/liker pair in matchQueue
-      // for (const match of matchQueue) {
-      //   if ((match.posterUid === posterP.uid && match.likerUid === likerP.uid) ||
-      //     (match.posterUid === likerP.uid && match.likerUid === posterP.uid)) {
-      //     return false;
-      //   }
-      // }
-
-      //if poster currently in activeChat
-      for (const chat of likerChats) {
-        if (posterP.profile.uid === chat.activematchUUID) {
-          return false;
-        }
-      }
-      // if poster/liker are friends
-      for (const friend of likerFriends) {
-        if (posterP.profile.uid === friend.activematchUUID) {
-          return false;
-        }
-      }
-      return true;
-    })
-    .catch((error) => {
-      console.error(error);
-      return false;
-    });
-  }
-
   const onMatch = async (event) => {
     if (window.confirm("Are you sure you want to queue a match?")) {
       const matchQueue = fb.matchQueue().once('value').then((snapshot) => {
@@ -379,66 +357,17 @@ const PostAreaBase = (props) => {
         console.error(error);
       });
 
-      // Gets the availability of the liker
-      const liker = fb.user(uid).once('value').then((snapshot) => {
-        if (snapshot.exists()) {
-          return snapshot.val();
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-      const likerAvail = liker.then((data) => {
-        const chats = Object.values(data.chats);
-        for (let chat of chats) {
-          if (!chat.active) {
-            return true;
-          }
-        }
-        return false;
-      })
-      .catch((error) => {
-        console.error(error);
-        return false;
-      });
-
-      // Gets the availability of the poster
-      const poster = fb.user(currentPost.uid).once('value').then((snapshot) => {
-        if (snapshot.exists()) {
-          return snapshot.val();
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-      const posterAvail = poster.then((data) => {
-        const chats = Object.values(data.chats);
-        for (let chat of chats) {
-          if (!chat.active) {
-            return true;
-          }
-        }
-        return false;
-      })
-      .catch((error) => {
-        console.error(error);
-        return false;
-      });
-
       // Add new match into the matchQueue
-      const likerUid = fb.auth.currentUser.uid;
+      const liker = userData(uid);
+      const poster = userData(currentPost.uid);
+      const likerUid = uid;
       const posterUid = currentPost.uid;
-      const postUid = currentPost.postUid;
+      const likerAvail = userAvail(liker);
+      const posterAvail = userAvail(poster);
+      const postUid = currentPostUid;
       const timeMatched = new Date().getTime();
 
-      const asserts = await matchAsserts(matchQueue, liker, poster);
-      if (asserts) {
+      if (await matchAsserts(liker, poster)) {
         var newMatch = fb.matchQueue().push();
         newMatch.set({
           likerUid: likerUid,
@@ -462,7 +391,7 @@ const PostAreaBase = (props) => {
       // Write matched post to user in database
       var newMatchPost = fb.userMatchedPosts(uid).push();
       newMatchPost.set({
-        postUid: currentPost.postUid,
+        postUid: currentPostUid,
         matchedTime,
         key: newMatchPost.key
       }).catch((error) => console.log(error));
@@ -498,7 +427,7 @@ const PostAreaBase = (props) => {
           </Col>
           <Col md="auto">
             <Button className="btn-postcreation btn-match d-flex justify-content-md-center" type="button" disabled={ areaState.matchDisabled } onClick={onMatch}>
-              { postState.postMatched ? "Match queued" : "Match me!" }
+              { postState.postMatched ? "..." : "Match me!" }
             </Button>
           </Col>
           <Col>
