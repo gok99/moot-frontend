@@ -455,7 +455,7 @@ const PostAreaBase = (props) => {
           }
         </Row>
         <hr />
-        <PostComments fb={fb} uid={uid} postUid={currentPost.postUid} commentedPostKey={commentedPostKey} comments={!!currentPost.userComments ? Object.values(currentPost.userComments) : []}></PostComments>
+        <PostComments fb={fb} uid={uid} postUid={currentPost.postUid} posterUid={currentPost.uid} commentedPostKey={commentedPostKey} comments={!!currentPost.userComments ? Object.values(currentPost.userComments) : []}></PostComments>
       </Col>
     </Row>
   );

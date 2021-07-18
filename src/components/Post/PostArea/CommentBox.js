@@ -15,6 +15,7 @@ const CommentBox = (props) => {
   const commentedPostKey = props.commentedPostKey;
   const uid = props.uid;
   const postUid = props.postUid;
+  const commentByPoster = props.commentByPoster;
   const newTime = convertTime(commentTime);
 
   const deleteComment = (event) => {
@@ -31,7 +32,7 @@ const CommentBox = (props) => {
     <>
       <Row>
         <Col md={8} className="d-flex justify-content-start">
-          <p className="text-post meta">Comment by {myComment ? "me" : "anonymous user"} on {newTime}:</p>
+          <p className="text-post meta">Comment by {myComment ? "me" : commentByPoster ? "OP" : "anonymous user"} on {newTime}:</p>
         </Col>
         <Col md={4} className="d-flex justify-content-end">
         {
