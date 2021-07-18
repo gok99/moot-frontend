@@ -1,6 +1,8 @@
 import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 
+import { convertTime } from '../../utils.js';
+
 import '../../Styles/styles.css';
 import '../post.css';
 
@@ -13,17 +15,8 @@ const CommentBox = (props) => {
   const commentedPostKey = props.commentedPostKey;
   const uid = props.uid;
   const postUid = props.postUid;
-         
-  var date = new Date(commentTime);
-  var hour = date.getHours() % 12 === 0 ? 12 : date.getHours() % 12;
-  var ampm = date.getHours() >= 12 ? "PM" : "AM";
-  var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes().toString() : date.getMinutes().toString();
-  var new_commentTime = 
-    date.getDate().toString() + " " + 
-    date.toLocaleString('default', { month: 'long' }) + ", " + 
-    hour.toString().toString() + ":" +
-    minutes + " " + ampm;
-  
+  const newTime = convertTime(commentTime);
+
   const deleteComment = (event) => {
     fb.deletePostUserComments(postUid, commentKey);
     fb.deleteUserCommentedPosts(uid, commentedPostKey);
@@ -38,7 +31,7 @@ const CommentBox = (props) => {
     <>
       <Row>
         <Col md={8} className="d-flex justify-content-start">
-          <p className="text-post meta">Comment by {myComment ? "me" : "anonymous user"} on {new_commentTime}:</p>
+          <p className="text-post meta">Comment by {myComment ? "me" : "anonymous user"} on {newTime}:</p>
         </Col>
         <Col md={4} className="d-flex justify-content-end">
         {
