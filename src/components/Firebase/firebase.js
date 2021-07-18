@@ -47,12 +47,21 @@ class Firebase {
   deletePostUserComments = (postUid, key) => this.db.ref(`posts/${postUid}/userComments/${key}`).remove();
   postUserMatches = postUid => this.db.ref(`posts/${postUid}/userMatches`);
 
+  // *** Interest Tags API ***
+  tags = () => this.db.ref(`tags`);
+  tag = (name) => this.db.ref(`tags/${name}`);
+  tagPosts = (name) => this.db.ref(`tags/${name}/posts`);
+
+  // *** Admin API ***
+  admins = () => this.db.ref(`admins`);
+
   // *** User API ***
   user = (uid) => this.db.ref(`users/${uid}`);
   userDescription = (uid) => this.db.ref(`users/${uid}/profile/description`);
   userProfile = (uid) => this.db.ref(`users/${uid}/profile`);
   userChats = (uid) => this.db.ref(`users/${uid}/chats`);
   userFriends = (uid) => this.db.ref(`users/${uid}/friends`);
+  userTags = (uid) => this.db.ref(`users/${uid}/tags`);
   userPosts = (uid) => this.db.ref(`users/${uid}/posts`);
   userLikedPosts = (uid) => this.db.ref(`users/${uid}/likedPosts`);
   deleteUserLikedPosts = (uid, key) => this.db.ref(`users/${uid}/likedPosts/${key}`).remove();

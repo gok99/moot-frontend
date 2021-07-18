@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
@@ -53,18 +53,35 @@ const AppRouter = (props) => {
   //   }
   // });
 
+  const fb = props.firebase;
   const authUser = props.authUser;
   const [navState, setNavState] = useState(true);
+  const [adminCheck, setAdminCheck] = useState(false);
   const toggleNavBar = () => {
     setNavState(!navState);
   }
+
+  useEffect(() => {
+    const adminListener = fb.admins().on('value', (snapshot) => {
+      if (snapshot.exists()) {
+        const check = Object.values(snapshot.val()).map((admin) => admin.uid).includes(fb.auth.currentUser.uid);
+        setAdminCheck(check);
+      } else {
+        console.log("No admins");
+      }
+    });
+
+    return () => {
+      fb.admins().off('value', adminListener);
+    }
+  }, []);
 
   return (
     <Router>
       <div>
         { !!authUser
           ? <div>
-              <Navigation authUser={authUser} navState={navState}/>
+              <Navigation authUser={authUser} navState={navState} adminCheck={adminCheck}/>
             </div>
           : null
         }
