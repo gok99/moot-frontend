@@ -18,8 +18,8 @@ const ProfilePreviewBase = (props) => {
     description: '',
     pid: 0
   });
-  const [tagsList, setTagsList] = useState([]);
-  const [userTagsList, setUserTagsList] = useState([]);
+  // const [tagsList, setTagsList] = useState([]);
+  // const [userTagsList, setUserTagsList] = useState([]);
 
   useEffect(() => {
     const fb = props.firebase;
@@ -37,24 +37,24 @@ const ProfilePreviewBase = (props) => {
         console.log("No data available");
       }
     });
-    const tagsListener = fb.tags().on('value', (snapshot) => {
-      if (snapshot.exists()) {
-        setTagsList(Object.keys(snapshot.val()));
-      } else {
-        console.log("No data available");
-      }
-    });
-    const userTagsListener = fb.userTags(uid).on('value', (snapshot) => {
-      if (snapshot.exists()) {
-        setUserTagsList(Object.keys(snapshot.val()));
-      } else {
-        console.log("No data available");
-      }
-    });
+    // const tagsListener = fb.tags().on('value', (snapshot) => {
+    //   if (snapshot.exists()) {
+    //     setTagsList(Object.keys(snapshot.val()));
+    //   } else {
+    //     console.log("No data available");
+    //   }
+    // });
+    // const userTagsListener = fb.userTags(uid).on('value', (snapshot) => {
+    //   if (snapshot.exists()) {
+    //     setUserTagsList(Object.keys(snapshot.val()));
+    //   } else {
+    //     console.log("No data available");
+    //   }
+    // });
     return () => {
       fb.userProfile(uid).off('value', profileListener);
-      fb.tags().off('value', tagsListener);
-      fb.userTags(uid).off('value', userTagsListener);
+      // fb.tags().off('value', tagsListener);
+      // fb.userTags(uid).off('value', userTagsListener);
     }
   }, []);
   // Empty Dependency Array is temporary, try and reduce burden on profilepreview?
@@ -67,8 +67,8 @@ const ProfilePreviewBase = (props) => {
         description={profile.description}
         pid={profile.pid}
         overlayState={props.overlayState}
-        tagsList={tagsList}
-        userTagsList={userTagsList}
+        // tagsList={tagsList}
+        // userTagsList={userTagsList}
       >
       </ProfileDetailsPreview>
     </Col>
