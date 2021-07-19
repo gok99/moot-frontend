@@ -14,7 +14,7 @@ import icl from '../../../assets/icon_l.png';
  * Functional Container Component that renders the Account Dropdown Menu.
  */
 const NavIconMenuBase = (props) => {
-  const adminCheck = props.adminCheck;
+  // const adminCheck = props.adminCheck;
   const history = useHistory();
 
   const onClick = (dest, event) => {
@@ -84,14 +84,14 @@ const NavIconMenuBase = (props) => {
             Settings
           </Dropdown.Item>
         </Button>
-        { adminCheck
+        {/* { adminCheck
           ? <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.ADMIN, event)}>
               <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
                 Admin
               </Dropdown.Item>
             </Button>
           : null
-        }
+        } */}
         <Button className="btn-accountmenu" type="submit" onClick={(event) => onSignOut(ROUTES.SIGN_IN, event)}>
           <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
             Log Out

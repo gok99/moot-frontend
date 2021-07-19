@@ -16,7 +16,7 @@ import icl from '../../../assets/icon_l.png';
 /**
  * Functional Presentational Component that displays the Icons on the Navigation Bar.
  */
-const NavIcon = ({ adminCheck }) => {
+const NavIcon = () => {
   return (
     <Row className="d-flex justify-content-center">
       <Col md="auto">
@@ -32,7 +32,7 @@ const NavIcon = ({ adminCheck }) => {
         <NavIconItem altname="Library" dest={ROUTES.LIBRARY} image={icl}></NavIconItem>
       </Col>
       <Col md="auto">
-        <NavIconAccount adminCheck={adminCheck}></NavIconAccount>
+        <NavIconAccount /*adminCheck={adminCheck}*/></NavIconAccount>
       </Col>
     </Row>
   );

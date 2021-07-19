@@ -9,11 +9,11 @@ import '../navigation.css';
 /**
  * Functional Presentational Component that displays the Icon Menu on the Navigation Bar (Smaller Screens).
  */
-const NavMenu = ({ adminCheck }) => {
+const NavMenu = () => {
   return (
     <Row className="d-flex justify-content-start">
       <Col md="auto">
-        <NavIconMenu adminCheck={adminCheck}></NavIconMenu>
+        <NavIconMenu /*adminCheck={adminCheck}*/></NavIconMenu>
       </Col>
     </Row>
   );

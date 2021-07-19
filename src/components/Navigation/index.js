@@ -14,7 +14,7 @@ import './navigation.css';
 const Navigation = (props) => {
   const authUser = props.authUser;
   const navState = props.navState;
-  const adminCheck = props.adminCheck;
+  // const adminCheck = props.adminCheck;
 
   return (
     !authUser
@@ -27,12 +27,12 @@ const Navigation = (props) => {
                 <NavLogo />
               </Col>
               <Col md={4} className="navcol-icon">
-                <NavIcon adminCheck={adminCheck}></NavIcon>
+                <NavIcon /*adminCheck={adminCheck}*/></NavIcon>
               </Col>
             </Container>
             <Container className="navbar-alt">
               <Col xs={4} className="navcol-menu">
-                <NavMenu adminCheck={adminCheck}></NavMenu>
+                <NavMenu /*adminCheck={adminCheck}*/></NavMenu>
               </Col>
               <Col xs={4} className="navcol-logo">
                 <NavLogo />
@@ -47,12 +47,12 @@ const Navigation = (props) => {
                 <NavLogo />
               </Col>
               <Col md={4} className="navcol-icon">
-                <NavIcon adminCheck={adminCheck}></NavIcon>
+                <NavIcon /*adminCheck={adminCheck}*/></NavIcon>
               </Col>
             </Container>
             <Container className="navbar-alt">
               <Col xs={4} className="navcol-menu">
-                <NavMenu adminCheck={adminCheck}></NavMenu>
+                <NavMenu /*adminCheck={adminCheck}*/></NavMenu>
               </Col>
               <Col xs={4} className="navcol-logo">
                 <NavLogo />
