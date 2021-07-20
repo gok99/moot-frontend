@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-// import AdminForm from './AdminForm';
+import AdminForm from './AdminForm';
 
 import '../Styles/styles.css';
 
@@ -14,8 +14,7 @@ const Admin = (props) => {
         <Col xs={10}>
           <Row>
             <Col xs={12}>
-              <p>Admin</p>
-              {/* <AdminForm /> */}
+              <AdminForm />
             </Col>
           </Row>
         </Col>

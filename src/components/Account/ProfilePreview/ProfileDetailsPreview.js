@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import ProfilePicture from '../ProfilePicture';
 // import ProfileTagsPreview from './ProfileTagsPreview';
 import { PostCreation } from '../../Post';
+import Tag from '../../Tag';
 
 import '../../Styles/styles.css';
 import '../account.css';
@@ -40,6 +41,7 @@ const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlaySt
       </Row>
       <hr className={overlayState}></hr>
       <PostCreation /*tagsList={tagsList}*/></PostCreation>
+      <Tag tagName="try" />
     </div>
   );
 };

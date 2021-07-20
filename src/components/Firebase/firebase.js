@@ -49,6 +49,8 @@ class Firebase {
 
   // *** Interest Tags API ***
   tags = () => this.db.ref(`tags`);
+  tagRequests = () => this.db.ref(`tags/requests`);
+  deleteTagRequest = (key) => this.db.ref(`tags/requests/${key}`).remove();
   tag = (name) => this.db.ref(`tags/${name}`);
   tagPosts = (name) => this.db.ref(`tags/${name}/posts`);
 

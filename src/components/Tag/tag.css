@@ -1,0 +1,49 @@
+.tag {
+  background: #000000;
+  border-radius: 12px;
+  padding: 0;
+  padding-left: 10px;
+}
+
+.btn-tag,
+.btn-tag:visited,
+.btn-tag:default,
+.btn-tag:focus {
+  background: #666666;
+  color: #ffffff;
+  border: none;
+  height: 24px;
+  margin-left: 8px;
+  border-radius: 0px 12px 12px 0px;
+  text-align: center;
+  padding: 0;
+  padding-left: 8px;
+  padding-right: 12px;
+  padding-bottom: 28px;
+}
+
+.btn-tag.alt {
+  padding-left: 10px;
+  padding-right: 15px;
+}
+
+.btn-tag:disabled {
+  background: #666666;
+  color: #ffffff;
+  border: none;
+  opacity: 0.4 !important;
+}
+
+.btn-tag:hover,
+.btn-tag:focus:hover {
+  background: #555555;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-tag:focus:active,
+.btn-tag:active {
+  background-color: #444444;
+  color: #ffffff;
+  border: none;
+}
