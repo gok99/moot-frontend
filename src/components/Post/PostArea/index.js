@@ -55,24 +55,6 @@ const PostAreaBase = (props) => {
   const userCheck = (data) => data.some((user) => user.uid === uid);
 
   /** 
-   * Retrieves the user data
-   */
-  const userData = (uid) => {
-    return fb.user(uid).once('value')
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        return snapshot.val();
-      } else {
-        console.log("No data available");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      return {};
-    });
-  };
-
-  /** 
    * Gets the availability of the user
    */
   const userAvail = (user) => {
@@ -359,8 +341,8 @@ const PostAreaBase = (props) => {
     if (window.confirm("Are you sure you want to queue a match?")) {
 
       // Add new match into the matchQueue
-      const liker = userData(uid);
-      const poster = userData(currentPost.uid);
+      const liker = fb.userData(uid);
+      const poster = fb.userData(currentPost.uid);
       const likerUid = uid;
       const posterUid = currentPost.uid;
       const likerAvail = userAvail(liker);
