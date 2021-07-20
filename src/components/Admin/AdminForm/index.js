@@ -13,18 +13,40 @@ const AdminFormBase = (props) => {
   const fb = props.firebase;
   const [currentTag, setCurrentTag] = useState('');
   const [requests, setRequests] = useState([]);
+
   fb.tagRequests().once('value')
   .then((snapshot) => {
     if (snapshot.exists()) {
       return snapshot.val();
     } else {
-      console.log("No admins here");
+      console.log("No requests");
       return {};
     }
   })
   .then((data) => {
     setRequests(Object.values(data));
   });
+
+  const resetTags = (event) => {
+    if (window.confirm("Are you sure you want to reset all tag posts?")) {
+      if (window.confirm("Are you REALLY sure you want to reset all tag posts?")) {
+        fb.tags().once('value')
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            return Object.keys(snapshot.val());
+          } else {
+            console.log("No data???");
+            return [];
+          }
+        })
+        .then((tagList) => {
+          for (let tag of tagList) {
+            fb.deleteTagPosts(tag);
+          }
+        });
+      }
+    }
+  }
 
   const onSubmit = (event) => {
     fb.tags().child(currentTag).set({
@@ -70,6 +92,7 @@ const AdminFormBase = (props) => {
         </Col>
         <Col md={3}>{/* Divider */}</Col>
       </Row>
+      <Button className="btn-adminform btn-reset mt-3 mb-1" onClick={resetTags}>Reset Tag Posts (Use with Caution)</Button>
     </>
   );
 }

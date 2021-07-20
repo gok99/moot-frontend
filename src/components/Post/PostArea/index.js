@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { withFirebase } from '../../Firebase';
 import PostContent from './PostContent';
 import PostComments from './PostComments';
+import PostTags from './PostTags';
 import { convertTime } from '../../utils.js';
 
 import '../../Styles/styles.css';
@@ -27,6 +28,7 @@ const PostAreaBase = (props) => {
     postContent: '',
     postTime: 0,
     postUid: '',
+    postTags: {},
     userLikes: {},
     userComments: {}
   });
@@ -50,6 +52,7 @@ const PostAreaBase = (props) => {
     comment: ''
   });
   const [userFriends, setUserFriends] = useState([]);
+  const [userTags, setUserTags] = useState([]);
   const getIndex = (keys, key, fn = n => n) => fn(keys.indexOf(key));
   const getValue = (values, keys, key, fn = n => n) => values[getIndex(keys, key, fn)];
   const userCheck = (data) => data.some((user) => user.uid === uid);
@@ -166,45 +169,39 @@ const PostAreaBase = (props) => {
       }
     });
 
-    // Listener for user likes
-    const likedPostListener = fb.userLikedPosts(uid).on('value', (snapshot) => {
+    // Listener for current user data
+    const userListener = fb.user(uid).on('value', (snapshot) => {
       if (snapshot.exists()) {
-        setLikedPosts(Object.values(snapshot.val()));
-      } else {
-        console.log("No likes available");
-      }
-    });
+        const currUserData = snapshot.val();
 
-    // Listener for user comments
-    const commentedPostListener = fb.userCommentedPosts(uid).on('value', (snapshot) => {
-      if (snapshot.exists()) {
-        const commentedPostsList = Object.values(snapshot.val());
+        // Liked Posts
+        setLikedPosts(Object.values(currUserData.likedPosts));
+
+        // Commented Posts
+        const commentedPostsList = Object.values(currUserData.commentedPosts);
         setCommentedPosts(commentedPostsList);
         for (let post of commentedPostsList) {
           if (post.postUid === currentPost.postUid) {
             setCommentedPostKey(post.key);
           }
         }
-      } else {
-        console.log("No comments available");
-      }
-    });
 
-    // Listener for user friends
-    const friendsListener = fb.userFriends(uid).on('value', (snapshot) => {
-      if (snapshot.exists()) {
-        setUserFriends(Object.values(snapshot.val()));
+        // User friends
+        setUserFriends(Object.values(currUserData.friends));
+
+        // User tags
+        setUserTags(!!currUserData.tags ? Object.keys(currUserData.tags) : []);
+
       } else {
-        console.log("No friends available");
+        console.log("No data available");
       }
     });
 
     return () => {
       fb.posts().off('value', postListener);
-      fb.userLikedPosts(uid).off('value', likedPostListener);
-      fb.userCommentedPosts(uid).off('value', commentedPostListener);
-      fb.userFriends(uid).off('value', friendsListener);
+      fb.user(uid).off('value', userListener);
     };
+    // eslint-disable-next-line
   }, [fb, currentPostUid, uid]);
 
   /** 
@@ -420,6 +417,8 @@ const PostAreaBase = (props) => {
         <hr />
         <PostContent noPost={postState.noPost} myPost={postState.myPost} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends}></PostContent>
         <hr />
+        <PostTags postTags={!!currentPost.postTags ? Object.values(currentPost.postTags) : []} uid={uid} userTags={userTags} />
+        <hr />
         <Row className="mb-2">
           <Col md="auto">
             <Button className="btn-like d-flex justify-content-md-center" type="button" disabled={ areaState.likeDisabled } onClick={onLike}>
@@ -447,22 +446,29 @@ const PostAreaBase = (props) => {
           { areaState.commentDisabled
               ? null
               : <Form className="mt-2" onSubmit={onCommentSubmit}>
-                  <Form.Group controlId="comment">
-                    <Form.Control
-                      name="currentComment" 
-                      type="text"
-                      as="textarea"
-                      placeholder="Reply to this post!"
-                      value={currentComment.comment}
-                      // defaultValue={ data.description }
-                      onChange={onChange} />
-                  </Form.Group>
-                  <Button  
-                    className="btn-postcreation btn-comment mt-4 mb-2"
-                    type="submit"
-                    disabled={currentComment.comment === ''}>
-                    Reply
-                  </Button>
+                  <Row>
+                    <Col >
+                      <Form.Group controlId="comment">
+                        <Form.Control
+                          className="input-comment"
+                          name="currentComment" 
+                          type="text"
+                          as="textarea"
+                          placeholder="Reply to this post!"
+                          value={currentComment.comment}
+                          // defaultValue={ data.description }
+                          onChange={onChange} />
+                      </Form.Group>
+                    </Col>
+                    <Col md="auto">
+                      <Button  
+                        className="btn-postcreation btn-comment"
+                        type="submit"
+                        disabled={currentComment.comment === ''}>
+                        Reply
+                      </Button>
+                    </Col>
+                  </Row>
                 </Form>
           }
         </Row>

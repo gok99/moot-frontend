@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Badge, Button } from 'react-bootstrap';
 
 import './tag.css';
 
-const Tag = ({ tagName, owned, onTagPress }) => {
-  const [ownState, setOwnState] = useState(true); //change to owned
-  const onClick = () => {
-    // onTagPress(ownState); 
+const Tag = ({ tagName, owned, onTagPress, postCreationCheck }) => {
+  var ownedState = owned;
+  const onClick = (event) => {
     // This function should be one that adds / removes tags, takes in a boolean: if true, remove; if false, add.
-    setOwnState(!ownState);
+    (onTagPress(ownedState, tagName))(event); 
+    ownedState = !ownedState;
   };
 
   return (
-    <Badge pill className="tag" bg="primary">
+    <Badge pill className="tag mb-1" bg="primary">
       {tagName}
-      <Button className={ ownState ? "btn-tag alt" : "btn-tag" } onClick={onClick}>
-        { ownState ? "-" : "+" }  
+      <Button className="btn-tag" onClick={postCreationCheck ? onTagPress(tagName) : onClick}>
+        { ownedState ? "-" : "+" }  
       </Button>  
     </Badge>
   );

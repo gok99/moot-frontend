@@ -22,7 +22,7 @@ const FormET = (props) => {
                 type="text"
                 className="input-text-account"
                 value={email}
-                disabled>
+                readOnly>
               </Form.Control>
             </Form.Group>
           </Form>
@@ -40,7 +40,7 @@ const FormET = (props) => {
                 type="text"
                 className="input-text-account"
                 value={props.teleUser === '' ? '' : teleUser}
-                disabled>
+                readOnly>
               </Form.Control>
             </Form.Group>
           </Form>

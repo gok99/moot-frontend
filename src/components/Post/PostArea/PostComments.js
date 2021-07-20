@@ -18,7 +18,7 @@ const PostComments = (props) => {
   if (comments.length === 0) {
     return (
       <Row>
-        <p className="d-flex justify-content-center text-post content">This post has no replies...</p>
+        <p className="d-flex justify-content-start text-post content">This post has no comments.</p>
       </Row>
     );
   } else {

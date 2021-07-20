@@ -53,6 +53,7 @@ class Firebase {
   deleteTagRequest = (key) => this.db.ref(`tags/requests/${key}`).remove();
   tag = (name) => this.db.ref(`tags/${name}`);
   tagPosts = (name) => this.db.ref(`tags/${name}/posts`);
+  deleteTagPosts = (name) => this.db.ref(`tags/${name}/posts`).remove();
 
   // *** Admin API ***
   admins = () => this.db.ref(`admins`);
@@ -64,6 +65,7 @@ class Firebase {
   userChats = (uid) => this.db.ref(`users/${uid}/chats`);
   userFriends = (uid) => this.db.ref(`users/${uid}/friends`);
   userTags = (uid) => this.db.ref(`users/${uid}/tags`);
+  deleteUserTags = (uid, name) => this.db.ref(`users/${uid}/tags/${name}`).remove();
   userPosts = (uid) => this.db.ref(`users/${uid}/posts`);
   userLikedPosts = (uid) => this.db.ref(`users/${uid}/likedPosts`);
   deleteUserLikedPosts = (uid, key) => this.db.ref(`users/${uid}/likedPosts/${key}`).remove();

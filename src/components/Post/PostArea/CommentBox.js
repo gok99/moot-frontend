@@ -1,5 +1,5 @@
-import React from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Row, Col, Button, Form } from 'react-bootstrap';
 
 import { convertTime } from '../../utils.js';
 
@@ -12,9 +12,11 @@ const CommentBox = (props) => {
   const postUid = props.postUid;
   const poster = props.poster;
   const commentedPostKey = props.commentedPostKey;
+  const [editState, setEditState] = useState(false);
 
   const commentKey = props.commentKey;
   const commentContent = props.commentContent;
+  const [currentComment, setCurrentComment] = useState(commentContent);
   const commentTime = props.commentTime;
   const myComment = props.myComment;
   const newTime = convertTime(commentTime);
@@ -25,9 +27,25 @@ const CommentBox = (props) => {
     event.preventDefault();
   };
 
-  // const editComment = (event) => {
-  //   event.preventDefault();
-  // };
+  const editComment = (event) => {
+    setEditState(true);
+    event.preventDefault();
+  };
+
+  const onSubmit = (event) => {
+    fb.postUserComments(postUid).child(commentKey).update({
+      comment: currentComment
+    })
+    fb.userCommentedPosts(uid).child(commentedPostKey).update({
+      comment: currentComment
+    })
+    setEditState(false);
+    event.preventDefault();
+  }
+
+  const onChange = (event) => {
+    setCurrentComment(event.target.value);
+  };
 
   return (
     <>
@@ -38,18 +56,46 @@ const CommentBox = (props) => {
         <Col md={4} className="d-flex justify-content-end">
         {
           myComment
-            ? /*<Button className="btn-postexpand" type="button" onClick={editComment}>
-                Edit
-              </Button>*/
-              <Button className="btn-postexpand" type="button" onClick={deleteComment}>
-                Delete
-              </Button>
+            ? <>
+                <Button className="btn-postexpand comment" type="button" onClick={editComment}>
+                  Edit
+                </Button>
+                <Button className="btn-postexpand comment" type="button" onClick={deleteComment}>
+                  Delete
+                </Button>
+              </>
             : null
         }
         </Col>
       </Row>
       <Row className="mb-3">
-        <p className="text-post content">{commentContent}</p>
+        { editState
+            ? <Form className="mt-2" onSubmit={onSubmit}>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="comment">
+                        <Form.Control
+                          className="input-comment"
+                          name="currentComment" 
+                          type="text"
+                          as="textarea"
+                          placeholder="Edit your comment!"
+                          value={currentComment}
+                          onChange={onChange} />
+                      </Form.Group>
+                    </Col>
+                    <Col md="auto">
+                      <Button  
+                        className="btn-postcreation btn-comment"
+                        type="submit"
+                        disabled={currentComment === ''}>
+                        Edit Comment
+                      </Button>
+                    </Col>
+                  </Row>
+                </Form>
+            : <p className="text-post content">{commentContent}</p>
+        }
       </Row>
     </>
   );

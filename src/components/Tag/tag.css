@@ -1,34 +1,29 @@
 .tag {
-  background: #000000;
+  background: #7e5ab8;
   border-radius: 12px;
   padding: 0;
   padding-left: 10px;
+  margin: 0px 2px;
 }
 
 .btn-tag,
 .btn-tag:visited,
 .btn-tag:default,
 .btn-tag:focus {
-  background: #666666;
+  background: #5f3d96;
   color: #ffffff;
   border: none;
   height: 24px;
+  width: 32px;
   margin-left: 8px;
   border-radius: 0px 12px 12px 0px;
   text-align: center;
   padding: 0;
-  padding-left: 8px;
-  padding-right: 12px;
   padding-bottom: 28px;
 }
 
-.btn-tag.alt {
-  padding-left: 10px;
-  padding-right: 15px;
-}
-
 .btn-tag:disabled {
-  background: #666666;
+  background: #5f3d96;
   color: #ffffff;
   border: none;
   opacity: 0.4 !important;
@@ -36,14 +31,14 @@
 
 .btn-tag:hover,
 .btn-tag:focus:hover {
-  background: #555555;
+  background: #4f2d85;
   color: #ffffff;
   border: none;
 }
 
 .btn-tag:focus:active,
 .btn-tag:active {
-  background-color: #444444;
+  background-color: #31165c;
   color: #ffffff;
   border: none;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Col } from 'react-bootstrap';
 
 import { withFirebase } from '../Firebase';
@@ -15,8 +15,10 @@ import './navigation.css';
  */
 const Navigation = (props) => {
   const authUser = props.authUser;
+  const uid = props.firebase.auth.currentUser.uid;
+  const [adminCheck, setAdminCheck] = useState(false);
   
-  const adminCheck = props.firebase.admins().once('value')
+  props.firebase.admins().once('value')
   .then((snapshot) => {
     if (snapshot.exists()) {
       return snapshot.val();
@@ -25,15 +27,8 @@ const Navigation = (props) => {
       return {};
     }
   }).then((data) => {
-    const adminsList = Object.values(data[0]);
-    for (let admin of data) {
-      if (admin.uid === props.firebase.auth.currentUser.uid) {
-        return true;
-      }
-    }
-    return false;
+    setAdminCheck(Object.values(data).map(admin => admin.uid).includes(uid));
   });
-  console.log(adminCheck);
 
   return (
     !authUser
