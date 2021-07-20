@@ -11,6 +11,8 @@ const PostComments = (props) => {
   const comments = props.comments;
   const uid = props.uid;
   const postUid = props.postUid;
+  const posterUid = props.posterUid;
+  const friends = props.friends;
   const commentedPostKey = props.commentedPostKey;
 
   if (comments.length === 0) {
@@ -21,7 +23,19 @@ const PostComments = (props) => {
     );
   } else {
     const commentsList = comments.map((commentObj) => {
-      return <Row><CommentBox fb={fb} commentKey={commentObj.key} commentedPostKey={commentedPostKey} uid={uid} postUid={postUid} myComment={uid === commentObj.uid} commentContent={commentObj.comment} commentTime={commentObj.commentTime} ></CommentBox></Row>
+      var commenterState = "anonymous user";
+      for (let friend of friends) {
+        if (friend.friendUid === commentObj.uid) {
+          commenterState = friend.username;
+        }
+      }
+      const poster = 
+        commentObj.uid === uid
+          ? "me"
+          : commentObj.uid === posterUid
+            ? "OP (" + commenterState + ")"
+            : commenterState;
+      return <Row><CommentBox commentKey={commentObj.key} commentContent={commentObj.comment} commentTime={commentObj.commentTime} myComment={commentObj.uid === uid} fb={fb} uid={uid} postUid={postUid} posterUid={posterUid} commentedPostKey={commentedPostKey} poster={poster}></CommentBox></Row>
     });
     return (
       <Row>{commentsList}</Row>

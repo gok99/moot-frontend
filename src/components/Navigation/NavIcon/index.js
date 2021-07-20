@@ -32,7 +32,7 @@ const NavIcon = () => {
         <NavIconItem altname="Library" dest={ROUTES.LIBRARY} image={icl}></NavIconItem>
       </Col>
       <Col md="auto">
-        <NavIconAccount />
+        <NavIconAccount /*adminCheck={adminCheck}*/></NavIconAccount>
       </Col>
     </Row>
   );

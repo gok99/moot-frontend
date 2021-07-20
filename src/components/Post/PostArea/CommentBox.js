@@ -8,13 +8,15 @@ import '../post.css';
 
 const CommentBox = (props) => {
   const fb = props.fb;
+  const uid = props.uid;
+  const postUid = props.postUid;
+  const poster = props.poster;
+  const commentedPostKey = props.commentedPostKey;
+
+  const commentKey = props.commentKey;
   const commentContent = props.commentContent;
   const commentTime = props.commentTime;
   const myComment = props.myComment;
-  const commentKey = props.commentKey
-  const commentedPostKey = props.commentedPostKey;
-  const uid = props.uid;
-  const postUid = props.postUid;
   const newTime = convertTime(commentTime);
 
   const deleteComment = (event) => {
@@ -31,7 +33,7 @@ const CommentBox = (props) => {
     <>
       <Row>
         <Col md={8} className="d-flex justify-content-start">
-          <p className="text-post meta">Comment by {myComment ? "me" : "anonymous user"} on {newTime}:</p>
+          <p className="text-post meta">Comment by {poster} on {newTime}:</p>
         </Col>
         <Col md={4} className="d-flex justify-content-end">
         {

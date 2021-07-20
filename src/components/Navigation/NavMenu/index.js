@@ -13,7 +13,7 @@ const NavMenu = () => {
   return (
     <Row className="d-flex justify-content-start">
       <Col md="auto">
-        <NavIconMenu />
+        <NavIconMenu /*adminCheck={adminCheck}*/></NavIconMenu>
       </Col>
     </Row>
   );

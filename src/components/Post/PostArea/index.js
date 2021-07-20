@@ -49,6 +49,7 @@ const PostAreaBase = (props) => {
   const [currentComment, setCurrentComment] = useState({
     comment: ''
   });
+  const [userFriends, setUserFriends] = useState([]);
   const getIndex = (keys, key, fn = n => n) => fn(keys.indexOf(key));
   const getValue = (values, keys, key, fn = n => n) => values[getIndex(keys, key, fn)];
   const userCheck = (data) => data.some((user) => user.uid === uid);
@@ -171,10 +172,20 @@ const PostAreaBase = (props) => {
       }
     });
 
+    // Listener for user friends
+    const friendsListener = fb.userFriends(uid).on('value', (snapshot) => {
+      if (snapshot.exists()) {
+        setUserFriends(Object.values(snapshot.val()));
+      } else {
+        console.log("No friends available");
+      }
+    });
+
     return () => {
       fb.posts().off('value', postListener);
       fb.userLikedPosts(uid).off('value', likedPostListener);
       fb.userCommentedPosts(uid).off('value', commentedPostListener);
+      fb.userFriends(uid).off('value', friendsListener);
     };
   }, [fb, currentPostUid, uid]);
 
@@ -184,6 +195,7 @@ const PostAreaBase = (props) => {
   const onButtonClick = (event, fn) => {
     const currPost = getValue(posts, postKeys, currentPostUid, fn);
     setPostAreaState(currPost);
+
 
     for (let post of commentedPosts) {
       if (post.postUid === currPost.postUid) {
@@ -388,7 +400,7 @@ const PostAreaBase = (props) => {
           </Col>
         </Row>
         <hr />
-        <PostContent noPost={postState.noPost} myPost={postState.myPost} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent}></PostContent>
+        <PostContent noPost={postState.noPost} myPost={postState.myPost} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends}></PostContent>
         <hr />
         <Row className="mb-2">
           <Col md="auto">
@@ -437,7 +449,7 @@ const PostAreaBase = (props) => {
           }
         </Row>
         <hr />
-        <PostComments fb={fb} uid={uid} postUid={currentPost.postUid} commentedPostKey={commentedPostKey} comments={!!currentPost.userComments ? Object.values(currentPost.userComments) : []}></PostComments>
+        <PostComments fb={fb} uid={uid} postUid={currentPost.postUid} posterUid={currentPost.uid} commentedPostKey={commentedPostKey} friends={userFriends} comments={!!currentPost.userComments ? Object.values(currentPost.userComments) : []}></PostComments>
       </Col>
     </Row>
   );

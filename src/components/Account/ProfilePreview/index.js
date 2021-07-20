@@ -18,11 +18,13 @@ const ProfilePreviewBase = (props) => {
     description: '',
     pid: 0
   });
+  // const [tagsList, setTagsList] = useState([]);
+  // const [userTagsList, setUserTagsList] = useState([]);
 
   useEffect(() => {
     const fb = props.firebase;
     const uid = fb.auth.currentUser.uid;
-    const listener = fb.userProfile(uid).on('value', (snapshot) => {
+    const profileListener = fb.userProfile(uid).on('value', (snapshot) => {
       if (snapshot.exists()) {
         const user = snapshot.val();
         setProfile({
@@ -35,8 +37,27 @@ const ProfilePreviewBase = (props) => {
         console.log("No data available");
       }
     });
-    return () => fb.userProfile(uid).off('value', listener);
-  });
+    // const tagsListener = fb.tags().on('value', (snapshot) => {
+    //   if (snapshot.exists()) {
+    //     setTagsList(Object.keys(snapshot.val()));
+    //   } else {
+    //     console.log("No data available");
+    //   }
+    // });
+    // const userTagsListener = fb.userTags(uid).on('value', (snapshot) => {
+    //   if (snapshot.exists()) {
+    //     setUserTagsList(Object.keys(snapshot.val()));
+    //   } else {
+    //     console.log("No data available");
+    //   }
+    // });
+    return () => {
+      fb.userProfile(uid).off('value', profileListener);
+      // fb.tags().off('value', tagsListener);
+      // fb.userTags(uid).off('value', userTagsListener);
+    }
+  }, []);
+  // Empty Dependency Array is temporary, try and reduce burden on profilepreview?
 
   return (
     <Col xs={3} className="b-profilepreview d-flex justify-content-center">
@@ -46,6 +67,8 @@ const ProfilePreviewBase = (props) => {
         description={profile.description}
         pid={profile.pid}
         overlayState={props.overlayState}
+        // tagsList={tagsList}
+        // userTagsList={userTagsList}
       >
       </ProfileDetailsPreview>
     </Col>

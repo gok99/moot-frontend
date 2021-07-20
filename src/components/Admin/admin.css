@@ -1,0 +1,50 @@
+/* CSS Specific to Admin Pages */
+
+.b-adminform {
+  max-width: 320px;
+}
+
+/**
+ * Buttons
+ */
+.btn-adminform,
+.btn-adminform:visited,
+.btn-adminform:default,
+.btn-adminform:focus {
+  display: block;
+  text-align: center;
+  background: #921fd5;
+  color: #fcfcfc;
+  border: 2px solid #921fd5;
+  border-radius: 8px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  width: 200px;
+  height: 48px;
+  margin: auto;
+  padding: 10px 0px;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn-adminform:disabled {
+  background: #921fd5;
+  color: #fcfcfc;
+  border: 2px solid #921fd5;
+  opacity: 0.4 !important;
+}
+
+.btn-adminform:hover,
+.btn-adminform:focus:hover {
+  background: #7213a9;
+  color: #fcfcfc;
+  border: 2px solid #7213a9;
+}
+
+.btn-adminform:focus:active,
+.btn-adminform:active {
+  background-color: #fcfcfc;
+  color: #921fd5;
+  border: 2px solid #921fd5;
+}

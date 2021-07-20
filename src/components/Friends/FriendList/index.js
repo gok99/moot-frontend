@@ -29,7 +29,11 @@ const FriendListBase = (props) => {
     <div>
       {
         friends.length === 0
-          ? <p className="text-placeholder">You have no friends yet :(</p>
+          ? <>
+              <h2>Friends</h2>
+              <hr />
+              <p className="text-placeholder">You have no friends yet :(</p>
+            </>
           : <FriendBoxList friends={friends}></FriendBoxList>
       }
     </div>

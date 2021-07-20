@@ -1,9 +1,28 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 
-const Admin = () => (
-  <div>
-    <h1>Admin</h1>
-  </div>
-);
+// import AdminForm from './AdminForm';
+
+import '../Styles/styles.css';
+
+const Admin = (props) => {
+  return (
+    <Container className="b-main">
+      <Row className="b-divider"></Row>
+      <Row>
+        <Col>{/* Blank divider */}</Col>
+        <Col xs={10}>
+          <Row>
+            <Col xs={12}>
+              <p>Admin</p>
+              {/* <AdminForm /> */}
+            </Col>
+          </Row>
+        </Col>
+        <Col>{/* Blank divider */}</Col>
+      </Row>
+    </Container>
+  );
+};
 
 export default Admin;
