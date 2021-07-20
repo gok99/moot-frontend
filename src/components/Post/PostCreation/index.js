@@ -4,6 +4,9 @@ import { compose } from 'recompose';
  
 import { withFirebase } from '../../Firebase';
 
+import FormTagList from './FormTagList';
+import AddTagForm from './AddTagForm';
+
 import '../../Styles/styles.css';
 import '../post.css';
 
@@ -13,18 +16,32 @@ import icon_x from '../../../assets/icon_x.png';
  * Functional Presentational Component that, depending on the current state, displays the Post Creation accordingly.
  */
 const PostCreationBase = (props) => {
+  const fb = props.firebase;
   const [active, setActive] = useState(false);
   const [postState, setPostState] = useState({
     postTitle: '',
     postContent: ''
   });
   const [formState, setFormState] = useState(false);
-  // const [error, setError] = useState(null);
+  const [tagList, setTagList] = useState([]);
+  const [addTagState, setAddTagState] = useState(false);
+  const [postTagList, setPostTagList] = useState([]);
   const target = useRef(null);
+
+  fb.tags().once('value')
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      console.log("No tags available");
+      return {};
+    }
+  }).then((data) => {
+    setTagList(Object.keys(data));
+  });
 
   const onSubmit = (event) => {
     setFormState(true);
-    const fb = props.firebase;
     var uid = fb.auth.currentUser.uid;
     var postTime = new Date().getTime();
 
@@ -36,18 +53,27 @@ const PostCreationBase = (props) => {
       postContent: postState.postContent,
       postTime,
       postUid: newPost.key,
+      postTags: Object.assign({}, postTagList)
     }).then(() => {
       setPostState({
         postTitle: '',
         postContent: ''
       });
-      // setError(null);
     }).then(() => {
       setFormState(false);
       setActive(false);
     }).catch((error) => {
       console.log(error);
     });
+
+    // Create post under tags
+    for (let tag of postTagList) {
+      fb.tagPosts(tag).push({
+        postUid: newPost.key
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
 
     // Create post under user
     fb.userPosts(uid).push({
@@ -59,6 +85,14 @@ const PostCreationBase = (props) => {
     event.preventDefault();
   };
 
+  const onAddTag = (tag) => (event) => {
+    if (!postTagList.includes(tag) && tag !== "") {
+      setPostTagList(postTagList.concat([tag]));
+    }
+    setAddTagState(false);
+    event.preventDefault();
+  }
+
   const onChange = (event) => {
     setPostState({
       ...postState,
@@ -67,6 +101,7 @@ const PostCreationBase = (props) => {
   };
 
   const toggleClass = (event) => {
+    setPostTagList([]);
     setActive(!active);
   }
 
@@ -110,7 +145,11 @@ const PostCreationBase = (props) => {
                           value={postState.postContent}
                           onChange={onChange} />
                       </Form.Group>
-
+                      <FormTagList postTagList={postTagList}/>
+                      { addTagState
+                          ? <AddTagForm tagList={tagList} onAddTag={(tag) => onAddTag(tag)}/>
+                          : <Button className="btn-postcreation btn-addtag mt-2 mb-2" onClick={() => setAddTagState(true)}>Add a Post Tag</Button>
+                      }
                       { formState
                         ? <Button ref={target} className="btn-postcreation loading mt-2 mb-2" disabled>
                             <Spinner
