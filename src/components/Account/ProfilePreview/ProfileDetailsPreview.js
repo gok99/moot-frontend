@@ -6,6 +6,7 @@ import { PostCreation } from '../../Post';
 
 import '../../Styles/styles.css';
 import '../account.css';
+import QuickMatch from '../../Match/Quickmatch';
 
 /**
  * Functional Presentational Component that renders all the profile information passed to it.
@@ -39,7 +40,9 @@ const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlaySt
         </Col>
       </Row>
       <hr className={overlayState}></hr>
-      <PostCreation></PostCreation>
+      <PostCreation/>
+      <hr className={overlayState}></hr>
+      <QuickMatch/>
     </div>
   );
 };

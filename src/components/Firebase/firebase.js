@@ -40,6 +40,7 @@ class Firebase {
   // *** Posts API ***
   posts = () => this.db.ref('posts');
   matchQueue = () => this.db.ref('matchQueue');
+  quickMatchQueue = () => this.db.ref('quickMatchQueue');
   post = id => this.db.ref(`posts/${id}`);
   postUserLikes = postUid => this.db.ref(`posts/${postUid}/userLikes`);
   deletePostUserLikes = (postUid, key) => this.db.ref(`posts/${postUid}/userLikes/${key}`).remove();
@@ -61,6 +62,20 @@ class Firebase {
   userMatchedPosts = (uid) => this.db.ref(`users/${uid}/matchedPosts`);
   users = () => this.db.ref('users');
   idToUid = id => this.db.ref(`ids/${id}`);
+  userData = async (uid) => {
+    return this.user(uid).once('value')
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      return {};
+    });
+  };
 }
    
 export default Firebase;
