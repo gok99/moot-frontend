@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="row"
+>
+  <p
+    className="d-flex justify-content-center text-post content"
+  >
+    This post has no replies...
+  </p>
+</div>
+`;
