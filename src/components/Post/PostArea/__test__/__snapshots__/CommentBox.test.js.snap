@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+Array [
+  <div
+    className="row"
+  >
+    <div
+      className="d-flex justify-content-start col-md-8"
+    >
+      <p
+        className="text-post meta"
+      >
+        Comment by 
+         on 
+        NaN Invalid Date, NaN:NaN AM
+        :
+      </p>
+    </div>
+    <div
+      className="d-flex justify-content-end col-md-4"
+    />
+  </div>,
+  <div
+    className="mb-3 row"
+  >
+    <p
+      className="text-post content"
+    />
+  </div>,
+]
+`;

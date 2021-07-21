@@ -15,6 +15,7 @@ import icon_like from '../../../assets/icon_like.png';
 import icon_unlike from '../../../assets/icon_unlike.png';
 
 const PostAreaBase = (props) => {
+  console.log(props);
   const fb = props.firebase;
   const uid = fb.auth.currentUser.uid;
   const [posts, setPosts] = useState([]);
