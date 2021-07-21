@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Row, Col, ProgressBar } from 'react-bootstrap';
 
 import { withFirebase } from '../../Firebase';
@@ -11,8 +11,14 @@ import logo from '../../../assets/navlogo.png';
  * Functional Presentational Component that displays Onboarding Form 2.
  */
 const OnboardingVerificationForm = (props) => {
+  const fb = props.firebase;
   const onSubmit = props.onSubmit;
-  const [btnDisabled, setBtnDisabled] = useState(!props.firebase.auth.currentUser.emailVerified);
+  const [btnDisabled, setBtnDisabled] = useState(!fb.auth.currentUser.emailVerified);
+
+  const useEffect = (() => {
+    const verified = fb.auth.currentUser.emailVerified;
+    setBtnDisabled(!verified);
+  });
 
   const onVerify = (event) => {
     setBtnDisabled(false);
