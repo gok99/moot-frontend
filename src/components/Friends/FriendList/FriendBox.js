@@ -14,7 +14,7 @@ const FriendBox = (props) => {
     <Row className="b-friendbox mb-2">
       <Col className="b-text-friendbox">
         <Row>
-          <p className="text-friendbox heavy">{fUsername}</p><br /><br />
+          <p className="text-friendbox heavy">{fUsername}</p>
         </Row>
         <Row>
           <p className="text-friendbox light">@{fTeleUser}</p>

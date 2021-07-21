@@ -11,10 +11,9 @@ import '../friends.css';
 
 const FriendBoxList = (props) => {
   const fb = props.firebase;
-  const uid = fb.auth.currentUser.uid;
   const friends = props.friends;
   const [viewPostState, setViewPostState] = useState(false);
-  const [currentUid, setCurrentUid] = useState(uid);
+  const [currentUid, setCurrentUid] = useState('');
   const [currentUser, setCurrentUser] = useState('');
   const [postUidList, setPostUidList] = useState([]);
   
@@ -22,6 +21,7 @@ const FriendBoxList = (props) => {
     const friendPostListener = fb.userPosts(currentUid).on('value', (snapshot) => {
       if (snapshot.exists()) {
         setPostUidList(Object.values(snapshot.val()).map((post) => post.postUid).reverse());
+        console.log(Object.values(snapshot.val()).map((post) => post.postUid).reverse());
       } else {
         console.log("No friend post available");
       }

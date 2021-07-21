@@ -6,12 +6,13 @@ import '../../Access/access.css'
 const AddTagForm = ({ tagList, onAddTag, postCreationCheck, ownedError }) => {
   const [currentTag, setCurrentTag] = useState("");
   const target = useRef(null);
+  const firefox = typeof InstallTrigger !== 'undefined';
   const [error, setError] = useState(ownedError);
   const tags = tagList.map((tag) => {
     return <option>{tag}</option>
   });
 
-  const btnTags = typeof InstallTrigger !== 'undefined'
+  const btnTags = firefox
     ? tagList.map((tag) => {
         return <option onClick={onAddTag(tag)}>{tag}</option>
       })
@@ -25,7 +26,7 @@ const AddTagForm = ({ tagList, onAddTag, postCreationCheck, ownedError }) => {
 
   const onChangeTwo = (event) => {
     setCurrentTag(event.target.value);
-    onAddTag(event.target.value);
+    (onAddTag(event.target.value))(event);
   };
 
   return postCreationCheck 
@@ -59,13 +60,13 @@ const AddTagForm = ({ tagList, onAddTag, postCreationCheck, ownedError }) => {
           </Button>
         </Col>
         <Col xs={4}>
-          { typeof InstallTrigger !== 'undefined'
+          { firefox
             ? <Form.Control as="select" value={currentTag} onChange={onChange}>
                 <option>&lt;Home&gt;</option>
                 {btnTags}
               </Form.Control>
             : <Form.Control as="select" value={currentTag} onChange={onChangeTwo}>
-                <option>&lt;Home&gt;</option>
+                <option value="">&lt;Home&gt;</option>
                 {btnTags}
               </Form.Control>
           }
