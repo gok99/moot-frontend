@@ -14,6 +14,7 @@ import '../account.css'
 
 const AccountPage = (props) => {
   const fb = props.firebase;
+  const uid = fb.auth.currentUser.uid;
   const [user, setUser] = useState({
     description: '',
     email: '',
@@ -34,7 +35,7 @@ const AccountPage = (props) => {
       }
     });
     return () => fb.userProfile(uid).off('value', listener);
-  });
+  }, [fb, uid]);
 
   return (
     <div>

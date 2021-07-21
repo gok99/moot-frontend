@@ -16,7 +16,6 @@ const ProfileTagsPreview = (props) => {
   const uid = fb.auth.currentUser.uid;
   const overlayState = props.overlayState;
   const userTagsList = props.userTagsList;
-  console.log(userTagsList);
 
   const toggleTagOwn = (tagOwned, name) => (event) => {
     // If tag is already owned, delete; else, add to user

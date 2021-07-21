@@ -39,9 +39,16 @@ const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlaySt
       </Row>
       <ProfileTagsPreview userTagsList={userTagsList} overlayState={overlayState}></ProfileTagsPreview>
       <hr className={overlayState}></hr>
-      <PostCreation />
+      <Row>
+        <Col xs={6}>
+          <PostCreation />
+        </Col>
+        <Col xs={6}>
+          <QuickMatch/>
+        </Col>
+      </Row>
       <hr className={overlayState}></hr>
-      <QuickMatch/>
+      <a className="text-preview meta" href="" target="_blank" rel="noopener noreferrer">About (Placeholder)</a>
     </div>
   );
 };

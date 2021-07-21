@@ -63,6 +63,11 @@
   font-weight: 600;
 }
 
+.text-preview.meta {
+  color: #3d3d3d;
+  font-weight: 600;
+}
+
 .text-profile {
   text-align: center;
   font-size: 18px;
