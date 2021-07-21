@@ -159,48 +159,41 @@ const CustomPostAreaBase = (props) => {
   useEffect(() => {
     if (props.postUidList.length === 0) {
       setPostAreaState(emptyPost);
+      return () => {};
     } else {
-      fb.post(props.postUidList[0]).once('value').then((snapshot) => {
+      var currPostUid = ''
+      if (currentPostUid === '') {
+        currPostUid = props.postUidList[0];
+      } else {
+        currPostUid = currentPostUid;
+      }
+      const postListener = fb.post(currPostUid).on('value', (snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
-          return snapshot.val();
+          const data = snapshot.val();
+          data.postTime = convertTime(data.postTime);
+          setPostAreaState(data);
+          for (let post of commentedPosts) {
+            if (post.postUid === data.postUid) {
+              setCommentedPostKey(post.key);
+            }
+          }
         } else {
           console.log("No post available");
           return emptyPost;
         }
-      }).then((data) => {
-        data.postTime = convertTime(data.postTime);
-        setPostAreaState(data);
-        for (let post of commentedPosts) {
-          if (post.postUid === data.postUid) {
-            setCommentedPostKey(post.key);
-          }
-        }
       });
+      return () => {
+        fb.post(currPostUid).off('value', postListener);
+      };
     }
-  }, [props.postUidList]);
+  }, [props.postUidList, currentPostUid]);
 
   /** 
    * Behaviour on left/right button click
    */
   const onButtonClick = (event, fn) => {
-    const nextPostUid = postUidList[getIndex(postUidList, currentPostUid, fn)];
-    fb.post(nextPostUid).once('value').then((snapshot) => {
-      if (snapshot.exists()) {
-        return snapshot.val();
-      } else {
-        console.log("No specified post");
-        return emptyPost;
-      }
-    }).then((data) => {
-      data.postTime = convertTime(data.postTime);
-      setPostAreaState(data);
-      for (let post of commentedPosts) {
-        if (post.postUid === data.postUid) {
-          setCommentedPostKey(post.key);
-        }
-      }
-    });
+    const nextPostUid = getValue(postUidList, postUidList, currentPostUid, fn);
+    setCurrentPostUid(nextPostUid);
 
     event.preventDefault();
   };
@@ -246,18 +239,6 @@ const CustomPostAreaBase = (props) => {
         }
       }
 
-      fb.post(currentPostUid).once('value').then((snapshot) => {
-        if (snapshot.exists()) {
-          return snapshot.val();
-        } else {
-          console.log("No specified post");
-          return emptyPost;
-        }
-      }).then((data) => {
-        data.postTime = convertTime(data.postTime);
-        setPostAreaState(data);
-      });
-
       event.preventDefault();
 
     } else {
@@ -279,18 +260,6 @@ const CustomPostAreaBase = (props) => {
         likedTime: likedTime,
         key: newLikedPost.key
       }).catch((error) => console.log(error));
-
-      fb.post(currentPostUid).once('value').then((snapshot) => {
-        if (snapshot.exists()) {
-          return snapshot.val();
-        } else {
-          console.log("No specified post");
-          return emptyPost;
-        }
-      }).then((data) => {
-        data.postTime = convertTime(data.postTime);
-        setPostAreaState(data);
-      });
 
       event.preventDefault();
     }
@@ -322,18 +291,6 @@ const CustomPostAreaBase = (props) => {
 
     setCommentedPostKey(newCommentKey);
     setCurrentComment('');
-
-    fb.post(currentPostUid).once('value').then((snapshot) => {
-      if (snapshot.exists()) {
-        return snapshot.val();
-      } else {
-        console.log("No specified post");
-        return emptyPost;
-      }
-    }).then((data) => {
-      data.postTime = convertTime(data.postTime);
-      setPostAreaState(data);
-    });
 
     event.preventDefault();
   };
