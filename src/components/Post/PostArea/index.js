@@ -78,9 +78,9 @@ const PostAreaBase = (props) => {
     setCurrentPost(currPost);
     setCurrentPostUid(currPost.postUid);
     const userPostCheck = (currPost.uid === uid);
-    const userLikes = !!currPost.userLikes ? Object.values(currPost.userLikes) : [];
-    const userComments = !!currPost.userComments ? Object.values(currPost.userComments) : [];
-    const userMatches = !!currPost.userMatches ? Object.values(currPost.userMatches) : [];
+    const userLikes = Object.values(currPost.userLikes || {});
+    const userComments = Object.values(currPost.userComments || {});
+    const userMatches = Object.values(currPost.userMatches || {});
     const postLiked = userCheck(userLikes);
     const postMatched = userCheck(userMatches);
 
@@ -157,10 +157,10 @@ const PostAreaBase = (props) => {
         const currUserData = snapshot.val();
 
         // Liked Posts
-        setLikedPosts(Object.values(currUserData.likedPosts));
+        setLikedPosts(Object.values(currUserData.likedPosts || {}));
 
         // Commented Posts
-        const commentedPostsList = Object.values(currUserData.commentedPosts);
+        const commentedPostsList = Object.values(currUserData.commentedPosts || {});
         setCommentedPosts(commentedPostsList);
         for (let post of commentedPostsList) {
           if (post.postUid === currentPost.postUid) {
@@ -169,10 +169,10 @@ const PostAreaBase = (props) => {
         }
 
         // User friends
-        setUserFriends(Object.values(currUserData.friends));
+        setUserFriends(Object.values(currUserData.friends || {}));
 
         // User tags
-        setUserTags(!!currUserData.tags ? Object.keys(currUserData.tags) : []);
+        setUserTags(Object.keys(currUserData.tags || {}));
 
       } else {
         console.log("No data available");
