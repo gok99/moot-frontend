@@ -19,12 +19,17 @@ const CustomPostAreaBase = (props) => {
   const uid = fb.auth.currentUser.uid;
   const postUidList = props.postUidList;
   const tag = props.tag;
+  const friend = props.friend;
 
   const [postUids, setPostUids] = useState(postUidList);
   const [currentPostUid, setCurrentPostUid] = useState(''); // Used to cycle through the postUids
   const emptyPost = {
     uid: '',
-    postTitle: !!tag ? "There are no posts available for the \"" + tag + "\" category!" : "There are no posts available!",
+    postTitle: !!tag 
+      ? "There are no posts available for the \"" + tag + "\" category!" 
+      : !!friend
+        ? friend + " has not created any posts yet!"
+        : "There are no posts available!",
     postContent: '',
     postTime: 0,
     postUid: '',
@@ -458,9 +463,12 @@ const CustomPostAreaBase = (props) => {
                 </Button>
               </Col>
               <Col md="auto">
-                <Button className="btn-postcreation btn-match d-flex justify-content-md-center" type="button" disabled={ areaState.matchDisabled } onClick={onMatch}>
-                  { postState.postMatched ? "..." : "Match me!" }
-                </Button>
+                { !!friend
+                  ? null
+                  : <Button className="btn-postcreation btn-match d-flex justify-content-md-center" type="button" disabled={ areaState.matchDisabled } onClick={onMatch}>
+                      { postState.postMatched ? "..." : "Match me!" }
+                    </Button>
+                }
               </Col>
               <Col>
                 {/* Divider */}

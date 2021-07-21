@@ -509,12 +509,11 @@ const PostAreaBase = (props) => {
   return (
     currentTag === '' || currentTag === "<Home>"
       ? <>
-          <Row>
+          <Row className="b-selection mb-2">
             <AddTagForm tagList={tagList} onAddTag={onChangeTag} postCreationCheck={false} />
           </Row>
           <Row className="b-post flex-container">
             <Col className="b-postcontent">
-              
               <Row className="mb-4">
                 <Col>
                   <Button className="btn-postchange left" type="button" disabled={ areaState.leftDisabled } onClick={onLeftClick}>&lt;- Previous Post</Button>
@@ -535,7 +534,7 @@ const PostAreaBase = (props) => {
           </Row>
         </>
       : <>
-          <Row>
+          <Row className="b-selection mb-2">
             <AddTagForm tagList={tagList} onAddTag={onChangeTag} postCreationCheck={false} />
           </Row>
           <CustomPostArea postUidList={tagPostUidList} tag={currentTag}/>

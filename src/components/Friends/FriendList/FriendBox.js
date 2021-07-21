@@ -7,9 +7,12 @@ import '../friends.css';
 const FriendBox = (props) => {
   const fTeleUser = props.fTeleUser;
   const fUsername = props.fUsername;
+  const fUid = props.fUid;
+  const onViewPost = props.onViewPost;
+
   return (
     <Row className="b-friendbox mb-2">
-      <Col>
+      <Col className="b-text-friendbox">
         <Row>
           <p className="text-friendbox heavy">{fUsername}</p><br /><br />
         </Row>
@@ -18,8 +21,13 @@ const FriendBox = (props) => {
         </Row>
       </Col>
       <Col md="auto" className="d-flex justify-content-end">
+        <Button className="btn-friendchat" onClick={onViewPost(fUid, fUsername)}>
+          View {fUsername}'s Posts
+        </Button>
+      </Col>
+      <Col md="auto" className="d-flex justify-content-end">
         <Button className="btn-friendchat" href={"https://t.me/"+fTeleUser} target="_blank" rel="noopener noreferrer">
-          Chat &#62;&#62;&#62;
+          Chat with {fUsername}
         </Button>
       </Col>
     </Row>
