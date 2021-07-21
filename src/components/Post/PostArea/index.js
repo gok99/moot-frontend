@@ -425,86 +425,6 @@ const PostAreaBase = (props) => {
     }
   };
 
-  const PostCommentArea = () => {
-    return (
-      areaState.commentDisabled
-        ? null
-        : <Form className="mt-2" onSubmit={onCommentSubmit}>
-            <Row>
-              <Col >
-                <Form.Group controlId="comment">
-                  <Form.Control
-                    className="input-comment"
-                    name="comment" 
-                    type="text"
-                    as="textarea"
-                    placeholder="Reply to this post!"
-                    value={currentComment}
-                    onChange={onChange} />
-                </Form.Group>
-              </Col>
-              <Col md="auto">
-                <Button  
-                  className="btn-postcreation btn-comment"
-                  type="submit"
-                  disabled={currentComment === ''}>
-                  Reply
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-    );
-  };
-
-  const PostInteractionArea = () => {
-    return (
-      !postState.myPost
-        ? <>
-            <Row className="mb-2">
-              <Col md="auto">
-                <Button className="btn-like d-flex justify-content-md-center" type="button" disabled={ areaState.likeDisabled } onClick={onLike}>
-                  <img className="icon-like" src={postState.postLiked ? icon_like : icon_unlike} alt={postState.postLiked ? "Liked" : "Not Liked"} />
-                </Button>
-              </Col>
-              <Col md="auto">
-                <Button className="btn-postcreation btn-match d-flex justify-content-md-center" type="button" disabled={ areaState.matchDisabled } onClick={onMatch}>
-                  { postState.postMatched ? "..." : "Match me!" }
-                </Button>
-              </Col>
-              <Col>
-                {/* Divider */}
-              </Col>
-              <Col md={3}>
-                <Row className="d-flex justify-content-end mt-2">
-                  <p className="text-post content">{postState.likeCount} Likes</p>
-                </Row>
-                <Row className="d-flex justify-content-end">
-                  <p className="text-post content">{postState.commentCount} Comments</p>
-                </Row>
-              </Col>
-            </Row>
-            <Row>
-              <PostCommentArea />
-            </Row>
-          </>
-        : <>
-            <Row className="mb-2">
-              <Col>
-                <PostCommentArea />
-              </Col>
-              <Col md={3}>
-                <Row className="d-flex justify-content-end mt-2">
-                  <p className="text-post content">{postState.likeCount} Likes</p>
-                </Row>
-                <Row className="d-flex justify-content-end">
-                  <p className="text-post content">{postState.commentCount} Comments</p>
-                </Row>
-              </Col>
-            </Row>
-          </>
-    );
-  };
-
   return (
     currentTag === '' || currentTag === "<Home>"
       ? <>
@@ -526,7 +446,103 @@ const PostAreaBase = (props) => {
               <hr />
               <PostTags postTags={!!currentPost.postTags ? Object.values(currentPost.postTags) : []} uid={uid} userTags={userTags} />
               <hr />
-              <PostInteractionArea />
+              { !postState.myPost
+                  ? <>
+                      <Row className="mb-2">
+                        <Col md="auto">
+                          <Button className="btn-like d-flex justify-content-md-center" type="button" disabled={ areaState.likeDisabled } onClick={onLike}>
+                            <img className="icon-like" src={postState.postLiked ? icon_like : icon_unlike} alt={postState.postLiked ? "Liked" : "Not Liked"} />
+                          </Button>
+                        </Col>
+                        <Col md="auto">
+                          <Button className="btn-postcreation btn-match d-flex justify-content-md-center" type="button" disabled={ areaState.matchDisabled } onClick={onMatch}>
+                            { postState.postMatched ? "..." : "Match me!" }
+                          </Button>
+                        </Col>
+                        <Col>
+                          {/* Divider */}
+                        </Col>
+                        <Col md={3}>
+                          <Row className="d-flex justify-content-end mt-2">
+                            <p className="text-post content">{postState.likeCount} Likes</p>
+                          </Row>
+                          <Row className="d-flex justify-content-end">
+                            <p className="text-post content">{postState.commentCount} Comments</p>
+                          </Row>
+                        </Col>
+                      </Row>
+                      <Row>
+                        { areaState.commentDisabled
+                            ? null
+                            : <Form className="mt-2" onSubmit={onCommentSubmit}>
+                                <Row>
+                                  <Col >
+                                    <Form.Group controlId="comment">
+                                      <Form.Control
+                                        className="input-comment"
+                                        name="comment" 
+                                        type="text"
+                                        as="textarea"
+                                        placeholder="Reply to this post!"
+                                        value={currentComment}
+                                        onChange={onChange} />
+                                    </Form.Group>
+                                  </Col>
+                                  <Col md="auto">
+                                    <Button  
+                                      className="btn-postcreation btn-comment"
+                                      type="submit"
+                                      disabled={currentComment === ''}>
+                                      Reply
+                                    </Button>
+                                  </Col>
+                                </Row>
+                              </Form>
+                        }
+                      </Row>
+                    </>
+                  : <>
+                      <Row className="mb-2">
+                        <Col>
+                          { areaState.commentDisabled
+                              ? null
+                              : <Form className="mt-2" onSubmit={onCommentSubmit}>
+                                  <Row>
+                                    <Col >
+                                      <Form.Group controlId="comment">
+                                        <Form.Control
+                                          className="input-comment"
+                                          name="comment" 
+                                          type="text"
+                                          as="textarea"
+                                          placeholder="Reply to this post!"
+                                          value={currentComment}
+                                          onChange={onChange} />
+                                      </Form.Group>
+                                    </Col>
+                                    <Col md="auto">
+                                      <Button  
+                                        className="btn-postcreation btn-comment"
+                                        type="submit"
+                                        disabled={currentComment === ''}>
+                                        Reply
+                                      </Button>
+                                    </Col>
+                                  </Row>
+                                </Form>
+                          }
+                        </Col>
+                        <Col md={3}>
+                          <Row className="d-flex justify-content-end mt-2">
+                            <p className="text-post content">{postState.likeCount} Likes</p>
+                          </Row>
+                          <Row className="d-flex justify-content-end">
+                            <p className="text-post content">{postState.commentCount} Comments</p>
+                          </Row>
+                        </Col>
+                      </Row>
+                    </>
+              }
               <hr />
               <PostComments fb={fb} uid={uid} postUid={currentPost.postUid} posterUid={currentPost.uid} commentedPostKey={commentedPostKey} friends={userFriends} comments={!!currentPost.userComments ? Object.values(currentPost.userComments) : []}></PostComments>
             </Col>

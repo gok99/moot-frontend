@@ -27,7 +27,7 @@ const FriendBoxList = (props) => {
       }
     });
     return () => { fb.userPosts(currentUid).off('value', friendPostListener); };
-  }, [fb, currentUid, currentUser]);
+  });
 
   const onViewPost = (fUid, fUsername) => (event) => {
     setCurrentUid(fUid);
