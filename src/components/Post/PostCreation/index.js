@@ -147,7 +147,7 @@ const PostCreationBase = (props) => {
                       </Form.Group>
                       <FormTagList postTagList={postTagList}/>
                       { addTagState
-                          ? <AddTagForm tagList={tagList} onAddTag={(tag) => onAddTag(tag)}/>
+                          ? <AddTagForm tagList={tagList} onAddTag={(tag) => onAddTag(tag)} postCreationCheck={true}/>
                           : <Button className="btn-postcreation btn-addtag mt-2 mb-2" onClick={() => setAddTagState(true)}>Add a Post Tag</Button>
                       }
                       { formState

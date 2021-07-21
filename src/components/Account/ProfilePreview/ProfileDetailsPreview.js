@@ -48,7 +48,7 @@ const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlaySt
         </Col>
       </Row>
       <hr className={overlayState}></hr>
-      <p className="text-preview meta">Privacy Terms About More Lmao</p>
+      <a className="text-preview meta" href="" target="_blank" rel="noopener noreferrer">About (Placeholder)</a>
     </div>
   );
 };

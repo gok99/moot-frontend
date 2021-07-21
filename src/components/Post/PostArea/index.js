@@ -334,7 +334,6 @@ const PostAreaBase = (props) => {
   };
 
   const onChangeTag = (tag) => (event) => {
-    console.log(tag);
     setCurrentTag(tag);
     fb.tagPosts(tag).once('value').then((snapshot) => {
       if (snapshot.exists()) {
