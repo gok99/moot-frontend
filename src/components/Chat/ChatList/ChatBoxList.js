@@ -8,14 +8,12 @@ import { findByAltText } from '@testing-library/react';
 
 const ChatBoxList = (props) => {
   const chats = props.chatList;
-  // const chatInfo = props.chatInfo;
-  const chatInfo = Object.values(props.chatInfo).map((chat) => {
-    console.log(chat.tags)
-    chat.tags = chat.tags.length <= 0 ? "No declared interests" : chat.tags.slice(1).reduce((acc, curr) => `${acc}, ${curr}`, chat.tags[0]);
-    return chat;
-  });
+  const chatInfo = props.chatInfo;
   const ref = useRef(null);
   const chatsList = chats.map((chat, index) => {
+    const description = chatInfo["chat" + (index + 1)].description;
+    const tags = chatInfo["chat" + (index + 1)].tags;
+    const str = tags.length <= 0 ? "No declared interests" : tags.slice(1).reduce((acc, curr) => `${acc}, ${curr}`, tags[0]);
     return <Row className="mb-2">
               <Col md={9}>
                 <OverlayTrigger
@@ -26,11 +24,22 @@ const ChatBoxList = (props) => {
                   overlay={
                     <Popover className="popover-chat" id={`popover-positioned-bottom`}>
                       <Popover.Title as="h3">{chat.active ? "You have an ongoing match!" : "This match slot is empty..."}</Popover.Title>
-                      <Popover.Content>
-                        This chat is anonymous, but here's what we can tell you about your match:{'\n\n'}
-                        Description:{'\n'}{chatInfo[`chat${index}`].description}{'\n\n'}
-                        Interests:{'\n'}{chatInfo[`chat${index}`].tags}{'\n'}
-                      </Popover.Content>
+                      { chat.active
+                        ? <>
+                            <Popover.Content>
+                              This chat is anonymous, but here's what we can tell you about your match:
+                            </Popover.Content>
+                            <Popover.Content>
+                              Description: {description}
+                            </Popover.Content>
+                            <Popover.Content>
+                              Interests: {str}
+                            </Popover.Content>
+                          </>
+                        : <Popover.Content>
+                            Use the \"Match\" or \"QuickMatch\" features to match up with another anonymous user!
+                          </Popover.Content>
+                      }
                     </Popover>
                   }
                 >

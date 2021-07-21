@@ -10,23 +10,23 @@ import '../chat.css';
 const ChatListBase = (props) => {
   const [chats, setChats] = useState([]);
   const [chatInfo, setChatInfo] = useState({
-    chat1: {
+    "chat1": {
       description: '',
       tags: []
     },
-    chat2: {
+    "chat2": {
       description: '',
       tags: []
     },
-    chat3: {
+    "chat3": {
       description: '',
       tags: []
     },
-    chat4: {
+    "chat4": {
       description: '',
       tags: []
     },
-    chat5: {
+    "chat5": {
       description: '',
       tags: []
     }
@@ -35,33 +35,33 @@ const ChatListBase = (props) => {
 
   useEffect(() => {
     const uid = fb.auth.currentUser.uid;
-    const listener = fb.userChats(uid).on('value', (snapshot) => {
+    const listener = fb.userChats(uid).on('value', async (snapshot) => {
       if (snapshot.exists()) {
         const userChats = Object.values(snapshot.val());
         setChats(userChats);
 
         const matchUidList = userChats.map((chat) => chat.activematchUUID);
         const currChatInfo = {};
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 0; i < 5; i++) {
           const currChat = {
             description: '',
             tags: []
           };
-          fb.userDescription(matchUidList[i]).once('value').then((snapshot) => {
+          await fb.userDescription(matchUidList[i]).once('value').then((snapshot) => {
             if (snapshot.exists()) {
               currChat.description = snapshot.val();
             } else {
               currChat.description = "";
             }
           });
-          fb.userTags(matchUidList[i]).once('value').then((snapshot) => {
+          await fb.userTags(matchUidList[i]).once('value').then((snapshot) => {
             if (snapshot.exists()) {
               currChat.tags = Object.keys(snapshot.val());
             } else {
               currChat.tags = [];
             }
           });
-          currChatInfo[`chat${i}`] = currChat;
+          currChatInfo[`chat${i+1}`] = currChat;
         }
         setChatInfo(currChatInfo);
 
