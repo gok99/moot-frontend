@@ -5,9 +5,9 @@ exports[`matches snapshot 1`] = `
   className="row"
 >
   <p
-    className="d-flex justify-content-center text-post content"
+    className="d-flex justify-content-start text-post content"
   >
-    This post has no replies...
+    This post has no comments.
   </p>
 </div>
 `;
