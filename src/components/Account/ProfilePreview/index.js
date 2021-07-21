@@ -12,18 +12,17 @@ import '../account.css';
  * Functional Container Component that retrieves and passes down the relevant user information to be shown in the profile preview.
  */
 const ProfilePreviewBase = (props) => {
+  const fb = props.firebase;
+  const uid = fb.auth.currentUser.uid;
   const [profile, setProfile] = useState({
     username: '',
     teleUser: '',
     description: '',
     pid: 0
   });
-  // const [tagsList, setTagsList] = useState([]);
-  // const [userTagsList, setUserTagsList] = useState([]);
+  const [userTagsList, setUserTagsList] = useState([]);
 
   useEffect(() => {
-    const fb = props.firebase;
-    const uid = fb.auth.currentUser.uid;
     const profileListener = fb.userProfile(uid).on('value', (snapshot) => {
       if (snapshot.exists()) {
         const user = snapshot.val();
@@ -37,26 +36,18 @@ const ProfilePreviewBase = (props) => {
         console.log("No data available");
       }
     });
-    // const tagsListener = fb.tags().on('value', (snapshot) => {
-    //   if (snapshot.exists()) {
-    //     setTagsList(Object.keys(snapshot.val()));
-    //   } else {
-    //     console.log("No data available");
-    //   }
-    // });
-    // const userTagsListener = fb.userTags(uid).on('value', (snapshot) => {
-    //   if (snapshot.exists()) {
-    //     setUserTagsList(Object.keys(snapshot.val()));
-    //   } else {
-    //     console.log("No data available");
-    //   }
-    // });
+    const userTagsListener = fb.userTags(uid).on('value', (snapshot) => {
+      if (snapshot.exists()) {
+        setUserTagsList(Object.keys(snapshot.val()));
+      } else {
+        setUserTagsList([]);
+      }
+    });
     return () => {
       fb.userProfile(uid).off('value', profileListener);
-      // fb.tags().off('value', tagsListener);
-      // fb.userTags(uid).off('value', userTagsListener);
+      fb.userTags(uid).off('value', userTagsListener);
     }
-  }, []);
+  }, [fb, uid]);
   // Empty Dependency Array is temporary, try and reduce burden on profilepreview?
 
   return (
@@ -67,8 +58,7 @@ const ProfilePreviewBase = (props) => {
         description={profile.description}
         pid={profile.pid}
         overlayState={props.overlayState}
-        // tagsList={tagsList}
-        // userTagsList={userTagsList}
+        userTagsList={userTagsList}
       >
       </ProfileDetailsPreview>
     </Col>

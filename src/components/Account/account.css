@@ -2,7 +2,13 @@
 
 .display-profilepreview {
   display: block;
-  min-width: 200px;
+  min-width: 256px;
+  padding: 28px;
+  height: 40vh;
+  background: none;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 4px;
 }
 
 .b-accountsidebar {

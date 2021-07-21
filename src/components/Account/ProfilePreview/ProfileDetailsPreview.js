@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import ProfilePicture from '../ProfilePicture';
-// import ProfileTagsPreview from './ProfileTagsPreview';
+import ProfileTagsPreview from './ProfileTagsPreview';
 import { PostCreation } from '../../Post';
 
 import '../../Styles/styles.css';
@@ -12,7 +12,7 @@ import QuickMatch from '../../Match/Quickmatch';
 /**
  * Functional Presentational Component that renders all the profile information passed to it.
  */
-const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlayState, tagsList/*, userTagsList*/ }) => {
+const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlayState, userTagsList }) => {
   return (
     <div className="display-profilepreview">
       <Row>
@@ -30,8 +30,6 @@ const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlaySt
           </Row>
         </Col>
       </Row>
-      {/* <hr className={overlayState}></hr>
-      <ProfileTagsPreview userTagsList={userTagsList} overlayState={overlayState}></ProfileTagsPreview> */}
       <hr className={overlayState}></hr>
       <Row>
         <Col>
@@ -39,8 +37,9 @@ const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlaySt
           <p className="text-preview description">{description}</p>
         </Col>
       </Row>
+      <ProfileTagsPreview userTagsList={userTagsList} overlayState={overlayState}></ProfileTagsPreview>
       <hr className={overlayState}></hr>
-      <PostCreation></PostCreation>
+      <PostCreation />
       <hr className={overlayState}></hr>
       <QuickMatch/>
     </div>

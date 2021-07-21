@@ -28,12 +28,14 @@
 }
 
 .b-postcreation {
+  height: auto;
+  width: 40vw;
   margin: auto;
   background: #faf9ff;
   box-sizing: border-box;
   border-radius: 8px;
   padding: 12px 28px;
-  z-index: 4;
+  z-index: 5;
 }
 
 .b-post {
@@ -46,10 +48,8 @@
   box-sizing: border-box;
   /* box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5); */
   border-radius: 4px;
-  z-index: 2;
   padding: 32px;
   min-height: 60vh;
-  background: #fcfcfc;
 }
 
 .b-text-postcontent {
@@ -76,6 +76,10 @@
   vertical-align: middle;
   padding-left: 0;
   padding-right: 0;
+}
+
+.input-comment {
+  height: 48px;
 }
 
 /**
@@ -129,8 +133,9 @@
   border: none;
   color: #6b4eff;
   font-size: 15px;
-  width: 96px;
+  width: auto;
   padding: 0px;
+  margin: 0 12px;
 }
 
 .btn-postexpand:hover,
@@ -214,6 +219,18 @@
   border: 2px solid #921fd5;
 }
 
+.btn-postcreation.btn-addtag {
+  width: 100px;
+  height: 38px;
+  font-size: 12px;
+  padding: 0;
+}
+
+.btn-postcreation.btn-addtag.form {
+  height: 36px;
+  width: 100%;
+}
+
 .btn-match,
 .btn-match:hover,
 .btn-match:focus:hover,
@@ -290,7 +307,7 @@
 .btn-like:focus {
   display: block;
   text-align: center;
-  background: #b373e1;
+  background: #fcfcfc;
   border: none;
   border-radius: 24px;
   width: 48px;
@@ -301,29 +318,19 @@
 }
 
 .btn-like:disabled {
-  background: #b373e1;
-  opacity: 0.4 !important;
-}
-
-.btn-like.loading:disabled {
-  opacity: 1 !important;
-  background: #ffffff;
-  color: #8235ff;
-  border: 2px solid #8235ff;
-  box-shadow: none;
-  padding: 12px 32px 16px;
-  text-align: center;
+  background: #fcfcfc;
+  opacity: 0.5 !important;
 }
 
 .btn-like:hover,
 .btn-like:focus:hover {
-  background: #884db3;
+  background: #fcfcfc;
   border: none;
 }
 
 .btn-like:focus:active,
 .btn-like:active {
-  background: #552577;
+  background: #fcfcfc;
   border: none;
 }
 
