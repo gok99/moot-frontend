@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-const AddTagForm = ({ tagList, onAddTag }) => {
+const AddTagForm = ({ tagList, onAddTag, postCreationCheck }) => {
   const [currentTag, setCurrentTag] = useState("");
   const tags = tagList.map((tag) => {
     return <option>{tag}</option>
@@ -13,14 +13,16 @@ const AddTagForm = ({ tagList, onAddTag }) => {
 
   return (
     <Row className="mt-2 mb-2" >
-      <Col xs={7}>
+      <Col xs={8}>
         <Form.Control as="select" value={currentTag} onChange={onChange}>
-          <option>&lt;None&gt;</option>
+          <option>{ postCreationCheck ? "<None>" : "<Home>" }</option>
           {tags}
         </Form.Control>
       </Col>
-      <Col xs={5}>
-        <Button className="btn-postcreation btn-addtag form" onClick={onAddTag(currentTag)}>Add Tag</Button>
+      <Col xs={4}>
+        <Button className={ postCreationCheck ? "btn-postcreation btn-addtag form" : "btn-postchange btn-addtag" } onClick={onAddTag(currentTag)}>
+          { postCreationCheck ? "Add Tag" : "Select Category" }
+        </Button>
       </Col>
     </Row>
   );

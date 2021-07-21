@@ -39,7 +39,7 @@ const ChatBoxList = (props) => {
   });
   return (
     <Col>
-      <h2>Chats</h2>
+      <h2>My Chats</h2>
       <hr />
       {chatsList}
     </Col>

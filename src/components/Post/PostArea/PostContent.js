@@ -12,7 +12,8 @@ const PostContent = (props) => {
   const postContent = props.postContent;
   const posterUid = props.posterUid;
   const friends = props.friends;
-  const [postContentState, setPostContentState] = useState(false);
+  const initialPostContentState = props.initialPostContentState;
+  const [postContentState, setPostContentState] = useState(initialPostContentState);
   var posterState = "an anonymous user";
   for (let friend of friends) {
     if (friend.friendUid === posterUid) {

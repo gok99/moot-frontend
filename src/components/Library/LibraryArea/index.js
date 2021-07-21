@@ -45,7 +45,7 @@ const LibraryArea = (props) => {
 
   return (
     <>
-      <h2>Library</h2>
+      <h2>My Library</h2>
       <hr />
       { userTags.length === 0
           ? <p className="text-placeholder">You currently have no interest tags... go and get some!</p>

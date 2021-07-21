@@ -3,11 +3,9 @@ import { Row, Col, Button, Form } from 'react-bootstrap';
 import { compose } from 'recompose';
  
 import { withFirebase } from '../../Firebase';
-import AddTagForm from '../PostCreation/AddTagForm';
-import CustomPostArea from '../CustomPostArea'
-import PostContent from './PostContent';
-import PostComments from './PostComments';
-import PostTags from './PostTags';
+import PostContent from '../PostArea/PostContent';
+import PostComments from '../PostArea/PostComments';
+import PostTags from '../PostArea/PostTags';
 import { convertTime } from '../../utils.js';
 
 import '../../Styles/styles.css';
@@ -15,37 +13,35 @@ import '../post.css';
 
 import icon_like from '../../../assets/icon_like.png';
 import icon_unlike from '../../../assets/icon_unlike.png';
-// <CustomPostArea postUidList={postUidList} likeEnabled={true} matchEnabled={true} />
-const PostAreaBase = (props) => {
 
+const CustomPostAreaBase = (props) => {
   const fb = props.firebase;
   const uid = fb.auth.currentUser.uid;
+  const postUidList = props.postUidList;
+  const tag = props.tag;
 
-  const [posts, setPosts] = useState([]);
-  const [postKeys, setPostKeys] = useState([]);
-  const [likedPosts, setLikedPosts] = useState([]);
-  const [commentedPosts, setCommentedPosts] = useState([]);
-  const [commentedPostKey, setCommentedPostKey] = useState('');
-  const [userFriends, setUserFriends] = useState([]);
-  const [userTags, setUserTags] = useState([]);
-  const [initialPostContentState, setInitialPostContentState] = useState(false);
-
-  const [currentPostUid, setCurrentPostUid] = useState('');
-  const [currentPost, setCurrentPost] = useState({
+  const [postUids, setPostUids] = useState(postUidList);
+  const [currentPostUid, setCurrentPostUid] = useState(''); // Used to cycle through the postUids
+  const emptyPost = {
     uid: '',
-    postTitle: '',
+    postTitle: !!tag ? "There are no posts available for the \"" + tag + "\" category!" : "There are no posts available!",
     postContent: '',
     postTime: 0,
     postUid: '',
     postTags: {},
     userLikes: {},
     userComments: {}
-  });
-  const [currentComment, setCurrentComment] = useState('');
+  };
+  const [currentPost, setCurrentPost] = useState(emptyPost);
+  const [currentComment, setCurrentComment] = useState(''); // Used for the comment box
 
-  const [tagList, setTagList] = useState([]);
-  const [tagPostUidList, setTagPostUidList] = useState([]);
-  const [currentTag, setCurrentTag] = useState('');
+  const [likedPosts, setLikedPosts] = useState([]);
+  const [commentedPosts, setCommentedPosts] = useState([]);
+  const [userFriends, setUserFriends] = useState([]);
+  const [userTags, setUserTags] = useState([]);
+
+  const [commentedPostKey, setCommentedPostKey] = useState(''); // Used to access the specific commented post on the post global object
+  const [initialPostContentState, setInitialPostContentState] = useState(false); // TEST: Used for expand vs Show Less
 
   const [postState, setPostState] = useState({
     noPost: false,
@@ -66,7 +62,7 @@ const PostAreaBase = (props) => {
   const getIndex = (keys, key, fn = n => n) => fn(keys.indexOf(key));
   const getValue = (values, keys, key, fn = n => n) => values[getIndex(keys, key, fn)];
   const userCheck = (data) => data.some((user) => user.uid === uid);
-  
+
   /** 
    * Gets the availability of the user
    */
@@ -82,22 +78,22 @@ const PostAreaBase = (props) => {
   };
 
   /** 
-   * Sets Post state and Area state
+   * Sets Post state and Area state given a single post
    */
-  const setPostAreaState = (currPost) => {
-    setCurrentPost(currPost);
-    setCurrentPostUid(currPost.postUid);
-    const userPostCheck = (currPost.uid === uid);
-    const userLikes = Object.values(currPost.userLikes || {});
-    const userComments = Object.values(currPost.userComments || {});
-    const userMatches = Object.values(currPost.userMatches || {});
+  const setPostAreaState = (post) => {
+    setCurrentPost(post);
+    setCurrentPostUid(post.postUid);
+    const userPostCheck = (post.uid === uid);
+    const userLikes = Object.values(post.userLikes || {});
+    const userComments = Object.values(post.userComments || {});
+    const userMatches = Object.values(post.userMatches || {});
     const postLiked = userCheck(userLikes);
     const postMatched = userCheck(userMatches);
     setInitialPostContentState(false);
 
     setPostState({
-      noPost: false,
-      myPost: userPostCheck,
+      noPost: !post.postUid,
+      myPost: !post.postUid || userPostCheck,
       postLiked,
       postMatched,
       likeCount: userLikes.length,
@@ -105,11 +101,11 @@ const PostAreaBase = (props) => {
     });
 
     setAreaState({
-      likeDisabled: userPostCheck,
-      commentDisabled: false,
-      matchDisabled: userPostCheck || postMatched,
-      leftDisabled: getIndex(postKeys, currPost.postUid) === 0,
-      rightDisabled: getIndex(postKeys, currPost.postUid) === posts.length - 1
+      likeDisabled: !post.postUid || userPostCheck,
+      commentDisabled: !post.postUid,
+      matchDisabled: !post.postUid || (userPostCheck || postMatched),
+      leftDisabled: !post.postUid || getIndex(postUidList, post.postUid) === 0,
+      rightDisabled: getIndex(postUidList, post.postUid) === postUidList.length - 1
     });
   }
 
@@ -117,60 +113,16 @@ const PostAreaBase = (props) => {
    * Retrieves data from firebase
    */
   useEffect(() => {
-    // Listener for last 50 posts
-    const postListener = fb.posts().limitToLast(50).on('value', (snapshot) => {
-      if (snapshot.exists()) {
-        // Set the postsList array (Latest 50 posts, sorted from latest to earliest)
-        const postUids = Object.keys(snapshot.val()).reverse();
-        const postsList = Object.values(snapshot.val()).reverse();
-        const currPostUid = currentPostUid === '' ? postUids[0] : currentPostUid;
-        postsList.map((post) => {
-          post.postTime = convertTime(post.postTime);
-          return post;
-        });
-        setPosts(postsList);
-        setPostKeys(postUids);
-        
-        // Set the current post to the first (newest) post
-        const currPost = getValue(postsList, postUids, currPostUid);
-        setPostAreaState(currPost);
- 
-      } else {
-        console.log("No posts available");
-        // If there are no posts at all on moot
-        setCurrentPost({
-          uid: '',
-          postTitle: "There are no posts available!",
-          postContent: '',
-          postTime: '',
-          postUid: ''
-        });
-        setPostState({
-          noPost: true,
-          myPost: false,
-          postLiked: false,
-          postMatched: false,
-          likeCount: 0,
-          commentCount: 0
-        });
-        setAreaState({
-          likeDisabled: true,
-          commentDisabled: true,
-          leftDisabled: true,
-          rightDisabled: true
-        });
-      }
-    });
-
     // Listener for current user data
     const userListener = fb.user(uid).on('value', (snapshot) => {
       if (snapshot.exists()) {
+        // Current User Data
         const currUserData = snapshot.val();
 
-        // Liked Posts
+        // Set Liked Posts
         setLikedPosts(Object.values(currUserData.likedPosts || {}));
 
-        // Commented Posts
+        // Set Commented Posts
         const commentedPostsList = Object.values(currUserData.commentedPosts || {});
         setCommentedPosts(commentedPostsList);
         for (let post of commentedPostsList) {
@@ -179,10 +131,10 @@ const PostAreaBase = (props) => {
           }
         }
 
-        // User friends
+        // Set User friends
         setUserFriends(Object.values(currUserData.friends || {}));
 
-        // User tags
+        // Set User tags
         setUserTags(Object.keys(currUserData.tags || {}));
 
       } else {
@@ -191,45 +143,60 @@ const PostAreaBase = (props) => {
     });
 
     return () => {
-      fb.posts().off('value', postListener);
       fb.user(uid).off('value', userListener);
     };
-
     // eslint-disable-next-line
   }, [fb, currentPostUid, uid]);
 
   /**
-   * Gets all tags (runs only once)
+   * Sets the initial post state once
    */
   useEffect(() => {
-    // Retrieves all tags
-    fb.tags().once('value')
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        return snapshot.val();
-      } else {
-        console.log("No tags available");
-        return {};
-      }
-    }).then((data) => {
-      setTagList(Object.keys(data));
-    });
-    // eslint-disable-next-line
-  }, []);
+    if (props.postUidList.length === 0) {
+      setPostAreaState(emptyPost);
+    } else {
+      fb.post(props.postUidList[0]).once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+          return snapshot.val();
+        } else {
+          console.log("No post available");
+          return emptyPost;
+        }
+      }).then((data) => {
+        data.postTime = convertTime(data.postTime);
+        setPostAreaState(data);
+        for (let post of commentedPosts) {
+          if (post.postUid === data.postUid) {
+            setCommentedPostKey(post.key);
+          }
+        }
+      });
+    }
+  }, [props.postUidList]);
 
   /** 
    * Behaviour on left/right button click
    */
   const onButtonClick = (event, fn) => {
-    const currPost = getValue(posts, postKeys, currentPostUid, fn);
-    setPostAreaState(currPost);
-
-
-    for (let post of commentedPosts) {
-      if (post.postUid === currPost.postUid) {
-        setCommentedPostKey(post.key);
+    const nextPostUid = postUidList[getIndex(postUidList, currentPostUid, fn)];
+    fb.post(nextPostUid).once('value').then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No specified post");
+        return emptyPost;
       }
-    }
+    }).then((data) => {
+      data.postTime = convertTime(data.postTime);
+      setPostAreaState(data);
+      for (let post of commentedPosts) {
+        if (post.postUid === data.postUid) {
+          setCommentedPostKey(post.key);
+        }
+      }
+    });
+
     event.preventDefault();
   };
 
@@ -274,6 +241,18 @@ const PostAreaBase = (props) => {
         }
       }
 
+      fb.post(currentPostUid).once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+          return snapshot.val();
+        } else {
+          console.log("No specified post");
+          return emptyPost;
+        }
+      }).then((data) => {
+        data.postTime = convertTime(data.postTime);
+        setPostAreaState(data);
+      });
+
       event.preventDefault();
 
     } else {
@@ -295,6 +274,18 @@ const PostAreaBase = (props) => {
         likedTime: likedTime,
         key: newLikedPost.key
       }).catch((error) => console.log(error));
+
+      fb.post(currentPostUid).once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+          return snapshot.val();
+        } else {
+          console.log("No specified post");
+          return emptyPost;
+        }
+      }).then((data) => {
+        data.postTime = convertTime(data.postTime);
+        setPostAreaState(data);
+      });
 
       event.preventDefault();
     }
@@ -326,26 +317,25 @@ const PostAreaBase = (props) => {
 
     setCommentedPostKey(newCommentKey);
     setCurrentComment('');
+
+    fb.post(currentPostUid).once('value').then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No specified post");
+        return emptyPost;
+      }
+    }).then((data) => {
+      data.postTime = convertTime(data.postTime);
+      setPostAreaState(data);
+    });
+
     event.preventDefault();
   };
 
   const onChange = (event) => {
     setCurrentComment(event.target.value);
   };
-
-  const onChangeTag = (tag) => (event) => {
-    console.log(tag);
-    setCurrentTag(tag);
-    fb.tagPosts(tag).once('value').then((snapshot) => {
-      if (snapshot.exists()) {
-        setTagPostUidList(Object.values(snapshot.val()).map((post) => post.postUid).reverse());
-      } else {
-        console.log("This tag has no posts");
-        setTagPostUidList([]);
-      }
-    })
-    event.preventDefault();
-  }
 
   // Function to ensure that repeat entries are not entered into matchQueue
   // (likerchat, likerfriends, posteruid)
@@ -507,44 +497,31 @@ const PostAreaBase = (props) => {
   };
 
   return (
-    currentTag === '' || currentTag === "<Home>"
-      ? <>
-          <Row>
-            <AddTagForm tagList={tagList} onAddTag={onChangeTag} postCreationCheck={false} />
-          </Row>
-          <Row className="b-post flex-container">
-            <Col className="b-postcontent">
-              
-              <Row className="mb-4">
-                <Col>
-                  <Button className="btn-postchange left" type="button" disabled={ areaState.leftDisabled } onClick={onLeftClick}>&lt;- Previous Post</Button>
-                </Col>
-                <Col>
-                  <Button className="btn-postchange right" type="button" disabled={ areaState.rightDisabled } onClick={onRightClick}>Next Post -&gt;</Button>
-                </Col>
-              </Row>
-              <hr />
-              <PostContent noPost={postState.noPost} myPost={postState.myPost} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} initialPostContentState={initialPostContentState}></PostContent>
-              <hr />
-              <PostTags postTags={!!currentPost.postTags ? Object.values(currentPost.postTags) : []} uid={uid} userTags={userTags} />
-              <hr />
-              <PostInteractionArea />
-              <hr />
-              <PostComments fb={fb} uid={uid} postUid={currentPost.postUid} posterUid={currentPost.uid} commentedPostKey={commentedPostKey} friends={userFriends} comments={!!currentPost.userComments ? Object.values(currentPost.userComments) : []}></PostComments>
-            </Col>
-          </Row>
-        </>
-      : <>
-          <Row>
-            <AddTagForm tagList={tagList} onAddTag={onChangeTag} postCreationCheck={false} />
-          </Row>
-          <CustomPostArea postUidList={tagPostUidList} tag={currentTag}/>
-        </>
+    <Row className="b-post flex-container">
+      <Col className="b-postcontent">
+        <Row className="mb-4">
+          <Col>
+            <Button className="btn-postchange left" type="button" disabled={ areaState.leftDisabled } onClick={onLeftClick}>&lt;- Previous Post</Button>
+          </Col>
+          <Col>
+            <Button className="btn-postchange right" type="button" disabled={ areaState.rightDisabled } onClick={onRightClick}>Next Post -&gt;</Button>
+          </Col>
+        </Row>
+        <hr />
+        <PostContent noPost={postState.noPost} myPost={postState.myPost} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} initialPostContentState={initialPostContentState}></PostContent>
+        <hr />
+        <PostTags postTags={!!currentPost.postTags ? Object.values(currentPost.postTags) : []} uid={uid} userTags={userTags} />
+        <hr />
+        <PostInteractionArea />
+        <hr />
+        <PostComments fb={fb} uid={uid} postUid={currentPost.postUid} posterUid={currentPost.uid} commentedPostKey={commentedPostKey} friends={userFriends} comments={!!currentPost.userComments ? Object.values(currentPost.userComments) : []}></PostComments>
+      </Col>
+    </Row>
   );
 };
 
-const PostArea = compose(
+const CustomPostArea = compose(
   withFirebase,
-)(PostAreaBase);
+)(CustomPostAreaBase);
 
-export default PostArea;
+export default CustomPostArea;

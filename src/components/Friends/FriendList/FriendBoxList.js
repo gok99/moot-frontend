@@ -12,7 +12,7 @@ const FriendBoxList = (props) => {
   });
   return (
     <>
-      <h2>Friends</h2>
+      <h2>My Friends</h2>
       <hr />
       {friendsList}
     </>

@@ -5,13 +5,13 @@ import * as ROUTES from '../../constants/routes';
 
 import { SignIn, SignUp, PasswordForget } from '../Access';
 import Account from '../Account';
-import { Posts, Inbox, Settings } from '../Account';
 import Navigation from '../Navigation';
 import Landing from '../Landing';
 import Home from '../Home';
 import Chat from '../Chat';
 import Library from '../Library';
 import Friends from '../Friends';
+import MyPosts from '../Post/MyPosts';
 import Admin from '../Admin';
 
 /**
@@ -37,9 +37,9 @@ const AppRouter = ({ authUser }) => {
         <Route path={ROUTES.LIBRARY} render={() => <Library></Library>} />
         <Route path={ROUTES.FRIENDS} render={() => <Friends></Friends>} />
         <Route path={ROUTES.ACCOUNT} component={Account} />
-        <Route path={ROUTES.POSTS} component={Posts} />
-        <Route path={ROUTES.INBOX} component={Inbox} />
-        <Route path={ROUTES.SETTINGS} component={Settings} />
+        <Route path={ROUTES.POSTS} component={MyPosts} />
+        {/* <Route path={ROUTES.INBOX} component={Inbox} />
+        <Route path={ROUTES.SETTINGS} component={Settings} /> */}
         <Route path={ROUTES.ADMIN} component={Admin} />
       </div>
     </Router>
