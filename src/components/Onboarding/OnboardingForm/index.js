@@ -46,7 +46,7 @@ const OnboardingFormBase = (props) => {
       }
     });
     return () => fb.userProfile(uid).off('value', listener);
-  });
+  }, []);
 
   // const changeFormState = (event) => {
   //   if (formState.count === 6) {
