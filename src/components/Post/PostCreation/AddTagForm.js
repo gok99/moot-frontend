@@ -3,7 +3,7 @@ import { Row, Col, Form, Button, Overlay, Tooltip } from 'react-bootstrap';
 
 import '../../Access/access.css'
 
-const AddTagForm = ({ tagList, onAddTag, postCreationCheck, ownedError }) => {
+const AddTagForm = ({ tagList, onAddTag, postCreationCheck, libraryCheck, ownedError }) => {
   const [currentTag, setCurrentTag] = useState("");
   const target = useRef(null);
   const firefox = typeof InstallTrigger !== 'undefined';
@@ -32,24 +32,42 @@ const AddTagForm = ({ tagList, onAddTag, postCreationCheck, ownedError }) => {
   return postCreationCheck 
     ? (
       <Row className="mt-2 mb-2" >
-        <Col xs={8}>
-          <Form.Control as="select" value={currentTag} onChange={onChange}>
-            <option>&lt;None&gt;</option>
-            {tags}
-          </Form.Control>
-        </Col>
-        <Col xs={4}>
-          <Button ref={target} className="btn-postcreation btn-addtag form" onClick={onAddTag(currentTag)}>
-            Add Tag
-          </Button>
-          <Overlay target={target} show={!!ownedError} placement="right">
-            {(props) => (
-              <Tooltip id="tooltip-access" {...props}>
-                {ownedError}
-              </Tooltip>
-            )}
-          </Overlay>
-        </Col>
+          { libraryCheck
+              ? <Col xs={8}>
+                  <Form.Control as="select" value={currentTag} onChange={onChange}>
+                    <option>&lt;None&gt;</option>
+                    {tags}
+                  </Form.Control>
+                </Col>
+              : firefox
+                ? <Col xs={12}>
+                    <Form.Control as="select" value={currentTag} onChange={onChange}>
+                      <option>&lt;None&gt;</option>
+                      {btnTags}
+                    </Form.Control>
+                  </Col>
+                : <Col xs={12}>
+                    <Form.Control as="select" value={currentTag} onChange={onChangeTwo}>
+                      <option value="">&lt;None&gt;</option>
+                      {btnTags}
+                    </Form.Control>
+                  </Col>
+          }
+        { libraryCheck
+            ? <Col xs={4}>
+                <Button ref={target} className="btn-postcreation btn-addtag form" onClick={onAddTag(currentTag)}>
+                  Click here to Add!
+                </Button>
+                <Overlay target={target} show={!!ownedError} placement="right">
+                  {(props) => (
+                    <Tooltip id="tooltip-access" {...props}>
+                      {ownedError}
+                    </Tooltip>
+                  )}
+                </Overlay>
+              </Col>
+            : null
+        }
       </Row>
       )
     : (

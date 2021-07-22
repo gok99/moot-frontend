@@ -149,6 +149,13 @@
   border: 2px solid #8235ff;
 }
 
+.btn-access.account {
+  max-width: 280px;
+  min-width: 180px;
+  width: 60%;
+  font-size: 14px;
+}
+
 @media only screen and (max-width: 600px) {
   .form-access,
   .btn-access {

@@ -239,6 +239,10 @@
   width: 100%;
 }
 
+.btn-postcreation.account {
+  width: 200px;
+}
+
 .btn-match,
 .btn-match:hover,
 .btn-match:focus:hover,
@@ -391,4 +395,9 @@
   display: inline-block;
   text-align: left;
   margin: auto;
+}
+
+.icon-arrow {
+  height: 28px;
+  width: 28px;
 }

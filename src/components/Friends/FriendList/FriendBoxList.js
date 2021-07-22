@@ -21,7 +21,6 @@ const FriendBoxList = (props) => {
     const friendPostListener = fb.userPosts(currentUid).on('value', (snapshot) => {
       if (snapshot.exists()) {
         setPostUidList(Object.values(snapshot.val()).map((post) => post.postUid).reverse());
-        console.log(Object.values(snapshot.val()).map((post) => post.postUid).reverse());
       } else {
         console.log("No friend post available");
       }

@@ -83,7 +83,7 @@ const LibraryArea = (props) => {
           ? <>
               <Row>
                 <Col>
-                  <AddTagForm tagList={allTagList} onAddTag={onAddTag} postCreationCheck={true} ownedError={tagOwnedState}/>
+                  <AddTagForm tagList={allTagList} onAddTag={onAddTag} postCreationCheck={true} ownedError={tagOwnedState} libraryCheck={true}/>
                 </Col>
                 <Col xs={3}>
                   {/* Divider */}
@@ -96,7 +96,7 @@ const LibraryArea = (props) => {
           : <>
               <Row>
                 <Col>
-                  <AddTagForm tagList={allTagList} onAddTag={onAddTag} postCreationCheck={true} ownedError={tagOwnedState}/>
+                  <AddTagForm tagList={allTagList} onAddTag={onAddTag} postCreationCheck={true} ownedError={tagOwnedState} libraryCheck={true}/>
                 </Col>
                 <Col xs={3}>
                   {/* Divider */}

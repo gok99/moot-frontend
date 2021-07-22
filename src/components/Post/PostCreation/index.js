@@ -17,6 +17,7 @@ import icon_x from '../../../assets/icon_x.png';
  */
 const PostCreationBase = (props) => {
   const fb = props.firebase;
+  const accountPage = props.accountPage;
   const [active, setActive] = useState(false);
   const [postState, setPostState] = useState({
     postTitle: '',
@@ -95,6 +96,16 @@ const PostCreationBase = (props) => {
     event.preventDefault();
   }
 
+  const onRemoveTag = (tag) => (event) => {
+    const i = postTagList.indexOf(tag);
+    if (i > -1) {
+      const currList = postTagList;
+      currList.splice(i, 1);
+      setPostTagList(currList);
+    }
+    event.preventDefault();
+  }
+
   const onChange = (event) => {
     setPostState({
       ...postState,
@@ -106,11 +117,11 @@ const PostCreationBase = (props) => {
     setPostTagList([]);
     setActive(!active);
   }
-
+  
   return (
     active
         ? <div>
-            <Button className="btn-postcreation mt-2 mb-2" type="button" onClick = {toggleClass}>Create a Post</Button>
+            <Button className={accountPage ? "btn-postcreation account mt-2 mb-2" : "btn-postcreation mt-2 mb-2"} type="button" onClick = {toggleClass}>Create a Post</Button>
             <div
               className={ active 
                 ? "b-overlay-postcreation active d-flex justify-content-md-center"
@@ -126,7 +137,7 @@ const PostCreationBase = (props) => {
                     </Button>
                   </Row>
                   <Row>
-                    <p className="text-postcreation">What's on your mind?</p>
+                    <p className="text-postcreation">Create a post!</p>
                   </Row>
                   <Row>
                     <Form className="form-postcreation" onSubmit={onSubmit}>
@@ -134,7 +145,7 @@ const PostCreationBase = (props) => {
                         <Form.Control 
                           name="postTitle"
                           type="text"
-                          placeholder="What is it about?"
+                          placeholder="Title"
                           value={postState.postTitle}
                           onChange={onChange} />
                       </Form.Group>
@@ -143,16 +154,17 @@ const PostCreationBase = (props) => {
                           name="postContent"
                           type="text"
                           as="textarea"
-                          placeholder="Give us more details!"
+                          placeholder="Text (optional)"
                           value={postState.postContent}
                           onChange={onChange} />
                       </Form.Group>
-                      <FormTagList postTagList={postTagList}/>
+                      <FormTagList postTagList={postTagList} onRemoveTag={(tag) => onRemoveTag(tag)}/>
                       { addTagState
                           ? <AddTagForm tagList={tagList} onAddTag={(tag) => onAddTag(tag)} postCreationCheck={true}/>
                           : <Button className="btn-postcreation btn-addtag mt-2 mb-2" onClick={() => setAddTagState(true)}>Add a Post Tag</Button>
                       }
                       <hr />
+                      <p>There currently is an issue with the UI where: after removing a tag from the list, it doesn't disappear. Do note that when you remove it, it DOES get removed, it's just visible when it shouldn't be. Please take note!</p>
                       { formState
                         ? <Button ref={target} className="btn-postcreation loading mt-4 mb-2" disabled>
                             <Spinner
@@ -178,7 +190,7 @@ const PostCreationBase = (props) => {
             </div>
           </div>
         : <div>
-            <Button className="btn-postcreation mt-2 mb-2" type="button" onClick = {toggleClass}>Create a Post</Button>
+            <Button className={accountPage ? "btn-postcreation account mt-2 mb-2" : "btn-postcreation mt-2 mb-2"} type="button" onClick = {toggleClass}>Create a Post</Button>
           </div>
   );
 };

@@ -15,6 +15,8 @@ import '../post.css';
 
 import icon_like from '../../../assets/icon_like.png';
 import icon_unlike from '../../../assets/icon_unlike.png';
+import icon_arrow from '../../../assets/icon_arrow.png';
+import icon_arrowi from '../../../assets/icon_arrowi.png';
 // <CustomPostArea postUidList={postUidList} likeEnabled={true} matchEnabled={true} />
 const PostAreaBase = (props) => {
 
@@ -435,10 +437,14 @@ const PostAreaBase = (props) => {
             <Col className="b-postcontent">
               <Row className="mb-4">
                 <Col>
-                  <Button className="btn-postchange left" type="button" disabled={ areaState.leftDisabled } onClick={onLeftClick}>&lt;- Previous Post</Button>
+                  <Button className="btn-postchange left" type="button" disabled={ areaState.leftDisabled } onClick={onLeftClick}>
+                    <img className="icon-arrow" src={icon_arrowi} alt="Previous" />
+                  </Button>
                 </Col>
                 <Col>
-                  <Button className="btn-postchange right" type="button" disabled={ areaState.rightDisabled } onClick={onRightClick}>Next Post -&gt;</Button>
+                  <Button className="btn-postchange right" type="button" disabled={ areaState.rightDisabled } onClick={onRightClick}>
+                    <img className="icon-arrow" src={icon_arrow} alt="Previous" />
+                  </Button>
                 </Col>
               </Row>
               <hr />

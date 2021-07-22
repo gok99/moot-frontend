@@ -14,12 +14,12 @@ const FormUP = (props) => {
   const [formState, setFormState] = useState(null);
 
   const onPasswordForgetForm = (event) => {
-    setFormState(PasswordForgetForm);
+    setFormState(<PasswordForgetForm accountPage={true} />);
     event.preventDefault();
   };
 
   const onPasswordChangeForm = (event) => {
-    setFormState(PasswordChangeForm);
+    setFormState(<PasswordChangeForm accountPage={true} />);
     event.preventDefault();
   };
 

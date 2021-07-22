@@ -93,6 +93,14 @@
   font-weight: 600;
 }
 
+.text-account-description {
+  color: #695e75;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
 /**
  * Inputs
  */

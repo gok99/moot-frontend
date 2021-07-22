@@ -8,7 +8,7 @@ import * as ROUTES from '../../../constants/routes';
 
 import '../../Styles/styles.css';
 import '../navigation.css';
-import icl from '../../../assets/icon_l.png';
+import icm from '../../../assets/icon_m.png';
 
 /**
  * Functional Container Component that renders the Account Dropdown Menu.
@@ -40,7 +40,7 @@ const NavIconMenuBase = (props) => {
             </Tooltip>
           }
         >
-          <img className="navicon account" src={icl} alt="Menu" />
+          <img className="navicon account" src={icm} alt="Menu" />
         </OverlayTrigger>
       </Dropdown.Toggle>
       <Dropdown.Menu className="b-accountmenu">

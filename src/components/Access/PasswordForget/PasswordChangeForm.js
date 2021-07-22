@@ -6,6 +6,7 @@ import '../../Styles/styles.css'
 import '../access.css';
 
 const PasswordChangeForm = (props) => {
+  const accountPage = props.accountPage;
   const [creds, setCreds] = useState({
     passwordOne: '',
     passwordTwo: ''
@@ -17,30 +18,53 @@ const PasswordChangeForm = (props) => {
   const [error, setError] = useState(null);
   const target = useRef(null);
 
+  const assert_valid = (creds) => {
+    const invalids = {
+      passwordsNoMatch: creds.passwordOne !== creds.passwordTwo,
+      passwordLengthShort: creds.passwordOne.length < 8
+    };
+
+    if (invalids.passwordsNoMatch) {
+      setError(new Error('The two passwords don\'t match. Please try again!'));
+      return false;
+    } else if (invalids.passwordLengthShort) {
+      setError(new Error('Passwords should be at least 8 characters long. Please try again!')); 
+      return false;
+    } 
+    return true;
+  }
+
   const onSubmit = (event) => {
     setFormState({
       submit: true,
       error: false
     });
-    props.firebase
-      .doPasswordUpdate(creds.passwordOne)
-      .then(() => {
-        setCreds({
-          passwordOne: '',
-          passwordTwo: ''
+    if (assert_valid(creds)) {
+      props.firebase
+        .doPasswordUpdate(creds.passwordOne)
+        .then(() => {
+          setCreds({
+            passwordOne: '',
+            passwordTwo: ''
+          });
+          setFormState({
+            submit: false,
+            error: false
+          });
+        })
+        .catch(error => {
+          setError(error);
+          setFormState({
+            submit: false,
+            error: true
+          });
         });
-        setFormState({
-          submit: false,
-          error: false
-        });
-      })
-      .catch(error => {
-        setError(error);
-        setFormState({
-          submit: false,
-          error: true
-        });
+    } else {
+      setFormState({
+        submit: false,
+        error: true
       });
+    }
     event.preventDefault();
   };
 
@@ -78,7 +102,7 @@ const PasswordChangeForm = (props) => {
       </Form.Group>
 
       { formState.submit
-        ? <Button ref={target} className="btn-access loading mt-2 mb-2" disabled>
+        ? <Button ref={target} className={accountPage ? "btn-access account loading mt-2 mb-2" : "btn-access loading mt-2 mb-2"} disabled>
             <Spinner
               as="span"
               animation="border"
@@ -90,7 +114,7 @@ const PasswordChangeForm = (props) => {
         : <>
             <Button
               ref={target}
-              className="btn-access mt-2 mb-2"
+              className={accountPage ? "btn-access account mt-2 mb-2" : "btn-access mt-2 mb-2"}
               type="submit"
               disabled={creds.passwordOne === '' || creds.passwordTwo === ''}>
               Change My Password
