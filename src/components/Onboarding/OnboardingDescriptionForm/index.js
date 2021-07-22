@@ -71,7 +71,7 @@ const OnboardingDescriptionForm = (props) => {
       </Row>
       <Row>
         <p><br /><br /></p>
-        <ProgressBar striped variant="info" animated now={50} />
+        <ProgressBar striped variant="info" animated now={75} />
         <p><br /></p>
       </Row>
     </Col>

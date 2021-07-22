@@ -52,7 +52,7 @@ const OnboardingVerificationForm = (props) => {
       </Row>
       <Row>
         <p><br /><br /></p>
-        <ProgressBar striped variant="info" animated now={16} />
+        <ProgressBar striped variant="info" animated now={25} />
         <p><br /></p>
       </Row>
     </Col>

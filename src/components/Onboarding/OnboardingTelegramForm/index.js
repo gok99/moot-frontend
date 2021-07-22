@@ -34,7 +34,7 @@ const OnboardingTelegramForm = (props) => {
       </Row>
       <Row>
         <p><br /><br /></p>
-        <ProgressBar striped variant="info" animated now={33} />
+        <ProgressBar striped variant="info" animated now={50} />
         <p><br /></p>
       </Row>
     </Col>
