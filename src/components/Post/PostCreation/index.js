@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Form, Button, Row, Spinner } from 'react-bootstrap';
 import { compose } from 'recompose';
  
@@ -28,16 +28,18 @@ const PostCreationBase = (props) => {
   const [postTagList, setPostTagList] = useState([]);
   const target = useRef(null);
 
-  fb.tags().once('value')
-  .then((snapshot) => {
-    if (snapshot.exists()) {
-      return snapshot.val();
-    } else {
-      console.log("No tags available");
-      return {};
-    }
-  }).then((data) => {
-    setTagList(Object.keys(data));
+  useEffect(() => {
+    fb.tags().once('value')
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No tags available");
+        return {};
+      }
+    }).then((data) => {
+      setTagList(Object.keys(data));
+    });
   });
 
   const onSubmit = (event) => {
@@ -150,8 +152,9 @@ const PostCreationBase = (props) => {
                           ? <AddTagForm tagList={tagList} onAddTag={(tag) => onAddTag(tag)} postCreationCheck={true}/>
                           : <Button className="btn-postcreation btn-addtag mt-2 mb-2" onClick={() => setAddTagState(true)}>Add a Post Tag</Button>
                       }
+                      <hr />
                       { formState
-                        ? <Button ref={target} className="btn-postcreation loading mt-2 mb-2" disabled>
+                        ? <Button ref={target} className="btn-postcreation loading mt-4 mb-2" disabled>
                             <Spinner
                               as="span"
                               animation="border"
@@ -162,7 +165,7 @@ const PostCreationBase = (props) => {
                           </Button>
                         : <Button
                             ref={target}
-                            className="btn-postcreation mt-2 mb-2"
+                            className="btn-postcreation mt-4 mb-2"
                             type="submit"
                             disabled={postState.postTitle === '' || postState.postContent === ''}>
                             Submit Post
