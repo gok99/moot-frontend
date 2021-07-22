@@ -11,8 +11,10 @@ import '../../account.css';
 const ProfileDescriptionBase = (props) => {
   const username = props.username;
   const teleUser = props.teleUser;
-  const [currentDescription, setCurrentDescription] = useState('');
+  const description = props.description;
+  const [currentDescription, setCurrentDescription] = useState(props.description);
   const [descriptionState, setDescriptionState] = useState(false);
+  const [changeState, setChangeState] = useState(false);
 
   const onSubmit = (event) => {
     const fb = props.firebase;
@@ -34,6 +36,7 @@ const ProfileDescriptionBase = (props) => {
 
   const onChange = (event) => {
     setCurrentDescription(event.target.value);
+    setChangeState(true);
     event.preventDefault();
   };
  
@@ -54,11 +57,11 @@ const ProfileDescriptionBase = (props) => {
             ? <Form onSubmit={onSubmit} className="b-account-description">
                 <Form.Group controlId="description">
                   <Form.Control
-                    name="currentDescription"
+                    name="description"
                     type="text"
                     as="textarea"
                     placeholder="Describe yourself!"
-                    value={currentDescription}
+                    value={!changeState ? description : currentDescription} 
                     onChange={onChange} />
                 </Form.Group>
                 <Button  
