@@ -164,7 +164,7 @@ const CustomPostAreaBase = (props) => {
       return () => {};
     } else {
       var currPostUid = ''
-      if (currentPostUid === '') {
+      if (currentPostUid === '' || !props.postUidList.includes(currentPostUid)) {
         currPostUid = props.postUidList[0];
       } else {
         currPostUid = currentPostUid;
