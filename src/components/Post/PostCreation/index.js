@@ -40,7 +40,7 @@ const PostCreationBase = (props) => {
     }).then((data) => {
       setTagList(Object.keys(data));
     });
-  });
+  }, []);
 
   const onSubmit = (event) => {
     setFormState(true);
