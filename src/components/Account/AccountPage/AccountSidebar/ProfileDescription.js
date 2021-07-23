@@ -20,7 +20,7 @@ const ProfileDescriptionBase = (props) => {
     const fb = props.firebase;
     const uid = fb.auth.currentUser.uid;
     fb.userProfile(uid).update({
-      description: currentDescription
+      description: !changeState ? description : currentDescription
     })
     .catch((error) => {
       console.log(error);

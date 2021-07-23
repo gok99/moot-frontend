@@ -33,7 +33,7 @@ const FormUP = (props) => {
       const fb = props.firebase;
       const uid = fb.auth.currentUser.uid;
       fb.userProfile(uid).update({
-        username: currentUsername
+        username: !changeState ? username : currentUsername
       })
       .catch((error) => {
         console.log(error);
