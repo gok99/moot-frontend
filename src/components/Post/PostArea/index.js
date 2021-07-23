@@ -19,7 +19,6 @@ import icon_arrow from '../../../assets/icon_arrow.png';
 import icon_arrowi from '../../../assets/icon_arrowi.png';
 // <CustomPostArea postUidList={postUidList} likeEnabled={true} matchEnabled={true} />
 const PostAreaBase = (props) => {
-
   const fb = props.firebase;
   const uid = fb.auth.currentUser.uid;
 
