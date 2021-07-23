@@ -101,6 +101,8 @@ const PostCreationBase = (props) => {
     if (i > -1) {
       const currList = postTagList;
       currList.splice(i, 1);
+      console.log(postTagList);
+      console.log(currList);
       setPostTagList(currList);
     }
     event.preventDefault();
@@ -160,8 +162,8 @@ const PostCreationBase = (props) => {
                       </Form.Group>
                       <FormTagList postTagList={postTagList} onRemoveTag={(tag) => onRemoveTag(tag)}/>
                       { addTagState
-                          ? <AddTagForm tagList={tagList} onAddTag={(tag) => onAddTag(tag)} postCreationCheck={true}/>
-                          : <Button className="btn-postcreation btn-addtag mt-2 mb-2" onClick={() => setAddTagState(true)}>Add a Post Tag</Button>
+                        ? <AddTagForm tagList={tagList} onAddTag={(tag) => onAddTag(tag)} postCreationCheck={true}/>
+                        : <Button className="btn-postcreation btn-addtag mt-2 mb-2" onClick={() => setAddTagState(true)}>Add a Post Tag</Button>
                       }
                       <hr />
                       <p>There currently is an issue with the UI where: after removing a tag from the list, it doesn't disappear. Do note that when you remove it, it DOES get removed, it's just visible when it shouldn't be. Please take note!</p>

@@ -4,14 +4,19 @@ import { Row } from 'react-bootstrap';
 import Tag from '../../Tag';
 
 const FormTagList = (props) => {
-  const tagList = props.postTagList;
-  const formTagList = tagList.map((tag) => {
-    return <Tag tagName={tag} owned={true} onTagPress={(tag) => props.onRemoveTag(tag)} postCreationCheck={true}/>
+  const [tagListState, setTagListState] = useState([]);
+  useEffect(() => {
+    setTagListState(
+      props.postTagList.map((tag) => {
+        return <Tag tagName={tag} owned={true} onTagPress={(tag) => props.onRemoveTag(tag)} postCreationCheck={true}/>
+      })
+    );
   });
+  // const formTagList = ;
 
   return (
     <Row md="auto" className="b-taglist mt-2">
-      {formTagList}
+      {tagListState}
     </Row>
   );
 };
