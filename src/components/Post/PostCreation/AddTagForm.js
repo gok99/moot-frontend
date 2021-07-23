@@ -3,11 +3,13 @@ import { Row, Col, Form, Button, Overlay, Tooltip } from 'react-bootstrap';
 
 import '../../Access/access.css'
 
-const AddTagForm = ({ tagList, onAddTag, postCreationCheck, libraryCheck, ownedError }) => {
+const AddTagForm = ({ tagList, onAddTag, postCreationCheck, libraryCheck, ownedError, currentPostTag }) => {
   const [currentTag, setCurrentTag] = useState("");
   const target = useRef(null);
   const firefox = typeof InstallTrigger !== 'undefined';
   const [error, setError] = useState(ownedError);
+  const [all, setAll] = useState("All"); // A contrived but only good way to re-render a component.
+  // https://stackoverflow.com/questions/46240647/react-how-to-force-a-function-component-to-render/53837442#53837442
   const tags = tagList.map((tag) => {
     return <option>{tag}</option>
   });
@@ -27,6 +29,11 @@ const AddTagForm = ({ tagList, onAddTag, postCreationCheck, libraryCheck, ownedE
   const onChangeTwo = (event) => {
     setCurrentTag(event.target.value);
     (onAddTag(event.target.value))(event);
+  };
+
+  const onChangePostArea = (event) => {
+    setAll(all + "");
+    (onAddTag("All"))(event);
   };
 
   return postCreationCheck 
@@ -73,18 +80,18 @@ const AddTagForm = ({ tagList, onAddTag, postCreationCheck, libraryCheck, ownedE
     : (
       <Row className="mt-2 mb-2" >
         <Col xs={8}>
-          <Button className="btn-selection" onClick={onAddTag("<Home>")}>
+          <Button className="btn-selection" onClick={onChangePostArea}>
             All
           </Button>
         </Col>
         <Col xs={4}>
           { firefox
             ? <Form.Control as="select" value={currentTag} onChange={onChange}>
-                <option>&lt;Home&gt;</option>
+                <option onClick={onAddTag("All")}>All</option>
                 {btnTags}
               </Form.Control>
             : <Form.Control as="select" value={currentTag} onChange={onChangeTwo}>
-                <option value="">&lt;Home&gt;</option>
+                <option value="All">All</option>
                 {btnTags}
               </Form.Control>
           }

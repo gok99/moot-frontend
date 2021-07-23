@@ -337,14 +337,17 @@ const PostAreaBase = (props) => {
 
   const onChangeTag = (tag) => (event) => {
     setCurrentTag(tag);
-    fb.tagPosts(tag).once('value').then((snapshot) => {
-      if (snapshot.exists()) {
-        setTagPostUidList(Object.values(snapshot.val()).map((post) => post.postUid).reverse());
-      } else {
-        console.log("This tag has no posts");
-        setTagPostUidList([]);
-      }
-    })
+    if (tag === "All") {
+    } else {
+      fb.tagPosts(tag).once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+          setTagPostUidList(Object.values(snapshot.val()).map((post) => post.postUid).reverse());
+        } else {
+          console.log("This tag has no posts");
+          setTagPostUidList([]);
+        }
+      });
+    }
     event.preventDefault();
   }
 
@@ -428,10 +431,10 @@ const PostAreaBase = (props) => {
   };
 
   return (
-    currentTag === '' || currentTag === "<Home>"
+    currentTag === '' || currentTag === "All"
       ? <>
           <Row className="b-selection mb-2">
-            <AddTagForm tagList={tagList} onAddTag={onChangeTag} postCreationCheck={false} />
+            <AddTagForm tagList={tagList} onAddTag={onChangeTag} currentPostTag={currentTag} postCreationCheck={false} />
           </Row>
           <Row className="b-post flex-container">
             <Col className="b-postcontent">
