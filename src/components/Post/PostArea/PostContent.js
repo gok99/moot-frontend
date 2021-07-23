@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 
 import '../../Styles/styles.css';
@@ -7,6 +7,7 @@ import '../post.css';
 const PostContent = (props) => {
   const noPost = props.noPost;
   const myPost = props.myPost;
+  const currentPostUid = props.currentPostUid;
   const postTime = props.postTime;
   const postTitle = props.postTitle;
   const postContent = props.postContent;
@@ -14,13 +15,19 @@ const PostContent = (props) => {
   const friends = props.friends;
   const initialPostContentState = props.initialPostContentState;
   const [postContentState, setPostContentState] = useState(initialPostContentState);
-  var posterState = "an anonymous user";
-  for (let friend of friends) {
-    if (friend.friendUid === posterUid) {
-      posterState = friend.username;
-    }
-  }
+  const [posterState, setPosterState] = useState("an anonymous user");
 
+  useEffect(() => {
+    for (let friend of friends) {
+      if (friend.uid === posterUid) {
+        setPosterState(friend.username);
+        break;
+      } else {
+        setPosterState("an anonymous user");
+      }
+    }
+  });
+  
   const toggleExpand = () => {
     setPostContentState(!postContentState);
   }

@@ -9,21 +9,21 @@ import '../../Styles/styles.css';
 import '../friends.css';
 
 const FriendListBase = (props) => {
+  const fb = props.firebase;
+  const uid = fb.auth.currentUser.uid;
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
-    const fb = props.firebase;
-    const uid = fb.auth.currentUser.uid;
-    const listener = fb.userFriends(uid).on('value', (snapshot) => {
+    const friendsListener = fb.userFriends(uid).on('value', (snapshot) => {
       if (snapshot.exists()) {
-        const userFriends = Object.values(snapshot.val());
+        const userFriends = Object.values(snapshot.val()).map((friend) => friend.uid);
         setFriends(userFriends);
       } else {
         console.log("No data available");
       }
     });
-    return () => fb.userFriends(uid).off('value', listener);
-  }, []);
+    return () => fb.userFriends(uid).off('value', friendsListener);
+  }, [fb, uid, friends]);
 
   return (
     <div>

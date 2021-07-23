@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
 
 import CommentBox from './CommentBox';
@@ -13,7 +13,14 @@ const PostComments = (props) => {
   const postUid = props.postUid;
   const posterUid = props.posterUid;
   const friends = props.friends;
+  const [friendsUidList, setFriendsUidList] = useState([]);
   const commentedPostKey = props.commentedPostKey;
+  
+  useEffect(() => {
+    setFriendsUidList(friends.map((friend) => friend.uid));
+    console.log(friends);
+    console.log(friendsUidList);
+  }, []);
 
   if (comments.length === 0) {
     return (
@@ -23,18 +30,18 @@ const PostComments = (props) => {
     );
   } else {
     const commentsList = comments.map((commentObj) => {
-      var commenterState = "anonymous user";
-      for (let friend of friends) {
-        if (friend.friendUid === commentObj.uid) {
-          commenterState = friend.username;
-        }
-      }
+      const posterIdentity = friendsUidList.includes(commentObj.uid) ? friendsUidList.filter((uid) => uid === commentObj.uid).username : "anonymous user";
+      // console.log(friendsUidList);
+      // console.log(friendsUidList.filter((uid) => uid === commentObj.uid));
+      // console.log(commentObj.uid);
+      // console.log(0);
       const poster = 
         commentObj.uid === uid
           ? "me"
           : commentObj.uid === posterUid
-            ? "OP (" + commenterState + ")"
-            : commenterState;
+            ? "OP (" + posterIdentity + ")"
+            : posterIdentity;
+
       return <Row><CommentBox commentKey={commentObj.key} commentContent={commentObj.comment} commentTime={commentObj.commentTime} myComment={commentObj.uid === uid} fb={fb} uid={uid} postUid={postUid} posterUid={posterUid} commentedPostKey={commentedPostKey} poster={poster}></CommentBox></Row>
     });
     return (

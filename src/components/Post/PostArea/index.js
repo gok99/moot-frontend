@@ -27,6 +27,7 @@ const PostAreaBase = (props) => {
   const [likedPosts, setLikedPosts] = useState([]);
   const [commentedPosts, setCommentedPosts] = useState([]);
   const [commentedPostKey, setCommentedPostKey] = useState('');
+  const [userFriendsUidList, setUserFriendsUidList] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
   const [userTags, setUserTags] = useState([]);
   const [initialPostContentState, setInitialPostContentState] = useState(false);
@@ -181,7 +182,7 @@ const PostAreaBase = (props) => {
         }
 
         // User friends
-        setUserFriends(Object.values(currUserData.friends || {}));
+        setUserFriendsUidList(Object.values(currUserData.friends || {}).map((friend) => friend.uid));
 
         // User tags
         setUserTags(Object.keys(currUserData.tags || {}));
@@ -198,6 +199,26 @@ const PostAreaBase = (props) => {
 
     // eslint-disable-next-line
   }, [fb, currentPostUid, uid]);
+
+  useEffect(() => {
+    const friendsData = [];
+    for (let i = 0; i < userFriendsUidList.length; i++) {
+      fb.userProfile(userFriendsUidList[i]).once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+          return snapshot.val();
+        } else {
+          return {};
+        }
+      }).then((data) => {
+        friendsData[i] = {
+          uid: userFriendsUidList[i],
+          username: data.username,
+          teleUser: data.teleUser
+        };
+      });
+    }
+    setUserFriends(friendsData);
+  }, [fb, uid, userFriendsUidList]);
 
   /**
    * Gets all tags (runs only once)
@@ -451,7 +472,7 @@ const PostAreaBase = (props) => {
                 </Col>
               </Row>
               <hr />
-              <PostContent noPost={postState.noPost} myPost={postState.myPost} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} initialPostContentState={initialPostContentState}></PostContent>
+              <PostContent noPost={postState.noPost} myPost={postState.myPost} currentPostUid={currentPostUid} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} initialPostContentState={initialPostContentState}></PostContent>
               <hr />
               <PostTags postTags={!!currentPost.postTags ? Object.values(currentPost.postTags) : []} uid={uid} userTags={userTags} />
               <hr />

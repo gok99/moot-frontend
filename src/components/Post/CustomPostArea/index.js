@@ -23,7 +23,6 @@ const CustomPostAreaBase = (props) => {
   const tag = props.tag;
   const friend = props.friend;
 
-  const [postUids, setPostUids] = useState(postUidList);
   const [currentPostUid, setCurrentPostUid] = useState(''); // Used to cycle through the postUids
   const emptyPost = {
     uid: '',
@@ -44,6 +43,7 @@ const CustomPostAreaBase = (props) => {
 
   const [likedPosts, setLikedPosts] = useState([]);
   const [commentedPosts, setCommentedPosts] = useState([]);
+  const [userFriendsUidList, setUserFriendsUidList] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
   const [userTags, setUserTags] = useState([]);
 
@@ -138,8 +138,8 @@ const CustomPostAreaBase = (props) => {
           }
         }
 
-        // Set User friends
-        setUserFriends(Object.values(currUserData.friends || {}));
+        // User friends
+        setUserFriendsUidList(Object.values(currUserData.friends || {}).map((friend) => friend.uid));
 
         // Set User tags
         setUserTags(Object.keys(currUserData.tags || {}));
@@ -153,19 +153,39 @@ const CustomPostAreaBase = (props) => {
       fb.user(uid).off('value', userListener);
     };
     // eslint-disable-next-line
-  }, [fb, currentPostUid, uid]);
+  }, [fb, uid, currentPostUid]);
+
+  useEffect(() => {
+    const friendsData = [];
+    for (let i = 0; i < userFriendsUidList.length; i++) {
+      fb.userProfile(userFriendsUidList[i]).once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+          return snapshot.val();
+        } else {
+          return {};
+        }
+      }).then((data) => {
+        friendsData[i] = {
+          uid: userFriendsUidList[i],
+          username: data.username,
+          teleUser: data.teleUser
+        };
+      });
+    }
+    setUserFriends(friendsData);
+  }, [fb, uid, userFriendsUidList]);
 
   /**
    * Sets the initial post state once
    */
   useEffect(() => {
-    if (props.postUidList.length === 0) {
+    if (postUidList.length === 0) {
       setPostAreaState(emptyPost);
       return () => {};
     } else {
       var currPostUid = ''
-      if (currentPostUid === '' || !props.postUidList.includes(currentPostUid)) {
-        currPostUid = props.postUidList[0];
+      if (currentPostUid === '' || !postUidList.includes(currentPostUid)) {
+        currPostUid = postUidList[0];
       } else {
         currPostUid = currentPostUid;
       }
@@ -188,7 +208,7 @@ const CustomPostAreaBase = (props) => {
         fb.post(currPostUid).off('value', postListener);
       };
     }
-  }, [props.postUidList, currentPostUid]);
+  }, [postUidList, currentPostUid]);
 
   /** 
    * Behaviour on left/right button click
@@ -396,7 +416,7 @@ const CustomPostAreaBase = (props) => {
           </Col>
         </Row>
         <hr />
-        <PostContent noPost={postState.noPost} myPost={postState.myPost} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} initialPostContentState={initialPostContentState}></PostContent>
+        <PostContent noPost={postState.noPost} myPost={postState.myPost} currentPostUid={currentPostUid} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} initialPostContentState={initialPostContentState}></PostContent>
         <hr />
         <PostTags postTags={!!currentPost.postTags ? Object.values(currentPost.postTags) : []} uid={uid} userTags={userTags} />
         <hr />

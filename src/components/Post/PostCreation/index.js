@@ -101,8 +101,6 @@ const PostCreationBase = (props) => {
     if (i > -1) {
       const currList = postTagList;
       currList.splice(i, 1);
-      console.log(postTagList);
-      console.log(currList);
       setPostTagList(currList);
     }
     event.preventDefault();

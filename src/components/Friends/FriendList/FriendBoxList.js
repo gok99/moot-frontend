@@ -12,10 +12,28 @@ import '../friends.css';
 const FriendBoxList = (props) => {
   const fb = props.firebase;
   const friends = props.friends;
+  const [friendsData, setFriendsData] = useState([]);
   const [viewPostState, setViewPostState] = useState(false);
   const [currentUid, setCurrentUid] = useState('');
   const [currentUser, setCurrentUser] = useState('');
   const [postUidList, setPostUidList] = useState([]);
+
+  useEffect(() => {
+    for (let i = 0; i < friends.length; i++) {
+      fb.userProfile(friends[i]).once('value').then((snapshot) => {
+        const data = snapshot.val();
+        const newData = friendsData;
+        newData[i] = {
+          uid: friends[i],
+          username: data.username,
+          teleUser: data.teleUser
+        }
+        setFriendsData(newData);
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+  }, [fb, friends, friendsData]);
   
   useEffect(() => {
     const friendPostListener = fb.userPosts(currentUid).on('value', (snapshot) => {
@@ -26,7 +44,7 @@ const FriendBoxList = (props) => {
       }
     });
     return () => { fb.userPosts(currentUid).off('value', friendPostListener); };
-  });
+  }, [fb, currentUid, viewPostState]);
 
   const onViewPost = (fUid, fUsername) => (event) => {
     setCurrentUid(fUid);
@@ -37,11 +55,13 @@ const FriendBoxList = (props) => {
 
   const onBack = (event) => {
     setViewPostState(false);
+    setCurrentUid('');
+    setPostUidList([]);
     event.preventDefault();
   }
 
-  const friendsList = friends.map((friend) => {
-    return <><Row><FriendBox fUsername={friend.username} fTeleUser={friend.teleUser} fUid={friend.friendUid} onViewPost={onViewPost}></FriendBox></Row><hr /></>
+  const friendsList = friendsData.map((friend) => {
+    return <><Row><FriendBox fUsername={friend.username} fTeleUser={friend.teleUser} fUid={friend.uid} onViewPost={onViewPost}></FriendBox></Row><hr /></>
   });
 
   return (
