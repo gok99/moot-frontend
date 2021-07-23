@@ -30,7 +30,6 @@ const PostAreaBase = (props) => {
   const [userFriendsUidList, setUserFriendsUidList] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
   const [userTags, setUserTags] = useState([]);
-  const [initialPostContentState, setInitialPostContentState] = useState(false);
 
   const [currentPostUid, setCurrentPostUid] = useState('');
   const [currentPost, setCurrentPost] = useState({
@@ -95,7 +94,6 @@ const PostAreaBase = (props) => {
     const userMatches = Object.values(currPost.userMatches || {});
     const postLiked = userCheck(userLikes);
     const postMatched = userCheck(userMatches);
-    setInitialPostContentState(false);
 
     setPostState({
       noPost: false,
@@ -472,7 +470,7 @@ const PostAreaBase = (props) => {
                 </Col>
               </Row>
               <hr />
-              <PostContent noPost={postState.noPost} myPost={postState.myPost} currentPostUid={currentPostUid} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} initialPostContentState={initialPostContentState}></PostContent>
+              <PostContent noPost={postState.noPost} myPost={postState.myPost} currentPostUid={currentPostUid} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} />
               <hr />
               <PostTags postTags={!!currentPost.postTags ? Object.values(currentPost.postTags) : []} uid={uid} userTags={userTags} />
               <hr />

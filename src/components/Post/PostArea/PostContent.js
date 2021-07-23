@@ -13,8 +13,7 @@ const PostContent = (props) => {
   const postContent = props.postContent;
   const posterUid = props.posterUid;
   const friends = props.friends;
-  const initialPostContentState = props.initialPostContentState;
-  const [postContentState, setPostContentState] = useState(initialPostContentState);
+  const [postContentState, setPostContentState] = useState(false);
   const [posterState, setPosterState] = useState("an anonymous user");
 
   useEffect(() => {
@@ -27,6 +26,10 @@ const PostContent = (props) => {
       }
     }
   });
+
+  useEffect(() => {
+    setPostContentState(false);
+  }, [currentPostUid]);
   
   const toggleExpand = () => {
     setPostContentState(!postContentState);

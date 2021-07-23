@@ -48,7 +48,6 @@ const CustomPostAreaBase = (props) => {
   const [userTags, setUserTags] = useState([]);
 
   const [commentedPostKey, setCommentedPostKey] = useState(''); // Used to access the specific commented post on the post global object
-  const [initialPostContentState, setInitialPostContentState] = useState(false); // TEST: Used for expand vs Show Less
 
   const [postState, setPostState] = useState({
     noPost: false,
@@ -96,7 +95,6 @@ const CustomPostAreaBase = (props) => {
     const userMatches = Object.values(post.userMatches || {});
     const postLiked = userCheck(userLikes);
     const postMatched = userCheck(userMatches);
-    setInitialPostContentState(false);
 
     setPostState({
       noPost: !post.postUid,
@@ -416,7 +414,7 @@ const CustomPostAreaBase = (props) => {
           </Col>
         </Row>
         <hr />
-        <PostContent noPost={postState.noPost} myPost={postState.myPost} currentPostUid={currentPostUid} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} initialPostContentState={initialPostContentState}></PostContent>
+        <PostContent noPost={postState.noPost} myPost={postState.myPost} currentPostUid={currentPostUid} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} />
         <hr />
         <PostTags postTags={!!currentPost.postTags ? Object.values(currentPost.postTags) : []} uid={uid} userTags={userTags} />
         <hr />
