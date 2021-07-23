@@ -164,7 +164,6 @@ const PostCreationBase = (props) => {
                         : <Button className="btn-postcreation btn-addtag mt-2 mb-2" onClick={() => setAddTagState(true)}>Add a Post Tag</Button>
                       }
                       <hr />
-                      <p>There currently is an issue with the UI where: after removing a tag from the list, it doesn't disappear. Do note that when you remove it, it DOES get removed, it's just visible when it shouldn't be. Please take note!</p>
                       { formState
                         ? <Button ref={target} className="btn-postcreation loading mt-4 mb-2" disabled>
                             <Spinner

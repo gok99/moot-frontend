@@ -409,7 +409,7 @@ const CustomPostAreaBase = (props) => {
           </Col>
           <Col>
             <Button className="btn-postchange right" type="button" disabled={ areaState.rightDisabled } onClick={onRightClick}>
-              <img className="icon-arrow" src={icon_arrow} alt="Previous" />
+              <img className="icon-arrow" src={icon_arrow} alt="Next" />
             </Button>
           </Col>
         </Row>

@@ -21,7 +21,12 @@ const FriendBoxList = (props) => {
   useEffect(() => {
     for (let i = 0; i < friends.length; i++) {
       fb.userProfile(friends[i]).once('value').then((snapshot) => {
-        const data = snapshot.val();
+        if (snapshot.exists()) {
+          return snapshot.val();
+        } else {
+          console.log("No user data available");
+        }
+      }).then((data) => {
         const newData = friendsData;
         newData[i] = {
           uid: friends[i],

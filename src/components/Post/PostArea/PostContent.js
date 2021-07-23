@@ -14,7 +14,7 @@ const PostContent = (props) => {
   const posterUid = props.posterUid;
   const friends = props.friends;
   const [postContentState, setPostContentState] = useState(false);
-  const [posterState, setPosterState] = useState("an anonymous user");
+  const [posterState, setPosterState] = useState("");
 
   useEffect(() => {
     for (let friend of friends) {
@@ -25,7 +25,7 @@ const PostContent = (props) => {
         setPosterState("an anonymous user");
       }
     }
-  });
+  }, [currentPostUid]);
 
   useEffect(() => {
     setPostContentState(false);
