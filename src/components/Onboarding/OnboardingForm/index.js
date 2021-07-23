@@ -46,15 +46,26 @@ const OnboardingFormBase = (props) => {
       }
     });
     return () => fb.userProfile(uid).off('value', listener);
-  });
+  }, []);
+
+  // const changeFormState = (event) => {
+  //   if (formState.count === 6) {
+  //     history.push({ pathname: ROUTES.HOME });
+  //   } else {
+  //     setFormState({
+  //       count: formState.count + 1,
+  //       progress: formState.progress + 16
+  //     });
+  //   }
+  // };
 
   const changeFormState = (event) => {
-    if (formState.count === 6) {
+    if (formState.count === 4) {
       history.push({ pathname: ROUTES.HOME });
     } else {
       setFormState({
         count: formState.count + 1,
-        progress: formState.progress + 16
+        progress: formState.progress + 25
       });
     }
   };
@@ -62,7 +73,7 @@ const OnboardingFormBase = (props) => {
   return (
     <Row className="d-flex justify-content-md-center">
       <Col md="auto" className="b-onboarding">
-        {
+        {/* {
           formState.count === 0
             ? <OWForm onSubmit={changeFormState} username={profile.username}/>
             : formState.count === 1
@@ -78,10 +89,23 @@ const OnboardingFormBase = (props) => {
                       : formState.count === 6
                         ? <OLForm onSubmit={changeFormState}/>
                         : null
+        } */}
+        {
+          formState.count === 0
+            ? <OWForm onSubmit={changeFormState} username={profile.username}/>
+            : formState.count === 1
+              ? <OVForm onSubmit={changeFormState}/>
+              : formState.count === 2
+                ? <OTForm onSubmit={changeFormState} id={profile.id}/>
+                : formState.count === 3
+                  ? <ODForm onSubmit={changeFormState}/>
+                  : formState.count === 4
+                    ? <OLForm onSubmit={changeFormState}/>
+                    : null
         }
       </Col>
       <Col md="auto" className="b-onboarding-alt">
-        {
+        {/* {
           formState.count === 0
             ? <OWForm onSubmit={changeFormState} username={profile.username}/>
             : formState.count === 1
@@ -97,6 +121,19 @@ const OnboardingFormBase = (props) => {
                       : formState.count === 6
                         ? <OLForm onSubmit={changeFormState}/>
                         : null
+        } */}
+        {
+          formState.count === 0
+            ? <OWForm onSubmit={changeFormState} username={profile.username}/>
+            : formState.count === 1
+              ? <OVForm onSubmit={changeFormState}/>
+              : formState.count === 2
+                ? <OTForm onSubmit={changeFormState} id={profile.id}/>
+                : formState.count === 3
+                  ? <ODForm onSubmit={changeFormState}/>
+                  : formState.count === 4
+                    ? <OLForm onSubmit={changeFormState}/>
+                    : null
         }
       </Col>
     </Row>

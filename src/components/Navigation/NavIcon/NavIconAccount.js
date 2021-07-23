@@ -54,7 +54,7 @@ const NavIconAccountBase = (props) => {
             My Posts
           </Dropdown.Item>
         </Button>
-        <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.INBOX, event)}>
+        {/* <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.INBOX, event)}>
           <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
             My Inbox
           </Dropdown.Item>
@@ -63,7 +63,7 @@ const NavIconAccountBase = (props) => {
           <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
             Settings
           </Dropdown.Item>
-        </Button>
+        </Button> */}
         { adminCheck
           ? <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.ADMIN, event)}>
               <Dropdown.Item className="text-accountmenu d-flex justify-content-center">

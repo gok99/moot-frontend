@@ -8,7 +8,7 @@ import * as ROUTES from '../../../constants/routes';
 
 import '../../Styles/styles.css';
 import '../navigation.css';
-import icl from '../../../assets/icon_l.png';
+import icm from '../../../assets/icon_m.png';
 
 /**
  * Functional Container Component that renders the Account Dropdown Menu.
@@ -40,7 +40,7 @@ const NavIconMenuBase = (props) => {
             </Tooltip>
           }
         >
-          <img className="navicon account" src={icl} alt="Menu" />
+          <img className="navicon account" src={icm} alt="Menu" />
         </OverlayTrigger>
       </Dropdown.Toggle>
       <Dropdown.Menu className="b-accountmenu">
@@ -74,7 +74,7 @@ const NavIconMenuBase = (props) => {
             My Posts
           </Dropdown.Item>
         </Button>
-        <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.INBOX, event)}>
+        {/* <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.INBOX, event)}>
           <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
             My Inbox
           </Dropdown.Item>
@@ -83,7 +83,7 @@ const NavIconMenuBase = (props) => {
           <Dropdown.Item className="text-accountmenu d-flex justify-content-center">
             Settings
           </Dropdown.Item>
-        </Button>
+        </Button> */}
         { adminCheck
           ? <Button className="btn-accountmenu" type="submit" onClick={(event) => onClick(ROUTES.ADMIN, event)}>
               <Dropdown.Item className="text-accountmenu d-flex justify-content-center">

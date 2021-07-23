@@ -3,6 +3,8 @@ import { Row, Col, Button, Form } from 'react-bootstrap';
 import { compose } from 'recompose';
  
 import { withFirebase } from '../../Firebase';
+import AddTagForm from '../PostCreation/AddTagForm';
+import CustomPostArea from '../CustomPostArea'
 import PostContent from './PostContent';
 import PostComments from './PostComments';
 import PostTags from './PostTags';
@@ -13,15 +15,23 @@ import '../post.css';
 
 import icon_like from '../../../assets/icon_like.png';
 import icon_unlike from '../../../assets/icon_unlike.png';
-
+import icon_arrow from '../../../assets/icon_arrow.png';
+import icon_arrowi from '../../../assets/icon_arrowi.png';
+// <CustomPostArea postUidList={postUidList} likeEnabled={true} matchEnabled={true} />
 const PostAreaBase = (props) => {
   const fb = props.firebase;
   const uid = fb.auth.currentUser.uid;
+
   const [posts, setPosts] = useState([]);
   const [postKeys, setPostKeys] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const [commentedPosts, setCommentedPosts] = useState([]);
   const [commentedPostKey, setCommentedPostKey] = useState('');
+  const [userFriends, setUserFriends] = useState([]);
+  const [userTags, setUserTags] = useState([]);
+  const [initialPostContentState, setInitialPostContentState] = useState(false);
+
+  const [currentPostUid, setCurrentPostUid] = useState('');
   const [currentPost, setCurrentPost] = useState({
     uid: '',
     postTitle: '',
@@ -32,7 +42,12 @@ const PostAreaBase = (props) => {
     userLikes: {},
     userComments: {}
   });
-  const [currentPostUid, setCurrentPostUid] = useState('');
+  const [currentComment, setCurrentComment] = useState('');
+
+  const [tagList, setTagList] = useState([]);
+  const [tagPostUidList, setTagPostUidList] = useState([]);
+  const [currentTag, setCurrentTag] = useState('');
+
   const [postState, setPostState] = useState({
     noPost: false,
     myPost: false,
@@ -48,15 +63,11 @@ const PostAreaBase = (props) => {
     leftDisabled: true,
     rightDisabled: true
   });
-  const [currentComment, setCurrentComment] = useState({
-    comment: ''
-  });
-  const [userFriends, setUserFriends] = useState([]);
-  const [userTags, setUserTags] = useState([]);
+  
   const getIndex = (keys, key, fn = n => n) => fn(keys.indexOf(key));
   const getValue = (values, keys, key, fn = n => n) => values[getIndex(keys, key, fn)];
   const userCheck = (data) => data.some((user) => user.uid === uid);
-
+  
   /** 
    * Gets the availability of the user
    */
@@ -83,6 +94,7 @@ const PostAreaBase = (props) => {
     const userMatches = Object.values(currPost.userMatches || {});
     const postLiked = userCheck(userLikes);
     const postMatched = userCheck(userMatches);
+    setInitialPostContentState(false);
 
     setPostState({
       noPost: false,
@@ -129,7 +141,7 @@ const PostAreaBase = (props) => {
         // If there are no posts at all on moot
         setCurrentPost({
           uid: '',
-          postTitle: "You have no more posts left to view!",
+          postTitle: "There are no posts available!",
           postContent: '',
           postTime: '',
           postUid: ''
@@ -183,8 +195,28 @@ const PostAreaBase = (props) => {
       fb.posts().off('value', postListener);
       fb.user(uid).off('value', userListener);
     };
+
     // eslint-disable-next-line
   }, [fb, currentPostUid, uid]);
+
+  /**
+   * Gets all tags (runs only once)
+   */
+  useEffect(() => {
+    // Retrieves all tags
+    fb.tags().once('value')
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No tags available");
+        return {};
+      }
+    }).then((data) => {
+      setTagList(Object.keys(data));
+    });
+    // eslint-disable-next-line
+  }, []);
 
   /** 
    * Behaviour on left/right button click
@@ -278,7 +310,7 @@ const PostAreaBase = (props) => {
     var newComment = fb.postUserComments(currentPost.postUid).push();
     newComment.set({
       uid: uid,
-      comment: currentComment.comment,
+      comment: currentComment,
       commentTime: commentTime,
       key: newComment.key
     }).catch((error) => console.log(error));
@@ -288,23 +320,32 @@ const PostAreaBase = (props) => {
     const newCommentKey = newCommentedPost.key;
     newCommentedPost.set({
       postUid: currentPost.postUid,
-      comment: currentComment.comment,
+      comment: currentComment,
       commentTime: commentTime,
       key: newCommentKey
     }).catch((error) => console.log(error));
 
     setCommentedPostKey(newCommentKey);
-    setCurrentComment({
-      comment: ''
-    });
+    setCurrentComment('');
     event.preventDefault();
   };
 
   const onChange = (event) => {
-    setCurrentComment({
-      comment: event.target.value
-    });
+    setCurrentComment(event.target.value);
   };
+
+  const onChangeTag = (tag) => (event) => {
+    setCurrentTag(tag);
+    fb.tagPosts(tag).once('value').then((snapshot) => {
+      if (snapshot.exists()) {
+        setTagPostUidList(Object.values(snapshot.val()).map((post) => post.postUid).reverse());
+      } else {
+        console.log("This tag has no posts");
+        setTagPostUidList([]);
+      }
+    })
+    event.preventDefault();
+  }
 
   // Function to ensure that repeat entries are not entered into matchQueue
   // (likerchat, likerfriends, posteruid)
@@ -386,78 +427,138 @@ const PostAreaBase = (props) => {
   };
 
   return (
-    <Row className="b-post flex-container">
-      <Col className="b-postcontent">
-        <Row className="mb-4">
-          <Col>
-            <Button className="btn-postchange left" type="button" disabled={ areaState.leftDisabled } onClick={onLeftClick}>&lt;- Previous Post</Button>
-          </Col>
-          <Col>
-            <Button className="btn-postchange right" type="button" disabled={ areaState.rightDisabled } onClick={onRightClick}>Next Post -&gt;</Button>
-          </Col>
-        </Row>
-        <hr />
-        <PostContent noPost={postState.noPost} myPost={postState.myPost} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends}></PostContent>
-        <hr />
-        <PostTags postTags={!!currentPost.postTags ? Object.values(currentPost.postTags) : []} uid={uid} userTags={userTags} />
-        <hr />
-        <Row className="mb-2">
-          <Col md="auto">
-            <Button className="btn-like d-flex justify-content-md-center" type="button" disabled={ areaState.likeDisabled } onClick={onLike}>
-              <img className="icon-like" src={postState.postLiked ? icon_like : icon_unlike} alt={postState.postLiked ? "Liked" : "Not Liked"} />
-            </Button>
-          </Col>
-          <Col md="auto">
-            <Button className="btn-postcreation btn-match d-flex justify-content-md-center" type="button" disabled={ areaState.matchDisabled } onClick={onMatch}>
-              { postState.postMatched ? "..." : "Match me!" }
-            </Button>
-          </Col>
-          <Col>
-            {/* Divider */}
-          </Col>
-          <Col md={3}>
-            <Row className="d-flex justify-content-end">
-              <p className="text-post content">{postState.likeCount} Likes</p>
-            </Row>
-            <Row className="d-flex justify-content-end">
-              <p className="text-post content">{postState.commentCount} Comments</p>
-            </Row>
-          </Col>
-        </Row>
-        <Row>
-          { areaState.commentDisabled
-              ? null
-              : <Form className="mt-2" onSubmit={onCommentSubmit}>
-                  <Row>
-                    <Col >
-                      <Form.Group controlId="comment">
-                        <Form.Control
-                          className="input-comment"
-                          name="currentComment" 
-                          type="text"
-                          as="textarea"
-                          placeholder="Reply to this post!"
-                          value={currentComment.comment}
-                          // defaultValue={ data.description }
-                          onChange={onChange} />
-                      </Form.Group>
-                    </Col>
-                    <Col md="auto">
-                      <Button  
-                        className="btn-postcreation btn-comment"
-                        type="submit"
-                        disabled={currentComment.comment === ''}>
-                        Reply
-                      </Button>
-                    </Col>
-                  </Row>
-                </Form>
-          }
-        </Row>
-        <hr />
-        <PostComments fb={fb} uid={uid} postUid={currentPost.postUid} posterUid={currentPost.uid} commentedPostKey={commentedPostKey} friends={userFriends} comments={!!currentPost.userComments ? Object.values(currentPost.userComments) : []}></PostComments>
-      </Col>
-    </Row>
+    currentTag === '' || currentTag === "<Home>"
+      ? <>
+          <Row className="b-selection mb-2">
+            <AddTagForm tagList={tagList} onAddTag={onChangeTag} postCreationCheck={false} />
+          </Row>
+          <Row className="b-post flex-container">
+            <Col className="b-postcontent">
+              <Row className="mb-4">
+                <Col>
+                  <Button className="btn-postchange left" type="button" disabled={ areaState.leftDisabled } onClick={onLeftClick}>
+                    <img className="icon-arrow" src={icon_arrowi} alt="Previous" />
+                  </Button>
+                </Col>
+                <Col>
+                  <Button className="btn-postchange right" type="button" disabled={ areaState.rightDisabled } onClick={onRightClick}>
+                    <img className="icon-arrow" src={icon_arrow} alt="Previous" />
+                  </Button>
+                </Col>
+              </Row>
+              <hr />
+              <PostContent noPost={postState.noPost} myPost={postState.myPost} postTime={currentPost.postTime} postTitle={currentPost.postTitle} postContent={currentPost.postContent} posterUid={currentPost.uid} friends={userFriends} initialPostContentState={initialPostContentState}></PostContent>
+              <hr />
+              <PostTags postTags={!!currentPost.postTags ? Object.values(currentPost.postTags) : []} uid={uid} userTags={userTags} />
+              <hr />
+              { !postState.myPost
+                  ? <>
+                      <Row className="mb-2">
+                        <Col md="auto">
+                          <Button className="btn-like d-flex justify-content-md-center" type="button" disabled={ areaState.likeDisabled } onClick={onLike}>
+                            <img className="icon-like" src={postState.postLiked ? icon_like : icon_unlike} alt={postState.postLiked ? "Liked" : "Not Liked"} />
+                          </Button>
+                        </Col>
+                        <Col md="auto">
+                          <Button className="btn-postcreation btn-match d-flex justify-content-md-center" type="button" disabled={ areaState.matchDisabled } onClick={onMatch}>
+                            { postState.postMatched ? "..." : "Match me!" }
+                          </Button>
+                        </Col>
+                        <Col>
+                          {/* Divider */}
+                        </Col>
+                        <Col md={3}>
+                          <Row className="d-flex justify-content-end mt-2">
+                            <p className="text-post content">{postState.likeCount} Likes</p>
+                          </Row>
+                          <Row className="d-flex justify-content-end">
+                            <p className="text-post content">{postState.commentCount} Comments</p>
+                          </Row>
+                        </Col>
+                      </Row>
+                      <Row>
+                        { areaState.commentDisabled
+                            ? null
+                            : <Form className="mt-2" onSubmit={onCommentSubmit}>
+                                <Row>
+                                  <Col >
+                                    <Form.Group controlId="comment">
+                                      <Form.Control
+                                        className="input-comment"
+                                        name="comment" 
+                                        type="text"
+                                        as="textarea"
+                                        placeholder="Reply to this post!"
+                                        value={currentComment}
+                                        onChange={onChange} />
+                                    </Form.Group>
+                                  </Col>
+                                  <Col md="auto">
+                                    <Button  
+                                      className="btn-postcreation btn-comment"
+                                      type="submit"
+                                      disabled={currentComment === ''}>
+                                      Reply
+                                    </Button>
+                                  </Col>
+                                </Row>
+                              </Form>
+                        }
+                      </Row>
+                    </>
+                  : <>
+                      <Row className="mb-2">
+                        <Col>
+                          { areaState.commentDisabled
+                              ? null
+                              : <Form className="mt-2" onSubmit={onCommentSubmit}>
+                                  <Row>
+                                    <Col >
+                                      <Form.Group controlId="comment">
+                                        <Form.Control
+                                          className="input-comment"
+                                          name="comment" 
+                                          type="text"
+                                          as="textarea"
+                                          placeholder="Reply to this post!"
+                                          value={currentComment}
+                                          onChange={onChange} />
+                                      </Form.Group>
+                                    </Col>
+                                    <Col md="auto">
+                                      <Button  
+                                        className="btn-postcreation btn-comment"
+                                        type="submit"
+                                        disabled={currentComment === ''}>
+                                        Reply
+                                      </Button>
+                                    </Col>
+                                  </Row>
+                                </Form>
+                          }
+                        </Col>
+                        <Col md={3}>
+                          <Row className="d-flex justify-content-end mt-2">
+                            <p className="text-post content">{postState.likeCount} Likes</p>
+                          </Row>
+                          <Row className="d-flex justify-content-end">
+                            <p className="text-post content">{postState.commentCount} Comments</p>
+                          </Row>
+                        </Col>
+                      </Row>
+                    </>
+              }
+              <hr />
+              <PostComments fb={fb} uid={uid} postUid={currentPost.postUid} posterUid={currentPost.uid} commentedPostKey={commentedPostKey} friends={userFriends} comments={!!currentPost.userComments ? Object.values(currentPost.userComments) : []}></PostComments>
+            </Col>
+          </Row>
+        </>
+      : <>
+          <Row className="b-selection mb-2">
+            <AddTagForm tagList={tagList} onAddTag={onChangeTag} postCreationCheck={false} />
+          </Row>
+          <CustomPostArea postUidList={tagPostUidList} tag={currentTag}/>
+        </>
   );
 };
 

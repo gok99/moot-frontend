@@ -10,13 +10,16 @@ const Tag = ({ tagName, owned, onTagPress, postCreationCheck }) => {
     (onTagPress(ownedState, tagName))(event); 
     ownedState = !ownedState;
   };
+  const onClickPostCreation = (event) => {
+    (onTagPress(tagName))(event);
+  }
 
   return (
     <Badge pill className="tag mb-1" bg="primary">
       {tagName}
-      <Button className="btn-tag" onClick={postCreationCheck ? onTagPress(tagName) : onClick}>
-        { ownedState ? "-" : "+" }  
-      </Button>  
+      <Button className="btn-tag" onClick={postCreationCheck ? onClickPostCreation : onClick}>
+        { ownedState ? "-" : "+" }
+      </Button>
     </Badge>
   );
 };

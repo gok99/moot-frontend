@@ -10,6 +10,7 @@ import '../access.css';
  * On submission, it will log the user in and redirect them to the Home Page.
  */
 const PasswordForgetFormBase = (props) => {
+  const accountPage = props.accountPage;
   const [creds, setCreds] = useState({
     email: ''
   });
@@ -21,29 +22,50 @@ const PasswordForgetFormBase = (props) => {
   const [error, setError] = useState(null);
   const target = useRef(null);
 
+  const assert_valid = (creds) => {
+    const emailRegex = new RegExp('^(e|E)[0-9]{7}@u.nus.edu$', 'g');
+    const invalids = {
+      notNUSEmail: !emailRegex.test(creds.email)
+    };
+
+    if (invalids.notNUSEmail) {
+      setError(new Error('You must use a valid NUS email address (starting with E or e). Please try again!')); 
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   const onSubmit = (event) => {
     setFormState({
       submit: true,
       error: false
     });
-    props.firebase
-      .doPasswordReset(creds.email)
-      .then(() => {
-        setCreds({
-          email: ''
+    if (assert_valid(creds)) {
+      props.firebase
+        .doPasswordReset(creds.email)
+        .then(() => {
+          setCreds({
+            email: ''
+          });
+          setFormState({
+            submit: false,
+            error: false
+          });
+        })
+        .catch(error => {
+          setError(error);
+          setFormState({
+            submit: false,
+            error: true
+          });
         });
-        setFormState({
-          submit: false,
-          error: false
-        });
-      })
-      .catch(error => {
-        setError(error);
-        setFormState({
-          submit: false,
-          error: true
-        });
+    } else {
+      setFormState({
+        submit: false,
+        error: true
       });
+    }
     event.preventDefault();
   };
 
@@ -71,7 +93,7 @@ const PasswordForgetFormBase = (props) => {
       </Form.Group>
 
       { formState.submit
-        ? <Button ref={target} className="btn-access loading mt-2 mb-2" disabled>
+        ? <Button ref={target} className={accountPage ? "btn-access account loading mt-2 mb-2" : "btn-access loading mt-2 mb-2"} disabled>
             <Spinner
               as="span"
               animation="border"
@@ -83,7 +105,7 @@ const PasswordForgetFormBase = (props) => {
         : <>
             <Button
               ref={target}
-              className="btn-access mt-2 mb-2"
+              className={accountPage ? "btn-access account mt-2 mb-2" : "btn-access mt-2 mb-2"}
               type="submit"
               disabled={creds.email === ''}>
               Reset My Password

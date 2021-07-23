@@ -1,19 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
 
 import Tag from '../../Tag';
 
-const AddTagForm = ({ postTagList }) => {
-  var tagList = postTagList;
-  const removeTag = (name) => (event) => {
-    const i = tagList.indexOf(name);
-    if (i > -1) {
-      tagList.splice(i, 1);
-    }
-    event.preventDefault();
-  }
+const FormTagList = (props) => {
+  const tagList = props.postTagList;
   const formTagList = tagList.map((tag) => {
-    return <Tag tagName={tag} owned={true} onTagPress={removeTag} postCreationCheck={true}/>
+    return <Tag tagName={tag} owned={true} onTagPress={(tag) => props.onRemoveTag(tag)} postCreationCheck={true}/>
   });
 
   return (
@@ -23,4 +16,4 @@ const AddTagForm = ({ postTagList }) => {
   );
 };
 
-export default AddTagForm;
+export default FormTagList;

@@ -10,33 +10,42 @@ import '../../../Styles/styles.css';
 import '../../account.css';
 
 const FormUP = (props) => {
-  const [currentUsername, setCurrentUsername] = useState('');
+  const username = props.username;
+  const [currentUsername, setCurrentUsername] = useState(username);
   const [formState, setFormState] = useState(null);
+  const [usernameState, setUsernameState] = useState(false);
+  const [changeState, setChangeState] = useState(false);
 
   const onPasswordForgetForm = (event) => {
-    setFormState(PasswordForgetForm);
+    setFormState(<PasswordForgetForm accountPage={true} />);
     event.preventDefault();
   };
 
   const onPasswordChangeForm = (event) => {
-    setFormState(PasswordChangeForm);
+    setFormState(<PasswordChangeForm accountPage={true} />);
     event.preventDefault();
   };
 
   const onSubmit = (event) => {
-    const fb = props.firebase;
-    const uid = fb.auth.currentUser.uid;
-    fb.userProfile(uid).update({
-      username: currentUsername
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    if (!usernameState) {
+      setUsernameState(true);
+    } else {
+      const fb = props.firebase;
+      const uid = fb.auth.currentUser.uid;
+      fb.userProfile(uid).update({
+        username: currentUsername
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      setUsernameState(false);
+    }
     event.preventDefault();
   };
 
   const onChange = (event) => {
     setCurrentUsername(event.target.value);
+    setChangeState(true);
     event.preventDefault();
   };
 
@@ -50,16 +59,17 @@ const FormUP = (props) => {
                 <p className="text-account">Username</p>
               </Col>
               <Col className="d-flex justify-content-end">
-                <Button className="btn-username" type="submit">Submit</Button>
+                <Button className="btn-username" type="submit">{usernameState ? "Submit" : "Edit"}</Button>
               </Col>
             </Row>
             <Row>
-              <Form.Group className="input-account mt-2" controlId="username">
+              <Form.Group className={usernameState ? "input-account mt-2" : "input-account-disabled mt-2"} controlId="username">
                 <Form.Control
                   name="username"
                   type="text"
                   className="input-text-account"
-                  defaultValue={props.username} 
+                  value={!changeState ? username : currentUsername} 
+                  disabled={!usernameState}
                   onChange={onChange} />
               </Form.Group>
             </Row>

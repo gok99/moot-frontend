@@ -11,6 +11,10 @@
   background: #f4efff;
 }
 
+.b-text-friendbox {
+  margin-left: 10px;
+}
+
 /**
  * Text for Friendboxes
  */
@@ -20,7 +24,7 @@
   color: #421d61;
 }
 .text-friendbox {
-  font-size: 16px; 
+  font-size: 16px;
 }
 
 .heavy {
@@ -42,8 +46,8 @@
 .btn-friendchat:focus {
   display: block;
   text-align: center;
-  background: #f4efff;
-  color: #773b97;
+  background: #dad0f0;
+  color: #371655;
   border: none;
   border-radius: 0px;
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
@@ -58,22 +62,22 @@
 }
 
 .btn-friendchat:disabled {
-  background: #f4efff;
-  color: #773b97;
+  background: #dad0f0;
+  color: #371655;
   border: none;
   opacity: 0.4 !important;
 }
 
 .btn-friendchat:hover,
 .btn-friendchat:focus:hover {
-  background: #e4d5ee;
-  color: #773b97;
+  background: #bdb2d6;
+  color: #371655;
   border: none;
 }
 
 .btn-friendchat:focus:active,
 .btn-friendchat:active {
-  background-color: #d2b7e4;
-  color: #773b97;
+  background-color: #a291ca;
+  color: #371655;
   border: none;
 }

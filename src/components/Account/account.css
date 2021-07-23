@@ -63,6 +63,11 @@
   font-weight: 600;
 }
 
+.text-preview.meta {
+  color: #3d3d3d;
+  font-weight: 600;
+}
+
 .text-profile {
   text-align: center;
   font-size: 18px;
@@ -86,6 +91,14 @@
 .text-account-sub {
   color: #765c94;
   font-weight: 600;
+}
+
+.text-account-description {
+  color: #695e75;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
 /**

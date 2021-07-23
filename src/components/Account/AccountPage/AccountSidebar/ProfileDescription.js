@@ -11,7 +11,10 @@ import '../../account.css';
 const ProfileDescriptionBase = (props) => {
   const username = props.username;
   const teleUser = props.teleUser;
-  const [currentDescription, setCurrentDescription] = useState('');
+  const description = props.description;
+  const [currentDescription, setCurrentDescription] = useState(props.description);
+  const [descriptionState, setDescriptionState] = useState(false);
+  const [changeState, setChangeState] = useState(false);
 
   const onSubmit = (event) => {
     const fb = props.firebase;
@@ -22,11 +25,18 @@ const ProfileDescriptionBase = (props) => {
     .catch((error) => {
       console.log(error);
     });
+    setDescriptionState(false);
     event.preventDefault();
   };
 
+  const onClick = (event) => {
+    setDescriptionState(true);
+    event.preventDefault();
+  }
+
   const onChange = (event) => {
     setCurrentDescription(event.target.value);
+    setChangeState(true);
     event.preventDefault();
   };
  
@@ -39,26 +49,32 @@ const ProfileDescriptionBase = (props) => {
         { teleUser === '' ? null : <p className="text-profile teleuser mt-2">@{teleUser}</p> }
       </Row>
       <hr />
+      <p className="text-account-description mb-1">Bio:</p>
+      <p className="text-account-description mb-3">{props.description}</p>
+      <hr />
       <Row className="d-flex justify-content-center">
-        <Form onSubmit={onSubmit} className="b-account-description">
-          <Form.Group controlId="description">
-            <Form.Control
-              name="currentDescription"
-              type="text"
-              as="textarea"
-              placeholder="Describe yourself!"
-              defaultValue={props.description}
-              onChange={onChange} />
-          </Form.Group>
-          <Button  
-            className="btn-description mt-3 mb-1"
-            type="submit">
-            Set Description
-          </Button>
-        </Form>
+        { descriptionState
+            ? <Form onSubmit={onSubmit} className="b-account-description">
+                <Form.Group controlId="description">
+                  <Form.Control
+                    name="description"
+                    type="text"
+                    as="textarea"
+                    placeholder="Describe yourself!"
+                    value={!changeState ? description : currentDescription} 
+                    onChange={onChange} />
+                </Form.Group>
+                <Button  
+                  className="btn-description mt-3 mb-1"
+                  type="submit">
+                  Set Description
+                </Button>
+              </Form>
+            : <Button className="btn-description mt-2" onClick={onClick}>Edit Description</Button>
+        }
       </Row>
       <hr />
-      <PostCreation />
+      <PostCreation accountPage={true}/>
     </>
   );
 };

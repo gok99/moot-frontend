@@ -11,7 +11,7 @@ const AccountSidebar = (props) => {
   return (
     <Col xs={4} className="b-accountsidebar">
       <Row className="d-flex justify-content-center">
-        <ProfilePicture pid={props.pid} picStyle={"profile " + props.overlayState}></ProfilePicture>
+        <ProfilePicture account={true} pid={props.pid} picStyle={"profile " + props.overlayState}></ProfilePicture>
       </Row>
       <ProfileDescription username={props.username} teleUser={props.teleUser} description={props.description}></ProfileDescription>
     </Col>

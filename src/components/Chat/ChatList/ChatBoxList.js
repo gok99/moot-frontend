@@ -4,12 +4,16 @@ import ChatBox from './ChatBox';
 
 import '../../Styles/styles.css';
 import '../chat.css';
+import { findByAltText } from '@testing-library/react';
 
 const ChatBoxList = (props) => {
   const chats = props.chatList;
+  const chatInfo = props.chatInfo;
   const ref = useRef(null);
   const chatsList = chats.map((chat, index) => {
-    
+    const description = chatInfo["chat" + (index + 1)].description;
+    const tags = chatInfo["chat" + (index + 1)].tags;
+    const str = tags.length <= 0 ? "No declared interests" : tags.slice(1).reduce((acc, curr) => `${acc}, ${curr}`, tags[0]);
     return <Row className="mb-2">
               <Col md={9}>
                 <OverlayTrigger
@@ -20,10 +24,18 @@ const ChatBoxList = (props) => {
                   overlay={
                     <Popover className="popover-chat" id={`popover-positioned-bottom`}>
                       <Popover.Title as="h3">{chat.active ? "You have an ongoing match!" : "This match slot is empty..."}</Popover.Title>
-                      <Popover.Content>
-                        This is Chat {index+1}. Things to be displayed here: 
-                        1) Match Basis Info (Post), 2) Other person's description, 3) Other person's Interests
-                      </Popover.Content>
+                      { chat.active
+                        ? <>
+                            <Popover.Content>
+                              This chat is anonymous, but here's what we can tell you about your match:<br /><br />
+                              <strong>Description</strong>: <br />{description}<br /><br />
+                              <strong>Interests</strong>: <br />{str}
+                            </Popover.Content>
+                          </>
+                        : <Popover.Content>
+                            Use the <strong>Match</strong> or <strong>QuickMatch</strong> features to match up with another anonymous user!
+                          </Popover.Content>
+                      }
                     </Popover>
                   }
                 >
@@ -39,7 +51,7 @@ const ChatBoxList = (props) => {
   });
   return (
     <Col>
-      <h2>Chats</h2>
+      <h2>My Chats</h2>
       <hr />
       {chatsList}
     </Col>
