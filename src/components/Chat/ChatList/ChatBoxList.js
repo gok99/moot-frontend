@@ -27,17 +27,13 @@ const ChatBoxList = (props) => {
                       { chat.active
                         ? <>
                             <Popover.Content>
-                              This chat is anonymous, but here's what we can tell you about your match:
-                            </Popover.Content>
-                            <Popover.Content>
-                              Description: {description}
-                            </Popover.Content>
-                            <Popover.Content>
-                              Interests: {str}
+                              This chat is anonymous, but here's what we can tell you about your match:<br /><br />
+                              <strong>Description</strong>: <br />{description}<br /><br />
+                              <strong>Interests</strong>: <br />{str}
                             </Popover.Content>
                           </>
                         : <Popover.Content>
-                            Use the \"Match\" or \"QuickMatch\" features to match up with another anonymous user!
+                            Use the <strong>Match</strong> or <strong>QuickMatch</strong> features to match up with another anonymous user!
                           </Popover.Content>
                       }
                     </Popover>
