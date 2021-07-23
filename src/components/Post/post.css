@@ -130,6 +130,12 @@
   color: #777777;
 }
 
+.text-post.sub {
+  color: #765c94;
+  font-weight: 600;
+  margin: auto;
+}
+
 .btn-postexpand,
 .btn-postexpand:visited,
 .btn-postexpand:default,

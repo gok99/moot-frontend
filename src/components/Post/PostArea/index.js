@@ -336,6 +336,7 @@ const PostAreaBase = (props) => {
   };
 
   const onChangeTag = (tag) => (event) => {
+    console.log(currentTag);
     setCurrentTag(tag);
     if (tag === "All") {
     } else {

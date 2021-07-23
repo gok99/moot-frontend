@@ -8,8 +8,7 @@ const AddTagForm = ({ tagList, onAddTag, postCreationCheck, libraryCheck, ownedE
   const target = useRef(null);
   const firefox = typeof InstallTrigger !== 'undefined';
   const [error, setError] = useState(ownedError);
-  const [all, setAll] = useState("All"); // A contrived but only good way to re-render a component.
-  // https://stackoverflow.com/questions/46240647/react-how-to-force-a-function-component-to-render/53837442#53837442
+  const [selectState, setSelectState] = useState(false);
   const tags = tagList.map((tag) => {
     return <option>{tag}</option>
   });
@@ -24,17 +23,30 @@ const AddTagForm = ({ tagList, onAddTag, postCreationCheck, libraryCheck, ownedE
 
   const onChange = (event) => {
     setCurrentTag(event.target.value);
+    if (event.target.value === "All") {
+      setSelectState(false);
+    }
   };
 
   const onChangeTwo = (event) => {
     setCurrentTag(event.target.value);
     (onAddTag(event.target.value))(event);
+    if (event.target.value === "All") {
+      setSelectState(false);
+    }
   };
 
-  const onChangePostArea = (event) => {
-    setAll(all + "");
+  const onButton = (event) => {
+    setCurrentTag("All");
     (onAddTag("All"))(event);
-  };
+    if (currentTag === "All" || currentPostTag === "") {
+      setSelectState(false);
+    }
+  }
+
+  const onSelectButton = (event) => {
+    setSelectState(true);
+  }
 
   return postCreationCheck 
     ? (
@@ -79,21 +91,26 @@ const AddTagForm = ({ tagList, onAddTag, postCreationCheck, libraryCheck, ownedE
       )
     : (
       <Row className="mt-2 mb-2" >
-        <Col xs={8}>
-          <Button className="btn-selection" onClick={onChangePostArea}>
+        <Col xs={4}>
+          <Button className="btn-selection" onClick={onButton}>
             All
           </Button>
         </Col>
+        <Col xs={4} className="d-flex justify-content-end">
+          <p className="text-post sub">{currentPostTag === "All" || currentPostTag === "" ? "You are currently viewing \"All\":" : "You are currently viewing \"" + currentTag + "\":"}</p>
+        </Col>
         <Col xs={4}>
-          { firefox
-            ? <Form.Control as="select" value={currentTag} onChange={onChange}>
-                <option onClick={onAddTag("All")}>All</option>
-                {btnTags}
-              </Form.Control>
-            : <Form.Control as="select" value={currentTag} onChange={onChangeTwo}>
-                <option value="All">All</option>
-                {btnTags}
-              </Form.Control>
+          { !selectState
+            ? <Button onClick={onSelectButton}></Button>
+            : firefox
+              ? <Form.Control as="select" value={currentTag} onChange={onChange}>
+                  <option onClick={onAddTag("All")}>All</option>
+                  {btnTags}
+                </Form.Control>
+              : <Form.Control as="select" value={currentTag} onChange={onChangeTwo}>
+                  <option value="All">All</option>
+                  {btnTags}
+                </Form.Control>
           }
         </Col>
       </Row>
