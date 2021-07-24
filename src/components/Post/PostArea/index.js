@@ -388,7 +388,7 @@ const PostAreaBase = (props) => {
 
     // if poster/liker are friends
     for (const friend of likerFriends) {
-      if (posterP.profile.uid === friend.activematchUUID) {
+      if (posterP.profile.uid === friend.uid) {
         return false;
       }
     }
