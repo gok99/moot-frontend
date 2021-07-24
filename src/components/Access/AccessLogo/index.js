@@ -5,7 +5,10 @@ import '../access.css';
 import logo from '../../../assets/logo.png';
 
 /**
- * Functional Presentational Component that displays the moot logo on the Access Pages.
+ * Component for displaying the moot logo on the Access Pages.
+ * 
+ * @author [Gokul Rajiv] (https://github.com/gok99)
+ * @author [Lee Hyung Woon] (https://github.com/lhw-1)
  */
 const Access = () => {
   return (

@@ -8,8 +8,10 @@ import '../../Styles/styles.css'
 import '../access.css';
 
 /**
- * Functional Presentational Component that composes its three sub-components.
- * The sub-components are Sign-in Form, Sign-up Link, and Password Forget Link.
+ * Component for composing the Sign In Form, Sign Up Link, and Password Forget Link.
+ * 
+ * @author [Gokul Rajiv] (https://github.com/gok99)
+ * @author [Lee Hyung Woon] (https://github.com/lhw-1)
  */
 const PasswordForgetBlock = (props) => {
   return (

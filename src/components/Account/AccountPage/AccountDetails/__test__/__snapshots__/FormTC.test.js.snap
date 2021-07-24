@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col"
+  >
+    <div
+      className="row"
+    >
+      <p
+        className="text-account"
+      >
+        Telegram Connection
+      </p>
+    </div>
+    <div
+      className="mt-2 row"
+    >
+      <p
+        className="text-account-sub"
+      >
+        You are not connected to telegram yet. Please use the command (/r 
+        0
+        ) with our telegram bot to register. Thank you!
+      </p>
+      <a
+        className="btn-accountform mt-3 btn btn-primary"
+        href="https://t.me/mootapp_bot"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Connect to Telegram
+      </a>
+    </div>
+  </div>
+</div>
+`;

@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import * as ROUTES from '../../../constants/routes'; 
 
 import '../../Styles/styles.css'
 import '../access.css';
 
 /**
- * Functional Presentational Component that displays the Password Forget Link.
+ * Component for displaying the Password Forget Link.
+ * 
+ * @author [Gokul Rajiv] (https://github.com/gok99)
+ * @author [Lee Hyung Woon] (https://github.com/lhw-1)
  */
 const PasswordForgetLink = () => {
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
+
 import { withFirebase } from '../../Firebase';
 
 import AccessLogo from '../AccessLogo';
@@ -9,7 +10,10 @@ import '../../Styles/styles.css'
 import '../access.css';
 
 /**
- * Functional Presentational Component that composes the Logo with the Password Forget Page.
+ * Component for composing the Access Logo with the Password Forget Page.
+ * 
+ * @author [Gokul Rajiv] (https://github.com/gok99)
+ * @author [Lee Hyung Woon] (https://github.com/lhw-1)
  */
 const PasswordForget = (props) => {
   return (

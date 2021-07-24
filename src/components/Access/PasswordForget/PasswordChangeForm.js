@@ -1,10 +1,17 @@
-import React, { useState, useRef } from 'react';
-import { Form, Button, Spinner, Overlay, Tooltip } from 'react-bootstrap';
+import React, { useRef, useState } from 'react';
+import { Button, Form, Overlay, Spinner, Tooltip } from 'react-bootstrap';
+
 import { withFirebase } from '../../Firebase';
 
 import '../../Styles/styles.css'
 import '../access.css';
 
+/**
+ * Component for rendering and handling the Password Change Form.
+ * 
+ * @author [Gokul Rajiv] (https://github.com/gok99)
+ * @author [Lee Hyung Woon] (https://github.com/lhw-1)
+ */
 const PasswordChangeForm = (props) => {
   const accountPage = props.accountPage;
   const [creds, setCreds] = useState({

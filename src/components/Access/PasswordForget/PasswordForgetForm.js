@@ -1,26 +1,48 @@
-import React, { useState, useRef } from 'react';
-import { Form, Button, Spinner, Overlay, Tooltip } from 'react-bootstrap';
+import React, { useRef, useState } from 'react';
+import { Button, Form, Overlay, Spinner, Tooltip } from 'react-bootstrap';
+
 import { withFirebase } from '../../Firebase';
 
 import '../../Styles/styles.css'
 import '../access.css';
 
 /**
- * Functional Container Component that retrieves user input (username and password).
- * On submission, it will log the user in and redirect them to the Home Page.
+ * Component for rendering and handling the Password Forget Form.
+ * 
+ * @author [Gokul Rajiv] (https://github.com/gok99)
+ * @author [Lee Hyung Woon] (https://github.com/lhw-1)
  */
 const PasswordForgetFormBase = (props) => {
+
+  /**
+   * Boolean value to check if this component is being rendered in the My Account Page.
+   */
   const accountPage = props.accountPage;
+
+  /**
+   * Reference to set the target for the Tooltip.
+   */
+  const target = useRef(null);
+
+  /**
+   * State to store any errors on form submission.
+   */
+  const [error, setError] = useState(null);
+
+  /**
+   * State to store the current email state (String).
+   */
   const [creds, setCreds] = useState({
     email: ''
   });
   
+  /**
+   * State to store the current form submission state and error state (check if there are errors).
+   */
   const [formState, setFormState] = useState({
     submit: false,
     error: false
   });
-  const [error, setError] = useState(null);
-  const target = useRef(null);
 
   const assert_valid = (creds) => {
     const emailRegex = new RegExp('^(e|E)[0-9]{7}@u.nus.edu$', 'g');
