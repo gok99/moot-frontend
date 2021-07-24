@@ -322,7 +322,7 @@ const CustomPostAreaBase = (props) => {
 
   // Function to ensure that repeat entries are not entered into matchQueue
   // (likerchat, likerfriends, posteruid)
-  const matchAsserts = async (poster, liker) => {
+  const matchAsserts = async (liker, poster) => {
     const posterP = await poster;
     const likerP = await liker;
     const likerChats = Object.values(likerP.chats);
@@ -337,7 +337,7 @@ const CustomPostAreaBase = (props) => {
 
     // if poster/liker are friends
     for (const friend of likerFriends) {
-      if (posterP.profile.uid === friend.activematchUUID) {
+      if (posterP.profile.uid === friend.uid) {
         return false;
       }
     }

@@ -373,7 +373,7 @@ const PostAreaBase = (props) => {
 
   // Function to ensure that repeat entries are not entered into matchQueue
   // (likerchat, likerfriends, posteruid)
-  const matchAsserts = async (poster, liker) => {
+  const matchAsserts = async (liker, poster) => {
     const posterP = await poster;
     const likerP = await liker;
     const likerChats = Object.values(likerP.chats);
