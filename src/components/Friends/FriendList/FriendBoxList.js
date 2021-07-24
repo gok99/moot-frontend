@@ -13,6 +13,7 @@ const FriendBoxList = (props) => {
   const fb = props.firebase;
   const friends = props.friends;
   const [friendsData, setFriendsData] = useState([]);
+  const [friendsList, setFriendsList] = useState([]);
   const [viewPostState, setViewPostState] = useState(false);
   const [currentUid, setCurrentUid] = useState('');
   const [currentUser, setCurrentUser] = useState('');
@@ -34,11 +35,15 @@ const FriendBoxList = (props) => {
           teleUser: data.teleUser
         }
         setFriendsData(newData);
+
+        setFriendsList(newData.map((friend) => {
+          return <><Row><FriendBox fUsername={friend.username} fTeleUser={friend.teleUser} fUid={friend.uid} onViewPost={onViewPost}></FriendBox></Row><hr /></>
+        }));
       }).catch((error) => {
         console.log(error);
       });
     }
-  }, [fb, friends, friendsData]);
+  }, [fb, friends]);
   
   useEffect(() => {
     const friendPostListener = fb.userPosts(currentUid).on('value', (snapshot) => {
@@ -65,9 +70,6 @@ const FriendBoxList = (props) => {
     event.preventDefault();
   }
 
-  const friendsList = friendsData.map((friend) => {
-    return <><Row><FriendBox fUsername={friend.username} fTeleUser={friend.teleUser} fUid={friend.uid} onViewPost={onViewPost}></FriendBox></Row><hr /></>
-  });
 
   return (
     <>

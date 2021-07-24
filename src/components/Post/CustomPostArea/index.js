@@ -119,7 +119,9 @@ const CustomPostAreaBase = (props) => {
    */
   useEffect(() => {
     // Listener for current user data
+    console.log("CPA1");
     const userListener = fb.user(uid).on('value', (snapshot) => {
+      console.log("CPA2");
       if (snapshot.exists()) {
         // Current User Data
         const currUserData = snapshot.val();
@@ -154,9 +156,11 @@ const CustomPostAreaBase = (props) => {
   }, [fb, uid, currentPostUid]);
 
   useEffect(() => {
+    console.log("CPA3");
     const friendsData = [];
     for (let i = 0; i < userFriendsUidList.length; i++) {
       fb.userProfile(userFriendsUidList[i]).once('value').then((snapshot) => {
+        console.log("CPA4."+i);
         if (snapshot.exists()) {
           return snapshot.val();
         } else {
@@ -177,6 +181,7 @@ const CustomPostAreaBase = (props) => {
    * Sets the initial post state once
    */
   useEffect(() => {
+    console.log("CPA5");
     if (postUidList.length === 0) {
       setPostAreaState(emptyPost);
       return () => {};
@@ -188,6 +193,7 @@ const CustomPostAreaBase = (props) => {
         currPostUid = currentPostUid;
       }
       const postListener = fb.post(currPostUid).on('value', (snapshot) => {
+      console.log("CPA6"); 
         if (snapshot.exists()) {
           const data = snapshot.val();
           data.postTime = convertTime(data.postTime);

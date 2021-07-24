@@ -23,7 +23,7 @@ const FriendListBase = (props) => {
       }
     });
     return () => fb.userFriends(uid).off('value', friendsListener);
-  }, [fb, uid, friends]);
+  }, [fb, uid]);
 
   return (
     <div>

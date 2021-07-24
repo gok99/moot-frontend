@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { compose } from 'recompose';
 
@@ -14,18 +14,20 @@ const AdminFormBase = (props) => {
   const [currentTag, setCurrentTag] = useState('');
   const [requests, setRequests] = useState([]);
 
-  fb.tagRequests().once('value')
-  .then((snapshot) => {
-    if (snapshot.exists()) {
-      return snapshot.val();
-    } else {
-      console.log("No requests");
-      return {};
-    }
-  })
-  .then((data) => {
-    setRequests(Object.values(data));
-  });
+  useEffect(() => {
+    fb.tagRequests().once('value')
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log("No requests");
+        return {};
+      }
+    })
+    .then((data) => {
+      setRequests(Object.values(data));
+    });
+  }, []);
 
   const resetTags = (event) => {
     if (window.confirm("Are you sure you want to reset all tag posts?")) {
