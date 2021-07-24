@@ -69,6 +69,7 @@ const FormUP = (props) => {
                   type="text"
                   className="input-text-account"
                   value={!changeState ? username : currentUsername} 
+                  maxlength="16"
                   disabled={!usernameState}
                   onChange={onChange} />
               </Form.Group>

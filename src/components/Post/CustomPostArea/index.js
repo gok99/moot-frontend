@@ -461,6 +461,7 @@ const CustomPostAreaBase = (props) => {
                                 as="textarea"
                                 placeholder="Reply to this post!"
                                 value={currentComment}
+                                maxlength="1000"
                                 onChange={onChange} />
                             </Form.Group>
                           </Col>
@@ -493,6 +494,7 @@ const CustomPostAreaBase = (props) => {
                                 as="textarea"
                                 placeholder="Reply to this post!"
                                 value={currentComment}
+                                maxlength="1000"
                                 onChange={onChange} />
                             </Form.Group>
                           </Col>

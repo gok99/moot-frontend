@@ -159,6 +159,7 @@ const SignUpFormBase = (props) => {
           type="username"
           placeholder="Username"
           value={creds.username}
+          maxlength="16"
           onChange={onChange} />
       </Form.Group>
 
