@@ -14,18 +14,11 @@ const PostContent = (props) => {
   const posterUid = props.posterUid;
   const friends = props.friends;
   const [postContentState, setPostContentState] = useState(false);
-  const [posterState, setPosterState] = useState("");
+  const [posterState, setPosterState] = useState("an anonymous user");
 
   useEffect(() => {
-    for (let friend of friends) {
-      if (friend.uid === posterUid) {
-        setPosterState(friend.username);
-        break;
-      } else {
-        setPosterState("an anonymous user");
-      }
-    }
-  }, [currentPostUid]);
+    setPosterState((friends.find((friend) => friend.uid === posterUid) || {}).username || "an anonymous user");
+  }, [currentPostUid, friends]);
 
   useEffect(() => {
     setPostContentState(false);

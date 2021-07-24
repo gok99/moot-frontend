@@ -13,14 +13,7 @@ const PostComments = (props) => {
   const postUid = props.postUid;
   const posterUid = props.posterUid;
   const friends = props.friends;
-  const [friendsUidList, setFriendsUidList] = useState([]);
   const commentedPostKey = props.commentedPostKey;
-  
-  useEffect(() => {
-    setFriendsUidList(friends.map((friend) => friend.uid));
-    console.log(friends);
-    console.log(friendsUidList);
-  }, []);
 
   if (comments.length === 0) {
     return (
@@ -30,11 +23,7 @@ const PostComments = (props) => {
     );
   } else {
     const commentsList = comments.map((commentObj) => {
-      const posterIdentity = friendsUidList.includes(commentObj.uid) ? friendsUidList.filter((uid) => uid === commentObj.uid).username : "anonymous user";
-      // console.log(friendsUidList);
-      // console.log(friendsUidList.filter((uid) => uid === commentObj.uid));
-      // console.log(commentObj.uid);
-      // console.log(0);
+      const posterIdentity = (friends.find((friend) => friend.uid === commentObj.uid) || {}).username || "an anonymous user"
       const poster = 
         commentObj.uid === uid
           ? "me"

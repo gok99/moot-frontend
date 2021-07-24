@@ -153,23 +153,24 @@ const CustomPostAreaBase = (props) => {
     // eslint-disable-next-line
   }, [fb, uid, currentPostUid]);
 
-  useEffect(() => {
-    const friendsData = [];
+  useEffect(async () => {
+    const promises = [];
     for (let i = 0; i < userFriendsUidList.length; i++) {
-      fb.userProfile(userFriendsUidList[i]).once('value').then((snapshot) => {
+      promises.push(fb.userProfile(userFriendsUidList[i]).once('value').then((snapshot) => {
         if (snapshot.exists()) {
           return snapshot.val();
         } else {
           return {};
         }
       }).then((data) => {
-        friendsData[i] = {
+        return {
           uid: userFriendsUidList[i],
           username: data.username,
           teleUser: data.teleUser
         };
-      });
+      }));
     }
+    const friendsData = await Promise.all(promises);
     setUserFriends(friendsData);
   }, [fb, uid, userFriendsUidList]);
 
