@@ -5,11 +5,13 @@ import './tag.css';
 
 const Tag = ({ tagName, owned, onTagPress, postCreationCheck }) => {
   var ownedState = owned;
+  
   const onClick = (event) => {
     // This function should be one that adds / removes tags, takes in a boolean: if true, remove; if false, add.
     (onTagPress(ownedState, tagName))(event); 
     ownedState = !ownedState;
   };
+
   const onClickPostCreation = (event) => {
     (onTagPress(tagName))(event);
   }

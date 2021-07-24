@@ -27,6 +27,7 @@ const PostCreationBase = (props) => {
   const [tagList, setTagList] = useState([]);
   const [addTagState, setAddTagState] = useState(false);
   const [postTagList, setPostTagList] = useState([]);
+  const [formTagList, setFormTagList] = useState(null);
   const target = useRef(null);
 
   useEffect(() => {
@@ -99,12 +100,16 @@ const PostCreationBase = (props) => {
   const onRemoveTag = (tag) => (event) => {
     const i = postTagList.indexOf(tag);
     if (i > -1) {
-      const currList = postTagList;
-      currList.splice(i, 1);
-      setPostTagList(currList);
+      setPostTagList(postTagList.filter((tagname) => tagname !== tag));
     }
     event.preventDefault();
   }
+
+  useEffect(() => {
+    setFormTagList(
+      <FormTagList postTagList={postTagList} onRemoveTag={(tag) => onRemoveTag(tag)}/>
+    );
+  }, [postTagList]);
 
   const onChange = (event) => {
     setPostState({
@@ -158,7 +163,7 @@ const PostCreationBase = (props) => {
                           value={postState.postContent}
                           onChange={onChange} />
                       </Form.Group>
-                      <FormTagList postTagList={postTagList} onRemoveTag={(tag) => onRemoveTag(tag)}/>
+                      {formTagList}
                       { addTagState
                         ? <AddTagForm tagList={tagList} onAddTag={(tag) => onAddTag(tag)} postCreationCheck={true}/>
                         : <Button className="btn-postcreation btn-addtag mt-2 mb-2" onClick={() => setAddTagState(true)}>Add a Post Tag</Button>
