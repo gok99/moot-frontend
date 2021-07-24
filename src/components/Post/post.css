@@ -57,6 +57,12 @@
   border: none;
 }
 
+.b-text-posttitle,
+.b-text-commentcontent {
+  word-wrap: break-word;
+  display: block;
+}
+
 .b-text-postcontent {
   word-wrap: break-word;
   overflow: hidden;

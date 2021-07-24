@@ -40,7 +40,7 @@ const PostContent = (props) => {
           }
         </Col>
       </Row>
-      <Row>
+      <Row className="b-text-posttitle">
         <p className="text-post title">{ postTitle }</p>
       </Row>
       <br />

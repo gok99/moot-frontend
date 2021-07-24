@@ -21,7 +21,7 @@ Array [
     </div>
   </div>,
   <div
-    className="row"
+    className="b-text-posttitle row"
   >
     <p
       className="text-post title"

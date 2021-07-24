@@ -152,6 +152,7 @@ const PostCreationBase = (props) => {
                           type="text"
                           placeholder="Title"
                           value={postState.postTitle}
+                          maxlength="100"
                           onChange={onChange} />
                       </Form.Group>
                       <Form.Group className="mt-2" controlId="postContent">
@@ -161,6 +162,7 @@ const PostCreationBase = (props) => {
                           as="textarea"
                           placeholder="Text (optional)"
                           value={postState.postContent}
+                          maxlength="1000"
                           onChange={onChange} />
                       </Form.Group>
                       {formTagList}
@@ -183,7 +185,7 @@ const PostCreationBase = (props) => {
                             ref={target}
                             className="btn-postcreation mt-4 mb-2"
                             type="submit"
-                            disabled={postState.postTitle === '' || postState.postContent === ''}>
+                            disabled={postState.postTitle === ''}>
                             Submit Post
                           </Button>
                       }

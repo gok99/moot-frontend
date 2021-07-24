@@ -68,9 +68,9 @@ const CommentBox = (props) => {
         }
         </Col>
       </Row>
-      <Row className="mb-3">
-        { editState
-            ? <Form className="mt-2" onSubmit={onSubmit}>
+      { editState
+          ? <Row className="mb-3">
+              <Form className="mt-2" onSubmit={onSubmit}>
                   <Row>
                     <Col>
                       <Form.Group controlId="comment">
@@ -94,9 +94,9 @@ const CommentBox = (props) => {
                     </Col>
                   </Row>
                 </Form>
-            : <p className="text-post content">{commentContent}</p>
-        }
-      </Row>
+              </Row>
+          : <Row className="b-text-commentcontent mb-3"><p className="text-post content">{commentContent}</p></Row>
+      }
     </>
   );
 };

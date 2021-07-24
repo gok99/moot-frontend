@@ -22,7 +22,7 @@ Array [
     />
   </div>,
   <div
-    className="mb-3 row"
+    className="b-text-commentcontent mb-3 row"
   >
     <p
       className="text-post content"
