@@ -7,9 +7,11 @@ const AddTagForm = ({ tagList, onAddTag, postCreationCheck, libraryCheck, ownedE
   const [currentTag, setCurrentTag] = useState("");
   const target = useRef(null);
   const firefox = typeof InstallTrigger !== 'undefined';
-  const tags = tagList.map((tag) => {
-    return <option>{tag}</option>
-  });
+  const tags = tagList.length === 0 
+    ? null 
+    : tagList.map((tag) => {
+      return <option>{tag}</option>
+    });
 
   const btnTags = firefox
     ? tagList.map((tag) => {
