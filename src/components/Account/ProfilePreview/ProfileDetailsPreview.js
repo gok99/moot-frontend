@@ -48,7 +48,7 @@ const ProfileDetailsPreview = ({ username, teleUser, description, pid, overlaySt
         </Col>
       </Row>
       <hr className={overlayState}></hr>
-      <a className="text-preview meta" href="/" target="_blank" rel="noopener noreferrer">About us</a>
+      <a className="text-preview meta" href="https://sandy-soarer-fec.notion.site/Moot-User-Guide-e0a6150c62ce4167a748255a333b2cdf" target="_blank" rel="noopener noreferrer">About us</a>
     </div>
   );
 };
