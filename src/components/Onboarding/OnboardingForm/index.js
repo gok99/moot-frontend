@@ -10,8 +10,8 @@ import OWForm from '../OnboardingWelcomeForm';
 import OVForm from '../OnboardingVerificationForm';
 import OTForm from '../OnboardingTelegramForm';
 import ODForm from '../OnboardingDescriptionForm';
-// import OIForm from '../OnboardingIconForm';
-// import OIntForm from '../OnboardingInterestsForm';
+import OIForm from '../OnboardingIconForm';
+import OIntForm from '../OnboardingInterestsForm';
 import OLForm from '../OnboardingLastForm';
 
 import '../../Styles/styles.css';
