@@ -440,8 +440,12 @@ const PostAreaBase = (props) => {
         key: newMatchPost.key
       }).catch((error) => console.log(error));
 
-      const currPost = getValue(posts, postKeys, currentPostUid);
-      setPostAreaState(currPost);
+      setPostState({
+        postMatched: true,
+      });
+      setAreaState({
+        matchDisabled: true,
+      });
     }
   };
 
