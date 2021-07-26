@@ -355,7 +355,6 @@ const PostAreaBase = (props) => {
   };
 
   const onChangeTag = (tag) => (event) => {
-    console.log(currentTag);
     setCurrentTag(tag);
     if (tag === "All") {
     } else {
@@ -441,12 +440,8 @@ const PostAreaBase = (props) => {
         key: newMatchPost.key
       }).catch((error) => console.log(error));
 
-      setPostState({
-        postMatched: true,
-      });
-      setAreaState({
-        matchDisabled: true,
-      });
+      const currPost = getValue(posts, postKeys, currentPostUid);
+      setPostAreaState(currPost);
     }
   };
 
